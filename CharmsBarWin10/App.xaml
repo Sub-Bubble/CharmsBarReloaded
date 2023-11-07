@@ -2,7 +2,8 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:CharmsBarWin10"
-             StartupUri="MainWindow.xaml">
+             DispatcherUnhandledException="Application_DispatcherUnhandledException"
+             StartupUri="CharmsBar.xaml">
     <Application.Resources>
          
     </Application.Resources>

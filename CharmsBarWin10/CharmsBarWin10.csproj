@@ -7,4 +7,27 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Remove="Assets\CharmsBarIcons\Devices.png" />
+    <None Remove="Assets\CharmsBarIcons\Search.png" />
+    <None Remove="Assets\CharmsBarIcons\Settings.png" />
+    <None Remove="Assets\CharmsBarIcons\Share.png" />
+    <None Remove="Assets\CharmsBarIcons\Start.png" />
+    <None Remove="Assets\Settings.png" />
+    <None Remove="Icon.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.Runtime.InteropServices" Version="4.3.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Assets\CharmsBarIcons\Devices.png" />
+    <Resource Include="Assets\CharmsBarIcons\Search.png" />
+    <Resource Include="Assets\CharmsBarIcons\Settings.png" />
+    <Resource Include="Assets\CharmsBarIcons\Share.png" />
+    <Resource Include="Assets\CharmsBarIcons\Start.png" />
+    <Resource Include="Icon.png" />
+  </ItemGroup>
+
 </Project>
