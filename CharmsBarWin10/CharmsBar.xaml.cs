@@ -63,7 +63,10 @@ namespace CharmsBarWin10
                         Mouse.Capture(null);
                         if (pointToScreen.X + 1 == desktopWorkingArea.Right && pointToScreen.Y == desktopWorkingArea.Top)
                         {
-                            this.Opacity = 1.0;
+                            //this.Opacity = 1.0;
+                            var bc = new BrushConverter();
+                            this.Background = (Brush)bc.ConvertFrom("#01000000");
+                            CharmsGrid.Visibility = Visibility.Visible;
                         }
                     }));
                 };
@@ -120,7 +123,15 @@ namespace CharmsBarWin10
         }
         private void Window_MouseLeave(Object sender, MouseEventArgs e)
         {
-            this.Opacity = 0.0;
+            var bc = new BrushConverter();
+            this.Background = (Brush)bc.ConvertFrom("#00000000");
+            CharmsGrid.Visibility = Visibility.Collapsed;
+        }
+
+        private void CharmsGrid_MouseEnter(object sender, MouseEventArgs e)
+        {
+            var bc = new BrushConverter();
+            this.Background = (Brush)bc.ConvertFrom("#FF000000");
         }
     }
 }

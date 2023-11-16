@@ -12,14 +12,13 @@
         Width="86"
         Topmost="True"
         ResizeMode="NoResize" ScrollViewer.VerticalScrollBarVisibility="Disabled" SizeToContent="Width"
-        WindowStyle="None" AllowsTransparency="True" ShowInTaskbar="False">
+        WindowStyle="None" AllowsTransparency="True" ShowInTaskbar="True">
 
-    <Grid Width="98" Height="686" Background="Black">
+    <Grid Width="98" Height="686" Name="CharmsGrid" MouseEnter="CharmsGrid_MouseEnter">
 
         <!--Rows-->
         <Grid.RowDefinitions>
-            <RowDefinition Height="27.908"/>
-            <RowDefinition Height="70.092"/>
+            <RowDefinition Height="98"/>
             <RowDefinition Height="98"/>
             <RowDefinition Height="98"/>
             <RowDefinition Height="98"/>
@@ -48,27 +47,27 @@
         <Grid Grid.Row="4" Style="{StaticResource OnHover}"/>
         <Grid Grid.Row="5" Style="{StaticResource OnHover}"/>
         <Grid Grid.Row="6" Style="{StaticResource OnHover}"/>-->
-        <Grid Grid.Row="2" MouseDown="OnButtonClick" Height="98" Width="98" Style="{StaticResource OnHover}" HorizontalAlignment="Center" VerticalAlignment="Center" Name="one">
+        <Grid Grid.Row="1" MouseDown="OnButtonClick" Height="98" Width="98" Style="{StaticResource OnHover}" HorizontalAlignment="Center" VerticalAlignment="Center" Name="one">
             <Image Source="/Assets/CharmsBarIcons/Search.png" Height="48" Margin="0,12,0,38" />
             <Label Foreground="LightGray" Height="26" Content="Search" HorizontalAlignment="Center" Margin="22,60,22,12"/>
             <Label Width="98" Height="98"/>
         </Grid>
-        <Grid Grid.Row="3" MouseDown="OnButtonClick" Height="98" Width="98" Style="{StaticResource OnHover}" HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="two">
+        <Grid Grid.Row="2" MouseDown="OnButtonClick" Height="98" Width="98" Style="{StaticResource OnHover}" HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="two">
             <Image Source="/Assets/CharmsBarIcons/Share.png" Height="48" Margin="0,12,0,38" />
             <Label Foreground="LightGray" Height="26" Content="Share" HorizontalAlignment="Center" Margin="22,60,22,12"/>
             <Label Width="98" Height="98"/>
         </Grid>
-        <Grid Grid.Row="4" MouseDown="OnButtonClick" Height="98" Width="98" Style="{StaticResource OnHover}" HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="three">
+        <Grid Grid.Row="3" MouseDown="OnButtonClick" Height="98" Width="98" Style="{StaticResource OnHover}" HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="three">
             <Image Source="/Assets/CharmsBarIcons/Start.png" Height="48" Margin="0,12,0,38" />
             <Label Foreground="LightGray" Height="26" Content="Start" HorizontalAlignment="Center" Margin="22,60,22,12"/>
             <Label Width="98" Height="98"/>
         </Grid>
-        <Grid Grid.Row="5" MouseDown="OnButtonClick" Height="98" Width="98" Style="{StaticResource OnHover}" HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="four">
+        <Grid Grid.Row="4" MouseDown="OnButtonClick" Height="98" Width="98" Style="{StaticResource OnHover}" HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="four">
             <Image Source="/Assets/CharmsBarIcons/Devices.png" Height="48" Margin="0,12,0,38" />
             <Label Foreground="LightGray" Height="26" Content="Devices" HorizontalAlignment="Center" Margin="22,60,22,12"/>
             <Label Width="98" Height="98"/>
         </Grid>
-        <Grid Grid.Row="6" MouseDown="OnButtonClick" Height="98" Width="98" Style="{StaticResource OnHover}" HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="five">
+        <Grid Grid.Row="5" MouseDown="OnButtonClick" Height="98" Width="98" Style="{StaticResource OnHover}" HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="five">
             <Image Source="/Assets/CharmsBarIcons/Settings.png" Height="48" Margin="0,12,0,38" />
             <Label Foreground="LightGray" Height="26" Content="Settings" HorizontalAlignment="Center" Margin="22,60,22,12"/>
             <Label Width="98" Height="98"/>
