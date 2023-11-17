@@ -29,14 +29,15 @@ namespace CharmsBarWin10
         {
             /// initialing config and setting window location
             Config.ButtonConfig.SetVars();
-            this.Height = System.Windows.SystemParameters.PrimaryScreenHeight + 20;
+            //this.Height = System.Windows.SystemParameters.PrimaryScreenHeight + 20;
+            this.Height = System.Windows.SystemParameters.PrimaryScreenHeight -1;
             InitializeComponent(); //init window
             var desktopWorkingArea = System.Windows.SystemParameters.WorkArea;
             MouseLeave += Window_MouseLeave;
 
             this.Left = desktopWorkingArea.Right - this.Width - 12;
             //this.Left = desktopWorkingArea.Right - this.Width;
-            this.Top = desktopWorkingArea.Top;
+            this.Top = desktopWorkingArea.Top+1;
 
             /// setting theme based on windows settings
             switch (Config.SystemConfig.IsLightTheme())
@@ -67,6 +68,8 @@ namespace CharmsBarWin10
                             var bc = new BrushConverter();
                             this.Background = (Brush)bc.ConvertFrom("#01000000");
                             CharmsGrid.Visibility = Visibility.Visible;
+                            this.Height = System.Windows.SystemParameters.PrimaryScreenHeight-1;
+                            this.Top = desktopWorkingArea.Top+1;
                         }
                     }));
                 };
@@ -96,6 +99,8 @@ namespace CharmsBarWin10
         private void OnButtonClick(object sender, MouseButtonEventArgs e)
         {
             Grid button = sender as Grid;
+            if (Config.GlobalConfig.HideWindowAfterClick)
+                HideWindow();
             if (button != null)
                 switch (button.Name)
                 {
@@ -123,15 +128,21 @@ namespace CharmsBarWin10
         }
         private void Window_MouseLeave(Object sender, MouseEventArgs e)
         {
-            var bc = new BrushConverter();
-            this.Background = (Brush)bc.ConvertFrom("#00000000");
-            CharmsGrid.Visibility = Visibility.Collapsed;
+            HideWindow();
         }
 
         private void CharmsGrid_MouseEnter(object sender, MouseEventArgs e)
         {
             var bc = new BrushConverter();
+            this.Height = System.Windows.SystemParameters.PrimaryScreenHeight;
+            this.Top = System.Windows.SystemParameters.WorkArea.Top;
             this.Background = (Brush)bc.ConvertFrom("#FF000000");
+        }
+        public void HideWindow()
+        {
+            var bc = new BrushConverter();
+            this.Background = (Brush)bc.ConvertFrom("#00000000");
+            CharmsGrid.Visibility = Visibility.Collapsed;
         }
     }
 }

@@ -20,6 +20,7 @@ namespace CharmsBarWin10.Config
     {
         public const string VersionString = "b1.0";
         public const int Version = 1;
+        public static bool HideWindowAfterClick = true;
     }
     class ButtonConfig
     {
