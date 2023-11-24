@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CharmsBarWin10.Config
+namespace CharmsBarWin10
 {
     class SystemConfig
     {
@@ -18,9 +18,13 @@ namespace CharmsBarWin10.Config
     }
     class GlobalConfig
     {
+        /// Constants. Only changed manually
         public const string VersionString = "b1.0";
         public const int Version = 1;
-        public static bool HideWindowAfterClick = true;
+
+        /// other vars
+        public static bool HideWindowAfterClick = CharmsBarWin10.Properties.Settings.Default.HideWindowAfterClick;
+        public static string UserColor = CharmsBarWin10.Properties.Settings.Default.UserColor;
     }
     class ButtonConfig
     {
@@ -35,9 +39,9 @@ namespace CharmsBarWin10.Config
             {
                 case 1:
                     return Button1_Action;
-                case 2: 
+                case 2:
                     return Button2_Action;
-                case 3: 
+                case 3:
                     return Button3_Action;
                 case 4:
                     return Button4_Action;

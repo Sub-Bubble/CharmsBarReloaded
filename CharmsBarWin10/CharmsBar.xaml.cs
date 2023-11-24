@@ -1,6 +1,7 @@
 ﻿using CharmsBarWin10.Worker;
 using System;
 using System.Collections.Generic;
+using System.DirectoryServices.ActiveDirectory;
 using System.Linq;
 using System.Reflection.Emit;
 using System.Reflection.Metadata;
@@ -24,47 +25,57 @@ namespace CharmsBarWin10
     /// </summary>
     public partial class CharmsBar : Window
     {
+        /// hidind window from alttab
+        [DllImport("user32.dll", SetLastError = true)]
+        static extern int GetWindowLong(IntPtr hWnd, int nIndex);
+        [DllImport("user32.dll")]
+        static extern int SetWindowLong(IntPtr hWnd, int nIndex, int dwNewLong);
+        private const int GWL_EX_STYLE = -20;
+        private const int WS_EX_APPWINDOW = 0x00040000, WS_EX_TOOLWINDOW = 0x00000080;
+
 
         public CharmsBar()
         {
             /// initialing config and setting window location
-            Config.ButtonConfig.SetVars();
-            //this.Height = System.Windows.SystemParameters.PrimaryScreenHeight + 20;
-            this.Height = System.Windows.SystemParameters.PrimaryScreenHeight -1;
-            InitializeComponent(); //init window
+            ButtonConfig.SetVars();
             var desktopWorkingArea = System.Windows.SystemParameters.WorkArea;
+            InitializeComponent(); //init window
+
+            ///position
+            this.Height = System.Windows.SystemParameters.PrimaryScreenHeight - 1;
+            this.Left = desktopWorkingArea.Right - this.Width - 12;
+            this.Top = desktopWorkingArea.Top + 1;
             MouseLeave += Window_MouseLeave;
 
-            this.Left = desktopWorkingArea.Right - this.Width - 12;
-            //this.Left = desktopWorkingArea.Right - this.Width;
-            this.Top = desktopWorkingArea.Top+1;
+            /// hiding window
+            HideWindow();
 
+            /// Disabled, will be reworked in a future build
+            /*
             /// setting theme based on windows settings
             switch (Config.SystemConfig.IsLightTheme())
             {
                 case true:
                     //this.Background = Brushes.White;
-                    this.Background = Brushes.Black;
+                    this.Background = Brushes.White;
                     MessageBox.Show("Sorry, but light theme is not supported. Maybe in a future.\nMeanwhile, enjoy dark mode experience!", "Light mode coming soon", MessageBoxButton.OK, MessageBoxImage.Information);
                     break;
                 case false:
                     this.Background = Brushes.Black;
                     break;
-            }
+            }*/
+            /// checking for cursor location
             this.Loaded += delegate
             {
+                SetWindowLong(new WindowInteropHelper(this).Handle, GWL_EX_STYLE, (GetWindowLong(new WindowInteropHelper(this).Handle, GWL_EX_STYLE) | WS_EX_TOOLWINDOW) & ~WS_EX_APPWINDOW);
                 System.Timers.Timer timer = new System.Timers.Timer();
                 timer.Elapsed += delegate
                 {
                     this.Dispatcher.Invoke(new Action(delegate
                     {
-                        Mouse.Capture(this);
-                        Point pointToWindow = Mouse.GetPosition(this);
-                        Point pointToScreen = PointToScreen(pointToWindow);
-                        Mouse.Capture(null);
-                        if (pointToScreen.X + 1 == desktopWorkingArea.Right && pointToScreen.Y == desktopWorkingArea.Top)
+                        Point cursorPosition = GetMouseLocation.GetMousePosition();
+                        if (cursorPosition.X + 1 == desktopWorkingArea.Right && cursorPosition.Y == desktopWorkingArea.Top)
                         {
-                            //this.Opacity = 1.0;
                             var bc = new BrushConverter();
                             this.Background = (Brush)bc.ConvertFrom("#01000000");
                             CharmsGrid.Visibility = Visibility.Visible;
@@ -72,34 +83,16 @@ namespace CharmsBarWin10
                             this.Top = desktopWorkingArea.Top+1;
                         }
                     }));
+                    
                 };
                 timer.Interval = 1;
                 timer.Start();
             };
         }
-        /*    This SHOULD work, but doesn't
-        private const int GWL_EXSTYLE = -20;
-        private const int WS_EX_TOOLWINDOW = 0x00000080;
-
-        private const int ExtendedWindowStyleToolWindow = WS_EX_TOOLWINDOW;
-
-        [DllImport("user32.dll")]
-        private static extern int GetWindowLong(IntPtr hWnd, int nIndex);
-
-        [DllImport("user32.dll")]
-        private static extern int SetWindowLong(IntPtr hWnd, int nIndex, int dwNewLong);
-        public static void SetWindowStyle(Window window, int style)
-        {
-            var hwnd = new WindowInteropHelper(window).Handle;
-            var currentStyle = GetWindowLong(hwnd, GWL_EXSTYLE);
-            SetWindowLong(hwnd, GWL_EXSTYLE, currentStyle | style);
-            //SetWindowLong(hwnd, GWL_EXSTYLE, (GetWindowLong(hwnd, GWL_EXSTYLE) | WS_EX_TOOLWINDOW) & ~ExtendedWindowStyleToolWindow);
-        }*/
-
         private void OnButtonClick(object sender, MouseButtonEventArgs e)
         {
             Grid button = sender as Grid;
-            if (Config.GlobalConfig.HideWindowAfterClick)
+            if (GlobalConfig.HideWindowAfterClick)
                 HideWindow();
             if (button != null)
                 switch (button.Name)
@@ -136,7 +129,7 @@ namespace CharmsBarWin10
             var bc = new BrushConverter();
             this.Height = System.Windows.SystemParameters.PrimaryScreenHeight;
             this.Top = System.Windows.SystemParameters.WorkArea.Top;
-            this.Background = (Brush)bc.ConvertFrom("#FF000000");
+            this.Background = (Brush)bc.ConvertFrom($"#FF{GlobalConfig.UserColor}");
         }
         public void HideWindow()
         {

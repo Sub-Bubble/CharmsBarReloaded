@@ -9,6 +9,7 @@ namespace CharmsBarWin10.Worker
 {
     class ClickHandler
     {
+        private SettingsBeta? settings;
         private int button_id;
         public ClickHandler(int clicked_id)
         {
@@ -17,7 +18,8 @@ namespace CharmsBarWin10.Worker
         }
         public static void Do(int button_id)
         {
-            switch (Config.ButtonConfig.GetButtonConfig(button_id))
+            var clickHandler = new ClickHandler(button_id);
+            switch (ButtonConfig.GetButtonConfig(button_id))
             {
                 case "Search":
                     Execute.ShowSearch();
@@ -32,10 +34,23 @@ namespace CharmsBarWin10.Worker
                     Execute.ShowDevices();
                     break;
                 case "Settings":
-                    MessageBox.Show("Settings coming soon!", "Coming Soon", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    clickHandler.openSettings();
                     break;
             }
         }
-
+        public void openSettings()
+        {
+            try
+            {
+                settings!.Show();
+                settings!.Focus();
+            }
+            catch (Exception e) when (e is NullReferenceException || e is InvalidOperationException)
+            {
+                settings = new SettingsBeta();
+                settings.Show();
+                settings.Focus();
+            }
+        }
     }
 }
