@@ -4,7 +4,7 @@ using System.Windows.Interop;
 using System.Windows;
 using System.Reflection.Metadata;
 
-namespace CharmsBarWin10
+namespace CharmsBarReloaded
 {
     public static class GetMouseLocation
     { 

@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace CharmsBarWin10.Worker
+namespace CharmsBarReloaded.Worker
 {
     class ClickHandler
     {
@@ -34,11 +34,11 @@ namespace CharmsBarWin10.Worker
                     Execute.ShowDevices();
                     break;
                 case "Settings":
-                    clickHandler.openSettings();
+                    clickHandler.OpenSettings();
                     break;
             }
         }
-        public void openSettings()
+        public void OpenSettings()
         {
             try
             {

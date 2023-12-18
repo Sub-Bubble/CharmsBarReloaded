@@ -1,4 +1,4 @@
-﻿using CharmsBarWin10.Worker;
+﻿using CharmsBarReloaded.Worker;
 using System;
 using System.Collections.Generic;
 using System.DirectoryServices.ActiveDirectory;
@@ -18,14 +18,14 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace CharmsBarWin10
+namespace CharmsBarReloaded
 {
     /// <summary>
     /// Interaction logic for CharmsBar.xaml
     /// </summary>
     public partial class CharmsBar : Window
     {
-        /// hidind window from alttab
+        /// hiding window from alttab
         [DllImport("user32.dll", SetLastError = true)]
         static extern int GetWindowLong(IntPtr hWnd, int nIndex);
         [DllImport("user32.dll")]
@@ -38,11 +38,12 @@ namespace CharmsBarWin10
         {
             /// initialing config and setting window location
             ButtonConfig.SetVars();
-            var desktopWorkingArea = System.Windows.SystemParameters.WorkArea;
+            GlobalConfig.LoadConfig();
+            var desktopWorkingArea = SystemParameters.WorkArea;
             InitializeComponent(); //init window
 
             ///position
-            this.Height = System.Windows.SystemParameters.PrimaryScreenHeight - 1;
+            this.Height = SystemParameters.PrimaryScreenHeight - 1;
             this.Left = desktopWorkingArea.Right - this.Width - 12;
             this.Top = desktopWorkingArea.Top + 1;
             MouseLeave += Window_MouseLeave;
@@ -50,20 +51,6 @@ namespace CharmsBarWin10
             /// hiding window
             HideWindow();
 
-            /// Disabled, will be reworked in a future build
-            /*
-            /// setting theme based on windows settings
-            switch (Config.SystemConfig.IsLightTheme())
-            {
-                case true:
-                    //this.Background = Brushes.White;
-                    this.Background = Brushes.White;
-                    MessageBox.Show("Sorry, but light theme is not supported. Maybe in a future.\nMeanwhile, enjoy dark mode experience!", "Light mode coming soon", MessageBoxButton.OK, MessageBoxImage.Information);
-                    break;
-                case false:
-                    this.Background = Brushes.Black;
-                    break;
-            }*/
             /// checking for cursor location
             this.Loaded += delegate
             {
@@ -74,6 +61,11 @@ namespace CharmsBarWin10
                     this.Dispatcher.Invoke(new Action(delegate
                     {
                         Point cursorPosition = GetMouseLocation.GetMousePosition();
+
+                        /* Debug */
+                        //Text2.Content = $"{desktopWorkingArea.Right}, {desktopWorkingArea.Top}";
+                        //Text3.Content = $"{cursorPosition.X}, {cursorPosition.Y}";
+
                         if (cursorPosition.X + 1 == desktopWorkingArea.Right && cursorPosition.Y == desktopWorkingArea.Top)
                         {
                             var bc = new BrushConverter();
@@ -97,19 +89,19 @@ namespace CharmsBarWin10
             if (button != null)
                 switch (button.Name)
                 {
-                    case "one":
+                    case "Button1":
                         ClickHandler.Do(1);
                         break;
-                    case "two":
+                    case "Button2":
                         ClickHandler.Do(2);
                         break;
-                    case "three":
+                    case "Button3":
                         ClickHandler.Do(3);
                         break;
-                    case "four":
+                    case "Button4":
                         ClickHandler.Do(4);
                         break;
-                    case "five":
+                    case "Button5":
                         ClickHandler.Do(5);
                         break;
                     default:
@@ -129,7 +121,16 @@ namespace CharmsBarWin10
             var bc = new BrushConverter();
             this.Height = System.Windows.SystemParameters.PrimaryScreenHeight;
             this.Top = System.Windows.SystemParameters.WorkArea.Top;
-            this.Background = (Brush)bc.ConvertFrom($"#FF{GlobalConfig.UserColor}");
+            try
+            {
+                this.Background = (Brush)bc.ConvertFrom($"#FF{GlobalConfig.BackgroundColor}");
+            }
+            catch
+            {
+                MessageBox.Show($"Invalid color #{GlobalConfig.BackgroundColor}. Maybe invalid config? Reverting to defaults.", 
+                    "Invalid color", MessageBoxButton.OK, MessageBoxImage.Error);
+                GlobalConfig.ResetConfig();
+            }
         }
         public void HideWindow()
         {

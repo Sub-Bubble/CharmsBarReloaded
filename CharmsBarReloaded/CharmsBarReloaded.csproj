@@ -8,22 +8,30 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Assets\AppIcon.ico" />
     <None Remove="Assets\CharmsBarIcons\Devices.png" />
+    <None Remove="Assets\CharmsBarIcons\Devices.png" />
+    <None Remove="Assets\CharmsBarIcons\Exit.png" />
     <None Remove="Assets\CharmsBarIcons\Search.png" />
     <None Remove="Assets\CharmsBarIcons\Settings.png" />
+    <None Remove="Assets\CharmsBarIcons\SettingsDark.png" />
     <None Remove="Assets\CharmsBarIcons\Share.png" />
     <None Remove="Assets\CharmsBarIcons\Start.png" />
     <None Remove="Assets\Settings.png" />
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Hardcodet.NotifyIcon.Wpf" Version="1.1.0" />
     <PackageReference Include="System.Runtime.InteropServices" Version="4.3.0" />
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Assets\AppIcon.ico" />
     <Resource Include="Assets\CharmsBarIcons\Devices.png" />
+    <Resource Include="Assets\CharmsBarIcons\Exit.png" />
     <Resource Include="Assets\CharmsBarIcons\Search.png" />
     <Resource Include="Assets\CharmsBarIcons\Settings.png" />
+    <Resource Include="Assets\CharmsBarIcons\SettingsDark.png" />
     <Resource Include="Assets\CharmsBarIcons\Share.png" />
     <Resource Include="Assets\CharmsBarIcons\Start.png" />
   </ItemGroup>
