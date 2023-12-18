@@ -39,6 +39,17 @@ namespace CharmsBarReloaded
                 GlobalConfig.TextColor = TextColor.Text;
                 GlobalConfig.HoverColor = HoverColor.Text;
                 GlobalConfig.SaveConfig();
+                //checking config
+                try
+                {
+                    GlobalConfig.GetConfig("bg");
+                    GlobalConfig.GetConfig("text");
+                    MessageBox.Show("Config saved.", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+                catch
+                {
+                    MessageBox.Show("Error setting config.\nMaybe wrong formatting?", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
             }
             catch
             {

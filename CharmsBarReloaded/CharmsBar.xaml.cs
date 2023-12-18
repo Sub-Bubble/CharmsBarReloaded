@@ -69,7 +69,7 @@ namespace CharmsBarReloaded
                         if (cursorPosition.X + 1 == desktopWorkingArea.Right && cursorPosition.Y == desktopWorkingArea.Top)
                         {
                             var bc = new BrushConverter();
-                            this.Background = (Brush)bc.ConvertFrom("#01000000");
+                            this.Background = GlobalConfig.GetConfig("Transparent");
                             CharmsGrid.Visibility = Visibility.Visible;
                             this.Height = System.Windows.SystemParameters.PrimaryScreenHeight-1;
                             this.Top = desktopWorkingArea.Top+1;
@@ -118,24 +118,13 @@ namespace CharmsBarReloaded
 
         private void CharmsGrid_MouseEnter(object sender, MouseEventArgs e)
         {
-            var bc = new BrushConverter();
             this.Height = System.Windows.SystemParameters.PrimaryScreenHeight;
             this.Top = System.Windows.SystemParameters.WorkArea.Top;
-            try
-            {
-                this.Background = (Brush)bc.ConvertFrom($"#FF{GlobalConfig.BackgroundColor}");
-            }
-            catch
-            {
-                MessageBox.Show($"Invalid color #{GlobalConfig.BackgroundColor}. Maybe invalid config? Reverting to defaults.", 
-                    "Invalid color", MessageBoxButton.OK, MessageBoxImage.Error);
-                GlobalConfig.ResetConfig();
-            }
+            this.Background = GlobalConfig.GetConfig("bg");
         }
         public void HideWindow()
         {
-            var bc = new BrushConverter();
-            this.Background = (Brush)bc.ConvertFrom("#00000000");
+            this.Background = GlobalConfig.GetConfig("Hide");
             CharmsGrid.Visibility = Visibility.Collapsed;
         }
     }

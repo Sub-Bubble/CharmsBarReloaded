@@ -17,8 +17,17 @@ namespace CharmsBarReloaded
     {
         private void Application_DispatcherUnhandledException(object sender, System.Windows.Threading.DispatcherUnhandledExceptionEventArgs e)
         {
-            MessageBox.Show($"An error just happened. {e.Exception.Message}", "ErrorMessage", MessageBoxButton.OK, MessageBoxImage.Error);
-            e.Handled = true;
+            if (e.Exception is FormatException)
+            {
+                MessageBox.Show($"Invalid color #{GlobalConfig.BackgroundColor}. Maybe invalid config? Reverting to defaults.",
+                    "Invalid color", MessageBoxButton.OK, MessageBoxImage.Error);
+                GlobalConfig.ResetConfig();
+                e.Handled = true;
+            }
+            else{
+                MessageBox.Show($"An error just happened. {e.Exception.Message}", "ErrorMessage", MessageBoxButton.OK, MessageBoxImage.Error);
+                e.Handled = true;
+            }
         }
 
         private void Application_Startup(object sender, StartupEventArgs e)

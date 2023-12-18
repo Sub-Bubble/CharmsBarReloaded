@@ -5,6 +5,9 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Data;
+using System.Windows.Media;
 
 namespace CharmsBarReloaded
 {
@@ -57,6 +60,7 @@ namespace CharmsBarReloaded
             CharmsBarReloaded.Properties.Settings.Default.TextColor = "d3d3d3";
             CharmsBarReloaded.Properties.Settings.Default.HoverColor = "4c4c4c";
             CharmsBarReloaded.Properties.Settings.Default.UseLightTheme = false;
+            CharmsBarReloaded.Properties.Settings.Default.Save();
             LoadConfig();
         }
         public static void SaveConfig()
@@ -67,6 +71,28 @@ namespace CharmsBarReloaded
             CharmsBarReloaded.Properties.Settings.Default.TextColor = TextColor;
             CharmsBarReloaded.Properties.Settings.Default.HoverColor = HoverColor;
             CharmsBarReloaded.Properties.Settings.Default.UseLightTheme = UseLightTheme;
+            CharmsBarReloaded.Properties.Settings.Default.Save();
+        }
+        public static Brush GetConfig(string name)
+        {
+            var bc = new BrushConverter();
+            Brush result;
+            switch (name)
+            {
+                case "Hide":
+                    result = (Brush)bc.ConvertFrom("#00000000");
+                    return result;
+                case "bg":
+                    result = (Brush)bc.ConvertFrom($"#FF{GlobalConfig.BackgroundColor}");
+                    return result;
+                case "text":
+                    result = (Brush)bc.ConvertFrom($"#FF{GlobalConfig.TextColor}");
+                    return result;
+                case "Transparent":
+                    result = (Brush)bc.ConvertFrom("#01000000");
+                    return result;
+            }
+            return (Brush)bc.ConvertFrom("#FF000000"); //returning black when unknown
         }
     }
     class ButtonConfig
