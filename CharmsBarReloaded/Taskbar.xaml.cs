@@ -18,5 +18,19 @@ namespace CharmsBarReloaded
         {
             Application.Current.Shutdown();
         }
+
+        private void ToggleCharmsBar(object sender, RoutedEventArgs e)
+        {
+            if (GlobalConfig.IsEnabled)
+            {
+                GlobalConfig.IsEnabled = false;
+                Checkmark.IsChecked = false;
+            }
+            else
+            {
+                GlobalConfig.IsEnabled = true;
+                Checkmark.IsChecked = true;
+            }
+        }
     }
 }

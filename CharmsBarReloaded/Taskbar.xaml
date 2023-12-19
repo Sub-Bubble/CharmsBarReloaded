@@ -10,6 +10,8 @@
             </MenuItem.Icon>
         </MenuItem>
         <Separator/>
+        <MenuItem IsChecked="True"  Header="Enabled" Click="ToggleCharmsBar" x:Name="Checkmark"/>
+        <Separator/>
         <MenuItem Header="Settings" Click="OpenSettings">
             <MenuItem.Icon>
                 <Image Source="Assets/CharmsBarIcons/SettingsDark.png"/>

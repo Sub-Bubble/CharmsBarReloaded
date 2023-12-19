@@ -27,6 +27,7 @@ namespace CharmsBarReloaded
         public const int Version = 1;
 
         /// other vars
+        public static bool IsEnabled {  get; set; }
         public static bool HideWindowAfterClick {  get; set; }
         public static string BackgroundColor {  get; set; }
         public static string TextColor {  get; set; }
@@ -34,6 +35,7 @@ namespace CharmsBarReloaded
         public static bool UseLightTheme {  get; set; }
         public static void LoadConfig()
         {
+            IsEnabled = true;
             try
             {
                 HideWindowAfterClick = CharmsBarReloaded.Properties.Settings.Default.HideWindowAfterClick;

@@ -66,7 +66,7 @@ namespace CharmsBarReloaded
                         //Text2.Content = $"{desktopWorkingArea.Right}, {desktopWorkingArea.Top}";
                         //Text3.Content = $"{cursorPosition.X}, {cursorPosition.Y}";
 
-                        if (cursorPosition.X + 1 == desktopWorkingArea.Right && cursorPosition.Y == desktopWorkingArea.Top)
+                        if (cursorPosition.X + 1 == desktopWorkingArea.Right && cursorPosition.Y == desktopWorkingArea.Top && GlobalConfig.IsEnabled)
                         {
                             var bc = new BrushConverter();
                             this.Background = GlobalConfig.GetConfig("Transparent");
