@@ -24,6 +24,7 @@ namespace CharmsBarReloaded
         public SettingsBeta()
         {
             InitializeComponent();
+            VersionString.Content = $"CharmsBar: Reloaded {GlobalConfig.VersionString}\nBuild {GlobalConfig.Build}";
             //RunOnStartup.IsChecked = false;
             HideOnClick.IsChecked = GlobalConfig.HideWindowAfterClick;
             BackgroundColor.Text = GlobalConfig.BackgroundColor;

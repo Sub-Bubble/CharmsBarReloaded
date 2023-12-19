@@ -60,7 +60,7 @@
         <!-- Something else -->
         <StackPanel Orientation="Vertical" Margin="10, 10, 10, 0"  Grid.Column="2">
             <Label Content="About" Grid.Column="2" FontSize="40" Margin="10, 10, 0, 0" Height="70" VerticalAlignment="Top"/>
-            <Label Content="CharmsBar: Reloaded a1.0&#xA;Build 1"/>
+            <Label x:Name="VersionString"/>
 
         </StackPanel>
 
