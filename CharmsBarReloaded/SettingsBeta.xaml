@@ -52,9 +52,11 @@
                     <Label Content="Hover color:" Width="110"/>
                     <Label Content="#" FontSize="13"/>
                     <TextBox VerticalContentAlignment="Center" x:Name="HoverColor" PreviewTextInput="ValidHexCheck" MaxLength="6"/>
-                    
-                </DockPanel>
 
+                </DockPanel>
+                <StackPanel Margin="0, 20, 0, 0">
+                    <CheckBox Content="Show charging on desktop or devices with &#10;no battery" x:Name="ShowChargingOnDesktop"/>
+                </StackPanel>
             </StackPanel>
         </StackPanel>
         <!-- Something else -->

@@ -1,0 +1,43 @@
+﻿<Window x:Class="CharmsBarReloaded.CharmsClock"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:CharmsBarReloaded"
+      mc:Ignorable="d" 
+      Name="CharmsClock1" Title="Clock"
+      Top="0"
+      UseLayoutRounding="True"
+      SnapsToDevicePixels="True"
+      Width="510" Height="140"
+      Topmost="True"
+      ResizeMode="NoResize" ScrollViewer.VerticalScrollBarVisibility="Disabled" SizeToContent="Width"
+      WindowStyle="None" AllowsTransparency="True" ShowInTaskbar="True" Icon="Assets/AppIcon.ico">
+
+    <Grid Focusable="False" Background="Black" Width="510">
+        <!--<Border
+                Name="ClockBorder"
+                Panel.ZIndex="-1"
+                BorderBrush="{x:Static SystemColors.WindowTextBrush}" 
+                BorderThickness="2"
+                Width="Auto"
+                Height="138"
+                Margin="0,0,-10,0">
+        </Border>
+        -->
+        <StackPanel Grid.Row="0">
+            <!--<Image Name="InternetStatus" Source="Assets/CharmsClockIcons/NoInternet.png" HorizontalAlignment="Left" Width="25" Margin="37,3,0,-99"/>-->
+            <Image Name="BatteryLife" Source="Assets/CharmsClockIcons/BatteryFull.png" HorizontalAlignment="Left" Width="24" Margin="39,9,0,-169"/>
+            <Image Name="IsCharging" Source="Assets/CharmsClockIcons/Charging.png" HorizontalAlignment="Left" Width="24" Margin="39,9,0,-169"/>
+            <Label Name="ClockHours" Content="0" Foreground="White" FontFamily="Segoe UI light" FontSize="85" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="95, 3, 0, -106"/>
+            <Label Name="ClockMinutes" Content="00" Foreground="White" FontFamily="Segoe UI light" FontSize="85" Margin="144, -17, -190, -198"/>
+            <Label Name="ClockSeparator" Content=":" Foreground="White" FontFamily="Segoe UI Light" FontSize="84" Margin="125, -24.99, -190, -98"/>
+
+            <StackPanel Name="AutoResizer" Visibility="Hidden" Width="Auto" Margin="0, 0, 0, 0"/>
+
+            <Label Name="Week" Content="NaN" Foreground="White" FontFamily="Segoe UI Semilight" FontSize="32" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="255, 2, 0, -18"/>
+            <Label Name="Date" Content="NaN" Foreground="White" FontFamily="Segoe UI Semilight" FontSize="32" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="255, 3, 0, -24"/>
+            <Label Name="noClocks" Content="-1" Visibility="Hidden"/>
+        </StackPanel>
+    </Grid>
+</Window>

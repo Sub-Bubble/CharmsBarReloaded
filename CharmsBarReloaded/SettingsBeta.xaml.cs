@@ -43,6 +43,7 @@ namespace CharmsBarReloaded
             GlobalConfig.BackgroundColor = BackgroundColor.Text;
             GlobalConfig.TextColor = TextColor.Text;
             GlobalConfig.HoverColor = HoverColor.Text;
+            GlobalConfig.ShowChargingOnDesktop = (bool)ShowChargingOnDesktop.IsChecked;
             GlobalConfig.SaveConfig();
             //checking config, just in case
             try

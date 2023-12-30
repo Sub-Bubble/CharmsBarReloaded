@@ -82,5 +82,17 @@ namespace CharmsBarReloaded.Properties {
                 this["UseLightTheme"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool ShowChargingOnDesktop {
+            get {
+                return ((bool)(this["ShowChargingOnDesktop"]));
+            }
+            set {
+                this["ShowChargingOnDesktop"] = value;
+            }
+        }
     }
 }

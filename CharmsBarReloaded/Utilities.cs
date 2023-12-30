@@ -3,6 +3,7 @@ using System.Runtime.InteropServices;
 using System.Windows.Interop;
 using System.Windows;
 using System.Reflection.Metadata;
+using System.Net.NetworkInformation;
 
 namespace CharmsBarReloaded
 {

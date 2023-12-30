@@ -5,19 +5,47 @@
     <TargetFramework>net6.0-windows</TargetFramework>
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
+    <ApplicationIcon>Assets\AppIcon.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
     <None Remove="Assets\AppIcon.ico" />
+    <None Remove="Assets\CharmsBarIcons\BatteryFull.png" />
     <None Remove="Assets\CharmsBarIcons\Devices.png" />
     <None Remove="Assets\CharmsBarIcons\Devices.png" />
+    <None Remove="Assets\CharmsBarIcons\Ethernet.png" />
+    <None Remove="Assets\CharmsBarIcons\EthernetInternet.png" />
+    <None Remove="Assets\CharmsBarIcons\EthernetNoInternet.png" />
     <None Remove="Assets\CharmsBarIcons\Exit.png" />
+    <None Remove="Assets\CharmsBarIcons\NoInternet.png" />
     <None Remove="Assets\CharmsBarIcons\Search.png" />
     <None Remove="Assets\CharmsBarIcons\Settings.png" />
     <None Remove="Assets\CharmsBarIcons\SettingsDark.png" />
     <None Remove="Assets\CharmsBarIcons\Share.png" />
     <None Remove="Assets\CharmsBarIcons\Start.png" />
+    <None Remove="Assets\CharmsClockIcons\Battery0.png" />
+    <None Remove="Assets\CharmsClockIcons\Battery1.png" />
+    <None Remove="Assets\CharmsClockIcons\Battery10.png" />
+    <None Remove="Assets\CharmsClockIcons\Battery20.png" />
+    <None Remove="Assets\CharmsClockIcons\Battery30.png" />
+    <None Remove="Assets\CharmsClockIcons\Battery40.png" />
+    <None Remove="Assets\CharmsClockIcons\Battery5.png" />
+    <None Remove="Assets\CharmsClockIcons\Battery50.png" />
+    <None Remove="Assets\CharmsClockIcons\Battery60.png" />
+    <None Remove="Assets\CharmsClockIcons\Battery70.png" />
+    <None Remove="Assets\CharmsClockIcons\Battery80.png" />
+    <None Remove="Assets\CharmsClockIcons\Battery90.png" />
+    <None Remove="Assets\CharmsClockIcons\BatteryFull.png" />
+    <None Remove="Assets\CharmsClockIcons\Charging.png" />
+    <None Remove="Assets\CharmsClockIcons\EthernetInternet.png" />
+    <None Remove="Assets\CharmsClockIcons\EthernetNoInternet.png" />
+    <None Remove="Assets\CharmsClockIcons\NoInternet.png" />
     <None Remove="Assets\Settings.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Assets\CharmsClockIcons\Battery40.png" />
+    <Resource Include="Assets\CharmsClockIcons\Battery80.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -34,6 +62,21 @@
     <Resource Include="Assets\CharmsBarIcons\SettingsDark.png" />
     <Resource Include="Assets\CharmsBarIcons\Share.png" />
     <Resource Include="Assets\CharmsBarIcons\Start.png" />
+    <Resource Include="Assets\CharmsClockIcons\Battery0.png" />
+    <Resource Include="Assets\CharmsClockIcons\Battery1.png" />
+    <Resource Include="Assets\CharmsClockIcons\Battery10.png" />
+    <Resource Include="Assets\CharmsClockIcons\Battery20.png" />
+    <Resource Include="Assets\CharmsClockIcons\Battery30.png" />
+    <Resource Include="Assets\CharmsClockIcons\Battery5.png" />
+    <Resource Include="Assets\CharmsClockIcons\Battery50.png" />
+    <Resource Include="Assets\CharmsClockIcons\Battery60.png" />
+    <Resource Include="Assets\CharmsClockIcons\Battery70.png" />
+    <Resource Include="Assets\CharmsClockIcons\Battery90.png" />
+    <Resource Include="Assets\CharmsClockIcons\BatteryFull.png" />
+    <Resource Include="Assets\CharmsClockIcons\Charging.png" />
+    <Resource Include="Assets\CharmsClockIcons\EthernetInternet.png" />
+    <Resource Include="Assets\CharmsClockIcons\EthernetNoInternet.png" />
+    <Resource Include="Assets\CharmsClockIcons\NoInternet.png" />
   </ItemGroup>
 
   <ItemGroup>

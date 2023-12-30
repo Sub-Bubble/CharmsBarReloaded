@@ -7,17 +7,23 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Data;
+using System.Windows.Forms;
 using System.Windows.Media;
 
 namespace CharmsBarReloaded
 {
     class SystemConfig
     {
+        public static readonly Rect DesktopWorkingArea = SystemParameters.WorkArea;
         public static bool IsLightTheme()
         {
             using var key = Registry.CurrentUser.OpenSubKey(@"Software\Microsoft\Windows\CurrentVersion\Themes\Personalize");
             var value = key?.GetValue("AppsUseLightTheme");
             return value is int i && i > 0;
+        }
+        public static float BatteryPercentage()
+        {
+            return Convert.ToInt32(SystemInformation.PowerStatus.BatteryLifePercent*10);
         }
     }
     class GlobalConfig
@@ -33,6 +39,7 @@ namespace CharmsBarReloaded
         public static string TextColor {  get; set; }
         public static string HoverColor {  get; set; }
         public static bool UseLightTheme {  get; set; }
+        public static bool ShowChargingOnDesktop { get; set; }
         public static void LoadConfig()
         {
             IsEnabled = true;
@@ -43,6 +50,7 @@ namespace CharmsBarReloaded
                 TextColor = CharmsBarReloaded.Properties.Settings.Default.TextColor;
                 HoverColor = CharmsBarReloaded.Properties.Settings.Default.HoverColor;
                 UseLightTheme = CharmsBarReloaded.Properties.Settings.Default.UseLightTheme;
+                ShowChargingOnDesktop = CharmsBarReloaded.Properties.Settings.Default.ShowChargingOnDesktop;
             }
             catch
             {
@@ -52,6 +60,7 @@ namespace CharmsBarReloaded
                 TextColor = "d3d3d3";
                 HoverColor = "4c4c4c";
                 UseLightTheme = false;
+                ShowChargingOnDesktop = false;
             }
         }
         public static void ResetConfig()
@@ -62,6 +71,7 @@ namespace CharmsBarReloaded
             CharmsBarReloaded.Properties.Settings.Default.TextColor = "d3d3d3";
             CharmsBarReloaded.Properties.Settings.Default.HoverColor = "4c4c4c";
             CharmsBarReloaded.Properties.Settings.Default.UseLightTheme = false;
+            CharmsBarReloaded.Properties.Settings.Default.ShowChargingOnDesktop = false;
             CharmsBarReloaded.Properties.Settings.Default.Save();
             LoadConfig();
         }
@@ -73,6 +83,7 @@ namespace CharmsBarReloaded
             CharmsBarReloaded.Properties.Settings.Default.TextColor = TextColor;
             CharmsBarReloaded.Properties.Settings.Default.HoverColor = HoverColor;
             CharmsBarReloaded.Properties.Settings.Default.UseLightTheme = UseLightTheme;
+            CharmsBarReloaded.Properties.Settings.Default.ShowChargingOnDesktop = ShowChargingOnDesktop;
             CharmsBarReloaded.Properties.Settings.Default.Save();
         }
         public static Brush GetConfig(string name)

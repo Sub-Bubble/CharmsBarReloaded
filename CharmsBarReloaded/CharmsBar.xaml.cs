@@ -1,4 +1,5 @@
-﻿using CharmsBarReloaded.Worker;
+﻿using CharmsBarReloaded.Properties;
+using CharmsBarReloaded.Worker;
 using System;
 using System.Collections.Generic;
 using System.DirectoryServices.ActiveDirectory;
@@ -25,61 +26,61 @@ namespace CharmsBarReloaded
     /// </summary>
     public partial class CharmsBar : Window
     {
-        /// hiding window from alttab
+        /// hiding window from alttab      
         [DllImport("user32.dll", SetLastError = true)]
         static extern int GetWindowLong(IntPtr hWnd, int nIndex);
         [DllImport("user32.dll")]
         static extern int SetWindowLong(IntPtr hWnd, int nIndex, int dwNewLong);
         private const int GWL_EX_STYLE = -20;
         private const int WS_EX_APPWINDOW = 0x00040000, WS_EX_TOOLWINDOW = 0x00000080;
-
+        CharmsClock charmsClock = new CharmsClock();
 
         public CharmsBar()
         {
             /// initialing config and setting window location
             ButtonConfig.SetVars();
             GlobalConfig.LoadConfig();
-            var desktopWorkingArea = SystemParameters.WorkArea;
             InitializeComponent(); //init window
 
             ///position
             this.Height = SystemParameters.PrimaryScreenHeight - 1;
-            this.Left = desktopWorkingArea.Right - this.Width - 12;
-            this.Top = desktopWorkingArea.Top + 1;
+            this.Left = SystemConfig.DesktopWorkingArea.Right - this.Width - 12;
+            this.Top = SystemConfig.DesktopWorkingArea.Top + 1;
             MouseLeave += Window_MouseLeave;
 
             /// hiding window
             HideWindow();
 
             /// checking for cursor location
-            this.Loaded += delegate
+            this.Loaded += delegate { CheckCursorLocation(); };
+        }
+        private void CheckCursorLocation()
+        {
+            SetWindowLong(new WindowInteropHelper(this).Handle, GWL_EX_STYLE, (GetWindowLong(new WindowInteropHelper(this).Handle, GWL_EX_STYLE) | WS_EX_TOOLWINDOW) & ~WS_EX_APPWINDOW);
+            System.Timers.Timer timer = new System.Timers.Timer();
+            timer.Elapsed += delegate
             {
-                SetWindowLong(new WindowInteropHelper(this).Handle, GWL_EX_STYLE, (GetWindowLong(new WindowInteropHelper(this).Handle, GWL_EX_STYLE) | WS_EX_TOOLWINDOW) & ~WS_EX_APPWINDOW);
-                System.Timers.Timer timer = new System.Timers.Timer();
-                timer.Elapsed += delegate
+                this.Dispatcher.Invoke(new Action(delegate
                 {
-                    this.Dispatcher.Invoke(new Action(delegate
+                    Point cursorPosition = GetMouseLocation.GetMousePosition();
+
+                    /* Debug */
+                    //Text2.Content = $"{desktopWorkingArea.Right}, {desktopWorkingArea.Top}";
+                    //Text3.Content = $"{cursorPosition.X}, {cursorPosition.Y}";
+
+                    if (cursorPosition.X + 1 == SystemConfig.DesktopWorkingArea.Right && cursorPosition.Y == SystemConfig.DesktopWorkingArea.Top && GlobalConfig.IsEnabled)
                     {
-                        Point cursorPosition = GetMouseLocation.GetMousePosition();
+                        var bc = new BrushConverter();
+                        this.Background = GlobalConfig.GetConfig("Transparent");
+                        CharmsGrid.Visibility = Visibility.Visible;
+                        this.Height = System.Windows.SystemParameters.PrimaryScreenHeight - 1;
+                        this.Top = SystemConfig.DesktopWorkingArea.Top + 1;
+                    }
+                }));
 
-                        /* Debug */
-                        //Text2.Content = $"{desktopWorkingArea.Right}, {desktopWorkingArea.Top}";
-                        //Text3.Content = $"{cursorPosition.X}, {cursorPosition.Y}";
-
-                        if (cursorPosition.X + 1 == desktopWorkingArea.Right && cursorPosition.Y == desktopWorkingArea.Top && GlobalConfig.IsEnabled)
-                        {
-                            var bc = new BrushConverter();
-                            this.Background = GlobalConfig.GetConfig("Transparent");
-                            CharmsGrid.Visibility = Visibility.Visible;
-                            this.Height = System.Windows.SystemParameters.PrimaryScreenHeight-1;
-                            this.Top = desktopWorkingArea.Top+1;
-                        }
-                    }));
-                    
-                };
-                timer.Interval = 1;
-                timer.Start();
             };
+            timer.Interval = 1;
+            timer.Start();
         }
         private void OnButtonClick(object sender, MouseButtonEventArgs e)
         {
@@ -121,10 +122,12 @@ namespace CharmsBarReloaded
             this.Height = System.Windows.SystemParameters.PrimaryScreenHeight;
             this.Top = System.Windows.SystemParameters.WorkArea.Top;
             this.Background = GlobalConfig.GetConfig("bg");
+            charmsClock.Update();
         }
         public void HideWindow()
         {
             this.Background = GlobalConfig.GetConfig("Hide");
+            charmsClock.Hide();
             CharmsGrid.Visibility = Visibility.Collapsed;
         }
     }

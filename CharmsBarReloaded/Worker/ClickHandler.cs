@@ -9,7 +9,7 @@ namespace CharmsBarReloaded.Worker
 {
     class ClickHandler
     {
-        private SettingsBeta? settings;
+        private SettingsBeta settings = new SettingsBeta();
         private int button_id;
         public ClickHandler(int clicked_id)
         {
@@ -40,17 +40,8 @@ namespace CharmsBarReloaded.Worker
         }
         public void OpenSettings()
         {
-            try
-            {
-                settings!.Show();
-                settings!.Focus();
-            }
-            catch (Exception e) when (e is NullReferenceException || e is InvalidOperationException)
-            {
-                settings = new SettingsBeta();
-                settings.Show();
-                settings.Focus();
-            }
+            settings.Show();
+            settings.Focus();
         }
     }
 }
