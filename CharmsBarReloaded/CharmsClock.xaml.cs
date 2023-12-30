@@ -42,6 +42,7 @@ namespace CharmsBarReloaded
                 System.Windows.Threading.DispatcherTimer timer = new System.Windows.Threading.DispatcherTimer();
                 timer.Tick += new EventHandler(AlwaysUpdate);
                 timer.Start();
+                timer.Interval = TimeSpan.FromSeconds(1);
             };
         }
         private void AlwaysUpdate(object sender, EventArgs e)
