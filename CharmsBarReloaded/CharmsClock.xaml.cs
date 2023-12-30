@@ -73,7 +73,7 @@ namespace CharmsBarReloaded
                 BatteryLife.Visibility = Visibility.Hidden;
             else
             {
-                switch (Convert.ToInt32(SystemConfig.BatteryPercentage()))
+                switch (SystemConfig.BatteryPercentage())
                 {
                     case 0:
                         BatteryLife.Source = new BitmapImage(new Uri(@"/Assets/CharmsClockIcons/Battery0.png", UriKind.Relative)); break;
@@ -82,22 +82,20 @@ namespace CharmsBarReloaded
                     case 5: case 6: case 7: case 8: case 9:
                         BatteryLife.Source = new BitmapImage(new Uri(@"/Assets/CharmsClockIcons/Battery5.png", UriKind.Relative)); break;
                     default:
-                        BatteryLife.Source = new BitmapImage(new Uri(@$"/Assets/CharmsClockIcons/Battery{(SystemConfig.BatteryPercentage()/10)}.png", UriKind.Relative)); break;
+                        BatteryLife.Source = new BitmapImage(new Uri(@$"/Assets/CharmsClockIcons/Battery{(SystemConfig.BatteryPercentage()/10)}0.png", UriKind.Relative)); break;
                         
                 }
             }
-            var ChargeStatus = SystemInformation.PowerStatus.BatteryChargeStatus;
+            var ChargeStatus = SystemInformation.PowerStatus.PowerLineStatus;
             switch (ChargeStatus)
             {
-                case BatteryChargeStatus.NoSystemBattery:
-                    if (GlobalConfig.ShowChargingOnDesktop)
-                        IsCharging.Visibility = Visibility.Visible;
-                    else
+                case System.Windows.Forms.PowerLineStatus.Online:
+                    if (!GlobalConfig.ShowChargingOnDesktop && SystemInformation.PowerStatus.BatteryChargeStatus.ToString() == "NoSystemBattery")
                         IsCharging.Visibility = Visibility.Collapsed;
+                    else
+                        IsCharging.Visibility = Visibility.Visible;
                     break;
-                case BatteryChargeStatus.Charging:
-                    IsCharging.Visibility = Visibility.Visible; break;
-                default:
+                case System.Windows.Forms.PowerLineStatus.Offline:
                     IsCharging.Visibility = Visibility.Collapsed; break;
             }
 

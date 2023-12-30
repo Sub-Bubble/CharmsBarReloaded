@@ -21,9 +21,9 @@ namespace CharmsBarReloaded
             var value = key?.GetValue("AppsUseLightTheme");
             return value is int i && i > 0;
         }
-        public static float BatteryPercentage()
+        public static int BatteryPercentage()
         {
-            return Convert.ToInt32(SystemInformation.PowerStatus.BatteryLifePercent*10);
+            return Convert.ToInt32(SystemInformation.PowerStatus.BatteryLifePercent*100);
         }
     }
     class GlobalConfig
