@@ -5,6 +5,7 @@ using System.Windows;
 using System.Reflection.Metadata;
 using System.Net.NetworkInformation;
 using Microsoft.Win32;
+using NETWORKLIST;
 
 namespace CharmsBarReloaded
 {
@@ -25,6 +26,7 @@ namespace CharmsBarReloaded
     }
     public static class Networking
     {
+        /// airplane mode
         static RegistryKey airplaneModeRegistry = Registry.LocalMachine.OpenSubKey(@"SYSTEM\ControlSet001\Control\RadioManagement\SystemRadioState");
         private static bool airplaneModeOn() => Convert.ToBoolean(airplaneModeRegistry.GetValue("", "")); //returns true if airplane mode is on
 
@@ -42,6 +44,7 @@ namespace CharmsBarReloaded
             }
         }
 
+        /// active network
         private static NetworkInterfaceType getActiveNetworkInterface()
         {
             foreach (NetworkInterface networkInterface in NetworkInterface.GetAllNetworkInterfaces())
@@ -50,15 +53,21 @@ namespace CharmsBarReloaded
             return NetworkInterfaceType.Unknown;
         }
 
-        /*static bool GetNetworkConnectivityStatus()
+        /// connection to the internet
+        static INetworkListManager nlm = new NetworkListManager();
+        static string getNetworkConnectivityStatus()
         {
-            //will add code in future
-        }*/
+            if (nlm.IsConnectedToInternet) return "Internet";
+            else return "NoInternet";
+        }
 
+        /// actual endpoint
         public static string NetworkStatus()
         {
             if (!airplaneModeOn())
-                return $"{getConnectionType()}";
+                if (getConnectionType() == "Unknown")
+                    return "NoInternet";
+            return $"{getConnectionType()}{getNetworkConnectivityStatus().ToString()}";
             return "Airplane";
         }
     }

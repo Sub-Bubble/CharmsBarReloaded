@@ -101,14 +101,13 @@ namespace CharmsBarReloaded
             }
 
             // Internet icon logic
-            switch (Networking.NetworkStatus())
+            string netstatus = Networking.NetworkStatus();
+            switch (netstatus)
             {
                 case "Wifi":
-                    InternetStatus.Source = new BitmapImage(new Uri(@$"/Assets/CharmsClockIcons/WifiInternetMax.png", UriKind.Relative)); break;
-                case "Ethernet":
-                    InternetStatus.Source = new BitmapImage(new Uri(@$"/Assets/CharmsClockIcons/EthernetInternet.png", UriKind.Relative)); break;
-                case "Unknown":
-                    InternetStatus.Source = new BitmapImage(new Uri(@$"/Assets/CharmsClockIcons/NoInternet.png", UriKind.Relative)); break;
+                    InternetStatus.Source = new BitmapImage(new Uri(@$"/Assets/CharmsClockIcons/{netstatus}Max.png", UriKind.Relative)); break;
+                default:
+                    InternetStatus.Source = new BitmapImage(new Uri(@$"/Assets/CharmsClockIcons/{netstatus}.png", UriKind.Relative)); break;
             }
         }
         public void Update()
