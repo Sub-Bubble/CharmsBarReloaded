@@ -101,8 +101,15 @@ namespace CharmsBarReloaded
             }
 
             // Internet icon logic
-            // TBD
-            //InternetStatus.Source = new BitmapImage(new Uri(@$"/Assets/CharmsClockIcons/{Networking.GetInternetStatus()}.png", UriKind.Relative));
+            switch (Networking.NetworkStatus())
+            {
+                case "Wifi":
+                    InternetStatus.Source = new BitmapImage(new Uri(@$"/Assets/CharmsClockIcons/WifiInternetMax.png", UriKind.Relative)); break;
+                case "Ethernet":
+                    InternetStatus.Source = new BitmapImage(new Uri(@$"/Assets/CharmsClockIcons/EthernetInternet.png", UriKind.Relative)); break;
+                case "Unknown":
+                    InternetStatus.Source = new BitmapImage(new Uri(@$"/Assets/CharmsClockIcons/NoInternet.png", UriKind.Relative)); break;
+            }
         }
         public void Update()
         {

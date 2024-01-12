@@ -26,7 +26,7 @@
         </Border>
         -->
         <StackPanel Grid.Row="0">
-            <!--<Image Name="InternetStatus" Source="Assets/CharmsClockIcons/NoInternet.png" HorizontalAlignment="Left" Width="25" Margin="37,3,0,-99"/>-->
+            <Image Name="InternetStatus" Source="Assets/CharmsClockIcons/NoInternet.png" HorizontalAlignment="Left" Width="25" Margin="37,3,0,-99"/>
             <Image Name="BatteryLife" Source="Assets/CharmsClockIcons/BatteryFull.png" HorizontalAlignment="Left" Width="24" Margin="39,9,0,-169"/>
             <Image Name="IsCharging" Source="Assets/CharmsClockIcons/Charging.png" HorizontalAlignment="Left" Width="24" Margin="39,9,0,-169"/>
             <Label Name="ClockHours" Content="0" Foreground="White" FontFamily="Segoe UI light" FontSize="85" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="95, 3, 0, -106"/>
