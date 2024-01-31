@@ -1,5 +1,5 @@
 # CharmsBar: Reloaded
-Returns Windows 8's Charms Bar to Windows 10/11!<br>
+A complete(almost) rewrite of a CharmsBar, inspired from <a href="https://github.com/Icepenguins101/charms-bar-port">charms-bar-port</a>, that returns Windows 8's Charms Bar to Windows 10/11!<br><br>
 **Please, note that this is still in alpha, so most of the features are incomplete and may bug out. If this happens, report your problem, please.**
 
 ## Features
