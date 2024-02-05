@@ -29,7 +29,7 @@ namespace CharmsBarReloaded
     class GlobalConfig
     {
         /// Constants. Only changed manually
-        public const string VersionString = "a1.1";
+        public const string VersionString = "a2.1";
         public const int Build = 3;
 
         /// other vars
