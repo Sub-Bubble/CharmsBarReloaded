@@ -17,6 +17,11 @@
                 <Image Source="Assets/CharmsBarIcons/SettingsDark.png"/>
             </MenuItem.Icon>
         </MenuItem>
+        <MenuItem Header="Old Settings" Click="OpenOldSettings">
+            <MenuItem.Icon>
+                <Image Source="Assets/CharmsBarIcons/SettingsDark.png"/>
+            </MenuItem.Icon>
+        </MenuItem>
         <MenuItem Header="Exit" Click="ExitApp">
             <MenuItem.Icon>
                 <Image Source="Assets/CharmsBarIcons/Exit.png"/>

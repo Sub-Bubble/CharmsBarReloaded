@@ -1,12 +1,6 @@
 ﻿using Microsoft.Win32;
 using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Data;
 using System.Windows.Forms;
 using System.Windows.Media;
 
@@ -14,6 +8,7 @@ namespace CharmsBarReloaded
 {
     class SystemConfig
     {
+        static BrushConverter bc = new BrushConverter();
         public static readonly Rect DesktopWorkingArea = SystemParameters.WorkArea;
         public static bool IsLightTheme()
         {
@@ -23,14 +18,25 @@ namespace CharmsBarReloaded
         }
         public static int BatteryPercentage()
         {
-            return Convert.ToInt32(SystemInformation.PowerStatus.BatteryLifePercent*100);
+            return Convert.ToInt32(SystemInformation.PowerStatus.BatteryLifePercent * 100);
+        }
+        public static Brush AccentColor()
+        {
+
+            int colorValue = (int)Registry.GetValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Accent", "AccentColorMenu", null);
+
+            int red = (colorValue >> 16) & 0xFF;
+            int green = (colorValue >> 8) & 0xFF;
+            int blue = colorValue & 0xFF;
+            var color = Color.FromArgb(255, (byte)blue, (byte)green, (byte)red);
+            return new SolidColorBrush(color);
         }
     }
     class GlobalConfig
     {
         /// Constants. Only changed manually
-        public const string VersionString = "a2.1";
-        public const int Build = 3;
+        public const string VersionString = "a3.0";
+        public const int Build = 8;
 
         /// other vars
         public static bool IsEnabled {  get; set; }
@@ -131,6 +137,12 @@ namespace CharmsBarReloaded
                     return Button5_Action;
                 case -1:
                     return "Settings";
+                case -2:
+                    return "OldSettings";
+                case -3:
+                    return "OsSettings";
+                case -4:
+                    return "ControlPanel";
                 default:
                     return "null";
             }

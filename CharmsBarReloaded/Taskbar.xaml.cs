@@ -1,24 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Media;
+﻿using System.Windows;
 
 namespace CharmsBarReloaded
 {
     public partial class Taskbar
     {
-        internal void OpenSettings(object sender, RoutedEventArgs e)
+        internal void OpenOldSettings(object sender, RoutedEventArgs e)
         {
-            Worker.ClickHandler.Do(-1);
+            ClickHandler.Do(-2);
         }
         internal void ExitApp(object sender, RoutedEventArgs e)
         {
             Application.Current.Shutdown();
         }
-
+        private void OpenSettings(object sender, RoutedEventArgs e)
+        {
+            ClickHandler.Do(-1);
+        }
         private void ToggleCharmsBar(object sender, RoutedEventArgs e)
         {
             Checkmark.IsChecked = !GlobalConfig.IsEnabled;

@@ -4,7 +4,7 @@
              xmlns:local="clr-namespace:CharmsBarReloaded"
              DispatcherUnhandledException="Application_DispatcherUnhandledException"
              Startup="Application_Startup"
-             StartupUri="CharmsBar.xaml">
+             StartupUri="/CharmsBar/CharmsBar.xaml">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>

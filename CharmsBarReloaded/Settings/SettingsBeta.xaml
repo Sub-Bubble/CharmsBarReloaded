@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CharmsBarReloaded"
         mc:Ignorable="d"
-        Title="Settings (Beta)" MinHeight="540" MinWidth="960" Height="540" Width="960" WindowStyle="ThreeDBorderWindow" Icon="Assets/CharmsBarIcons/SettingsDark.png">
+        Title="Settings (Beta)" MinHeight="540" MinWidth="960" Height="540" Width="960" WindowStyle="ThreeDBorderWindow" Icon="../Assets/CharmsBarIcons/SettingsDark.png">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="192*"/>

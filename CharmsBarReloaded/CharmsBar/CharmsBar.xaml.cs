@@ -1,23 +1,11 @@
-﻿using CharmsBarReloaded.Properties;
-using CharmsBarReloaded.Worker;
-using System;
-using System.Collections.Generic;
-using System.DirectoryServices.ActiveDirectory;
-using System.Linq;
-using System.Reflection.Emit;
-using System.Reflection.Metadata;
+﻿using System;
 using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Interop;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+using System.Windows.Media.Animation;
 
 namespace CharmsBarReloaded
 {
@@ -26,53 +14,86 @@ namespace CharmsBarReloaded
     /// </summary>
     public partial class CharmsBar : Window
     {
-        /// hiding window from alttab      
+        #region hiding window from alttab
         [DllImport("user32.dll", SetLastError = true)]
         static extern int GetWindowLong(IntPtr hWnd, int nIndex);
         [DllImport("user32.dll")]
         static extern int SetWindowLong(IntPtr hWnd, int nIndex, int dwNewLong);
         private const int GWL_EX_STYLE = -20;
         private const int WS_EX_APPWINDOW = 0x00040000, WS_EX_TOOLWINDOW = 0x00000080;
+        #endregion hiding window from alttab
+
+        #region vars
         CharmsClock charmsClock = new CharmsClock();
+        System.Timers.Timer timer = new System.Timers.Timer();
+        bool isAnimating = false;
+        bool windowVisible = false;
+        #endregion vars
+        #region animations
+        ColorAnimation fadeIn;
+        DoubleAnimation fadeOut = new DoubleAnimation
+        {
+            From = 1.0,
+            To = 0.0,
+            Duration = TimeSpan.FromMilliseconds(100)
+        };
+        DoubleAnimation backTo1Opacity = new DoubleAnimation { From = 0.0, To = 1.0, Duration = TimeSpan.FromMilliseconds(1)};
+        Storyboard slideInButtons;
+        Storyboard prepareButtons;
+        #endregion animations
 
         public CharmsBar()
         {
             /// initialing config and setting window location
             ButtonConfig.SetVars();
             GlobalConfig.LoadConfig();
+            fadeIn = new ColorAnimation
+            {
+                To = (Color)ColorConverter.ConvertFromString($"#FF{GlobalConfig.BackgroundColor.ToUpper()}"),
+                Duration = TimeSpan.FromMilliseconds(100),
+            };
             InitializeComponent(); //init window
+            slideInButtons = (Storyboard)FindResource("SlideInAnimation");
+            prepareButtons = (Storyboard)FindResource("PrepareButtons");
 
             ///position
             this.Height = SystemParameters.PrimaryScreenHeight - 1;
             this.Left = SystemConfig.DesktopWorkingArea.Right - this.Width - 12;
             this.Top = SystemConfig.DesktopWorkingArea.Top + 1;
-            MouseLeave += Window_MouseLeave;
 
             /// hiding window
             HideWindow();
 
+            charmsClock.Update(true);
+
             /// checking for cursor location
             this.Loaded += delegate { CheckCursorLocation(); };
         }
-        private void CheckCursorLocation()
+        void CheckCursorLocation()
         {
             SetWindowLong(new WindowInteropHelper(this).Handle, GWL_EX_STYLE, (GetWindowLong(new WindowInteropHelper(this).Handle, GWL_EX_STYLE) | WS_EX_TOOLWINDOW) & ~WS_EX_APPWINDOW);
-            System.Timers.Timer timer = new System.Timers.Timer();
             timer.Elapsed += delegate
             {
                 this.Dispatcher.Invoke(new Action(delegate
                 {
                     Point cursorPosition = GetMouseLocation.GetMousePosition();
-
                     /* Debug */
-                    //Text2.Content = $"{desktopWorkingArea.Right}, {desktopWorkingArea.Top}";
+                    //Text2.Content = $"{SystemConfig.DesktopWorkingArea.Right}, {SystemConfig.DesktopWorkingArea.Top}";
+                    //Text3.Content = $"{this.Left}, {this.Top}";
                     //Text3.Content = $"{cursorPosition.X}, {cursorPosition.Y}";
 
-                    if (cursorPosition.X + 1 == SystemConfig.DesktopWorkingArea.Right && cursorPosition.Y == SystemConfig.DesktopWorkingArea.Top && GlobalConfig.IsEnabled)
+                    if (cursorPosition.X + 1 == SystemConfig.DesktopWorkingArea.Right && cursorPosition.Y == SystemConfig.DesktopWorkingArea.Top && GlobalConfig.IsEnabled && !windowVisible)
                     {
                         var bc = new BrushConverter();
                         this.Background = GlobalConfig.GetConfig("Transparent");
                         CharmsGrid.Visibility = Visibility.Visible;
+
+                        if (!isAnimating)
+                        {
+                            isAnimating = true;
+                            BeginStoryboard(slideInButtons);
+                        }
+
                         this.Height = System.Windows.SystemParameters.PrimaryScreenHeight - 1;
                         this.Top = SystemConfig.DesktopWorkingArea.Top + 1;
                     }
@@ -84,7 +105,7 @@ namespace CharmsBarReloaded
         }
         private void OnButtonClick(object sender, MouseButtonEventArgs e)
         {
-            Grid button = sender as Grid;
+            Grid? button = sender as Grid;
             if (GlobalConfig.HideWindowAfterClick)
                 HideWindow();
             if (button != null)
@@ -121,14 +142,26 @@ namespace CharmsBarReloaded
         {
             this.Height = System.Windows.SystemParameters.PrimaryScreenHeight;
             this.Top = System.Windows.SystemParameters.WorkArea.Top;
-            this.Background = GlobalConfig.GetConfig("bg");
+            //this.Background = GlobalConfig.GetConfig("bg");
+            Storyboard.SetTargetProperty(fadeIn, new PropertyPath("(Window.Background).(SolidColorBrush.Color)"));
+            Storyboard storyboard = new Storyboard();
+            storyboard.Children.Add(fadeIn);
+            storyboard.Begin(this);
             charmsClock.Update();
         }
         public void HideWindow()
         {
-            this.Background = GlobalConfig.GetConfig("Hide");
-            charmsClock.Hide();
-            CharmsGrid.Visibility = Visibility.Collapsed;
+            fadeOut.Completed += delegate
+            {
+                BeginStoryboard(prepareButtons);
+                isAnimating = false;
+                this.Background = GlobalConfig.GetConfig("Hide");
+                charmsClock.HideClock();
+                CharmsGrid.Visibility = Visibility.Collapsed;
+                BeginAnimation(OpacityProperty, backTo1Opacity);
+            };
+            BeginAnimation(UIElement.OpacityProperty, fadeOut);
+
         }
     }
 }

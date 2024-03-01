@@ -1,0 +1,130 @@
+﻿<Window x:Class="CharmsBarReloaded.CharmsBar"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CharmsBarReloaded"
+        mc:Ignorable="d"
+        Name="Charms" Title="Charms"
+        Top="0"
+        UseLayoutRounding="True"
+        SnapsToDevicePixels="True"
+        Width="86"
+        Topmost="True"
+        ResizeMode="NoResize" ScrollViewer.VerticalScrollBarVisibility="Disabled" SizeToContent="Width"
+        WindowStyle="None" AllowsTransparency="True" ShowInTaskbar="True" Icon="../Assets/AppIcon.ico"
+        MouseLeave="Window_MouseLeave">
+    <Window.Resources>
+        <Storyboard x:Key="SlideInAnimation">
+            <DoubleAnimation Storyboard.TargetName="slideIn1" Storyboard.TargetProperty="X" From="98" To="0" Duration="0:0:0.5" BeginTime="0:0:0.1">
+                <DoubleAnimation.EasingFunction>
+                    <QuinticEase EasingMode="EaseOut"/>
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+            <DoubleAnimation Storyboard.TargetName="slideIn2" Storyboard.TargetProperty="X" From="98" To="0" Duration="0:0:0.5" BeginTime="0:0:0.05">
+                <DoubleAnimation.EasingFunction>
+                    <QuinticEase EasingMode="EaseOut"/>
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+            <DoubleAnimation Storyboard.TargetName="slideIn3" Storyboard.TargetProperty="X" From="98" To="0" Duration="0:0:0.5" BeginTime="0:0:0">
+                <DoubleAnimation.EasingFunction>
+                    <QuinticEase EasingMode="EaseOut"/>
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+            <DoubleAnimation Storyboard.TargetName="slideIn4" Storyboard.TargetProperty="X" From="98" To="0" Duration="0:0:0.5" BeginTime="0:0:0.05">
+                <DoubleAnimation.EasingFunction>
+                    <QuinticEase EasingMode="EaseOut"/>
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+            <DoubleAnimation Storyboard.TargetName="slideIn5" Storyboard.TargetProperty="X" From="98" To="0" Duration="0:0:0.5" BeginTime="0:0:0.1">
+                <DoubleAnimation.EasingFunction>
+                    <QuinticEase EasingMode="EaseOut"/>
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+        </Storyboard>
+        <Storyboard x:Key="PrepareButtons">
+            <DoubleAnimation Storyboard.TargetName="slideIn1" Storyboard.TargetProperty="X" From="0" To="98" Duration="0:0:0"/>
+            <DoubleAnimation Storyboard.TargetName="slideIn2" Storyboard.TargetProperty="X" From="0" To="98" Duration="0:0:0"/>
+            <DoubleAnimation Storyboard.TargetName="slideIn3" Storyboard.TargetProperty="X" From="0" To="98" Duration="0:0:0"/>
+            <DoubleAnimation Storyboard.TargetName="slideIn4" Storyboard.TargetProperty="X" From="0" To="98" Duration="0:0:0"/>
+            <DoubleAnimation Storyboard.TargetName="slideIn5" Storyboard.TargetProperty="X" From="0" To="98" Duration="0:0:0"/>
+        </Storyboard>
+    </Window.Resources>
+    <Grid>
+        <Grid Width="98" Height="686" Name="CharmsGrid" MouseEnter="CharmsGrid_MouseEnter" Margin="0, 0, 0, 0">
+            <!--Rows-->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="98"/>
+            <RowDefinition Height="98"/>
+            <RowDefinition Height="98"/>
+            <RowDefinition Height="98"/>
+            <RowDefinition Height="98"/>
+            <RowDefinition Height="98"/>
+            <RowDefinition Height="98"/>
+        </Grid.RowDefinitions>
+        <!--
+        <!On mouse hover we change bg to light gray-->
+
+        <Grid.Resources>
+            <Style x:Key="OnHover" TargetType="Grid">
+                <Style.Triggers>
+                    <Trigger Property="IsMouseOver" Value="True">
+                        <Setter Property="Background" Value="#4c4c4c" x:Name="HoverColor"/>
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+        </Grid.Resources>
+        <!--all buttons, their names and config-->
+
+        <Grid Grid.Row="1" MouseDown="OnButtonClick" Height="98" Width="98" Style="{StaticResource OnHover}" 
+              HorizontalAlignment="Center" VerticalAlignment="Center" Name="Button1">
+                <Grid.RenderTransform>
+                    <TranslateTransform x:Name="slideIn1"/>
+                </Grid.RenderTransform>
+                <Image Source="../Assets/CharmsBarIcons/Search.png" Height="48" Margin="0,12,0,38" x:Name="Image1"/>
+            <Label Foreground="LightGray" Height="26" Content="Search" HorizontalAlignment="Center" Margin="22,60,22,12" Name="Text1"/>
+            <Label Width="98" Height="98"/>
+        </Grid>
+
+        <Grid Grid.Row="2" MouseDown="OnButtonClick" Height="98" Width="98" Style="{StaticResource OnHover}" 
+              HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="Button2">
+                <Grid.RenderTransform>
+                    <TranslateTransform x:Name="slideIn2"/>
+                </Grid.RenderTransform>
+                <Image Source="../Assets/CharmsBarIcons/Share.png" Height="48" Margin="0,12,0,38" x:Name="Image2"/>
+            <Label Foreground="LightGray" Height="26" Content="Share" HorizontalAlignment="Center" Margin="22,60,22,12" Name="Text2"/>
+            <Label Width="98" Height="98"/>
+        </Grid>
+
+            <Grid Grid.Row="3" MouseDown="OnButtonClick" Height="98" Width="98" Style="{StaticResource OnHover}" 
+              HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="Button3">
+                <Grid.RenderTransform>
+                    <TranslateTransform x:Name="slideIn3"/>
+                </Grid.RenderTransform>
+                <Image Source="../Assets/CharmsBarIcons/Start.png" Height="48" Margin="0,12,0,38" x:Name="Image3"/>
+            <Label Foreground="LightGray" Height="26" Content="Start" HorizontalAlignment="Center" Margin="22,60,22,12" Name="Text3"/>
+            <Label Width="98" Height="98"/>
+        </Grid>
+
+        <Grid Grid.Row="4" MouseDown="OnButtonClick" Height="98" Width="98" Style="{StaticResource OnHover}" 
+              HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="Button4">
+                <Grid.RenderTransform>
+                    <TranslateTransform x:Name="slideIn4"/>
+                </Grid.RenderTransform>
+                <Image Source="../Assets/CharmsBarIcons/Devices.png" Height="48" Margin="0,12,0,38" x:Name="Image4"/>
+            <Label Foreground="LightGray" Height="26" Content="Devices" HorizontalAlignment="Center" Margin="22,60,22,12" Name="Text4"/>
+            <Label Width="98" Height="98"/>
+        </Grid>
+
+        <Grid Grid.Row="5" MouseDown="OnButtonClick" Height="98" Width="98" Style="{StaticResource OnHover}" 
+              HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="Button5">
+                <Grid.RenderTransform>
+                    <TranslateTransform x:Name="slideIn5"/>
+                </Grid.RenderTransform>
+                <Image Source="../Assets/CharmsBarIcons/Settings.png" Height="48" Margin="0,12,0,38" x:Name="Image5"/>
+            <Label Foreground="LightGray" Height="26" Content="Settings" HorizontalAlignment="Center" Margin="22,60,22,12" Name="Text5"/>
+            <Label Width="98" Height="98"/>
+        </Grid>
+    </Grid>
+    </Grid>
+</Window>

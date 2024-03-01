@@ -1,32 +1,13 @@
-﻿using System;
-using System.Runtime.InteropServices;
-using System.Windows.Interop;
-using System.Windows;
-using System.Reflection.Metadata;
-using System.Net.NetworkInformation;
-using Microsoft.Win32;
-using NETWORKLIST;
+﻿using Microsoft.Win32;
 using NativeWifi;
+using NETWORKLIST;
+using System;
+using System.Net.NetworkInformation;
+using System.Windows.Forms;
 using static NativeWifi.Wlan;
-using static NativeWifi.WlanClient;
 
 namespace CharmsBarReloaded
 {
-    public static class GetMouseLocation
-    {
-        [DllImport("user32.dll")]
-        [return: MarshalAs(UnmanagedType.Bool)]
-        internal static extern bool GetCursorPos(ref Win32Point pt);
-
-        [StructLayout(LayoutKind.Sequential)]
-        internal struct Win32Point { public Int32 X; public Int32 Y; };
-        public static System.Windows.Point GetMousePosition()
-        {
-            var w32Mouse = new Win32Point();
-            GetCursorPos(ref w32Mouse);
-            return new System.Windows.Point(w32Mouse.X, w32Mouse.Y);
-        }
-    }
     public static class Networking
     {
         /// airplane mode
@@ -69,29 +50,38 @@ namespace CharmsBarReloaded
         static WlanClient wlanClient = new WlanClient();
         public static string GetWifiLinkQuality()
         {
-            Wlan.WlanBssEntry[] wlanBssEntries = wlanClient.Interfaces[0].GetNetworkBssList();
-            //MessageBox.Show($"Number of wlan clients: {wlanClient.Interfaces.Length}"); //use for debugging
-            WlanBssEntry wifiEntry = wlanBssEntries[0];
-            int linkQuality = Convert.ToInt32(wifiEntry.linkQuality)/20 + 1;
-            switch (linkQuality)
+            try
             {
-                case 1:
-                    return "Weakest";
-                case 2:
-                    return "Weak";
-                case 3:
-                    return "Medium";
-                case 4:
-                    return "Strong";
-                case 5: case 6:
-                    return "Max";
-                default:
-                    return string.Empty;
+                Wlan.WlanBssEntry[] wlanBssEntries = wlanClient.Interfaces[0].GetNetworkBssList();
+                //MessageBox.Show($"Number of wlan clients: {wlanClient.Interfaces.Length}"); //use for debugging
+                WlanBssEntry wifiEntry = wlanBssEntries[0];
+                int linkQuality = Convert.ToInt32(wifiEntry.linkQuality) / 20 + 1;
+                switch (linkQuality)
+                {
+                    case 1:
+                        return "Weakest";
+                    case 2:
+                        return "Weak";
+                    case 3:
+                        return "Medium";
+                    case 4:
+                        return "Strong";
+                    case 5:
+                    case 6:
+                        return "Max";
+                    default:
+                        return string.Empty;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Either you have no WiFi module or my code has errored out. Error code: {ex.Message}");
+                return string.Empty;
             }
         }
 
         /// actual endpoint
-        public static string NetworkStatus()
+        public static string NetworkStatus() 
         {
             if (airplaneModeOn()) return "Airplane";
             if (getConnectionType() == "Unknown") return "NoInternet";
@@ -99,7 +89,7 @@ namespace CharmsBarReloaded
             {
                 return $"Wifi{getNetworkConnectivityStatus()}{GetWifiLinkQuality()}";
             }
-            return $"{getConnectionType()}{getNetworkConnectivityStatus().ToString()}";
+            return $"{getConnectionType()}{getNetworkConnectivityStatus()}";
         }
     }
 }

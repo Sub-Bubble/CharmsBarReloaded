@@ -1,0 +1,25 @@
+﻿<Page x:Class="CharmsBarReloaded.Settings.Customization"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:CharmsBarReloaded.Settings"
+      mc:Ignorable="d" 
+      d:DesignWidth="360"
+      Title="Customization">
+
+    <Grid>
+        <StackPanel Margin="40, 40, 0 ,0">
+            <StackPanel Orientation="Horizontal">
+                <Grid Height="40" Width="40" Margin="0,0,10,0" MouseDown="BackButton_MouseDown" MouseUp="BackButton_Click"  MouseEnter="BackButton_MouseEnter" MouseLeave="BackButton_MouseLeave">
+                    <Image Source="../Assets/CharmsSettings/BackButton.png" Width="40" Height="40" x:Name="BackButton"/>
+                </Grid>
+                <TextBlock Text="Customization" FontSize="30px" Foreground="White" FontWeight="Thin" Margin="0,0,0,5"/>
+            </StackPanel>
+        </StackPanel>
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+            <TextBlock Text="Coming Soon!" FontSize="50px" Foreground="White" FontWeight="Thin" TextAlignment="Center"/>
+            <TextBlock Text="Customization settings coming in the next release!" Foreground="White" TextAlignment="Center"/>
+        </StackPanel>
+    </Grid>
+</Page>

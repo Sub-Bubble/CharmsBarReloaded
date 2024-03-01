@@ -1,21 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Forms;
-using System.Windows.Input;
 using System.Windows.Interop;
-using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using System.Net.NetworkInformation;
+using System.Windows.Media.Animation;
 
 namespace CharmsBarReloaded
 {
@@ -32,10 +21,14 @@ namespace CharmsBarReloaded
         private const int GWL_EX_STYLE = -20;
         private const int WS_EX_APPWINDOW = 0x00040000, WS_EX_TOOLWINDOW = 0x00000080;
 
+        #region animations
+
+        #endregion animations
         public CharmsClock()
-        {            
+        {
             InitializeComponent();
-            this.Loaded += delegate 
+            AlwaysUpdate(null, null);
+            this.Loaded += delegate
             {
                 // hide from alttab
                 SetWindowLong(new WindowInteropHelper(this).Handle, GWL_EX_STYLE, (GetWindowLong(new WindowInteropHelper(this).Handle, GWL_EX_STYLE) | WS_EX_TOOLWINDOW) & ~WS_EX_APPWINDOW);
@@ -56,6 +49,14 @@ namespace CharmsBarReloaded
                 Week.Margin = new Thickness(267, 2, 0, -18);
                 Date.Margin = new Thickness(269, 3, 0, -24);
             }
+            else if (DateTime.Now.Hour.ToString().Length == 2 && DateTime.Now.Hour.ToString().StartsWith("2"))
+            {
+                ClockHours.Margin = new Thickness(80, 3, 0, -106);
+                ClockSeparator.Margin = new Thickness(169, -24.99, -190, -98);
+                ClockMinutes.Margin = new Thickness(188, -17, -190, -198);
+                Week.Margin = new Thickness(298, 2, 0, -18);
+                Date.Margin = new Thickness(300, 4, 0, -24);
+            }
             else
             {
                 ClockHours.Margin = new Thickness(95, 3, 0, -106);
@@ -68,7 +69,7 @@ namespace CharmsBarReloaded
             ClockMinutes.Content = DateTime.Now.ToString("mm");
             Date.Content = DateTime.Today.ToString("MMMM d");
             Week.Content = DateTime.Today.ToString("dddd");
-            
+
             // Battery icon logic
             if (SystemInformation.PowerStatus.BatteryChargeStatus.ToString() == "NoSystemBattery")
                 BatteryLife.Visibility = Visibility.Hidden;
@@ -77,14 +78,14 @@ namespace CharmsBarReloaded
                 switch (SystemConfig.BatteryPercentage())
                 {
                     case 0:
-                        BatteryLife.Source = new BitmapImage(new Uri(@"/Assets/CharmsClockIcons/Battery0.png", UriKind.Relative)); break;
+                        BatteryLife.Source = new BitmapImage(new Uri(@"../Assets/CharmsClockIcons/Battery0.png", UriKind.Relative)); break;
                     case 1: case 2: case 3: case 4:
-                        BatteryLife.Source = new BitmapImage(new Uri(@"/Assets/CharmsClockIcons/Battery1.png", UriKind.Relative)); break;
+                        BatteryLife.Source = new BitmapImage(new Uri(@"../Assets/CharmsClockIcons/Battery1.png", UriKind.Relative)); break;
                     case 5: case 6: case 7: case 8: case 9:
-                        BatteryLife.Source = new BitmapImage(new Uri(@"/Assets/CharmsClockIcons/Battery5.png", UriKind.Relative)); break;
+                        BatteryLife.Source = new BitmapImage(new Uri(@"../Assets/CharmsClockIcons/Battery5.png", UriKind.Relative)); break;
                     default:
-                        BatteryLife.Source = new BitmapImage(new Uri(@$"/Assets/CharmsClockIcons/Battery{(SystemConfig.BatteryPercentage()/10)}0.png", UriKind.Relative)); break;
-                        
+                        BatteryLife.Source = new BitmapImage(new Uri(@$"../Assets/CharmsClockIcons/Battery{(SystemConfig.BatteryPercentage() / 10)}0.png", UriKind.Relative)); break;
+
                 }
             }
             var ChargeStatus = SystemInformation.PowerStatus.PowerLineStatus;
@@ -101,13 +102,34 @@ namespace CharmsBarReloaded
             }
 
             // Internet icon logic
-            InternetStatus.Source = new BitmapImage(new Uri(@$"/Assets/CharmsClockIcons/{Networking.NetworkStatus()}.png", UriKind.Relative));
+            InternetStatus.Source = new BitmapImage(new Uri(@$"../Assets/CharmsClockIcons/{Networking.NetworkStatus()}.png", UriKind.Relative));
         }
-        public void Update()
+        public void Update(bool silent = false)
         {
             this.Left = 51;
             this.Top = SystemConfig.DesktopWorkingArea.Bottom - 188;
+            if (silent) return;
             this.Show();
+            BeginAnimation(UIElement.OpacityProperty, fadeIn);
         }
+        public void HideClock()
+        {
+            fadeOut.Completed += delegate { this.Hide(); };
+            BeginAnimation(UIElement.OpacityProperty, fadeOut);
+
+        }
+        DoubleAnimation fadeIn = new DoubleAnimation
+        {
+            From = 0.0,
+            To = 1.0,
+            Duration = TimeSpan.FromMilliseconds(100)
+        };
+        DoubleAnimation fadeOut = new DoubleAnimation
+        {
+            From = 1.0,
+            To = 0.0,
+            Duration = TimeSpan.FromMilliseconds(100)
+        };
+
     }
 }

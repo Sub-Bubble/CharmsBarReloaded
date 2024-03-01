@@ -2,14 +2,24 @@
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>net6.0-windows</TargetFramework>
+    <TargetFramework>net8.0-windows10.0.17763.0</TargetFramework>
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
     <ApplicationIcon>Assets\AppIcon.ico</ApplicationIcon>
+    <SignAssembly>False</SignAssembly>
+    <Version>$(VersionPrefix)</Version>
+    <ProduceReferenceAssembly>False</ProduceReferenceAssembly>
   </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'" />
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'" />
 
   <ItemGroup>
     <None Remove="Assets\AppIcon.ico" />
+    <None Remove="Assets\BackButton.png" />
+    <None Remove="Assets\BackButtonClicked.png" />
+    <None Remove="Assets\BackButtonMouseOver.png" />
     <None Remove="Assets\CharmsBarIcons\BatteryFull.png" />
     <None Remove="Assets\CharmsBarIcons\Devices.png" />
     <None Remove="Assets\CharmsBarIcons\Devices.png" />
@@ -40,6 +50,18 @@
     <None Remove="Assets\CharmsClockIcons\EthernetInternet.png" />
     <None Remove="Assets\CharmsClockIcons\EthernetNoInternet.png" />
     <None Remove="Assets\CharmsClockIcons\NoInternet.png" />
+    <None Remove="Assets\CharmsClockIcons\WifiInternet.png" />
+    <None Remove="Assets\CharmsClockIcons\WifiInternetMax.png" />
+    <None Remove="Assets\CharmsClockIcons\WifiInternetMedium.png" />
+    <None Remove="Assets\CharmsClockIcons\WifiInternetStrong.png" />
+    <None Remove="Assets\CharmsClockIcons\WifiInternetWeak.png" />
+    <None Remove="Assets\CharmsClockIcons\WifiInternetWeakest.png" />
+    <None Remove="Assets\CharmsClockIcons\WifiNoInternet.png" />
+    <None Remove="Assets\CharmsClockIcons\WifiNoInternetMax.png" />
+    <None Remove="Assets\CharmsClockIcons\WifiNoInternetMedium.png" />
+    <None Remove="Assets\CharmsClockIcons\WifiNoInternetStrong.png" />
+    <None Remove="Assets\CharmsClockIcons\WifiNoInternetWeak.png" />
+    <None Remove="Assets\CharmsClockIcons\WifiNoInternetWeakest.png" />
     <None Remove="Assets\Settings.png" />
   </ItemGroup>
 
@@ -56,6 +78,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Assets\AppIcon.ico" />
+    <Resource Include="Assets\CharmsSettings\BackButton.png" />
+    <Resource Include="Assets\CharmsSettings\BackButtonClicked.png" />
+    <Resource Include="Assets\CharmsSettings\BackButtonMouseOver.png" />
     <Resource Include="Assets\CharmsClockIcons\Battery40.png" />
     <Resource Include="Assets\CharmsClockIcons\Battery80.png" />
   </ItemGroup>
@@ -67,7 +93,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="Assets\AppIcon.ico" />
+    <Respirce Include="Assets\AppIcon.ico" />
     <Resource Include="Assets\CharmsBarIcons\Devices.png" />
     <Resource Include="Assets\CharmsBarIcons\Exit.png" />
     <Resource Include="Assets\CharmsBarIcons\Search.png" />
@@ -90,6 +116,18 @@
     <Resource Include="Assets\CharmsClockIcons\EthernetInternet.png" />
     <Resource Include="Assets\CharmsClockIcons\EthernetNoInternet.png" />
     <Resource Include="Assets\CharmsClockIcons\NoInternet.png" />
+    <Resource Include="Assets\CharmsClockIcons\WifiInternet.png" />
+    <Resource Include="Assets\CharmsClockIcons\WifiInternetMax.png" />
+    <Resource Include="Assets\CharmsClockIcons\WifiInternetMedium.png" />
+    <Resource Include="Assets\CharmsClockIcons\WifiInternetStrong.png" />
+    <Resource Include="Assets\CharmsClockIcons\WifiInternetWeak.png" />
+    <Resource Include="Assets\CharmsClockIcons\WifiInternetWeakest.png" />
+    <Resource Include="Assets\CharmsClockIcons\WifiNoInternet.png" />
+    <Resource Include="Assets\CharmsClockIcons\WifiNoInternetMax.png" />
+    <Resource Include="Assets\CharmsClockIcons\WifiNoInternetMedium.png" />
+    <Resource Include="Assets\CharmsClockIcons\WifiNoInternetStrong.png" />
+    <Resource Include="Assets\CharmsClockIcons\WifiNoInternetWeak.png" />
+    <Resource Include="Assets\CharmsClockIcons\WifiNoInternetWeakest.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -97,6 +135,9 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Update="Settings\Settings.xaml.cs">
+      <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
 
