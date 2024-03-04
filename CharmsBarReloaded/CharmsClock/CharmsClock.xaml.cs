@@ -22,7 +22,18 @@ namespace CharmsBarReloaded
         private const int WS_EX_APPWINDOW = 0x00040000, WS_EX_TOOLWINDOW = 0x00000080;
 
         #region animations
-
+        DoubleAnimation fadeIn = new DoubleAnimation
+        {
+            From = 0.0,
+            To = 1.0,
+            Duration = TimeSpan.FromMilliseconds(100)
+        };
+        DoubleAnimation fadeOut = new DoubleAnimation
+        {
+            From = 1.0,
+            To = 0.0,
+            Duration = TimeSpan.FromMilliseconds(100)
+        };
         #endregion animations
         public CharmsClock()
         {
@@ -118,18 +129,6 @@ namespace CharmsBarReloaded
             BeginAnimation(UIElement.OpacityProperty, fadeOut);
 
         }
-        DoubleAnimation fadeIn = new DoubleAnimation
-        {
-            From = 0.0,
-            To = 1.0,
-            Duration = TimeSpan.FromMilliseconds(100)
-        };
-        DoubleAnimation fadeOut = new DoubleAnimation
-        {
-            From = 1.0,
-            To = 0.0,
-            Duration = TimeSpan.FromMilliseconds(100)
-        };
 
     }
 }

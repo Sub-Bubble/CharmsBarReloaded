@@ -30,7 +30,7 @@ namespace CharmsBarReloaded
         bool windowVisible = false;
         #endregion vars
         #region animations
-        ColorAnimation fadeIn;
+        public static ColorAnimation fadeIn;
         DoubleAnimation fadeOut = new DoubleAnimation
         {
             From = 1.0,

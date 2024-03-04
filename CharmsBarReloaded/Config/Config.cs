@@ -3,6 +3,7 @@ using System;
 using System.Windows;
 using System.Windows.Forms;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 
 namespace CharmsBarReloaded
 {
@@ -91,6 +92,11 @@ namespace CharmsBarReloaded
             CharmsBarReloaded.Properties.Settings.Default.UseLightTheme = UseLightTheme;
             CharmsBarReloaded.Properties.Settings.Default.ShowChargingOnDesktop = ShowChargingOnDesktop;
             CharmsBarReloaded.Properties.Settings.Default.Save();
+            CharmsBar.fadeIn = new ColorAnimation
+            {
+                To = (Color)ColorConverter.ConvertFromString($"#FF{BackgroundColor.ToUpper()}"),
+                Duration = TimeSpan.FromMilliseconds(100),
+            };
         }
         public static Brush GetConfig(string name)
         {
