@@ -1,4 +1,5 @@
-﻿using System.Windows.Controls;
+﻿using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace CharmsBarReloaded.Settings
@@ -11,7 +12,6 @@ namespace CharmsBarReloaded.Settings
         public SettingsHome()
         {
             InitializeComponent();
-
         }
 
         private void General_MouseDown(object sender, MouseButtonEventArgs e)

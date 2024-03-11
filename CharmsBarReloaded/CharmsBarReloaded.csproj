@@ -21,18 +21,26 @@
     <None Remove="Assets\BackButtonClicked.png" />
     <None Remove="Assets\BackButtonMouseOver.png" />
     <None Remove="Assets\CharmsBarIcons\BatteryFull.png" />
+    <None Remove="Assets\CharmsBarIcons\BuiltInThemes\Beta8\Devices.png" />
+    <None Remove="Assets\CharmsBarIcons\BuiltInThemes\Beta8\Share.png" />
+    <None Remove="Assets\CharmsBarIcons\BuiltInThemes\Beta8\Start.png" />
     <None Remove="Assets\CharmsBarIcons\Devices.png" />
     <None Remove="Assets\CharmsBarIcons\Devices.png" />
+    <None Remove="Assets\CharmsBarIcons\DevicesPreview.png" />
     <None Remove="Assets\CharmsBarIcons\Ethernet.png" />
     <None Remove="Assets\CharmsBarIcons\EthernetInternet.png" />
     <None Remove="Assets\CharmsBarIcons\EthernetNoInternet.png" />
     <None Remove="Assets\CharmsBarIcons\Exit.png" />
     <None Remove="Assets\CharmsBarIcons\NoInternet.png" />
     <None Remove="Assets\CharmsBarIcons\Search.png" />
+    <None Remove="Assets\CharmsBarIcons\SearchPreview.png" />
     <None Remove="Assets\CharmsBarIcons\Settings.png" />
     <None Remove="Assets\CharmsBarIcons\SettingsDark.png" />
+    <None Remove="Assets\CharmsBarIcons\SettingsPreview.png" />
     <None Remove="Assets\CharmsBarIcons\Share.png" />
+    <None Remove="Assets\CharmsBarIcons\SharePreview.png" />
     <None Remove="Assets\CharmsBarIcons\Start.png" />
+    <None Remove="Assets\CharmsBarIcons\StartPreview.png" />
     <None Remove="Assets\CharmsClockIcons\Battery0.png" />
     <None Remove="Assets\CharmsClockIcons\Battery1.png" />
     <None Remove="Assets\CharmsClockIcons\Battery10.png" />
@@ -62,6 +70,7 @@
     <None Remove="Assets\CharmsClockIcons\WifiNoInternetStrong.png" />
     <None Remove="Assets\CharmsClockIcons\WifiNoInternetWeak.png" />
     <None Remove="Assets\CharmsClockIcons\WifiNoInternetWeakest.png" />
+    <None Remove="Assets\DarkIcon.png" />
     <None Remove="Assets\Settings.png" />
   </ItemGroup>
 
@@ -79,6 +88,14 @@
 
   <ItemGroup>
     <Resource Include="Assets\AppIcon.ico" />
+    <Resource Include="Assets\CharmsBarIcons\BuiltInThemes\Beta8\Devices.png" />
+    <Resource Include="Assets\CharmsBarIcons\BuiltInThemes\Beta8\Share.png" />
+    <Resource Include="Assets\CharmsBarIcons\BuiltInThemes\Beta8\Start.png" />
+    <Resource Include="Assets\CharmsBarIcons\DevicesPreview.png" />
+    <Resource Include="Assets\CharmsBarIcons\SearchPreview.png" />
+    <Resource Include="Assets\CharmsBarIcons\SettingsPreview.png" />
+    <Resource Include="Assets\CharmsBarIcons\SharePreview.png" />
+    <Resource Include="Assets\CharmsBarIcons\StartPreview.png" />
     <Resource Include="Assets\CharmsSettings\BackButton.png" />
     <Resource Include="Assets\CharmsSettings\BackButtonClicked.png" />
     <Resource Include="Assets\CharmsSettings\BackButtonMouseOver.png" />
@@ -128,6 +145,7 @@
     <Resource Include="Assets\CharmsClockIcons\WifiNoInternetStrong.png" />
     <Resource Include="Assets\CharmsClockIcons\WifiNoInternetWeak.png" />
     <Resource Include="Assets\CharmsClockIcons\WifiNoInternetWeakest.png" />
+    <Resource Include="Assets\DarkIcon.png" />
   </ItemGroup>
 
   <ItemGroup>

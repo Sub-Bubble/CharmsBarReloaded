@@ -7,22 +7,22 @@ This application returns Windows 8's Charms Bar to Windows 10/11!<br><br>
 - [X] Customizability with settings
 - [X] Tray Icon
 - [x] Animations
-- [ ] Keyboard Shortcuts (coming soon)
-- [ ] Running on startup (Can be configured, coming in the next release)
+- [ ] Keyboard Shortcuts (Coming in a4.0 or a4.1)
+- [ ] Running on startup (Can be configured, coming in a4.0)
 - [X] CharmsClock
 - [ ] DPI scaling (Coming soon)
-- [ ] Theme support (coming soon)
-- [ ] Button mapping (coming soon)
+- [ ] Theme support (coming soon™)
+- [ ] Button mapping (coming soon™)
 
 ## Screenshots
-Coming soon™
+Screenshots will be available with beta release (b1.0)
 
 ## Downloads
 Check <a href="https://github.com/Sub-Bubble/CharmsBarReloaded/releases">Releases</a> for downloads.
 
 ## Credits
-- Microsoft for CharmsBar
-- <a href="https://github.com/Icepenguins101/charms-bar-port">charms-bar-port</a> for some code and my idea to rewrite the project
+- Microsoft for CharmsBar, Windows 8 and most assets.
+- <a href="https://github.com/Icepenguins101/charms-bar-port">charms-bar-port</a> for some code (mostly CharmsClock) and my idea to rewrite the project
 
 ## Support
 You can support this project by contributing your code to it.

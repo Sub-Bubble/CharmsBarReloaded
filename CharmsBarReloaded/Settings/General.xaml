@@ -9,6 +9,7 @@
       Title="General">
 
     <Grid>
+        <TextBlock Text="Darkened features are not yet implemented" Foreground="Gray" Margin="90, 74, 0, 0"/>
         <StackPanel Margin="40, 40, 0 ,0">
             <StackPanel Orientation="Horizontal">
                 <Grid Height="40" Width="40" Margin="0,0,10,0" MouseDown="BackButton_MouseDown" MouseUp="BackButton_Click"  MouseEnter="BackButton_MouseEnter" MouseLeave="BackButton_MouseLeave">
@@ -16,10 +17,18 @@
                 </Grid>
                 <TextBlock Text="General" FontSize="30px" Foreground="White" FontWeight="Thin" Margin="0,0,0,5"/>
             </StackPanel>
-            <TextBlock Text="CharmsBar: Reloaded settings" Foreground="Gray" Margin="0, 10, 0, 0"/>
             <TextBlock Height="0" Margin="0, 20,0,0"/>
-            <CheckBox Content="Run on startup (Coming soon)" IsEnabled="False" x:Name="RunOnStartup" Foreground="White" FontSize="17px"/>
-            <CheckBox Content="Hide CharmsBar after button click" Margin="0, 5, 0, 0" x:Name="HideOnClick" Foreground="White" FontSize="17px" Click="HideOnClick_Update"/>
+            <Grid Background="#aa000000" Margin="0,0,5,0">
+                <Grid.OpacityMask>
+                    <SolidColorBrush Color="#aa000000"/>
+                </Grid.OpacityMask>
+            <CheckBox IsEnabled="False" x:Name="RunOnStartup" Foreground="White" FontSize="17px">
+                <TextBlock Text="Run on startup (Coming soon)" FontSize="17" Foreground="White" Margin="0,-4,0,0"/>
+            </CheckBox>
+            </Grid>
+            <CheckBox Margin="0, 5, 0, 0" x:Name="HideOnClick" Foreground="White" FontSize="17px" Click="HideOnClick_Update">
+                <TextBlock Text="Hide CharmsBar after button click" FontSize="17" Foreground="White" Margin="0,-4,0,0"/>
+            </CheckBox>
         </StackPanel>
     </Grid>
 </Page>

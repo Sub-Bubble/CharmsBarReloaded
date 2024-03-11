@@ -53,6 +53,7 @@ namespace CharmsBarReloaded
                 Duration = TimeSpan.FromMilliseconds(100),
             };
             InitializeComponent(); //init window
+            
             slideInButtons = (Storyboard)FindResource("SlideInAnimation");
             prepareButtons = (Storyboard)FindResource("PrepareButtons");
 
@@ -147,6 +148,7 @@ namespace CharmsBarReloaded
             Storyboard storyboard = new Storyboard();
             storyboard.Children.Add(fadeIn);
             storyboard.Begin(this);
+            StartButtonIcon.Background = SystemConfig.AccentColor();
             charmsClock.Update();
         }
         public void HideWindow()
@@ -158,6 +160,7 @@ namespace CharmsBarReloaded
                 this.Background = GlobalConfig.GetConfig("Hide");
                 charmsClock.HideClock();
                 CharmsGrid.Visibility = Visibility.Collapsed;
+                StartButtonIcon.Background = GlobalConfig.GetConfig("White");
                 BeginAnimation(OpacityProperty, backTo1Opacity);
             };
             BeginAnimation(UIElement.OpacityProperty, fadeOut);

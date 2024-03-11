@@ -9,17 +9,128 @@
       Title="Customization">
 
     <Grid>
-        <StackPanel Margin="40, 40, 0 ,0">
-            <StackPanel Orientation="Horizontal">
-                <Grid Height="40" Width="40" Margin="0,0,10,0" MouseDown="BackButton_MouseDown" MouseUp="BackButton_Click"  MouseEnter="BackButton_MouseEnter" MouseLeave="BackButton_MouseLeave">
-                    <Image Source="../Assets/CharmsSettings/BackButton.png" Width="40" Height="40" x:Name="BackButton"/>
-                </Grid>
-                <TextBlock Text="Customization" FontSize="30px" Foreground="White" FontWeight="Thin" Margin="0,0,0,5"/>
-            </StackPanel>
+        <StackPanel Orientation="Horizontal" Margin="40, 40, 0, 0" VerticalAlignment="Top">
+            <Grid Height="40" Width="40" Margin="0,0,10,0" MouseDown="BackButton_MouseDown" MouseUp="BackButton_Click"  MouseEnter="BackButton_MouseEnter" MouseLeave="BackButton_MouseLeave">
+                <Image Source="../Assets/CharmsSettings/BackButton.png" Width="40" Height="40" x:Name="BackButton"/>
+            </Grid>
+            <TextBlock Text="Customization" FontSize="30px" Foreground="White" FontWeight="Thin" Margin="0,0,0,5"/>
         </StackPanel>
-        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+        <TextBlock Text="Darkened features are not yet implemented" Foreground="Gray" Margin="90, 74, 0, 0"/>
+        <ScrollViewer Margin="0,90,0,0" ScrollViewer.VerticalScrollBarVisibility="Auto">
+            <Grid Background="#aa000000">
+                <Grid.OpacityMask>
+                    <SolidColorBrush Color="#aa000000"/>
+                </Grid.OpacityMask>
+                <StackPanel Margin="20,0,0,0">
+                    <!-- General settings -->
+                    <Label Foreground="LightGray" FontSize="20">General</Label>
+                    <!-- Themes -->
+                    <StackPanel Margin="5,0,5,0" Background="#aa000000">
+                        <StackPanel.OpacityMask>
+                            <SolidColorBrush Color="#aa000000"/>
+                        </StackPanel.OpacityMask>
+                        <Label Foreground="White" FontSize="16" Content="Themes (coming evetually)" FontWeight="SemiBold"/>
+                        <StackPanel Margin="5,0,0,0">
+                            <StackPanel Orientation="Horizontal">
+                                <Label Foreground="White" Content="Selected theme: " FontSize="15"/>
+                                <ComboBox Height="24" Width="170" IsEnabled="False">
+                                    <ComboBoxItem IsSelected="True">Default</ComboBoxItem>
+                                </ComboBox>
+                            </StackPanel>
+                            <!-- Installed Themes -->
+                            <StackPanel>
+                                <Label Foreground="White" Content="Installed themes: " FontSize="15"/>
+                                <ListBox Height="150" Width="300" IsEnabled="False">
+                                    <ListBoxItem Content="[Built in] Default" IsSelected="True"/>
+                                    <ListBoxItem Content="[Built in] Bright"/>
+                                    <ListBoxItem Content="[Built in] Beta8"/>
+                                </ListBox>
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,3,0,0">
+                                    <Button Content="Add Theme" Width="100" IsEnabled="False"/>
+                                    <Label Width="80"/>
+                                    <Button Content="Delete selected" Width="100" IsEnabled="False"/>
+                                </StackPanel>
+                            </StackPanel>
+                        </StackPanel>
+                    </StackPanel>
+
+                    <!-- CharmsBar -->
+                    <Label Height="20"/>
+                    <Label Foreground="LightGray" FontSize="20">Charms Bar</Label>
+                    <StackPanel Margin="5,5,0,0">
+                        <Label Foreground="White" FontSize="16" Content="General"/>
+                        <Grid Background="#aa000000" Margin="0,0,5,0">
+                            <Grid.OpacityMask>
+                                <SolidColorBrush Color="#aa000000"/>
+                            </Grid.OpacityMask>
+                            <CheckBox Foreground="White" IsChecked="True" IsEnabled="False">
+                                <TextBlock Text="Enable animations" FontSize="17" Margin="0,-4,0,0"/>
+                            </CheckBox>
+                        </Grid>
+                        <Label Height="5"/>
+                        <CheckBox Foreground="White" IsEnabled="False">
+                            <TextBlock Text="Hide Charms Bar after click" FontSize="17" Margin="0,-4,0,0"/>
+                        </CheckBox>
+                    </StackPanel>
+                    <StackPanel Margin="5,5,0,0">
+                        <!-- color options -->
+                        <Label Foreground="White" FontSize="16" Content="Color options" FontWeight="SemiBold"/>
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="Background color:" FontSize="15" Foreground="White" Width="130"/>
+                            <Label Content="#" Margin="0,0,-5,0" Foreground="White" FontSize="15"/>
+                            <TextBox Width="100" VerticalContentAlignment="Center" Height="25"/>
+                            <Grid Background="White" Width="29" Height="29" Margin="50,0,0,0"/>
+                        </StackPanel>
+                        <Label Height="5"/>
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="Text color:" FontSize="15" Foreground="White" Width="130"/>
+                            <Label Content="#" Margin="0,0,-5,0" Foreground="White" FontSize="15"/>
+                            <TextBox Width="100" VerticalContentAlignment="Center" Height="25"/>
+                            <Grid Background="White" Width="29" Height="29" Margin="50,0,0,0"/>
+                        </StackPanel>
+                        <Label Height="5"/>
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="Hover color:" FontSize="15" Foreground="White" Width="130"/>
+                            <Label Content="#" Margin="0,0,-5,0" Foreground="White" FontSize="15"/>
+                            <TextBox Width="100" VerticalContentAlignment="Center" Height="25"/>
+                            <Grid Background="White" Width="29" Height="29" Margin="50,0,0,0"/>
+                        </StackPanel>
+                    </StackPanel>
+
+                    <!-- CharmsClock -->
+                    <Label Height="20"/>
+                    <Label Foreground="LightGray" FontSize="20">Charms Clock</Label>
+                    <StackPanel Margin="5,5,5,0">
+                        <Grid Background="#aa000000">
+                            <Grid.OpacityMask>
+                                <SolidColorBrush Color="#aa000000"/>
+                            </Grid.OpacityMask>
+                            <CheckBox Foreground="White" IsEnabled="False">
+                                <TextBlock Text="Enable Charms Clock" FontSize="17" Margin="0,-4,0,0"/>
+                            </CheckBox>
+                        </Grid>
+                        <Label Height="5"/>
+                        <CheckBox Foreground="White">
+                            <TextBlock Text="Show Charging icon on desktop" FontSize="17" Margin="0,-4,0,0"/>
+                        </CheckBox>
+                        <Label Height="5"/>
+                        <Grid Background="#aa000000">
+                            <Grid.OpacityMask>
+                                <SolidColorBrush Color="#aa000000"/>
+                            </Grid.OpacityMask>
+                            <CheckBox Foreground="White" IsChecked="True" IsEnabled="False">
+                                <TextBlock Text="Use network caching (recommended)" FontSize="17" Margin="0,-4,0,0"/>
+                            </CheckBox>
+                        </Grid>
+                    </StackPanel>
+
+
+                </StackPanel>
+            </Grid>
+        </ScrollViewer>
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Background="Black">
             <TextBlock Text="Coming Soon!" FontSize="50px" Foreground="White" FontWeight="Thin" TextAlignment="Center"/>
-            <TextBlock Text="Customization settings coming in the next release!" Foreground="White" TextAlignment="Center"/>
+            <TextBlock Text="Customization settings are in the works!" Foreground="White" TextAlignment="Center"/>
         </StackPanel>
     </Grid>
 </Page>

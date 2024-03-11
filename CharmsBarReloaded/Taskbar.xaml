@@ -6,11 +6,11 @@
     <ContextMenu x:Shared="false" x:Key="CharmsTray">
         <MenuItem Header="CharmsBar: Reloaded" IsEnabled="False">
             <MenuItem.Icon>
-                <Image Source="Assets/CharmsBarIcons/Start.png"/>
+                <Image Source="Assets/DarkIcon.png" />
             </MenuItem.Icon>
         </MenuItem>
         <Separator/>
-        <MenuItem IsChecked="True"  Header="Enabled" Click="ToggleCharmsBar" x:Name="Checkmark"/>
+        <MenuItem IsChecked="True"  Header="Enable Charms Bar" Click="ToggleCharmsBar" x:Name="Checkmark"/>
         <Separator/>
         <MenuItem Header="Settings" Click="OpenSettings">
             <MenuItem.Icon>

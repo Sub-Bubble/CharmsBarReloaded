@@ -5,6 +5,7 @@ using System.Windows.Forms;
 using System.Windows.Interop;
 using System.Windows.Media.Imaging;
 using System.Windows.Media.Animation;
+using System.Timers;
 
 namespace CharmsBarReloaded
 {
@@ -39,16 +40,28 @@ namespace CharmsBarReloaded
         {
             InitializeComponent();
             AlwaysUpdate(null, null);
+            UpdateNetworkingData(null, null);
             this.Loaded += delegate
             {
                 // hide from alttab
                 SetWindowLong(new WindowInteropHelper(this).Handle, GWL_EX_STYLE, (GetWindowLong(new WindowInteropHelper(this).Handle, GWL_EX_STYLE) | WS_EX_TOOLWINDOW) & ~WS_EX_APPWINDOW);
-                System.Windows.Threading.DispatcherTimer timer = new System.Windows.Threading.DispatcherTimer();
-                timer.Tick += new EventHandler(AlwaysUpdate);
+                System.Timers.Timer timer = new System.Timers.Timer();
+                timer.Elapsed += new ElapsedEventHandler(AlwaysUpdate);
+                timer.Interval = 1000;
+
+                System.Timers.Timer networkingTimer = new System.Timers.Timer();
+                networkingTimer.Interval = 60000;
+                networkingTimer.Elapsed += UpdateNetworkingData;
+                networkingTimer.Start();
                 timer.Start();
-                timer.Interval = TimeSpan.FromSeconds(1);
             };
         }
+
+        private void UpdateNetworkingData(object? sender, ElapsedEventArgs e)
+        {
+            Networking.UpdateNetworkCache();
+        }
+
         private void AlwaysUpdate(object sender, EventArgs e)
         {
             // time logic
@@ -82,7 +95,7 @@ namespace CharmsBarReloaded
             Week.Content = DateTime.Today.ToString("dddd");
 
             // Battery icon logic
-            if (SystemInformation.PowerStatus.BatteryChargeStatus.ToString() == "NoSystemBattery")
+            if (SystemInformation.PowerStatus.BatteryChargeStatus == BatteryChargeStatus.NoSystemBattery)
                 BatteryLife.Visibility = Visibility.Hidden;
             else
             {
@@ -99,11 +112,15 @@ namespace CharmsBarReloaded
 
                 }
             }
+
+            var netstatus = Networking.NetworkStatus();
+            InternetStatus.Source = new BitmapImage(new Uri(@$"../Assets/CharmsClockIcons/{netstatus}.png", UriKind.Relative));
+
             var ChargeStatus = SystemInformation.PowerStatus.PowerLineStatus;
             switch (ChargeStatus)
             {
                 case System.Windows.Forms.PowerLineStatus.Online:
-                    if (!GlobalConfig.ShowChargingOnDesktop && SystemInformation.PowerStatus.BatteryChargeStatus.ToString() == "NoSystemBattery")
+                    if (!GlobalConfig.ShowChargingOnDesktop && SystemInformation.PowerStatus.BatteryChargeStatus == BatteryChargeStatus.NoSystemBattery)
                         IsCharging.Visibility = Visibility.Collapsed;
                     else
                         IsCharging.Visibility = Visibility.Visible;
@@ -111,9 +128,6 @@ namespace CharmsBarReloaded
                 case System.Windows.Forms.PowerLineStatus.Offline:
                     IsCharging.Visibility = Visibility.Collapsed; break;
             }
-
-            // Internet icon logic
-            InternetStatus.Source = new BitmapImage(new Uri(@$"../Assets/CharmsClockIcons/{Networking.NetworkStatus()}.png", UriKind.Relative));
         }
         public void Update(bool silent = false)
         {

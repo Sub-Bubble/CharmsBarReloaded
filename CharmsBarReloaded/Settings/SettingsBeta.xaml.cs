@@ -23,12 +23,17 @@ namespace CharmsBarReloaded
         public SettingsBeta()
         {
             InitializeComponent();
+            this.Loaded += delegate {
+                MessageBox.Show("Old settings are going to be deleted once CharmsBar: Reloaded goes in beta.",
+                    "Old settings deprecation", MessageBoxButton.OK, MessageBoxImage.Information);
+            };
             VersionString.Content = $"CharmsBar: Reloaded {GlobalConfig.VersionString}\nBuild {GlobalConfig.Build}";
             //RunOnStartup.IsChecked = false;
             HideOnClick.IsChecked = GlobalConfig.HideWindowAfterClick;
             BackgroundColor.Text = GlobalConfig.BackgroundColor;
             TextColor.Text = GlobalConfig.TextColor;
             HoverColor.Text = GlobalConfig.HoverColor;
+            ShowChargingOnDesktop.IsChecked = GlobalConfig.ShowChargingOnDesktop;
         }
 
         private void SaveSettings(object sender, RoutedEventArgs e)
@@ -60,6 +65,12 @@ namespace CharmsBarReloaded
         {
             Regex regex = new Regex("^[0-9A-Fa-f]{1}$");
             e.Handled = !regex.IsMatch(e.Text);
+        }
+
+        private void NewSettings(object sender, RoutedEventArgs e)
+        {
+            ClickHandler.Do(-1);
+            this.Close();
         }
     }
 }

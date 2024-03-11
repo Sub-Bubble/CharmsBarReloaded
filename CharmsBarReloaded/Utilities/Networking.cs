@@ -13,10 +13,13 @@ namespace CharmsBarReloaded
         /// airplane mode
         static RegistryKey airplaneModeRegistry = Registry.LocalMachine.OpenSubKey(@"SYSTEM\ControlSet001\Control\RadioManagement\SystemRadioState");
         private static bool airplaneModeOn() => Convert.ToBoolean(airplaneModeRegistry.GetValue("", "")); //returns true if airplane mode is on
+        static NetworkInterfaceType connectionType;
 
         private static string getConnectionType()
         {
-            switch (getActiveNetworkInterface())
+            if (!GlobalConfig.UseNetworkCaching || connectionType == null)
+                connectionType = getActiveNetworkInterface();
+            switch (connectionType)
             {
                 case NetworkInterfaceType.Ethernet:
                     return "Ethernet";
@@ -27,12 +30,17 @@ namespace CharmsBarReloaded
 
             }
         }
+        public static void UpdateNetworkCache()
+        {
+            connectionType = getActiveNetworkInterface();
+        }
 
         /// active network
         private static NetworkInterfaceType getActiveNetworkInterface()
         {
             foreach (NetworkInterface networkInterface in NetworkInterface.GetAllNetworkInterfaces())
-                if (networkInterface.OperationalStatus == OperationalStatus.Up && !(networkInterface.Description.ToLower().Contains("virtual") || networkInterface.Name.ToLower().Contains("virtual")))
+                if (networkInterface.OperationalStatus == OperationalStatus.Up && !(networkInterface.Description.ToLower().Contains("virtual") || networkInterface.Name.ToLower().Contains("virtual")
+                    && networkInterface.Description.ToLower().Contains("VPN") || networkInterface.Name.ToLower().Contains("VPN")))
                     return networkInterface.NetworkInterfaceType;
             return NetworkInterfaceType.Unknown;
         }

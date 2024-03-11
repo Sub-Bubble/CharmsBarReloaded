@@ -36,8 +36,8 @@ namespace CharmsBarReloaded
     class GlobalConfig
     {
         /// Constants. Only changed manually
-        public const string VersionString = "a3.0.1";
-        public const int Build = 9;
+        public const string VersionString = "a3.1";
+        public const int Build = 10;
 
         /// other vars
         public static bool IsEnabled {  get; set; }
@@ -47,9 +47,11 @@ namespace CharmsBarReloaded
         public static string HoverColor {  get; set; }
         public static bool UseLightTheme {  get; set; }
         public static bool ShowChargingOnDesktop { get; set; }
+        public static bool UseNetworkCaching {  get; set; }
         public static void LoadConfig()
         {
             IsEnabled = true;
+            UseNetworkCaching = true; /// This WILL be an option later
             try
             {
                 HideWindowAfterClick = CharmsBarReloaded.Properties.Settings.Default.HideWindowAfterClick;
@@ -115,6 +117,9 @@ namespace CharmsBarReloaded
                     return result;
                 case "Transparent":
                     result = (Brush)bc.ConvertFrom("#01000000");
+                    return result;
+                case "White":
+                    result = (Brush)bc.ConvertFrom("#FFFFFFFF");
                     return result;
             }
             return (Brush)bc.ConvertFrom("#FF000000"); //returning black when unknown
