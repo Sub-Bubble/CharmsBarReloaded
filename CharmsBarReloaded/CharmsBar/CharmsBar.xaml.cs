@@ -24,7 +24,7 @@ namespace CharmsBarReloaded
         #endregion hiding window from alttab
 
         #region vars
-        CharmsClock charmsClock = new CharmsClock();
+        CharmsClock charmsClock;
         System.Timers.Timer timer = new System.Timers.Timer();
         bool isAnimating = false;
         bool windowVisible = false;
@@ -47,6 +47,7 @@ namespace CharmsBarReloaded
             /// initialing config and setting window location
             ButtonConfig.SetVars();
             GlobalConfig.LoadConfig();
+            charmsClock = new CharmsClock();
             fadeIn = new ColorAnimation
             {
                 To = (Color)ColorConverter.ConvertFromString($"#FF{GlobalConfig.BackgroundColor.ToUpper()}"),

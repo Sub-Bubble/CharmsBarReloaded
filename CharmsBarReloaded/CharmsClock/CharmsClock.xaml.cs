@@ -45,15 +45,17 @@ namespace CharmsBarReloaded
             {
                 // hide from alttab
                 SetWindowLong(new WindowInteropHelper(this).Handle, GWL_EX_STYLE, (GetWindowLong(new WindowInteropHelper(this).Handle, GWL_EX_STYLE) | WS_EX_TOOLWINDOW) & ~WS_EX_APPWINDOW);
-                System.Timers.Timer timer = new System.Timers.Timer();
-                timer.Elapsed += new ElapsedEventHandler(AlwaysUpdate);
-                timer.Interval = 1000;
+                System.Windows.Threading.DispatcherTimer timer = new System.Windows.Threading.DispatcherTimer();
+                timer.Tick += new EventHandler(AlwaysUpdate);
+                timer.Interval = TimeSpan.FromSeconds(1);
+                timer.Start();
+
 
                 System.Timers.Timer networkingTimer = new System.Timers.Timer();
-                networkingTimer.Interval = 60000;
-                networkingTimer.Elapsed += UpdateNetworkingData;
+                //networkingTimer.Interval = 60000;
+                networkingTimer.Interval = 1000;
+                networkingTimer.Elapsed += new ElapsedEventHandler(UpdateNetworkingData);
                 networkingTimer.Start();
-                timer.Start();
             };
         }
 
