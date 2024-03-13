@@ -14,7 +14,8 @@ namespace CharmsBarReloaded.Settings
         public General()
         {
             InitializeComponent();
-            HideOnClick.IsChecked = GlobalConfig.HideWindowAfterClick;
+            hideOnClick.IsChecked = GlobalConfig.HideWindowAfterClick;
+            enableCharmsBar.IsChecked = GlobalConfig.IsEnabled;
         }
         #region back button
         private void BackButton_MouseDown(object sender, MouseButtonEventArgs e)
@@ -39,8 +40,17 @@ namespace CharmsBarReloaded.Settings
 
         private void HideOnClick_Update(object sender, RoutedEventArgs e)
         {
-            GlobalConfig.HideWindowAfterClick = (bool)HideOnClick.IsChecked;
+            GlobalConfig.HideWindowAfterClick = (bool)hideOnClick.IsChecked;
             GlobalConfig.SaveConfig();
+        }
+
+        private void CharmsBarEnabled_Update(object sender, RoutedEventArgs e)
+        {
+            GlobalConfig.IsEnabled = (bool)enableCharmsBar.IsChecked;
+        }
+        private void CharmsClockEnabled_Update(object sender, RoutedEventArgs e)
+        {
+            throw new NotImplementedException("not implemented yet.");
         }
     }
 }

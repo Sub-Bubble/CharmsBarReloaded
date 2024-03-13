@@ -53,6 +53,7 @@ namespace CharmsBarReloaded
             try
             {
                 GlobalConfig.GetConfig("bg");
+                GlobalConfig.GetConfig("hover");
                 GlobalConfig.GetConfig("text");
                 MessageBox.Show("Config saved.", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
             }

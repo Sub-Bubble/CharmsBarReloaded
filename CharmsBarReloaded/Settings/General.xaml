@@ -22,13 +22,24 @@
                 <Grid.OpacityMask>
                     <SolidColorBrush Color="#aa000000"/>
                 </Grid.OpacityMask>
-            <CheckBox IsEnabled="False" x:Name="RunOnStartup" Foreground="White" FontSize="17px">
+                <CheckBox IsEnabled="False" x:Name="runOnStartup" Foreground="White" FontSize="17px">
                 <TextBlock Text="Run on startup (Coming soon)" FontSize="17" Foreground="White" Margin="0,-4,0,0"/>
             </CheckBox>
             </Grid>
-            <CheckBox Margin="0, 5, 0, 0" x:Name="HideOnClick" Foreground="White" FontSize="17px" Click="HideOnClick_Update">
+            <CheckBox Margin="0, 5, 0, 0" x:Name="hideOnClick" Foreground="White" FontSize="17px" Click="HideOnClick_Update">
                 <TextBlock Text="Hide CharmsBar after button click" FontSize="17" Foreground="White" Margin="0,-4,0,0"/>
             </CheckBox>
+            <CheckBox Margin="0, 5, 0, 0" x:Name="enableCharmsBar" Foreground="White" FontSize="17px" Click="CharmsBarEnabled_Update">
+                <TextBlock Text="Enable Charms Bar" FontSize="17" Foreground="White" Margin="0,-4,0,0"/>
+            </CheckBox>
+            <Grid Background="#aa000000" Margin="0,0,5,0">
+                <Grid.OpacityMask>
+                    <SolidColorBrush Color="#aa000000"/>
+                </Grid.OpacityMask>
+                <CheckBox Margin="0, 5, 0, 0" x:Name="enableCharmsClock" Foreground="White" FontSize="17px" Click="CharmsClockEnabled_Update" IsChecked="True" IsEnabled="False">
+                    <TextBlock Text="Enable Charms Clock" FontSize="17" Foreground="White" Margin="0,-4,0,0"/>
+                </CheckBox>
+            </Grid>
         </StackPanel>
     </Grid>
 </Page>

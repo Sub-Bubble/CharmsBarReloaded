@@ -55,8 +55,11 @@ namespace CharmsBarReloaded
             };
             InitializeComponent(); //init window
             
+            UpdateHover();
+
             slideInButtons = (Storyboard)FindResource("SlideInAnimation");
             prepareButtons = (Storyboard)FindResource("PrepareButtons");
+
 
             ///position
             this.Height = SystemParameters.PrimaryScreenHeight - 1;
@@ -74,10 +77,23 @@ namespace CharmsBarReloaded
         void CheckCursorLocation()
         {
             SetWindowLong(new WindowInteropHelper(this).Handle, GWL_EX_STYLE, (GetWindowLong(new WindowInteropHelper(this).Handle, GWL_EX_STYLE) | WS_EX_TOOLWINDOW) & ~WS_EX_APPWINDOW);
+            System.Timers.Timer timer1 = new System.Timers.Timer();
+            timer1.Elapsed += delegate
+            {
+                this.Dispatcher.Invoke(new Action(delegate
+                {
+                    UpdateHover();
+                }
+                ));
+
+            };
+            timer1.Interval = 1000;
+            timer1.Start();
             timer.Elapsed += delegate
             {
                 this.Dispatcher.Invoke(new Action(delegate
                 {
+
                     Point cursorPosition = GetMouseLocation.GetMousePosition();
                     /* Debug */
                     //Text2.Content = $"{SystemConfig.DesktopWorkingArea.Right}, {SystemConfig.DesktopWorkingArea.Top}";
@@ -144,7 +160,6 @@ namespace CharmsBarReloaded
         {
             this.Height = System.Windows.SystemParameters.PrimaryScreenHeight;
             this.Top = System.Windows.SystemParameters.WorkArea.Top;
-            //this.Background = GlobalConfig.GetConfig("bg");
             Storyboard.SetTargetProperty(fadeIn, new PropertyPath("(Window.Background).(SolidColorBrush.Color)"));
             Storyboard storyboard = new Storyboard();
             storyboard.Children.Add(fadeIn);
@@ -166,6 +181,42 @@ namespace CharmsBarReloaded
             };
             BeginAnimation(UIElement.OpacityProperty, fadeOut);
 
+        }
+        void UpdateHover()
+        {
+            /// hover color
+            Style hoverStyle = new Style
+            {
+                TargetType = typeof(Grid),
+                Triggers =
+                {
+                    new Trigger
+                    { Property = IsMouseOverProperty,  Value = true,
+                        Setters = { new Setter { Property = BackgroundProperty, Value = GlobalConfig.GetConfig("hover")} }
+                    }
+                }
+            };
+            Button1.Style = hoverStyle;
+            Button2.Style = hoverStyle;
+            Button3.Style = hoverStyle;
+            Button4.Style = hoverStyle;
+            Button5.Style = hoverStyle;
+            
+            /// fade in animation
+            fadeIn.From = (Color)ColorConverter.ConvertFromString($"#FF{GlobalConfig.BackgroundColor.ToUpper()}");
+            
+            /// setting text and hover color
+            if (Text1.Foreground != GlobalConfig.GetConfig("text"))
+                try
+                {
+                    Text1.Foreground = GlobalConfig.GetConfig("text");
+                    Text2.Foreground = GlobalConfig.GetConfig("text");
+                    Text3.Foreground = GlobalConfig.GetConfig("text");
+                    Text4.Foreground = GlobalConfig.GetConfig("text");
+                    Text5.Foreground = GlobalConfig.GetConfig("text");
+
+                }
+                catch { }
         }
     }
 }

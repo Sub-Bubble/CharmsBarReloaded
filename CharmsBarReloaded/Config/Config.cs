@@ -36,8 +36,8 @@ namespace CharmsBarReloaded
     class GlobalConfig
     {
         /// Constants. Only changed manually
-        public const string VersionString = "a3.1.1";
-        public const int Build = 11;
+        public const string VersionString = "a3.2";
+        public const int Build = 12;
 
         /// other vars
         public static bool IsEnabled {  get; set; }
@@ -94,11 +94,6 @@ namespace CharmsBarReloaded
             CharmsBarReloaded.Properties.Settings.Default.UseLightTheme = UseLightTheme;
             CharmsBarReloaded.Properties.Settings.Default.ShowChargingOnDesktop = ShowChargingOnDesktop;
             CharmsBarReloaded.Properties.Settings.Default.Save();
-            CharmsBar.fadeIn = new ColorAnimation
-            {
-                To = (Color)ColorConverter.ConvertFromString($"#FF{BackgroundColor.ToUpper()}"),
-                Duration = TimeSpan.FromMilliseconds(100),
-            };
         }
         public static Brush GetConfig(string name)
         {
@@ -110,10 +105,13 @@ namespace CharmsBarReloaded
                     result = (Brush)bc.ConvertFrom("#00000000");
                     return result;
                 case "bg":
-                    result = (Brush)bc.ConvertFrom($"#FF{GlobalConfig.BackgroundColor}");
+                    result = (Brush)bc.ConvertFrom($"#FF{GlobalConfig.BackgroundColor.ToUpper()}");
                     return result;
                 case "text":
-                    result = (Brush)bc.ConvertFrom($"#FF{GlobalConfig.TextColor}");
+                    result = (Brush)bc.ConvertFrom($"#FF{GlobalConfig.TextColor.ToUpper()}");
+                    return result;
+                case "hover":
+                    result = (Brush)bc.ConvertFrom($"#FF{GlobalConfig.HoverColor.ToUpper()}");
                     return result;
                 case "Transparent":
                     result = (Brush)bc.ConvertFrom("#01000000");
