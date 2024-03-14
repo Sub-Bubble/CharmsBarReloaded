@@ -83,6 +83,7 @@ namespace CharmsBarReloaded
                 this.Dispatcher.Invoke(new Action(delegate
                 {
                     UpdateHover();
+                    GlobalConfig.SaveConfig();
                 }
                 ));
 
@@ -202,9 +203,6 @@ namespace CharmsBarReloaded
             Button4.Style = hoverStyle;
             Button5.Style = hoverStyle;
             
-            /// fade in animation
-            fadeIn.From = (Color)ColorConverter.ConvertFromString($"#FF{GlobalConfig.BackgroundColor.ToUpper()}");
-            
             /// setting text and hover color
             if (Text1.Foreground != GlobalConfig.GetConfig("text"))
                 try
@@ -214,7 +212,6 @@ namespace CharmsBarReloaded
                     Text3.Foreground = GlobalConfig.GetConfig("text");
                     Text4.Foreground = GlobalConfig.GetConfig("text");
                     Text5.Foreground = GlobalConfig.GetConfig("text");
-
                 }
                 catch { }
         }

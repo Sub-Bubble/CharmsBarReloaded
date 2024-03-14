@@ -27,6 +27,7 @@
             <TextBlock Text="CharmsBar: Reloaded" FontSize="17px" FontWeight="Thin" Foreground="White" Margin="0, 20, 0, 0"/>
             <TextBlock x:Name="versionString" Text="Version: " FontSize="15px" Foreground="White" Margin="0, 5, 0, 0"/>
             <TextBlock x:Name="buildString" Text="Build: " FontSize="15px" Foreground="White"/>
+            <Button Content="Check for updates (coming soon)" Margin="2" VerticalAlignment="Center" FontSize="15" Width="250" HorizontalAlignment="Left" IsEnabled="False"/>
         </StackPanel>
     </Grid>
 </Page>

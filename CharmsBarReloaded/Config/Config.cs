@@ -36,8 +36,8 @@ namespace CharmsBarReloaded
     class GlobalConfig
     {
         /// Constants. Only changed manually
-        public const string VersionString = "a3.2";
-        public const int Build = 12;
+        public const string VersionString = "a3.3";
+        public const int Build = 13;
 
         /// other vars
         public static bool IsEnabled {  get; set; }
@@ -94,11 +94,21 @@ namespace CharmsBarReloaded
             CharmsBarReloaded.Properties.Settings.Default.UseLightTheme = UseLightTheme;
             CharmsBarReloaded.Properties.Settings.Default.ShowChargingOnDesktop = ShowChargingOnDesktop;
             CharmsBarReloaded.Properties.Settings.Default.Save();
+            /// fade in animation
+            CharmsBar.fadeIn = new ColorAnimation
+            {
+                To = (Color)ColorConverter.ConvertFromString($"#FF{BackgroundColor.ToUpper()}"),
+                Duration = TimeSpan.FromMilliseconds(100),
+            };
         }
-        public static Brush GetConfig(string name)
+        public static Brush GetConfig(string name, string tryHexColor = null)
         {
             var bc = new BrushConverter();
             Brush result;
+
+            if (tryHexColor != null)
+                return (Brush)bc.ConvertFrom($"#FF{tryHexColor.ToUpper()}");
+            
             switch (name)
             {
                 case "Hide":
