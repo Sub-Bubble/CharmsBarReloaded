@@ -36,8 +36,8 @@ namespace CharmsBarReloaded
     class GlobalConfig
     {
         /// Constants. Only changed manually
-        public const string VersionString = "a3.3";
-        public const int Build = 13;
+        public const string VersionString = "a4.0";
+        public const int Build = 14;
 
         /// other vars
         public static bool IsEnabled {  get; set; }
@@ -48,6 +48,7 @@ namespace CharmsBarReloaded
         public static bool UseLightTheme {  get; set; }
         public static bool ShowChargingOnDesktop { get; set; }
         public static bool UseNetworkCaching {  get; set; }
+        public static bool EnableKeyboardShortcut {  get; set; }
         public static void LoadConfig()
         {
             IsEnabled = true;
@@ -60,6 +61,7 @@ namespace CharmsBarReloaded
                 HoverColor = CharmsBarReloaded.Properties.Settings.Default.HoverColor;
                 UseLightTheme = CharmsBarReloaded.Properties.Settings.Default.UseLightTheme;
                 ShowChargingOnDesktop = CharmsBarReloaded.Properties.Settings.Default.ShowChargingOnDesktop;
+                EnableKeyboardShortcut = CharmsBarReloaded.Properties.Settings.Default.EnableKeyboardShortcut;
             }
             catch
             {
@@ -70,6 +72,7 @@ namespace CharmsBarReloaded
                 HoverColor = "4c4c4c";
                 UseLightTheme = false;
                 ShowChargingOnDesktop = false;
+                EnableKeyboardShortcut = true;
             }
         }
         public static void ResetConfig()
@@ -81,6 +84,7 @@ namespace CharmsBarReloaded
             CharmsBarReloaded.Properties.Settings.Default.HoverColor = "4c4c4c";
             CharmsBarReloaded.Properties.Settings.Default.UseLightTheme = false;
             CharmsBarReloaded.Properties.Settings.Default.ShowChargingOnDesktop = false;
+            CharmsBarReloaded.Properties.Settings.Default.EnableKeyboardShortcut = true;
             CharmsBarReloaded.Properties.Settings.Default.Save();
             LoadConfig();
         }
@@ -93,6 +97,7 @@ namespace CharmsBarReloaded
             CharmsBarReloaded.Properties.Settings.Default.HoverColor = HoverColor;
             CharmsBarReloaded.Properties.Settings.Default.UseLightTheme = UseLightTheme;
             CharmsBarReloaded.Properties.Settings.Default.ShowChargingOnDesktop = ShowChargingOnDesktop;
+            CharmsBarReloaded.Properties.Settings.Default.EnableKeyboardShortcut = EnableKeyboardShortcut;
             CharmsBarReloaded.Properties.Settings.Default.Save();
             /// fade in animation
             CharmsBar.fadeIn = new ColorAnimation

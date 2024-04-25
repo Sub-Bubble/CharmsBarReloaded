@@ -16,6 +16,7 @@ namespace CharmsBarReloaded.Settings
             InitializeComponent();
             hideOnClick.IsChecked = GlobalConfig.HideWindowAfterClick;
             enableCharmsBar.IsChecked = GlobalConfig.IsEnabled;
+            enableKeyboardShortcut.IsChecked = GlobalConfig.EnableKeyboardShortcut;
         }
         #region back button
         private void BackButton_MouseDown(object sender, MouseButtonEventArgs e)
@@ -51,6 +52,11 @@ namespace CharmsBarReloaded.Settings
         private void CharmsClockEnabled_Update(object sender, RoutedEventArgs e)
         {
             throw new NotImplementedException("not implemented yet.");
+        }
+
+        private void KeyboardShortcutsEnabled_Update(object sender, RoutedEventArgs e)
+        {
+            GlobalConfig.EnableKeyboardShortcut = (bool)enableKeyboardShortcut.IsChecked;
         }
     }
 }

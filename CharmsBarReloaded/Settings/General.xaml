@@ -10,9 +10,9 @@
 
     <Grid>
         <TextBlock Text="Darkened features are not yet implemented" Foreground="Gray" Margin="90, 74, 0, 0"/>
-        <StackPanel Margin="40, 40, 0 ,0">
+        <StackPanel Margin="20, 40, 0 ,0">
             <StackPanel Orientation="Horizontal">
-                <Grid Height="40" Width="40" Margin="0,0,10,0" MouseDown="BackButton_MouseDown" MouseUp="BackButton_Click"  MouseEnter="BackButton_MouseEnter" MouseLeave="BackButton_MouseLeave">
+                <Grid Height="40" Width="40" Margin="20,0,10,0" MouseDown="BackButton_MouseDown" MouseUp="BackButton_Click"  MouseEnter="BackButton_MouseEnter" MouseLeave="BackButton_MouseLeave">
                     <Image Source="../Assets/CharmsSettings/BackButton.png" Width="40" Height="40" x:Name="BackButton"/>
                 </Grid>
                 <TextBlock Text="General" FontSize="30px" Foreground="White" FontWeight="Thin" Margin="0,0,0,5"/>
@@ -39,6 +39,21 @@
                 <CheckBox Margin="0, 5, 0, 0" x:Name="enableCharmsClock" Foreground="White" FontSize="17px" Click="CharmsClockEnabled_Update" IsChecked="True" IsEnabled="False">
                     <TextBlock Text="Enable Charms Clock" FontSize="17" Foreground="White" Margin="0,-4,0,0"/>
                 </CheckBox>
+            </Grid>
+            <TextBlock Text="Keyboard Shortcut settings" Foreground="White" FontWeight="Thin" FontSize="17" Margin="10,10,0,0"/>
+            <CheckBox Margin="0, 5, 0, 0" x:Name="enableKeyboardShortcut" Foreground="White" FontSize="17px" Click="KeyboardShortcutsEnabled_Update">
+                <TextBlock Text="Enable keyboard shortcuts" FontSize="17" Foreground="White" Margin="0,-4,0,0"/>
+            </CheckBox>
+            <Grid Background="#aa000000" Margin="0,0,5,0">
+                <Grid.OpacityMask>
+                    <SolidColorBrush Color="#aa000000"/>
+                </Grid.OpacityMask>
+                <CheckBox Margin="0, 5, 0, 0" x:Name="overrideCharmsBarSetting" Foreground="White" FontSize="17px" IsChecked="True" IsEnabled="False">
+                    <TextBlock Text="Override disabled Charms Bar setting" FontSize="17" Foreground="White" Margin="0,-4,0,0"/>
+                </CheckBox>
+            </Grid>
+            <Grid Background="#aa000000" Margin="0,0,5,0">
+                <Button Margin="50,2,50,2" Content="Change shortcut" IsEnabled="False"/>
             </Grid>
         </StackPanel>
     </Grid>

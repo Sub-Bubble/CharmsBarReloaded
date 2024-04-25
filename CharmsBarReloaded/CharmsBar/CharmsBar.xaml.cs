@@ -116,6 +116,20 @@ namespace CharmsBarReloaded
                         this.Height = System.Windows.SystemParameters.PrimaryScreenHeight - 1;
                         this.Top = SystemConfig.DesktopWorkingArea.Top + 1;
                     }
+                    if (Keyboard.IsKeyDown(Key.LWin) && Keyboard.IsKeyDown(Key.C) && GlobalConfig.EnableKeyboardShortcut)
+                    {
+                        this.Height = System.Windows.SystemParameters.PrimaryScreenHeight;
+                        this.Top = System.Windows.SystemParameters.WorkArea.Top;
+                        CharmsGrid.Visibility = Visibility.Visible;
+                        isAnimating = true;
+                        BeginStoryboard(slideInButtons);
+                        Storyboard.SetTargetProperty(fadeIn, new PropertyPath("(Window.Background).(SolidColorBrush.Color)"));
+                        Storyboard storyboard = new Storyboard();
+                        storyboard.Children.Add(fadeIn);
+                        storyboard.Begin(this);
+                        StartButtonIcon.Background = SystemConfig.AccentColor();
+                        charmsClock.Update();
+                    }
                 }));
 
             };
