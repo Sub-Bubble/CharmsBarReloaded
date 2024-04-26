@@ -87,6 +87,7 @@ namespace CharmsBarReloaded
                 }
                 ));
 
+
             };
             timer1.Interval = 1000;
             timer1.Start();
@@ -116,19 +117,30 @@ namespace CharmsBarReloaded
                         this.Height = System.Windows.SystemParameters.PrimaryScreenHeight - 1;
                         this.Top = SystemConfig.DesktopWorkingArea.Top + 1;
                     }
+
                     if (Keyboard.IsKeyDown(Key.LWin) && Keyboard.IsKeyDown(Key.C) && GlobalConfig.EnableKeyboardShortcut)
                     {
                         this.Height = System.Windows.SystemParameters.PrimaryScreenHeight;
                         this.Top = System.Windows.SystemParameters.WorkArea.Top;
                         CharmsGrid.Visibility = Visibility.Visible;
-                        isAnimating = true;
-                        BeginStoryboard(slideInButtons);
-                        Storyboard.SetTargetProperty(fadeIn, new PropertyPath("(Window.Background).(SolidColorBrush.Color)"));
-                        Storyboard storyboard = new Storyboard();
-                        storyboard.Children.Add(fadeIn);
-                        storyboard.Begin(this);
+                        if (!isAnimating)
+                        {
+                            isAnimating = true;
+                            windowVisible = true;
+                            BeginStoryboard(slideInButtons);
+                            Storyboard.SetTargetProperty(fadeIn, new PropertyPath("(Window.Background).(SolidColorBrush.Color)"));
+                            Storyboard storyboard = new Storyboard();
+                            storyboard.Children.Add(fadeIn);
+                            storyboard.Begin(this);
+                            storyboard.Completed += delegate { isAnimating = false; };
+                            charmsClock.Update();
+                        }
                         StartButtonIcon.Background = SystemConfig.AccentColor();
-                        charmsClock.Update();
+                    }
+                    if (Keyboard.IsKeyDown(Key.Escape) && GlobalConfig.EnableKeyboardShortcut)
+                    {
+                        isAnimating = true;
+                        HideWindow();
                     }
                 }));
 
@@ -188,6 +200,7 @@ namespace CharmsBarReloaded
             {
                 BeginStoryboard(prepareButtons);
                 isAnimating = false;
+                windowVisible = false;
                 this.Background = GlobalConfig.GetConfig("Hide");
                 charmsClock.HideClock();
                 CharmsGrid.Visibility = Visibility.Collapsed;
