@@ -18,14 +18,11 @@
                 <TextBlock Text="General" FontSize="30px" Foreground="White" FontWeight="Thin" Margin="0,0,0,5"/>
             </StackPanel>
             <TextBlock Height="0" Margin="0, 20,0,0"/>
-            <Grid Background="#aa000000" Margin="0,0,5,0">
-                <Grid.OpacityMask>
-                    <SolidColorBrush Color="#aa000000"/>
-                </Grid.OpacityMask>
-                <CheckBox IsEnabled="False" x:Name="runOnStartup" Foreground="White" FontSize="17px">
-                <TextBlock Text="Run on startup (Coming soon)" FontSize="17" Foreground="White" Margin="0,-4,0,0"/>
+            <CheckBox x:Name="runOnStartup" Foreground="White" FontSize="17px" Click="runOnStartup_Update">
+                <TextBlock Text="Run on startup" FontSize="17" Foreground="White" Margin="0,-4,0,0"/>
             </CheckBox>
-            </Grid>
+
+
             <CheckBox Margin="0, 5, 0, 0" x:Name="hideOnClick" Foreground="White" FontSize="17px" Click="HideOnClick_Update">
                 <TextBlock Text="Hide CharmsBar after button click" FontSize="17" Foreground="White" Margin="0,-4,0,0"/>
             </CheckBox>

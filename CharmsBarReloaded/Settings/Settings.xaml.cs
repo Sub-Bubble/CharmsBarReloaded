@@ -20,6 +20,9 @@ namespace CharmsBarReloaded
         private const int GWL_EX_STYLE = -20;
         private const int WS_EX_APPWINDOW = 0x00040000, WS_EX_TOOLWINDOW = 0x00000080;
 
+        public static bool windowBusy = false;
+        
+        
         Storyboard slideInWindow;
         Storyboard slideOutWindow;
         public CharmsSettings()
@@ -48,7 +51,8 @@ namespace CharmsBarReloaded
         }
         public void HideWindow()
         {
-            BeginStoryboard(slideOutWindow);
+            if (!windowBusy)
+                BeginStoryboard(slideOutWindow);
         }
     }
 }

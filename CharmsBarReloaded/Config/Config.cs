@@ -1,7 +1,6 @@
 ﻿using Microsoft.Win32;
 using System;
 using System.Windows;
-using System.Windows.Forms;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 
@@ -19,7 +18,7 @@ namespace CharmsBarReloaded
         }
         public static int BatteryPercentage()
         {
-            return Convert.ToInt32(SystemInformation.PowerStatus.BatteryLifePercent * 100);
+            return Convert.ToInt32(System.Windows.Forms.SystemInformation.PowerStatus.BatteryLifePercent * 100);
         }
         public static Brush AccentColor()
         {
@@ -31,6 +30,29 @@ namespace CharmsBarReloaded
             int blue = colorValue & 0xFF;
             var color = Color.FromArgb(255, (byte)blue, (byte)green, (byte)red);
             return new SolidColorBrush(color);
+        }
+        public static bool StartupKeyExists()
+        {
+            RegistryKey startupKey = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\Run", true);
+            var value = startupKey.GetValue("CharmsBarReloaded");
+            if (value == null)
+                return false;
+            else if (value != AppContext.BaseDirectory)
+                startupKey.SetValue("CharmsBarReloaded", AppContext.BaseDirectory);
+            return true;
+        }
+        public static void SetupStartupKey(object value)
+        {
+            RegistryKey startupKey = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\Run", true);
+            switch (value)
+            {
+                case true:
+                    startupKey.SetValue("CharmsBarReloaded", AppContext.BaseDirectory);
+                    break;
+                case false:
+                    startupKey.DeleteValue("CharmsBarReloaded");
+                    break;
+            }
         }
     }
     class GlobalConfig
@@ -167,6 +189,8 @@ namespace CharmsBarReloaded
                     return "OsSettings";
                 case -4:
                     return "ControlPanel";
+                case -5:
+                    return "FocusSettings";
                 default:
                     return "null";
             }

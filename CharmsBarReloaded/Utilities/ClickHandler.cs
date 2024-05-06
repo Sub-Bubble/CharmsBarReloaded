@@ -61,6 +61,9 @@ namespace CharmsBarReloaded
                 case "Settings":
                     clickHandler.OpenSettings();
                     break;
+                case "FocusSettings":
+                    clickHandler.FocusOnSettings();
+                    break;
                 case "OldSettings":
                     clickHandler.OpenOldSettings();
                     break;
@@ -81,6 +84,10 @@ namespace CharmsBarReloaded
             settings.Deactivated += (sender, args) => { settings.HideWindow(); };
             settings.Focus();
             settings.Animate();
+        }
+        public void FocusOnSettings()
+        {
+            settings.Focus();
         }
         public void OpenOldSettings()
         {

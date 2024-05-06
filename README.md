@@ -6,9 +6,9 @@ This application returns Windows 8's Charms Bar to Windows 10/11!<br><br>
 - [X] Lightweightness
 - [X] Customizability with settings
 - [X] Tray Icon
-- [x] Animations
-- [ ] Keyboard Shortcuts (Coming in a4.0)
-- [ ] Running on startup (Can be configured, coming in a4.0)
+- [X] Animations
+- [X] Keyboard Shortcuts
+- [X] Running on startup
 - [X] CharmsClock
 - [ ] DPI scaling (Coming soon™)
 - [ ] Theme support (Coming soon™, probably in b1.0)

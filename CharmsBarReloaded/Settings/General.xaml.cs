@@ -14,6 +14,14 @@ namespace CharmsBarReloaded.Settings
         public General()
         {
             InitializeComponent();
+            if (!SystemConfig.StartupKeyExists())
+            {
+                runOnStartup.IsChecked = false;
+            }
+            else
+            {
+                runOnStartup.IsChecked = true;
+            }
             hideOnClick.IsChecked = GlobalConfig.HideWindowAfterClick;
             enableCharmsBar.IsChecked = GlobalConfig.IsEnabled;
             enableKeyboardShortcut.IsChecked = GlobalConfig.EnableKeyboardShortcut;
@@ -57,6 +65,11 @@ namespace CharmsBarReloaded.Settings
         private void KeyboardShortcutsEnabled_Update(object sender, RoutedEventArgs e)
         {
             GlobalConfig.EnableKeyboardShortcut = (bool)enableKeyboardShortcut.IsChecked;
+        }
+
+        private void runOnStartup_Update(object sender, RoutedEventArgs e)
+        {
+            SystemConfig.SetupStartupKey(runOnStartup.IsChecked);
         }
     }
 }
