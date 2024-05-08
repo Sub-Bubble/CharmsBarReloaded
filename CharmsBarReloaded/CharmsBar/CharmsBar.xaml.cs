@@ -97,12 +97,8 @@ namespace CharmsBarReloaded
                 {
 
                     Point cursorPosition = GetMouseLocation.GetMousePosition();
-                    /* Debug */
-                    //Text2.Content = $"{SystemConfig.DesktopWorkingArea.Right}, {SystemConfig.DesktopWorkingArea.Top}";
-                    //Text3.Content = $"{this.Left}, {this.Top}";
-                    //Text3.Content = $"{cursorPosition.X}, {cursorPosition.Y}";
 
-                    if (cursorPosition.X + 1 == SystemConfig.DesktopWorkingArea.Right && cursorPosition.Y == SystemConfig.DesktopWorkingArea.Top && GlobalConfig.IsEnabled && !windowVisible)
+                    if (cursorPosition.X + 1 == System.Windows.Forms.Screen.PrimaryScreen.Bounds.Width && cursorPosition.Y == SystemConfig.DesktopWorkingArea.Top && GlobalConfig.IsEnabled && !windowVisible)
                     {
                         var bc = new BrushConverter();
                         this.Background = GlobalConfig.GetConfig("Transparent");
