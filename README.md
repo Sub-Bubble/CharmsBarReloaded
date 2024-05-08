@@ -10,7 +10,7 @@ This application returns Windows 8's Charms Bar to Windows 10/11!<br><br>
 - [X] Keyboard Shortcuts
 - [X] Running on startup
 - [X] CharmsClock
-- [ ] DPI scaling (Coming soon™)
+- [X] DPI scaling
 - [ ] Theme support (Coming soon™, probably in b1.0)
 - [ ] Button mapping (Coming soon™)
 
