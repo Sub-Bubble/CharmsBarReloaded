@@ -63,6 +63,7 @@ namespace CharmsBarReloaded
 
         /// other vars
         public static bool IsEnabled {  get; set; }
+        public static bool CharmsClockEnabled { get; set; }
         public static bool HideWindowAfterClick {  get; set; }
         public static string BackgroundColor {  get; set; }
         public static string TextColor {  get; set; }
@@ -71,6 +72,7 @@ namespace CharmsBarReloaded
         public static bool ShowChargingOnDesktop { get; set; }
         public static bool UseNetworkCaching {  get; set; }
         public static bool EnableKeyboardShortcut {  get; set; }
+        public static bool OverrideCharmsBarOffSetting { get; set; }
         public static void LoadConfig()
         {
             IsEnabled = true;
@@ -84,6 +86,8 @@ namespace CharmsBarReloaded
                 UseLightTheme = CharmsBarReloaded.Properties.Settings.Default.UseLightTheme;
                 ShowChargingOnDesktop = CharmsBarReloaded.Properties.Settings.Default.ShowChargingOnDesktop;
                 EnableKeyboardShortcut = CharmsBarReloaded.Properties.Settings.Default.EnableKeyboardShortcut;
+                CharmsClockEnabled = CharmsBarReloaded.Properties.Settings.Default.CharmsClockEnabled;
+                OverrideCharmsBarOffSetting = CharmsBarReloaded.Properties.Settings.Default.OverrideCharmsBarOffSetting;
             }
             catch
             {
@@ -95,6 +99,8 @@ namespace CharmsBarReloaded
                 UseLightTheme = false;
                 ShowChargingOnDesktop = false;
                 EnableKeyboardShortcut = true;
+                CharmsClockEnabled = true;
+                OverrideCharmsBarOffSetting = false;
             }
         }
         public static void ResetConfig()
@@ -107,6 +113,8 @@ namespace CharmsBarReloaded
             CharmsBarReloaded.Properties.Settings.Default.UseLightTheme = false;
             CharmsBarReloaded.Properties.Settings.Default.ShowChargingOnDesktop = false;
             CharmsBarReloaded.Properties.Settings.Default.EnableKeyboardShortcut = true;
+            CharmsBarReloaded.Properties.Settings.Default.CharmsClockEnabled = true;
+            CharmsBarReloaded.Properties.Settings.Default.OverrideCharmsBarOffSetting = false;
             CharmsBarReloaded.Properties.Settings.Default.Save();
             LoadConfig();
         }
@@ -120,6 +128,8 @@ namespace CharmsBarReloaded
             CharmsBarReloaded.Properties.Settings.Default.UseLightTheme = UseLightTheme;
             CharmsBarReloaded.Properties.Settings.Default.ShowChargingOnDesktop = ShowChargingOnDesktop;
             CharmsBarReloaded.Properties.Settings.Default.EnableKeyboardShortcut = EnableKeyboardShortcut;
+            CharmsBarReloaded.Properties.Settings.Default.CharmsClockEnabled = CharmsClockEnabled;
+            CharmsBarReloaded.Properties.Settings.Default.OverrideCharmsBarOffSetting = OverrideCharmsBarOffSetting;
             CharmsBarReloaded.Properties.Settings.Default.Save();
             /// fade in animation
             CharmsBar.fadeIn = new ColorAnimation

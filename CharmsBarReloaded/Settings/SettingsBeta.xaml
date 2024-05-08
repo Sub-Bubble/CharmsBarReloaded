@@ -22,7 +22,7 @@
             <Label Content="General" Grid.Column="0" FontSize="40" Height="70" VerticalAlignment="Top"/>
 
             <StackPanel Margin="10, 10, 0 0" Orientation="Vertical">
-                <CheckBox Content="Run on startup (Coming soon)" IsEnabled="False" x:Name="RunOnStartup"/>
+                <CheckBox Content="Run on startup" x:Name="RunOnStartup"/>
                 <CheckBox Content="Hide CharmsBar after button click" Margin="0, 10, 0, 0" x:Name="HideOnClick"/>
             </StackPanel>
         </StackPanel>
@@ -31,10 +31,13 @@
         <StackPanel Orientation="Vertical" Margin="10, 10, 10, 0"  Grid.Column="1">
             <Label Content="Customization" FontSize="40" Height="70" VerticalAlignment="Top"/>
 
-            <StackPanel Margin="10, 10, 0 0" Orientation="Vertical">
+            <StackPanel Margin="10, 0, 0 0" Orientation="Vertical">
+                <!-- Themes are going to be only in new settings-->
+                <!-- they are left only because if you'd like to bring them there and still, just use new stuff, it's better, trust me. -->
+                <!--
                 <Label Content="Theme: (Coming soon) "/>
                 <RadioButton GroupName="theme" Content="Light" IsEnabled="False"/>
-                <RadioButton GroupName="theme" Content="Dark" IsEnabled="False" IsChecked="True"/>
+                <RadioButton GroupName="theme" Content="Dark" IsEnabled="False" IsChecked="True"/>-->
 
                 <!-- color settings -->
                 <Label Content="Colors" Margin="0, 10, 0, 0" FontSize="20" FontWeight="SemiBold"/>
@@ -54,7 +57,8 @@
                     <TextBox VerticalContentAlignment="Center" x:Name="HoverColor" PreviewTextInput="ValidHexCheck" MaxLength="6"/>
 
                 </DockPanel>
-                <StackPanel Margin="0, 20, 0, 0">
+                <StackPanel>
+                    <Label Content="CharmsClock" Margin="0, 10, 0, 0" FontSize="20" FontWeight="SemiBold"/>
                     <CheckBox Content="Show charging on desktop or devices with &#10;no battery" x:Name="ShowChargingOnDesktop"/>
                 </StackPanel>
             </StackPanel>

@@ -106,5 +106,29 @@ namespace CharmsBarReloaded.Properties {
                 this["EnableKeyboardShortcut"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool CharmsClockEnabled {
+            get {
+                return ((bool)(this["CharmsClockEnabled"]));
+            }
+            set {
+                this["CharmsClockEnabled"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool OverrideCharmsBarOffSetting {
+            get {
+                return ((bool)(this["OverrideCharmsBarOffSetting"]));
+            }
+            set {
+                this["OverrideCharmsBarOffSetting"] = value;
+            }
+        }
     }
 }

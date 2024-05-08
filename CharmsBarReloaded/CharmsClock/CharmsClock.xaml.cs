@@ -136,6 +136,7 @@ namespace CharmsBarReloaded
             this.Left = 51;
             this.Top = SystemConfig.DesktopWorkingArea.Bottom - 188;
             if (silent) return;
+            if (!GlobalConfig.CharmsClockEnabled) return;
             this.Show();
             BeginAnimation(UIElement.OpacityProperty, fadeIn);
         }

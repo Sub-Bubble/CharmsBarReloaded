@@ -114,7 +114,7 @@ namespace CharmsBarReloaded
                         this.Top = SystemConfig.DesktopWorkingArea.Top + 1;
                     }
 
-                    if (Keyboard.IsKeyDown(Key.LWin) && Keyboard.IsKeyDown(Key.C) && GlobalConfig.EnableKeyboardShortcut)
+                    if (Keyboard.IsKeyDown(Key.LWin) && Keyboard.IsKeyDown(Key.C) && GlobalConfig.EnableKeyboardShortcut && (GlobalConfig.IsEnabled || GlobalConfig.OverrideCharmsBarOffSetting))
                     {
                         this.Height = System.Windows.SystemParameters.PrimaryScreenHeight;
                         this.Top = System.Windows.SystemParameters.WorkArea.Top;

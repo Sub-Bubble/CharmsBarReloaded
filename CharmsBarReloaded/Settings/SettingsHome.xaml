@@ -56,7 +56,5 @@
                 <TextBlock Text="Control Panel" Foreground="White" FontSize="17px" VerticalAlignment="Center" Margin="40, 0, 0, 0"/>
             </Grid>
         </StackPanel>
-        <Label Content="New Settings are in beta. &#10;Design flaws and bugs are expected, &#10;and can be reported." 
-               Foreground="White" Opacity="0.4" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="17px"/>
     </Grid>
 </Page>

@@ -24,11 +24,20 @@ namespace CharmsBarReloaded
         {
             InitializeComponent();
             this.Loaded += delegate {
-                MessageBox.Show("Old settings are going to be deleted once CharmsBar: Reloaded goes in beta.",
+                MessageBox.Show("Old settings are going to be deleted once a5.0 is released.\nLast version to include them will not have this warning.",
                     "Old settings deprecation", MessageBoxButton.OK, MessageBoxImage.Information);
             };
             VersionString.Content = $"CharmsBar: Reloaded {GlobalConfig.VersionString}\nBuild {GlobalConfig.Build}";
-            //RunOnStartup.IsChecked = false;
+
+            if (!SystemConfig.StartupKeyExists())
+            {
+                RunOnStartup.IsChecked = false;
+            }
+            else
+            {
+                RunOnStartup.IsChecked = true;
+            }
+
             HideOnClick.IsChecked = GlobalConfig.HideWindowAfterClick;
             BackgroundColor.Text = GlobalConfig.BackgroundColor;
             TextColor.Text = GlobalConfig.TextColor;
@@ -42,6 +51,8 @@ namespace CharmsBarReloaded
                 MessageBox.Show("Invalid hex colors.\nConfig not saved.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
+
+            SystemConfig.SetupStartupKey((bool)RunOnStartup.IsChecked);
 
             GlobalConfig.HideWindowAfterClick = (bool)HideOnClick.IsChecked;
             GlobalConfig.BackgroundColor = BackgroundColor.Text;

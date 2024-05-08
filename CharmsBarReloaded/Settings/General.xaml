@@ -29,28 +29,21 @@
             <CheckBox Margin="0, 5, 0, 0" x:Name="enableCharmsBar" Foreground="White" FontSize="17px" Click="CharmsBarEnabled_Update">
                 <TextBlock Text="Enable Charms Bar" FontSize="17" Foreground="White" Margin="0,-4,0,0"/>
             </CheckBox>
-            <Grid Background="#aa000000" Margin="0,0,5,0">
-                <Grid.OpacityMask>
-                    <SolidColorBrush Color="#aa000000"/>
-                </Grid.OpacityMask>
-                <CheckBox Margin="0, 5, 0, 0" x:Name="enableCharmsClock" Foreground="White" FontSize="17px" Click="CharmsClockEnabled_Update" IsChecked="True" IsEnabled="False">
-                    <TextBlock Text="Enable Charms Clock" FontSize="17" Foreground="White" Margin="0,-4,0,0"/>
-                </CheckBox>
-            </Grid>
+            <CheckBox Margin="0, 5, 0, 0" x:Name="enableCharmsClock" Foreground="White" FontSize="17px" Click="CharmsClockEnabled_Update">
+                <TextBlock Text="Enable Charms Clock" FontSize="17" Foreground="White" Margin="0,-4,0,0"/>
+            </CheckBox>
             <TextBlock Text="Keyboard Shortcut settings" Foreground="White" FontWeight="Thin" FontSize="17" Margin="10,10,0,0"/>
             <CheckBox Margin="0, 5, 0, 0" x:Name="enableKeyboardShortcut" Foreground="White" FontSize="17px" Click="KeyboardShortcutsEnabled_Update">
                 <TextBlock Text="Enable keyboard shortcuts" FontSize="17" Foreground="White" Margin="0,-4,0,0"/>
             </CheckBox>
-            <Grid Background="#aa000000" Margin="0,0,5,0">
+            <CheckBox Margin="0, 5, 0, 0" x:Name="overrideCharmsBarSetting" Foreground="White" FontSize="17px" Click="overrideCharmsBarSetting_Click">
+                <TextBlock Text="Override disabled Charms Bar setting" FontSize="17" Foreground="White" Margin="0,-4,0,0"/>
+            </CheckBox>
+                <Grid Background="#aa000000" Margin="0,0,5,0">
                 <Grid.OpacityMask>
                     <SolidColorBrush Color="#aa000000"/>
                 </Grid.OpacityMask>
-                <CheckBox Margin="0, 5, 0, 0" x:Name="overrideCharmsBarSetting" Foreground="White" FontSize="17px" IsChecked="True" IsEnabled="False">
-                    <TextBlock Text="Override disabled Charms Bar setting" FontSize="17" Foreground="White" Margin="0,-4,0,0"/>
-                </CheckBox>
-            </Grid>
-            <Grid Background="#aa000000" Margin="0,0,5,0">
-                <Button Margin="50,2,50,2" Content="Change shortcut" IsEnabled="False"/>
+                    <Button Margin="50,2,50,2" Content="Change shortcut" IsEnabled="False"/>
             </Grid>
         </StackPanel>
     </Grid>

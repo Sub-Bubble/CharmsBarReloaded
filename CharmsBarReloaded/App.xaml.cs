@@ -36,7 +36,7 @@ namespace CharmsBarReloaded
             if (count > 1)
             {
                 MessageBox.Show( "You're already running this app! Hover on top right corner to open Charms Bar!", "Already running!", MessageBoxButton.OK, MessageBoxImage.Error);
-                App.Current.Shutdown();
+                Application.Current.Shutdown();
             }
         }
         protected override void OnStartup(StartupEventArgs e)
