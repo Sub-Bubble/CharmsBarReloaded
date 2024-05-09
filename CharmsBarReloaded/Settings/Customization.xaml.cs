@@ -48,6 +48,8 @@ namespace CharmsBarReloaded.Settings
             hoverColorPreview.Background = GlobalConfig.GetConfig("hover");
             hoverColorTextbox.Text = GlobalConfig.HoverColor;
 
+            EnableAnimations.IsChecked = GlobalConfig.EnableAnimations;
+
 
             timer.Interval = 1;
             timer.Elapsed += delegate
@@ -95,6 +97,11 @@ namespace CharmsBarReloaded.Settings
             bgColorTextbox.Text = "000000";
             textColorTextbox.Text = "d3d3d3";
             hoverColorTextbox.Text = "4c4c4c";
+        }
+
+        private void EnableAnimations_Click(object sender, RoutedEventArgs e)
+        {
+            GlobalConfig.EnableAnimations = (bool)EnableAnimations.IsChecked;
         }
     }
 }

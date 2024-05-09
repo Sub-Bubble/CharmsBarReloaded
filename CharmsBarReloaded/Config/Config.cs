@@ -58,8 +58,8 @@ namespace CharmsBarReloaded
     class GlobalConfig
     {
         /// Constants. Only changed manually
-        public const string VersionString = "a4.1.1";
-        public const int Build = 17;
+        public const string VersionString = "a4.2";
+        public const int Build = 18;
 
         /// other vars
         public static bool IsEnabled {  get; set; }
@@ -73,6 +73,7 @@ namespace CharmsBarReloaded
         public static bool UseNetworkCaching {  get; set; }
         public static bool EnableKeyboardShortcut {  get; set; }
         public static bool OverrideCharmsBarOffSetting { get; set; }
+        public static bool EnableAnimations {  get; set; }
         public static void LoadConfig()
         {
             IsEnabled = true;
@@ -88,6 +89,7 @@ namespace CharmsBarReloaded
                 EnableKeyboardShortcut = CharmsBarReloaded.Properties.Settings.Default.EnableKeyboardShortcut;
                 CharmsClockEnabled = CharmsBarReloaded.Properties.Settings.Default.CharmsClockEnabled;
                 OverrideCharmsBarOffSetting = CharmsBarReloaded.Properties.Settings.Default.OverrideCharmsBarOffSetting;
+                EnableAnimations = CharmsBarReloaded.Properties.Settings.Default.EnableAnimations;
             }
             catch
             {
@@ -101,6 +103,7 @@ namespace CharmsBarReloaded
                 EnableKeyboardShortcut = true;
                 CharmsClockEnabled = true;
                 OverrideCharmsBarOffSetting = false;
+                EnableAnimations = true;
             }
         }
         public static void ResetConfig()
@@ -115,6 +118,7 @@ namespace CharmsBarReloaded
             CharmsBarReloaded.Properties.Settings.Default.EnableKeyboardShortcut = true;
             CharmsBarReloaded.Properties.Settings.Default.CharmsClockEnabled = true;
             CharmsBarReloaded.Properties.Settings.Default.OverrideCharmsBarOffSetting = false;
+            CharmsBarReloaded.Properties.Settings.Default.EnableAnimations = true;
             CharmsBarReloaded.Properties.Settings.Default.Save();
             LoadConfig();
         }
@@ -130,6 +134,7 @@ namespace CharmsBarReloaded
             CharmsBarReloaded.Properties.Settings.Default.EnableKeyboardShortcut = EnableKeyboardShortcut;
             CharmsBarReloaded.Properties.Settings.Default.CharmsClockEnabled = CharmsClockEnabled;
             CharmsBarReloaded.Properties.Settings.Default.OverrideCharmsBarOffSetting = OverrideCharmsBarOffSetting;
+            CharmsBarReloaded.Properties.Settings.Default.EnableAnimations = EnableAnimations;
             CharmsBarReloaded.Properties.Settings.Default.Save();
             /// fade in animation
             CharmsBar.fadeIn = new ColorAnimation

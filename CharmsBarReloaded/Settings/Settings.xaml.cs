@@ -41,18 +41,27 @@ namespace CharmsBarReloaded
             this.Loaded += delegate 
             { 
                 SetWindowLong(new WindowInteropHelper(this).Handle, GWL_EX_STYLE, (GetWindowLong(new WindowInteropHelper(this).Handle, GWL_EX_STYLE) | WS_EX_TOOLWINDOW) & ~WS_EX_APPWINDOW);
-                BeginStoryboard(slideInWindow);
+                Animate();
                 slideOutWindow.Completed += delegate { this.Hide(); SettingsFrame.Content = new SettingsHome(); /*Just in case*/ };
             };
         }
         public void Animate()
         {
-            BeginStoryboard(slideInWindow);
+            if (GlobalConfig.EnableAnimations)
+                BeginStoryboard(slideInWindow);
         }
         public void HideWindow()
         {
             if (!windowBusy)
-                BeginStoryboard(slideOutWindow);
+            {
+                if (GlobalConfig.EnableAnimations)
+                    BeginStoryboard(slideOutWindow);
+                else
+                {
+                    this.Hide();
+                    SettingsFrame.Content = new SettingsHome();
+                }
+            }
         }
     }
 }

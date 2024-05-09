@@ -35,6 +35,18 @@ namespace CharmsBarReloaded
             To = 0.0,
             Duration = TimeSpan.FromMilliseconds(100)
         };
+        DoubleAnimation noAnimationIn = new DoubleAnimation
+        {
+            From = 0.0,
+            To = 1.0,
+            Duration = TimeSpan.Zero
+        };
+        DoubleAnimation noAnimationOut = new DoubleAnimation
+        {
+            From = 1.0,
+            To = 0.0,
+            Duration = TimeSpan.Zero
+        };
         #endregion animations
         public CharmsClock()
         {
@@ -140,12 +152,17 @@ namespace CharmsBarReloaded
             if (silent) return;
             if (!GlobalConfig.CharmsClockEnabled) return;
             this.Show();
-            BeginAnimation(UIElement.OpacityProperty, fadeIn);
+            if (!GlobalConfig.EnableAnimations)
+                BeginAnimation(UIElement.OpacityProperty, noAnimationIn); 
+            else BeginAnimation(UIElement.OpacityProperty, fadeIn);
         }
         public void HideClock()
         {
             fadeOut.Completed += delegate { this.Hide(); };
-            BeginAnimation(UIElement.OpacityProperty, fadeOut);
+            noAnimationOut.Completed += delegate { this.Hide(); };
+            if (!GlobalConfig.EnableAnimations)
+                BeginAnimation(UIElement.OpacityProperty, noAnimationOut);
+            else BeginAnimation(UIElement.OpacityProperty, fadeOut);
 
         }
 

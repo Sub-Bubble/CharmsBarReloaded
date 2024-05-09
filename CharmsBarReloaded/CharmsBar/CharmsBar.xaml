@@ -49,6 +49,13 @@
             <DoubleAnimation Storyboard.TargetName="slideIn4" Storyboard.TargetProperty="X" From="0" To="98" Duration="0:0:0"/>
             <DoubleAnimation Storyboard.TargetName="slideIn5" Storyboard.TargetProperty="X" From="0" To="98" Duration="0:0:0"/>
         </Storyboard>
+        <Storyboard x:Key="NoAnimations">
+            <DoubleAnimation Storyboard.TargetName="slideIn1" Storyboard.TargetProperty="X" From="0" To="0" Duration="0:0:0"/>
+            <DoubleAnimation Storyboard.TargetName="slideIn2" Storyboard.TargetProperty="X" From="0" To="0" Duration="0:0:0"/>
+            <DoubleAnimation Storyboard.TargetName="slideIn3" Storyboard.TargetProperty="X" From="0" To="0" Duration="0:0:0"/>
+            <DoubleAnimation Storyboard.TargetName="slideIn4" Storyboard.TargetProperty="X" From="0" To="0" Duration="0:0:0"/>
+            <DoubleAnimation Storyboard.TargetName="slideIn5" Storyboard.TargetProperty="X" From="0" To="0" Duration="0:0:0"/>
+        </Storyboard>
     </Window.Resources>
     <Grid>
         <Grid Width="98" Height="686" Name="CharmsGrid" MouseEnter="CharmsGrid_MouseEnter" Margin="0, 0, 0, 0">

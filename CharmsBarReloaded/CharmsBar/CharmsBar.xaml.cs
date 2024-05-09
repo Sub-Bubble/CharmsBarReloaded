@@ -40,6 +40,7 @@ namespace CharmsBarReloaded
         DoubleAnimation backTo1Opacity = new DoubleAnimation { From = 0.0, To = 1.0, Duration = TimeSpan.FromMilliseconds(1)};
         Storyboard slideInButtons;
         Storyboard prepareButtons;
+        Storyboard noAnimations;
         #endregion animations
 
         public CharmsBar()
@@ -59,6 +60,7 @@ namespace CharmsBarReloaded
 
             slideInButtons = (Storyboard)FindResource("SlideInAnimation");
             prepareButtons = (Storyboard)FindResource("PrepareButtons");
+            noAnimations = (Storyboard)FindResource("NoAnimations");
 
 
             ///position
@@ -104,10 +106,14 @@ namespace CharmsBarReloaded
                         this.Background = GlobalConfig.GetConfig("Transparent");
                         CharmsGrid.Visibility = Visibility.Visible;
 
-                        if (!isAnimating)
+                        if (!isAnimating && GlobalConfig.EnableAnimations)
                         {
                             isAnimating = true;
                             BeginStoryboard(slideInButtons);
+                        }
+                        else if (!GlobalConfig.EnableAnimations)
+                        {
+                            BeginStoryboard(noAnimations);
                         }
 
                         this.Height = System.Windows.SystemParameters.PrimaryScreenHeight - 1;
@@ -119,7 +125,9 @@ namespace CharmsBarReloaded
                         this.Height = System.Windows.SystemParameters.PrimaryScreenHeight;
                         this.Top = System.Windows.SystemParameters.WorkArea.Top;
                         CharmsGrid.Visibility = Visibility.Visible;
-                        if (!isAnimating)
+
+
+                        if (!isAnimating && GlobalConfig.EnableAnimations)
                         {
                             isAnimating = true;
                             windowVisible = true;
@@ -131,6 +139,16 @@ namespace CharmsBarReloaded
                             storyboard.Completed += delegate { isAnimating = false; };
                             charmsClock.Update();
                         }
+                        else if (!GlobalConfig.EnableAnimations)
+                        {
+                            windowVisible = true;
+                            BeginStoryboard(noAnimations);
+                            this.Background = GlobalConfig.GetConfig("bg");
+                            charmsClock.Update();
+                        }
+
+
+
                         StartButtonIcon.Background = SystemConfig.AccentColor();
                     }
                     if (Keyboard.IsKeyDown(Key.Escape) && GlobalConfig.EnableKeyboardShortcut)
@@ -183,13 +201,22 @@ namespace CharmsBarReloaded
         {
             this.Height = System.Windows.SystemParameters.PrimaryScreenHeight;
             this.Top = System.Windows.SystemParameters.WorkArea.Top;
-            Storyboard.SetTargetProperty(fadeIn, new PropertyPath("(Window.Background).(SolidColorBrush.Color)"));
-            Storyboard storyboard = new Storyboard();
-            storyboard.Children.Add(fadeIn);
-            storyboard.Begin(this);
-            StartButtonIcon.Background = SystemConfig.AccentColor();
+            if (GlobalConfig.EnableAnimations)
+            {
+                Storyboard.SetTargetProperty(fadeIn, new PropertyPath("(Window.Background).(SolidColorBrush.Color)"));
+                Storyboard storyboard = new Storyboard();
+                storyboard.Children.Add(fadeIn);
+                storyboard.Begin(this);
+                StartButtonIcon.Background = SystemConfig.AccentColor();
+            }
+            else
+            {
+                this.Background = GlobalConfig.GetConfig("bg");
+            }
+
             if (charmsClock.Opacity != 1) 
                 charmsClock.Update();
+
         }
         public void HideWindow()
         {
@@ -204,6 +231,18 @@ namespace CharmsBarReloaded
                 StartButtonIcon.Background = GlobalConfig.GetConfig("White");
                 BeginAnimation(OpacityProperty, backTo1Opacity);
             };
+
+            if (!GlobalConfig.EnableAnimations)
+            {
+                BeginStoryboard(prepareButtons);
+                isAnimating = false;
+                windowVisible = false;
+                this.Background = GlobalConfig.GetConfig("Hide");
+                charmsClock.HideClock();
+                CharmsGrid.Visibility = Visibility.Collapsed;
+                StartButtonIcon.Background = GlobalConfig.GetConfig("White");
+                return;
+            }
             BeginAnimation(UIElement.OpacityProperty, fadeOut);
 
         }

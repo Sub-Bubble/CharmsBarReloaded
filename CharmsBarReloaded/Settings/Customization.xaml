@@ -24,6 +24,13 @@
             <StackPanel>
                 <!-- General settings -->
                 <Label Foreground="LightGray" FontSize="20">General</Label>
+                <StackPanel Margin="5,5,0,0">
+                    <Label Foreground="White" FontSize="16" Content="General" FontWeight="SemiBold"/>
+                    <CheckBox Foreground="White" IsChecked="True" x:Name="EnableAnimations" Click="EnableAnimations_Click">
+                        <TextBlock Text="Enable animations" FontSize="17" Margin="0,-4,0,0"/>
+                    </CheckBox>
+                    <Label Height="5"/>
+                </StackPanel>
                 <!-- Themes -->
                 <StackPanel Margin="5,0,5,0" Background="#aa000000">
                     <StackPanel.OpacityMask>
@@ -58,18 +65,6 @@
                 <Label Height="20"/>
                 <Label Foreground="LightGray" FontSize="20">Charms Bar</Label>
                 <StackPanel Margin="5,5,0,0">
-                    <Label Foreground="White" FontSize="16" Content="General"/>
-                    <Grid Background="#aa000000" Margin="0,0,5,0">
-                        <Grid.OpacityMask>
-                            <SolidColorBrush Color="#aa000000"/>
-                        </Grid.OpacityMask>
-                        <CheckBox Foreground="White" IsChecked="True" IsEnabled="False">
-                            <TextBlock Text="Enable animations" FontSize="17" Margin="0,-4,0,0"/>
-                        </CheckBox>
-                    </Grid>
-                    <Label Height="5"/>
-                </StackPanel>
-                <StackPanel Margin="5,5,0,0">
                     <!-- color options -->
                     <Label Foreground="White" FontSize="16" Content="Color options" FontWeight="SemiBold"/>
                     <StackPanel Orientation="Horizontal">
@@ -101,7 +96,7 @@
                             <TextBlock Text="Override system accent color" FontSize="17" Margin="0,-4,0,-5"/>
                         </CheckBox>
                     </Grid>
-                    
+
                     <Button Content="Reset color config" Width="140" Margin="-185,5,0,0" Click="ResetColorConfig" />
                 </StackPanel>
 
@@ -114,24 +109,8 @@
                         <TextBlock Text="Show Charging icon on desktop" FontSize="17" Margin="0,-4,0,0"/>
                     </CheckBox>
                     <Label Height="5"/>
-                    <Grid Background="#aa000000" Margin="0,0,5,0">
-                        <Grid.OpacityMask>
-                            <SolidColorBrush Color="#aa000000"/>
-                        </Grid.OpacityMask>
-                        <CheckBox Foreground="White" IsChecked="True" IsEnabled="False">
-                            <TextBlock Text="Use network caching (recommended)" FontSize="17" Margin="0,-4,0,0"/>
-                        </CheckBox>
-                    </Grid>
                 </StackPanel>
-
-
             </StackPanel>
         </ScrollViewer>
-        <!--
-        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Background="Black">
-            <TextBlock Text="Coming Soon!" FontSize="50px" Foreground="White" FontWeight="Thin" TextAlignment="Center"/>
-            <TextBlock Text="Customization settings are in the works!" Foreground="White" TextAlignment="Center"/>
-        </StackPanel>
-        -->
     </Grid>
 </Page>
