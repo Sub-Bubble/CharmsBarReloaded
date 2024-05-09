@@ -109,6 +109,8 @@ namespace CharmsBarReloaded
                         BatteryLife.Source = new BitmapImage(new Uri(@"../Assets/CharmsClockIcons/Battery1.png", UriKind.Relative)); break;
                     case 5: case 6: case 7: case 8: case 9:
                         BatteryLife.Source = new BitmapImage(new Uri(@"../Assets/CharmsClockIcons/Battery5.png", UriKind.Relative)); break;
+                    case 100:
+                        BatteryLife.Source = new BitmapImage(new Uri(@"../Assets/CharmsClockIcons/BatteryFull.png", UriKind.Relative)); break;
                     default:
                         BatteryLife.Source = new BitmapImage(new Uri(@$"../Assets/CharmsClockIcons/Battery{(SystemConfig.BatteryPercentage() / 10)}0.png", UriKind.Relative)); break;
 

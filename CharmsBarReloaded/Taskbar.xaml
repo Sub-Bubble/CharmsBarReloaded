@@ -3,7 +3,7 @@
                     xmlns:tb="http://www.hardcodet.net/taskbar"
                     x:Class="CharmsBarReloaded.Taskbar">
 
-    <ContextMenu x:Shared="false" x:Key="CharmsTray">
+    <ContextMenu x:Shared="false" x:Key="CharmsTray" Opened="ContextMenu_Opened">
         <MenuItem Header="CharmsBar: Reloaded" IsEnabled="False">
             <MenuItem.Icon>
                 <Image Source="Assets/DarkIcon.png" />

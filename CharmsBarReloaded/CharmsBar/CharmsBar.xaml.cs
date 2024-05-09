@@ -188,7 +188,8 @@ namespace CharmsBarReloaded
             storyboard.Children.Add(fadeIn);
             storyboard.Begin(this);
             StartButtonIcon.Background = SystemConfig.AccentColor();
-            charmsClock.Update();
+            if (charmsClock.Opacity != 1) 
+                charmsClock.Update();
         }
         public void HideWindow()
         {

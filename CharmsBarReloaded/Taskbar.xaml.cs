@@ -21,5 +21,10 @@ namespace CharmsBarReloaded
             Checkmark.IsChecked = !GlobalConfig.IsEnabled;
             GlobalConfig.IsEnabled = !GlobalConfig.IsEnabled;
         }
+
+        private void ContextMenu_Opened(object sender, RoutedEventArgs e)
+        {
+            Checkmark.IsChecked = GlobalConfig.IsEnabled;
+        }
     }
 }

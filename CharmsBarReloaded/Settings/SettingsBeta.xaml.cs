@@ -52,7 +52,12 @@ namespace CharmsBarReloaded
                 return;
             }
 
-            SystemConfig.SetupStartupKey((bool)RunOnStartup.IsChecked);
+            // fail if we try to delete the key that didnt exist. 
+            try
+            {
+                SystemConfig.SetupStartupKey((bool)RunOnStartup.IsChecked);
+            }
+            catch { }
 
             GlobalConfig.HideWindowAfterClick = (bool)HideOnClick.IsChecked;
             GlobalConfig.BackgroundColor = BackgroundColor.Text;

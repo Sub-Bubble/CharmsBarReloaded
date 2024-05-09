@@ -7,7 +7,7 @@ This application returns Windows 8's Charms Bar to Windows 10/11!<br><br>
 - [X] Customizability with settings
 - [X] Tray Icon
 - [X] Animations
-- [X] Keyboard Shortcuts
+- [X] Keyboard Shortcuts (broken on Windows 11 due to it opening Edge/Copilot)
 - [X] Running on startup
 - [X] CharmsClock
 - [X] DPI scaling
