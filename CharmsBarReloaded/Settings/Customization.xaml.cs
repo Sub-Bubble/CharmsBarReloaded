@@ -34,6 +34,12 @@ namespace CharmsBarReloaded.Settings
         #endregion back button
         System.Timers.Timer timer = new System.Timers.Timer();
         Regex regex = new Regex("^[0-9A-Fa-f]{1}$");
+
+
+
+        string bgColorError;
+        string textColorError;
+        string hoverColorError;
         public Customization()
         {
 
@@ -56,24 +62,51 @@ namespace CharmsBarReloaded.Settings
             {
                 this.Dispatcher.Invoke(new Action(delegate
                 {
-                    try
-                    {
-                        bgColorTextbox.Text = Regex.Replace(bgColorTextbox.Text, "[^0-9A-Fa-f]", "");
-                        bgColorPreview.Background = GlobalConfig.GetConfig("", bgColorTextbox.Text);
-                        GlobalConfig.BackgroundColor = bgColorTextbox.Text;
-                    } catch {}
-                    try
-                    {
-                        textColorTextbox.Text = Regex.Replace(textColorTextbox.Text, "[^0-9A-Fa-f]", "");
-                        textColorPreview.Background = GlobalConfig.GetConfig("", textColorTextbox.Text);
-                        GlobalConfig.TextColor = textColorTextbox.Text;
-                    } catch { }
-                    try
-                    {
-                        hoverColorTextbox.Text = Regex.Replace(hoverColorTextbox.Text, "[^0-9A-Fa-f]", "");
-                        hoverColorPreview.Background = GlobalConfig.GetConfig("", hoverColorTextbox.Text);
-                        GlobalConfig.HoverColor = hoverColorTextbox.Text;
-                    } catch { }
+                    // doesnt one dare to touch something that just works.
+                    // especially when the cost is really low.
+                    bgColorTextbox.Text = Regex.Replace(bgColorTextbox.Text, "[^0-9A-Fa-f]", "");
+                    if (bgColorError != bgColorTextbox.Text)
+                        try
+                        {
+                            bgColorPreview.Background = GlobalConfig.GetConfig("", bgColorTextbox.Text);
+                            if (GlobalConfig.BackgroundColor.ToUpper() != bgColorTextbox.Text.ToUpper())
+                            {
+                                GlobalConfig.BackgroundColor = bgColorTextbox.Text;
+                                GlobalConfig.SaveConfig();
+                            }
+                        }
+                        catch { bgColorError = bgColorTextbox.Text; }
+
+
+
+                    textColorTextbox.Text = Regex.Replace(textColorTextbox.Text, "[^0-9A-Fa-f]", "");
+                    if (textColorError != textColorTextbox.Text)
+                        try
+                        {
+                            textColorPreview.Background = GlobalConfig.GetConfig("", textColorTextbox.Text);
+                            if (GlobalConfig.TextColor.ToUpper() != textColorTextbox.Text.ToUpper())
+                            {
+                                GlobalConfig.TextColor = textColorTextbox.Text;
+                                GlobalConfig.SaveConfig();
+                            }
+                        }
+                        catch { textColorError = textColorTextbox.Text; }
+
+
+
+                    hoverColorTextbox.Text = Regex.Replace(hoverColorTextbox.Text, "[^0-9A-Fa-f]", "");
+                    if (hoverColorError != hoverColorTextbox.Text)
+                        try
+                        {
+                            hoverColorPreview.Background = GlobalConfig.GetConfig("", hoverColorTextbox.Text);
+                            if (GlobalConfig.HoverColor.ToUpper() != hoverColorTextbox.Text.ToUpper())
+                            {
+                                GlobalConfig.HoverColor = hoverColorTextbox.Text;
+                                GlobalConfig.SaveConfig();
+                            }
+                        }
+                        catch { hoverColorError = hoverColorTextbox.Text; }
+
                 }));
             };
             timer.Start();
@@ -93,10 +126,13 @@ namespace CharmsBarReloaded.Settings
 
         private void ResetColorConfig(object sender, RoutedEventArgs e)
         {
-
-            bgColorTextbox.Text = "000000";
-            textColorTextbox.Text = "d3d3d3";
-            hoverColorTextbox.Text = "4c4c4c";
+            GlobalConfig.BackgroundColor = "000000";
+            bgColorTextbox.Text = GlobalConfig.BackgroundColor;
+            GlobalConfig.TextColor = "d3d3d3";
+            textColorTextbox.Text = GlobalConfig.TextColor;
+            GlobalConfig.HoverColor = "4c4c4c";
+            hoverColorTextbox.Text = GlobalConfig.HoverColor;
+            GlobalConfig.SaveConfig();
         }
 
         private void EnableAnimations_Click(object sender, RoutedEventArgs e)

@@ -49,11 +49,15 @@ namespace CharmsBarReloaded
             ButtonConfig.SetVars();
             GlobalConfig.LoadConfig();
             charmsClock = new CharmsClock();
-            fadeIn = new ColorAnimation
+            try
             {
-                To = (Color)ColorConverter.ConvertFromString($"#FF{GlobalConfig.BackgroundColor.ToUpper()}"),
-                Duration = TimeSpan.FromMilliseconds(100),
-            };
+                fadeIn = new ColorAnimation
+                {
+                    To = (Color)ColorConverter.ConvertFromString($"#FF{GlobalConfig.BackgroundColor.ToUpper()}"),
+                    Duration = TimeSpan.FromMilliseconds(100),
+                };
+            }
+            catch { GlobalConfig.ResetConfig(); }
             InitializeComponent(); //init window
             
             UpdateHover();
