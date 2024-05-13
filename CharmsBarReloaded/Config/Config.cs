@@ -74,6 +74,8 @@ namespace CharmsBarReloaded
         public static bool EnableKeyboardShortcut {  get; set; }
         public static bool OverrideCharmsBarOffSetting { get; set; }
         public static bool EnableAnimations {  get; set; }
+        public static bool OverrideAccentColorEnabled {  get; set; }
+        public static string OverrideAccentColor { get; set; }
         public static void LoadConfig()
         {
             IsEnabled = true;
@@ -90,6 +92,8 @@ namespace CharmsBarReloaded
                 CharmsClockEnabled = CharmsBarReloaded.Properties.Settings.Default.CharmsClockEnabled;
                 OverrideCharmsBarOffSetting = CharmsBarReloaded.Properties.Settings.Default.OverrideCharmsBarOffSetting;
                 EnableAnimations = CharmsBarReloaded.Properties.Settings.Default.EnableAnimations;
+                OverrideAccentColorEnabled = CharmsBarReloaded.Properties.Settings.Default.OverrideAccentColorEnabled;
+                OverrideAccentColor = CharmsBarReloaded.Properties.Settings.Default.OverrideAccentColor;
             }
             catch
             {
@@ -104,6 +108,8 @@ namespace CharmsBarReloaded
                 CharmsClockEnabled = true;
                 OverrideCharmsBarOffSetting = false;
                 EnableAnimations = true;
+                OverrideAccentColorEnabled = false;
+                OverrideAccentColor = "000000";
             }
         }
         public static void ResetConfig()
@@ -119,6 +125,8 @@ namespace CharmsBarReloaded
             CharmsBarReloaded.Properties.Settings.Default.CharmsClockEnabled = true;
             CharmsBarReloaded.Properties.Settings.Default.OverrideCharmsBarOffSetting = false;
             CharmsBarReloaded.Properties.Settings.Default.EnableAnimations = true;
+            CharmsBarReloaded.Properties.Settings.Default.OverrideAccentColorEnabled = false;
+            CharmsBarReloaded.Properties.Settings.Default.OverrideAccentColor = "000000";
             CharmsBarReloaded.Properties.Settings.Default.Save();
             LoadConfig();
         }
@@ -135,6 +143,8 @@ namespace CharmsBarReloaded
             CharmsBarReloaded.Properties.Settings.Default.CharmsClockEnabled = CharmsClockEnabled;
             CharmsBarReloaded.Properties.Settings.Default.OverrideCharmsBarOffSetting = OverrideCharmsBarOffSetting;
             CharmsBarReloaded.Properties.Settings.Default.EnableAnimations = EnableAnimations;
+            CharmsBarReloaded.Properties.Settings.Default.OverrideAccentColorEnabled = OverrideAccentColorEnabled;
+            CharmsBarReloaded.Properties.Settings.Default.OverrideAccentColor = OverrideAccentColor;
             CharmsBarReloaded.Properties.Settings.Default.Save();
             /// fade in animation
             CharmsBar.fadeIn = new ColorAnimation
@@ -170,6 +180,9 @@ namespace CharmsBarReloaded
                     return result;
                 case "White":
                     result = (Brush)bc.ConvertFrom("#FFFFFFFF");
+                    return result;
+                case "overrideAccentColor":
+                    result = (Brush)bc.ConvertFrom($"#FF{GlobalConfig.OverrideAccentColor.ToUpper()}");
                     return result;
             }
             return (Brush)bc.ConvertFrom("#FF000000"); //returning black when unknown

@@ -20,8 +20,11 @@
             <TextBlock Text="Customization" FontSize="30px" Foreground="White" FontWeight="Thin" Margin="0,0,0,5"/>
         </StackPanel>
         <TextBlock Text="Darkened features are not yet implemented" Foreground="Gray" Margin="90, 74, 0, 0" Grid.RowSpan="2"/>
+        
+        
+        <!-- Main content -->
         <ScrollViewer Margin="20,90,0,0" ScrollViewer.VerticalScrollBarVisibility="Auto" Grid.RowSpan="2">
-            <StackPanel>
+            <StackPanel Margin="0,0,0,0">
                 <!-- General settings -->
                 <Label Foreground="LightGray" FontSize="20">General</Label>
                 <StackPanel Margin="5,5,0,0">
@@ -30,9 +33,23 @@
                         <TextBlock Text="Enable animations" FontSize="17" Margin="0,-4,0,0"/>
                     </CheckBox>
                     <Label Height="5"/>
+                    <Label Foreground="White" FontSize="16" Content="Color options" FontWeight="SemiBold"/>
+                    <CheckBox Foreground="White" x:Name="OverrideAccentColor_Toggle" Click="OverrideAccentColor_Toggle_Click">
+                            <TextBlock Text="Override system accent color" FontSize="17" Margin="0,-4,0,-5"/>
+                        </CheckBox>
+                    <StackPanel x:Name="OverrideAccentColor_Setting">
+                        <Label Content="Please note that text color is hardcoded to be white. With that in&#10;mind, avoid setting color that makes text unreadable" Foreground="LightGray" FontSize="10" FontWeight="SemiBold"/>
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="Background color:" FontSize="15" Foreground="White" Width="130"/>
+                            <Label Content="#" Margin="0,0,-5,0" Foreground="White" FontSize="15"/>
+                            <TextBox Width="100" VerticalContentAlignment="Center" Height="25" x:Name="OverrideAccentColor_TextBox" PreviewTextInput="ValidHexCheck" MaxLength="7"/>
+                            <Grid Background="White" Width="29" Height="29" Margin="50,0,0,0" x:Name="OverrideAccentColor_Preview"/>
+                        </StackPanel>
+                        <Button Content="Reset color" Width="140" Margin="-185,5,0,0" Click="ResetOverrideAccentColor" />
+                    </StackPanel>
                 </StackPanel>
                 <!-- Themes -->
-                <StackPanel Margin="5,0,5,0" Background="#aa000000">
+                <StackPanel Margin="5,10,5,0" Background="#aa000000">
                     <StackPanel.OpacityMask>
                         <SolidColorBrush Color="#aa000000"/>
                     </StackPanel.OpacityMask>
@@ -87,15 +104,6 @@
                         <TextBox Width="100" VerticalContentAlignment="Center" Height="25" x:Name="hoverColorTextbox" PreviewTextInput="ValidHexCheck" MaxLength="7"/>
                         <Grid Background="White" Width="29" Height="29" Margin="50,0,0,0" x:Name="hoverColorPreview"/>
                     </StackPanel>
-                    <Label Height="5"/>
-                    <Grid Background="#aa000000" Margin="0,0,5,0">
-                        <Grid.OpacityMask>
-                            <SolidColorBrush Color="#aa000000"/>
-                        </Grid.OpacityMask>
-                        <CheckBox Foreground="White" IsChecked="False" IsEnabled="False">
-                            <TextBlock Text="Override system accent color" FontSize="17" Margin="0,-4,0,-5"/>
-                        </CheckBox>
-                    </Grid>
 
                     <Button Content="Reset color config" Width="140" Margin="-185,5,0,0" Click="ResetColorConfig" />
                 </StackPanel>
@@ -104,11 +112,39 @@
                 <Label Height="20"/>
                 <Label Foreground="LightGray" FontSize="20">Charms Clock</Label>
                 <StackPanel Margin="5,5,5,0">
-                    <Label Height="5"/>
+                    <Label Foreground="White" FontSize="16" Content="General" FontWeight="SemiBold"/>
                     <CheckBox Foreground="White" x:Name="showChargingOnDesktop" Click="ShowChargingOnDesktop_Update">
                         <TextBlock Text="Show Charging icon on desktop" FontSize="17" Margin="0,-4,0,0"/>
                     </CheckBox>
                     <Label Height="5"/>
+                    
+                    
+                    <!-- color options -->
+                    <Grid Background="#aa000000">
+                        <Grid.OpacityMask>
+                            <SolidColorBrush Color="#aa000000"/>
+                        </Grid.OpacityMask>
+
+                        <StackPanel>
+                            <Label Foreground="White" FontSize="16" Content="Color options" FontWeight="SemiBold"/>
+                            <CheckBox Foreground="White" IsChecked="False" IsEnabled="False">
+                                <TextBlock Text="Synchronize with Charms Bar colors" FontSize="17" Margin="0,-4,0,-5"/>
+                            </CheckBox>
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="Background color:" FontSize="15" Foreground="White" Width="130"/>
+                                <Label Content="#" Margin="0,0,-5,0" Foreground="White" FontSize="15"/>
+                                <TextBox Width="100" VerticalContentAlignment="Center" Height="25" PreviewTextInput="ValidHexCheck" MaxLength="7" Text="000000" IsEnabled="False"/>
+                                <Grid Background="Black" Width="29" Height="29" Margin="50,0,0,0"/>
+                            </StackPanel>
+                            <Label Height="5"/>
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="Text color:" FontSize="15" Foreground="White" Width="130"/>
+                                <Label Content="#" Margin="0,0,-5,0" Foreground="White" FontSize="15"/>
+                                <TextBox Width="100" VerticalContentAlignment="Center" Height="25" PreviewTextInput="ValidHexCheck" MaxLength="7" Text="ffffff" IsEnabled="False"/>
+                                <Grid Background="White" Width="29" Height="29" Margin="50,0,0,0"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </Grid>
                 </StackPanel>
             </StackPanel>
         </ScrollViewer>

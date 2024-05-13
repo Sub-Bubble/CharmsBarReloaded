@@ -32,5 +32,11 @@
     <Setting Name="EnableAnimations" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
+    <Setting Name="OverrideAccentColorEnabled" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="OverrideAccentColor" Type="System.String" Scope="User">
+      <Value Profile="(Default)">000000</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

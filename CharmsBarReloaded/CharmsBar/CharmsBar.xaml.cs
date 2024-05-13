@@ -152,8 +152,9 @@ namespace CharmsBarReloaded
                         }
 
 
-
-                        StartButtonIcon.Background = SystemConfig.AccentColor();
+                        if (!GlobalConfig.OverrideAccentColorEnabled)
+                            StartButtonIcon.Background = SystemConfig.AccentColor();
+                        else StartButtonIcon.Background = GlobalConfig.GetConfig("overrideAccentColor");
                     }
                     if (Keyboard.IsKeyDown(Key.Escape) && GlobalConfig.EnableKeyboardShortcut)
                     {
@@ -211,11 +212,16 @@ namespace CharmsBarReloaded
                 Storyboard storyboard = new Storyboard();
                 storyboard.Children.Add(fadeIn);
                 storyboard.Begin(this);
-                StartButtonIcon.Background = SystemConfig.AccentColor();
+                if (!GlobalConfig.OverrideAccentColorEnabled)
+                    StartButtonIcon.Background = SystemConfig.AccentColor();
+                else StartButtonIcon.Background = GlobalConfig.GetConfig("overrideAccentColor");
             }
             else
             {
                 this.Background = GlobalConfig.GetConfig("bg");
+                if (!GlobalConfig.OverrideAccentColorEnabled)
+                    StartButtonIcon.Background = SystemConfig.AccentColor();
+                else StartButtonIcon.Background = GlobalConfig.GetConfig("overrideAccentColor");
             }
 
             if (charmsClock.Opacity != 1) 

@@ -40,11 +40,26 @@ namespace CharmsBarReloaded.Settings
         string bgColorError;
         string textColorError;
         string hoverColorError;
+        string overrideColorError;
         public Customization()
         {
 
             InitializeComponent();
 
+
+            // global
+
+            //general
+            EnableAnimations.IsChecked = GlobalConfig.EnableAnimations;
+            //color
+            OverrideAccentColor_Toggle.IsChecked = GlobalConfig.OverrideAccentColorEnabled;
+            if (GlobalConfig.OverrideAccentColorEnabled)
+                OverrideAccentColor_Setting.Visibility = Visibility.Visible;
+            else OverrideAccentColor_Setting.Visibility = Visibility.Collapsed;
+            OverrideAccentColor_TextBox.Text = GlobalConfig.OverrideAccentColor;
+            OverrideAccentColor_Preview.Background = GlobalConfig.GetConfig("overrideAccentColor");
+
+            // charmsbar
             bgColorPreview.Background = GlobalConfig.GetConfig("bg");
             bgColorTextbox.Text = GlobalConfig.BackgroundColor;
             
@@ -54,10 +69,11 @@ namespace CharmsBarReloaded.Settings
             hoverColorPreview.Background = GlobalConfig.GetConfig("hover");
             hoverColorTextbox.Text = GlobalConfig.HoverColor;
 
-            EnableAnimations.IsChecked = GlobalConfig.EnableAnimations;
+            //charmsclock
+            showChargingOnDesktop.IsChecked = GlobalConfig.ShowChargingOnDesktop;
 
 
-            timer.Interval = 1;
+            timer.Interval = 100;
             timer.Elapsed += delegate
             {
                 this.Dispatcher.Invoke(new Action(delegate
@@ -107,10 +123,21 @@ namespace CharmsBarReloaded.Settings
                         }
                         catch { hoverColorError = hoverColorTextbox.Text; }
 
+                    OverrideAccentColor_TextBox.Text = Regex.Replace(OverrideAccentColor_TextBox.Text, "[^0-9A-Fa-f]", "");
+                    if (overrideColorError != OverrideAccentColor_TextBox.Text)
+                        try
+                        {
+                            OverrideAccentColor_Preview.Background = GlobalConfig.GetConfig("", OverrideAccentColor_TextBox.Text);
+                            if (GlobalConfig.OverrideAccentColor.ToUpper() != OverrideAccentColor_TextBox.Text.ToUpper())
+                            {
+                                GlobalConfig.OverrideAccentColor = OverrideAccentColor_TextBox.Text;
+                                GlobalConfig.SaveConfig();
+                            }
+                        }
+                        catch { overrideColorError = OverrideAccentColor_TextBox.Text; }
                 }));
             };
             timer.Start();
-            showChargingOnDesktop.IsChecked = GlobalConfig.ShowChargingOnDesktop;
         }
 
         private void ShowChargingOnDesktop_Update(object sender, System.Windows.RoutedEventArgs e)
@@ -138,6 +165,21 @@ namespace CharmsBarReloaded.Settings
         private void EnableAnimations_Click(object sender, RoutedEventArgs e)
         {
             GlobalConfig.EnableAnimations = (bool)EnableAnimations.IsChecked;
+        }
+
+        private void OverrideAccentColor_Toggle_Click(object sender, RoutedEventArgs e)
+        {
+            GlobalConfig.OverrideAccentColorEnabled = (bool)OverrideAccentColor_Toggle.IsChecked;
+            if ((bool)OverrideAccentColor_Toggle.IsChecked)
+                OverrideAccentColor_Setting.Visibility = Visibility.Visible;
+            else OverrideAccentColor_Setting.Visibility = Visibility.Collapsed;
+        }
+
+        private void ResetOverrideAccentColor(object sender, RoutedEventArgs e)
+        {
+            GlobalConfig.OverrideAccentColor = "000000";
+            OverrideAccentColor_TextBox.Text = GlobalConfig.OverrideAccentColor;
+            GlobalConfig.SaveConfig();
         }
     }
 }

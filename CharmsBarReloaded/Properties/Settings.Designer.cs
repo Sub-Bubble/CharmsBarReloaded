@@ -142,5 +142,29 @@ namespace CharmsBarReloaded.Properties {
                 this["EnableAnimations"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool OverrideAccentColorEnabled {
+            get {
+                return ((bool)(this["OverrideAccentColorEnabled"]));
+            }
+            set {
+                this["OverrideAccentColorEnabled"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("000000")]
+        public string OverrideAccentColor {
+            get {
+                return ((string)(this["OverrideAccentColor"]));
+            }
+            set {
+                this["OverrideAccentColor"] = value;
+            }
+        }
     }
 }

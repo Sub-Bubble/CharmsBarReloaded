@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Runtime.InteropServices;
+using System.Threading;
 using System.Windows;
 using System.Windows.Interop;
 using System.Windows.Media.Animation;
@@ -25,6 +26,7 @@ namespace CharmsBarReloaded
         
         Storyboard slideInWindow;
         Storyboard slideOutWindow;
+        System.Timers.Timer timer = new System.Timers.Timer();
         public CharmsSettings()
         {
             InitializeComponent();
@@ -36,13 +38,27 @@ namespace CharmsBarReloaded
             SettingsGrid.Height = SystemParameters.PrimaryScreenHeight;
             this.Left = SystemConfig.DesktopWorkingArea.Right - this.Width;
             this.Top = SystemConfig.DesktopWorkingArea.Top;
-            SettingsGrid.Background = SystemConfig.AccentColor();
-
+            
+            if (!GlobalConfig.OverrideAccentColorEnabled)
+                SettingsGrid.Background = SystemConfig.AccentColor();
+            else SettingsGrid.Background = GlobalConfig.GetConfig("overrideAccentColor");
             this.Loaded += delegate 
             { 
                 SetWindowLong(new WindowInteropHelper(this).Handle, GWL_EX_STYLE, (GetWindowLong(new WindowInteropHelper(this).Handle, GWL_EX_STYLE) | WS_EX_TOOLWINDOW) & ~WS_EX_APPWINDOW);
                 Animate();
                 slideOutWindow.Completed += delegate { this.Hide(); SettingsFrame.Content = new SettingsHome(); /*Just in case*/ };
+                timer.Elapsed += delegate
+                {
+                    this.Dispatcher.Invoke(new Action((delegate
+                    {
+                        if (!GlobalConfig.OverrideAccentColorEnabled)
+                            SettingsGrid.Background = SystemConfig.AccentColor();
+                        else SettingsGrid.Background = GlobalConfig.GetConfig("overrideAccentColor");
+                    })));
+
+            };
+                timer.Interval = 100;
+                timer.Start();
             };
         }
         public void Animate()
