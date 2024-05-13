@@ -35,10 +35,10 @@
                     <Label Height="5"/>
                     <Label Foreground="White" FontSize="16" Content="Color options" FontWeight="SemiBold"/>
                     <CheckBox Foreground="White" x:Name="OverrideAccentColor_Toggle" Click="OverrideAccentColor_Toggle_Click">
-                            <TextBlock Text="Override system accent color" FontSize="17" Margin="0,-4,0,-5"/>
+                            <TextBlock Text="Override system accent color (experimental)" TextWrapping="WrapWithOverflow" FontSize="17" Margin="0,-4,0,-5"/>
                         </CheckBox>
                     <StackPanel x:Name="OverrideAccentColor_Setting">
-                        <Label Content="Please note that text color is hardcoded to be white. With that in&#10;mind, avoid setting color that makes text unreadable" Foreground="LightGray" FontSize="10" FontWeight="SemiBold"/>
+                        <TextBlock Text="Note: This feature is experimental (probably really buggy) and may be removed later.&#10;Please note that text color is hardcoded to be white. With that in mind, avoid setting color that makes text unreadable" TextWrapping="WrapWithOverflow" Foreground="LightGray" FontSize="10" FontWeight="SemiBold"/>
                         <StackPanel Orientation="Horizontal">
                             <Label Content="Background color:" FontSize="15" Foreground="White" Width="130"/>
                             <Label Content="#" Margin="0,0,-5,0" Foreground="White" FontSize="15"/>

@@ -115,6 +115,8 @@ namespace CharmsBarReloaded
                 GlobalConfig.GetConfig("bg");
                 GlobalConfig.GetConfig("hover");
                 GlobalConfig.GetConfig("text");
+                GlobalConfig.GetConfig("overrideAccentColor");
+                GlobalConfig.SaveConfig();
                 MessageBox.Show("Config saved.", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
             }
             catch
