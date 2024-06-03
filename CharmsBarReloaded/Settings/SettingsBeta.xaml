@@ -84,24 +84,6 @@
                         <CheckBox x:Name="ShowChargingOnDesktop">
                             <TextBlock Text="Show charging on desktop or devices with no battery" TextWrapping="WrapWithOverflow"/>
                         </CheckBox>
-
-                        <StackPanel Background="#aa000000">
-                            <StackPanel.OpacityMask>
-                                <SolidColorBrush Color="#aa000000"/>
-                            </StackPanel.OpacityMask>
-                            <Label Content="Color" Margin="10, 0, 0, 0" FontWeight="SemiBold"/>
-                            <CheckBox IsEnabled="False" Content="Synchronize colors with Charms Bar" x:Name="Clock_SyncColors"/>
-                            <DockPanel Margin="0, 0, 0, 0" LastChildFill="True">
-                                <Label Content="Background color:" Width="110"/>
-                                <Label Content="#" FontSize="13" Width="17.68"/>
-                                <TextBox IsEnabled="False" Text="000000" VerticalContentAlignment="Center" x:Name="ClockBackgroundColor" PreviewTextInput="ValidHexCheck" MaxLength="6" Margin="0,0,5,0"/>
-                            </DockPanel>
-                            <DockPanel Margin="0, 10, 0, 0" LastChildFill="True">
-                                <Label Content="Text color:" Width="110"/>
-                                <Label Content="#" FontSize="13" Width="17.68"/>
-                                <TextBox IsEnabled="False" Text="ffffff" VerticalContentAlignment="Center" x:Name="ClockTextColor" PreviewTextInput="ValidHexCheck" MaxLength="6" Margin="0,0,5,0"/>
-                            </DockPanel>
-                        </StackPanel>
                     </StackPanel>
                 </StackPanel>
             </ScrollViewer>

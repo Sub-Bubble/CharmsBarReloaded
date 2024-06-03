@@ -22,11 +22,11 @@ namespace CharmsBarReloaded
     {
         public SettingsBeta()
         {
-            InitializeComponent();
+            InitializeComponent();/*
             this.Loaded += delegate {
                 MessageBox.Show("Old settings are going to be deleted once a5.0 is released.\nLast version to include them will not have this warning.",
                     "Old settings deprecation", MessageBoxButton.OK, MessageBoxImage.Information);
-            };
+            };*/
             /// about
             VersionString.Content = $"CharmsBar: Reloaded {GlobalConfig.VersionString}\nBuild {GlobalConfig.Build}";
 
