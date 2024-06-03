@@ -15,7 +15,14 @@ This application returns Windows 8's Charms Bar to Windows 10/11!<br><br>
 - [ ] Button mapping (Coming soon™)
 
 ## Screenshots
-Screenshots will be available with alpha 5.0 release (a5.0)
+<details>
+  <summary>Windows 10</summary>
+  <img src="/Media/Win10Preview.png">
+  </details>
+<details>
+  <summary>Windows 11</summary>
+  <img src="/Media/Win11Preview.jpg">
+</details>
 
 ## Downloads
 Check <a href="https://github.com/Sub-Bubble/CharmsBarReloaded/releases">Releases</a> for downloads.
