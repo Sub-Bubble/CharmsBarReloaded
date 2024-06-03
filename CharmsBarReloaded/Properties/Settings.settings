@@ -38,5 +38,14 @@
     <Setting Name="OverrideAccentColor" Type="System.String" Scope="User">
       <Value Profile="(Default)">000000</Value>
     </Setting>
+    <Setting Name="SyncClockSettings" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="ClockBackground" Type="System.String" Scope="User">
+      <Value Profile="(Default)">000000</Value>
+    </Setting>
+    <Setting Name="ClockText" Type="System.String" Scope="User">
+      <Value Profile="(Default)">ffffff</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

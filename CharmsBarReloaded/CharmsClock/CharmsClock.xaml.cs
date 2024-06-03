@@ -78,6 +78,26 @@ namespace CharmsBarReloaded
 
         private void AlwaysUpdate(object sender, EventArgs e)
         {
+            if (GlobalConfig.SyncClockSettings)
+            {
+                this.Background = GlobalConfig.GetConfig("bg");
+                Week.Foreground = GlobalConfig.GetConfig("text");
+                Date.Foreground = GlobalConfig.GetConfig("text");
+                ClockHours.Foreground = GlobalConfig.GetConfig("text");
+                ClockSeparator.Foreground = GlobalConfig.GetConfig("text");
+                ClockMinutes.Foreground = GlobalConfig.GetConfig("text");
+            }
+            else
+            {
+                this.Background = GlobalConfig.GetConfig("clockBackground");
+                Week.Foreground = GlobalConfig.GetConfig("clockText");
+                Date.Foreground = GlobalConfig.GetConfig("clockText");
+                ClockHours.Foreground = GlobalConfig.GetConfig("clockText");
+                ClockSeparator.Foreground = GlobalConfig.GetConfig("clockText");
+                ClockMinutes.Foreground = GlobalConfig.GetConfig("clockText");
+            }
+
+
             // time logic
             if (DateTime.Now.Hour.ToString().Length == 1)
             {

@@ -23,7 +23,6 @@ namespace CharmsBarReloaded
         static extern void keybd_event(byte bVk, byte bScan, uint dwFlags,
            UIntPtr dwExtraInfo);
         #endregion keyboard simulation
-        SettingsBeta oldSettings = new SettingsBeta();
         static CharmsSettings settings = new CharmsSettings();
         int button_id;
         public ClickHandler(int clicked_id)
@@ -64,9 +63,6 @@ namespace CharmsBarReloaded
                 case "FocusSettings":
                     clickHandler.FocusOnSettings();
                     break;
-                case "OldSettings":
-                    clickHandler.OpenOldSettings();
-                    break;
                 case "OsSettings":
                     keybd_event(keyWin, 0, 0, UIntPtr.Zero);
                     keybd_event(keyI, 0, 0, UIntPtr.Zero);
@@ -88,11 +84,6 @@ namespace CharmsBarReloaded
         public void FocusOnSettings()
         {
             settings.Focus();
-        }
-        public void OpenOldSettings()
-        {
-            oldSettings.Show();
-            oldSettings.Focus();
         }
         public static void SwitchSettingsPage(int pageId = 0)
         {

@@ -166,5 +166,41 @@ namespace CharmsBarReloaded.Properties {
                 this["OverrideAccentColor"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool SyncClockSettings {
+            get {
+                return ((bool)(this["SyncClockSettings"]));
+            }
+            set {
+                this["SyncClockSettings"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("000000")]
+        public string ClockBackground {
+            get {
+                return ((string)(this["ClockBackground"]));
+            }
+            set {
+                this["ClockBackground"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("ffffff")]
+        public string ClockText {
+            get {
+                return ((string)(this["ClockText"]));
+            }
+            set {
+                this["ClockText"] = value;
+            }
+        }
     }
 }

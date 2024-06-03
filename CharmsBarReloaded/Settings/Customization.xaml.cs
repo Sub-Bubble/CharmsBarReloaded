@@ -41,6 +41,8 @@ namespace CharmsBarReloaded.Settings
         string textColorError;
         string hoverColorError;
         string overrideColorError;
+        string clockBgError;
+        string clockTextError;
         public Customization()
         {
 
@@ -71,6 +73,9 @@ namespace CharmsBarReloaded.Settings
 
             //charmsclock
             showChargingOnDesktop.IsChecked = GlobalConfig.ShowChargingOnDesktop;
+            ClockSyncColor.IsChecked = GlobalConfig.SyncClockSettings;
+            clockBackground.Text = GlobalConfig.ClockBackground;
+            clockText.Text = GlobalConfig.ClockText;
 
 
             timer.Interval = 100;
@@ -80,6 +85,23 @@ namespace CharmsBarReloaded.Settings
                 {
                     // doesnt one dare to touch something that just works.
                     // especially when the cost is really low.
+
+                    /// accentColorOverride
+                    OverrideAccentColor_TextBox.Text = Regex.Replace(OverrideAccentColor_TextBox.Text, "[^0-9A-Fa-f]", "");
+                    if (overrideColorError != OverrideAccentColor_TextBox.Text)
+                        try
+                        {
+                            OverrideAccentColor_Preview.Background = GlobalConfig.GetConfig("", OverrideAccentColor_TextBox.Text);
+                            if (GlobalConfig.OverrideAccentColor.ToUpper() != OverrideAccentColor_TextBox.Text.ToUpper())
+                            {
+                                GlobalConfig.OverrideAccentColor = OverrideAccentColor_TextBox.Text;
+                                GlobalConfig.SaveConfig();
+                            }
+                        }
+                        catch { overrideColorError = OverrideAccentColor_TextBox.Text; }
+
+
+                    /// charmsBar
                     bgColorTextbox.Text = Regex.Replace(bgColorTextbox.Text, "[^0-9A-Fa-f]", "");
                     if (bgColorError != bgColorTextbox.Text)
                         try
@@ -123,18 +145,35 @@ namespace CharmsBarReloaded.Settings
                         }
                         catch { hoverColorError = hoverColorTextbox.Text; }
 
-                    OverrideAccentColor_TextBox.Text = Regex.Replace(OverrideAccentColor_TextBox.Text, "[^0-9A-Fa-f]", "");
-                    if (overrideColorError != OverrideAccentColor_TextBox.Text)
+
+                    /// charmsClock
+                    clockBackground.Text = Regex.Replace(clockBackground.Text, "[^0-9A-Fa-f]", "");
+                    if (clockBgError != clockBackground.Text)
                         try
                         {
-                            OverrideAccentColor_Preview.Background = GlobalConfig.GetConfig("", OverrideAccentColor_TextBox.Text);
-                            if (GlobalConfig.OverrideAccentColor.ToUpper() != OverrideAccentColor_TextBox.Text.ToUpper())
+                            clockBgPrev.Background = GlobalConfig.GetConfig("", clockBackground.Text);
+                            if (GlobalConfig.ClockBackground.ToUpper() != clockBackground.Text.ToUpper())
                             {
-                                GlobalConfig.OverrideAccentColor = OverrideAccentColor_TextBox.Text;
+                                GlobalConfig.ClockBackground = clockBackground.Text;
                                 GlobalConfig.SaveConfig();
                             }
                         }
-                        catch { overrideColorError = OverrideAccentColor_TextBox.Text; }
+                        catch { clockBgError = clockBackground.Text; }
+
+
+
+                    clockText.Text = Regex.Replace(clockText.Text, "[^0-9A-Fa-f]", "");
+                    if (clockTextError != clockText.Text)
+                        try
+                        {
+                            clockTextPrev.Background = GlobalConfig.GetConfig("", clockText.Text);
+                            if (GlobalConfig.ClockText.ToUpper() != clockText.Text.ToUpper())
+                            {
+                                GlobalConfig.ClockText = clockText.Text;
+                                GlobalConfig.SaveConfig();
+                            }
+                        }
+                        catch { clockTextError = clockText.Text; }
                 }));
             };
             timer.Start();
@@ -179,6 +218,19 @@ namespace CharmsBarReloaded.Settings
         {
             GlobalConfig.OverrideAccentColor = "000000";
             OverrideAccentColor_TextBox.Text = GlobalConfig.OverrideAccentColor;
+            GlobalConfig.SaveConfig();
+        }
+
+        private void ClockSyncColor_Click(object sender, RoutedEventArgs e)
+        {
+            GlobalConfig.SyncClockSettings = (bool)ClockSyncColor.IsChecked;
+        }
+        private void ResetClockColorConfig(object sender, RoutedEventArgs e)
+        {
+            GlobalConfig.ClockBackground = "000000";
+            clockBackground.Text = GlobalConfig.ClockBackground;
+            GlobalConfig.ClockText = "ffffff";
+            clockText.Text = GlobalConfig.ClockText;
             GlobalConfig.SaveConfig();
         }
     }

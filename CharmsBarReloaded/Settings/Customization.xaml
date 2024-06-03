@@ -32,24 +32,30 @@
                     <CheckBox Foreground="White" IsChecked="True" x:Name="EnableAnimations" Click="EnableAnimations_Click">
                         <TextBlock Text="Enable animations" FontSize="17" Margin="0,-4,0,0"/>
                     </CheckBox>
-                    <Label Height="5"/>
-                    <Label Foreground="White" FontSize="16" Content="Color options" FontWeight="SemiBold"/>
-                    <CheckBox Foreground="White" x:Name="OverrideAccentColor_Toggle" Click="OverrideAccentColor_Toggle_Click">
-                            <TextBlock Text="Override system accent color (experimental)" TextWrapping="WrapWithOverflow" FontSize="17" Margin="0,-4,0,-5"/>
+                    <Label Height="5" />
+                    <StackPanel Background="#aa000000" Margin="0,0,5,0">
+                        <StackPanel.OpacityMask>
+                            <SolidColorBrush Color="#aa000000"/>
+                        </StackPanel.OpacityMask>
+                        <Label Foreground="White" FontSize="16" Content="Color options" FontWeight="SemiBold"/>
+                        <CheckBox Foreground="White" x:Name="OverrideAccentColor_Toggle" Click="OverrideAccentColor_Toggle_Click" IsEnabled="False">
+                            <TextBlock Text="Override system accent color&#x0a;(on a rework)" TextWrapping="WrapWithOverflow" FontSize="17" Margin="0,-4,0,-5"/>
                         </CheckBox>
-                    <StackPanel x:Name="OverrideAccentColor_Setting">
-                        <TextBlock Text="Note: This feature is experimental (probably really buggy) and may be removed later.&#10;Please note that text color is hardcoded to be white. With that in mind, avoid setting color that makes text unreadable" TextWrapping="WrapWithOverflow" Foreground="LightGray" FontSize="10" FontWeight="SemiBold"/>
-                        <StackPanel Orientation="Horizontal">
-                            <Label Content="Background color:" FontSize="15" Foreground="White" Width="130"/>
-                            <Label Content="#" Margin="0,0,-5,0" Foreground="White" FontSize="15"/>
-                            <TextBox Width="100" VerticalContentAlignment="Center" Height="25" x:Name="OverrideAccentColor_TextBox" PreviewTextInput="ValidHexCheck" MaxLength="7"/>
-                            <Grid Background="White" Width="29" Height="29" Margin="50,0,0,0" x:Name="OverrideAccentColor_Preview"/>
+                        <StackPanel x:Name="OverrideAccentColor_Setting">
+                            <TextBlock Text="Note: This feature is experimental (probably really buggy) and may be removed later.&#10;Please note that text color is hardcoded to be white. With that in mind, avoid setting color that makes text unreadable" TextWrapping="WrapWithOverflow" Foreground="LightGray" FontSize="10" FontWeight="SemiBold"/>
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="Background color:" FontSize="15" Foreground="White" Width="130"/>
+                                <Label Content="#" Margin="0,0,-5,0" Foreground="White" FontSize="15"/>
+                                <TextBox Width="100" VerticalContentAlignment="Center" Height="25" x:Name="OverrideAccentColor_TextBox" PreviewTextInput="ValidHexCheck" MaxLength="7"/>
+                                <Grid Background="White" Width="29" Height="29" Margin="50,0,0,0" x:Name="OverrideAccentColor_Preview"/>
+                            </StackPanel>
+                            <Button Content="Reset color" Width="140" Margin="-185,5,0,0" Click="ResetOverrideAccentColor" />
                         </StackPanel>
-                        <Button Content="Reset color" Width="140" Margin="-185,5,0,0" Click="ResetOverrideAccentColor" />
+                        <Label Margin="10"/>
                     </StackPanel>
                 </StackPanel>
                 <!-- Themes -->
-                <StackPanel Margin="5,10,5,0" Background="#aa000000">
+                <StackPanel Margin="5,0,5,0" Background="#aa000000" Visibility="Collapsed">
                     <StackPanel.OpacityMask>
                         <SolidColorBrush Color="#aa000000"/>
                     </StackPanel.OpacityMask>
@@ -120,31 +126,26 @@
                     
                     
                     <!-- color options -->
-                    <Grid Background="#aa000000">
-                        <Grid.OpacityMask>
-                            <SolidColorBrush Color="#aa000000"/>
-                        </Grid.OpacityMask>
-
-                        <StackPanel>
-                            <Label Foreground="White" FontSize="16" Content="Color options" FontWeight="SemiBold"/>
-                            <CheckBox Foreground="White" IsChecked="False" IsEnabled="False">
-                                <TextBlock Text="Synchronize with Charms Bar colors" FontSize="17" Margin="0,-4,0,-5"/>
-                            </CheckBox>
-                            <StackPanel Orientation="Horizontal">
-                                <Label Content="Background color:" FontSize="15" Foreground="White" Width="130"/>
-                                <Label Content="#" Margin="0,0,-5,0" Foreground="White" FontSize="15"/>
-                                <TextBox Width="100" VerticalContentAlignment="Center" Height="25" PreviewTextInput="ValidHexCheck" MaxLength="7" Text="000000" IsEnabled="False"/>
-                                <Grid Background="Black" Width="29" Height="29" Margin="50,0,0,0"/>
-                            </StackPanel>
-                            <Label Height="5"/>
-                            <StackPanel Orientation="Horizontal">
-                                <Label Content="Text color:" FontSize="15" Foreground="White" Width="130"/>
-                                <Label Content="#" Margin="0,0,-5,0" Foreground="White" FontSize="15"/>
-                                <TextBox Width="100" VerticalContentAlignment="Center" Height="25" PreviewTextInput="ValidHexCheck" MaxLength="7" Text="ffffff" IsEnabled="False"/>
-                                <Grid Background="White" Width="29" Height="29" Margin="50,0,0,0"/>
-                            </StackPanel>
+                    <StackPanel>
+                        <Label Foreground="White" FontSize="16" Content="Color options" FontWeight="SemiBold"/>
+                        <CheckBox Foreground="White" IsChecked="False" x:Name="ClockSyncColor" Click="ClockSyncColor_Click">
+                            <TextBlock Text="Synchronize with Charms Bar colors" FontSize="17" Margin="0,-4,0,-5"/>
+                        </CheckBox>
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="Background color:" FontSize="15" Foreground="White" Width="130"/>
+                            <Label Content="#" Margin="0,0,-5,0" Foreground="White" FontSize="15"/>
+                            <TextBox Width="100" VerticalContentAlignment="Center" Height="25" PreviewTextInput="ValidHexCheck" MaxLength="7" Text="000000" x:Name="clockBackground"/>
+                            <Grid Background="Black" Width="29" Height="29" Margin="50,0,0,0" x:Name="clockBgPrev"/>
                         </StackPanel>
-                    </Grid>
+                        <Label Height="5"/>
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="Text color:" FontSize="15" Foreground="White" Width="130"/>
+                            <Label Content="#" Margin="0,0,-5,0" Foreground="White" FontSize="15"/>
+                            <TextBox Width="100" VerticalContentAlignment="Center" Height="25" PreviewTextInput="ValidHexCheck" MaxLength="7" Text="ffffff" x:Name="clockText"/>
+                            <Grid Background="White" Width="29" Height="29" Margin="50,0,0,0" x:Name="clockTextPrev"/>
+                        </StackPanel>
+                        <Button Content="Reset color config" Width="140" Margin="-185,5,0,0" Click="ResetClockColorConfig" />
+                    </StackPanel>
                 </StackPanel>
             </StackPanel>
         </ScrollViewer>

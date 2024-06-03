@@ -58,8 +58,8 @@ namespace CharmsBarReloaded
     class GlobalConfig
     {
         /// Constants. Only changed manually
-        public const string VersionString = "a4.2.2";
-        public const int Build = 20;
+        public const string VersionString = "a5.0";
+        public const int Build = 21;
 
         /// other vars
         public static bool IsEnabled {  get; set; }
@@ -76,6 +76,9 @@ namespace CharmsBarReloaded
         public static bool EnableAnimations {  get; set; }
         public static bool OverrideAccentColorEnabled {  get; set; }
         public static string OverrideAccentColor { get; set; }
+        public static bool SyncClockSettings {  get; set; }
+        public static string ClockBackground {  get; set; }
+        public static string ClockText {  get; set; }
         public static void LoadConfig()
         {
             IsEnabled = true;
@@ -94,6 +97,9 @@ namespace CharmsBarReloaded
                 EnableAnimations = CharmsBarReloaded.Properties.Settings.Default.EnableAnimations;
                 OverrideAccentColorEnabled = CharmsBarReloaded.Properties.Settings.Default.OverrideAccentColorEnabled;
                 OverrideAccentColor = CharmsBarReloaded.Properties.Settings.Default.OverrideAccentColor;
+                SyncClockSettings = CharmsBarReloaded.Properties.Settings.Default.SyncClockSettings;
+                ClockText = CharmsBarReloaded.Properties.Settings.Default.ClockText;
+                ClockBackground = CharmsBarReloaded.Properties.Settings.Default.ClockBackground;
             }
             catch
             {
@@ -110,6 +116,9 @@ namespace CharmsBarReloaded
                 EnableAnimations = true;
                 OverrideAccentColorEnabled = false;
                 OverrideAccentColor = "000000";
+                SyncClockSettings = true;
+                ClockText = "ffffff";
+                ClockBackground = "000000";
             }
         }
         public static void ResetConfig()
@@ -127,6 +136,9 @@ namespace CharmsBarReloaded
             CharmsBarReloaded.Properties.Settings.Default.EnableAnimations = true;
             CharmsBarReloaded.Properties.Settings.Default.OverrideAccentColorEnabled = false;
             CharmsBarReloaded.Properties.Settings.Default.OverrideAccentColor = "000000";
+            CharmsBarReloaded.Properties.Settings.Default.SyncClockSettings = true;
+            CharmsBarReloaded.Properties.Settings.Default.ClockText = "ffffff";
+            CharmsBarReloaded.Properties.Settings.Default.ClockBackground = "000000";
             CharmsBarReloaded.Properties.Settings.Default.Save();
             LoadConfig();
         }
@@ -145,6 +157,9 @@ namespace CharmsBarReloaded
             CharmsBarReloaded.Properties.Settings.Default.EnableAnimations = EnableAnimations;
             CharmsBarReloaded.Properties.Settings.Default.OverrideAccentColorEnabled = OverrideAccentColorEnabled;
             CharmsBarReloaded.Properties.Settings.Default.OverrideAccentColor = OverrideAccentColor;
+            CharmsBarReloaded.Properties.Settings.Default.SyncClockSettings = SyncClockSettings;
+            CharmsBarReloaded.Properties.Settings.Default.ClockText = ClockText;
+            CharmsBarReloaded.Properties.Settings.Default.ClockBackground = ClockBackground;
             CharmsBarReloaded.Properties.Settings.Default.Save();
             /// fade in animation
             CharmsBar.fadeIn = new ColorAnimation
@@ -184,6 +199,12 @@ namespace CharmsBarReloaded
                 case "overrideAccentColor":
                     result = (Brush)bc.ConvertFrom($"#FF{GlobalConfig.OverrideAccentColor.ToUpper()}");
                     return result;
+                case "clockBackground":
+                    result = (Brush)bc.ConvertFrom($"#FF{GlobalConfig.ClockBackground.ToUpper()}");
+                    return result;
+                case "clockText":
+                    result = (Brush)bc.ConvertFrom($"#FF{GlobalConfig.ClockText.ToUpper()}");
+                    return result;
             }
             return (Brush)bc.ConvertFrom("#FF000000"); //returning black when unknown
         }
@@ -211,8 +232,6 @@ namespace CharmsBarReloaded
                     return Button5_Action;
                 case -1:
                     return "Settings";
-                case -2:
-                    return "OldSettings";
                 case -3:
                     return "OsSettings";
                 case -4:

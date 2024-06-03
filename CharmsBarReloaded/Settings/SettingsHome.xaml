@@ -38,23 +38,19 @@
                 <Label Width="360" Height="50"/>
                 <TextBlock Text="About" Foreground="White" FontSize="17px" Margin="40, 0, 0, 0" VerticalAlignment="Center"/>
             </Grid>
-            <Grid Height="50" Style="{StaticResource OnHover}" MouseDown="OldSettings_MouseDown">
-                <Label Width="360" Height="50"/>
-                <TextBlock Text="Open old settings" Foreground="White" FontSize="17px" Margin="40, 0, 0, 0" VerticalAlignment="Center"/>
-            </Grid>
-        </StackPanel>
-        
-        <!-- OS Settings -->
-        <TextBlock Text="OS Settings" Foreground="Gray" Margin="40, 340, 0, 0"/>
-        <StackPanel Margin="0, 370, 0, 0">
-            <Grid Height="50" Style="{StaticResource OnHover}" MouseDown="OsSettings_MouseDown">
-                <Label Width="360" Height="50"/>
-                <TextBlock Text="Settings" Foreground="White" FontSize="17px" VerticalAlignment="Center" Margin="40, 0, 0, 0"/>
-            </Grid>
-            <Grid Height="50" Style="{StaticResource OnHover}" MouseDown="ControlPanel_MouseDown">
-                <Label Width="360" Height="50"/>
-                <TextBlock Text="Control Panel" Foreground="White" FontSize="17px" VerticalAlignment="Center" Margin="40, 0, 0, 0"/>
-            </Grid>
+
+            <!-- OS Settings -->
+            <TextBlock Text="OS Settings" Foreground="Gray" Margin="40, 20, 0, 10"/>
+            <StackPanel Margin="0, 0, 0, 0">
+                <Grid Height="50" Style="{StaticResource OnHover}" MouseDown="OsSettings_MouseDown">
+                    <Label Width="360" Height="50"/>
+                    <TextBlock Text="Settings" Foreground="White" FontSize="17px" VerticalAlignment="Center" Margin="40, 0, 0, 0"/>
+                </Grid>
+                <Grid Height="50" Style="{StaticResource OnHover}" MouseDown="ControlPanel_MouseDown">
+                    <Label Width="360" Height="50"/>
+                    <TextBlock Text="Control Panel" Foreground="White" FontSize="17px" VerticalAlignment="Center" Margin="40, 0, 0, 0"/>
+                </Grid>
+            </StackPanel>
         </StackPanel>
     </Grid>
 </Page>

@@ -4,10 +4,6 @@ namespace CharmsBarReloaded
 {
     public partial class Taskbar
     {
-        internal void OpenOldSettings(object sender, RoutedEventArgs e)
-        {
-            ClickHandler.Do(-2);
-        }
         internal void ExitApp(object sender, RoutedEventArgs e)
         {
             Application.Current.Shutdown();

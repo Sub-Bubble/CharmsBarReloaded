@@ -14,7 +14,7 @@
       ResizeMode="NoResize" ScrollViewer.VerticalScrollBarVisibility="Disabled" SizeToContent="Width"
       WindowStyle="None" AllowsTransparency="True" ShowInTaskbar="True" Icon="../Assets/AppIcon.ico">
 
-    <Grid Focusable="False" Background="Black" Width="510">
+    <Grid Focusable="False" Width="510">
         <!--<Border
                 Name="ClockBorder"
                 Panel.ZIndex="-1"
