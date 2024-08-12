@@ -70,6 +70,12 @@
     <None Remove="Assets\CharmsClockIcons\WifiNoInternetStrong.png" />
     <None Remove="Assets\CharmsClockIcons\WifiNoInternetWeak.png" />
     <None Remove="Assets\CharmsClockIcons\WifiNoInternetWeakest.png" />
+    <None Remove="Assets\CharmsSettings\Brightness.png" />
+    <None Remove="Assets\CharmsSettings\Notifications.png" />
+    <None Remove="Assets\CharmsSettings\Power.png" />
+    <None Remove="Assets\CharmsSettings\Volume.png" />
+    <None Remove="Assets\CharmsSettings\VolumeMax.png" />
+    <None Remove="Assets\CharmsSettings\VolumeMute.png" />
     <None Remove="Assets\DarkIcon.png" />
     <None Remove="Assets\Settings.png" />
   </ItemGroup>
@@ -104,8 +110,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="CoreAudio" Version="1.37.0" />
     <PackageReference Include="Hardcodet.NotifyIcon.Wpf" Version="1.1.0" />
     <PackageReference Include="managedwifi" Version="1.1.0" />
+    <PackageReference Include="System.Management" Version="8.0.0" />
     <PackageReference Include="System.Runtime.InteropServices" Version="4.3.0" />
   </ItemGroup>
 
@@ -145,6 +153,11 @@
     <Resource Include="Assets\CharmsClockIcons\WifiNoInternetStrong.png" />
     <Resource Include="Assets\CharmsClockIcons\WifiNoInternetWeak.png" />
     <Resource Include="Assets\CharmsClockIcons\WifiNoInternetWeakest.png" />
+    <Resource Include="Assets\CharmsSettings\Brightness.png" />
+    <Resource Include="Assets\CharmsSettings\Notifications.png" />
+    <Resource Include="Assets\CharmsSettings\Power.png" />
+    <Resource Include="Assets\CharmsSettings\Volume.png" />
+    <Resource Include="Assets\CharmsSettings\VolumeMute.png" />
     <Resource Include="Assets\DarkIcon.png" />
   </ItemGroup>
 

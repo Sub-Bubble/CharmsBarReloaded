@@ -78,12 +78,29 @@ namespace CharmsBarReloaded
         {
             settings.Show();
             settings.Deactivated += (sender, args) => { settings.HideWindow(); };
+            settings.Activated += (sender, args) => { CharmsSettings.windowBusy = false; };
             settings.Focus();
             settings.Animate();
         }
         public void FocusOnSettings()
         {
             settings.Focus();
+        }
+        public static int GetWindowLocation(string get)
+        {
+            switch (get)
+            {
+                case "Left":
+                    return (int)settings.Left;
+                case "Top":
+                    return (int)settings.Top;
+                case "Width":
+                    return (int)settings.Width;
+                case "Height":
+                    return (int)settings.Height;
+                default:
+                    return 0;
+            }
         }
         public static void SwitchSettingsPage(int pageId = 0)
         {
