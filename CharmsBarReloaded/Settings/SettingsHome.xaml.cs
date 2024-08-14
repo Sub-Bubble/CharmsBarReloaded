@@ -151,7 +151,10 @@ namespace CharmsBarReloaded.Settings
             brightnessControl.Focus();
             brightnessControl.Deactivated += (sender, args) => { CharmsSettings.windowBusy = false; ClickHandler.Do(-5); brightnessControl.Hide(); };
             brightnessControl.brightnessText.Text = getcurentBrightness();
-            brightnessControl.brightnessSlider.Value = double.Parse(getcurentBrightness());
+            if (getcurentBrightness() == "Unavailable")
+                brightnessControl.IsEnabled = false;
+            else 
+                brightnessControl.brightnessSlider.Value = double.Parse(getcurentBrightness());
         }
 
         private void Power_MouseDown(object sender, MouseButtonEventArgs e)
@@ -174,12 +177,12 @@ namespace CharmsBarReloaded.Settings
 
         private void Shutdown_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            Process.Start("shutdown.exe", "-s -p");
+            Process.Start(new ProcessStartInfo { FileName = "shutdown.exe", Arguments = "-s -t 0", UseShellExecute = true});
         }
 
         private void Restart_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            Process.Start("shutdown.exe", "-r -p");
+            Process.Start(new ProcessStartInfo { FileName = "shutdown.exe", Arguments = "-r -t 0", UseShellExecute = true });
         }
     }
 }
