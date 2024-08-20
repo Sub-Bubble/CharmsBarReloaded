@@ -58,8 +58,8 @@ namespace CharmsBarReloaded
     class GlobalConfig
     {
         /// Constants. Only changed manually
-        public const string VersionString = "a5.0";
-        public const int Build = 21;
+        public const string VersionString = "a5.1";
+        public const int Build = 22;
 
         /// other vars
         public static bool IsEnabled {  get; set; }

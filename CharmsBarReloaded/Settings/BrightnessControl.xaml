@@ -1,0 +1,13 @@
+﻿<Window x:Class="CharmsBarReloaded.Settings.BrightnessControl"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CharmsBarReloaded.Settings"
+        mc:Ignorable="d"
+        Title="BrightnessControl" Height="140" Width="39" HorizontalAlignment="Center" WindowStyle="None" ResizeMode="NoResize" Topmost="True">
+    <StackPanel HorizontalAlignment="Center">
+        <Slider Orientation="Vertical" Height="100" HorizontalAlignment="Center" Margin="0,10,0,0" Minimum="0" Maximum="100" x:Name="brightnessSlider" ValueChanged="Slider_ValueChanged"/>
+        <TextBlock Text="100" FontWeight="Bold" Margin="0,10,0,10" x:Name="brightnessText" HorizontalAlignment="Center"/>
+    </StackPanel>
+</Window>
