@@ -1,0 +1,118 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows10.0.17763.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+    <UseWindowsForms>False</UseWindowsForms>
+    <SupportedOSPlatformVersion>10.0.17763.0</SupportedOSPlatformVersion>
+    <ApplicationIcon>AppIcon.ico</ApplicationIcon>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <GenerateAssemblyInfo>True</GenerateAssemblyInfo>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <GenerateAssemblyInfo>True</GenerateAssemblyInfo>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Assets\CharmsClock\Battery0.png" />
+    <None Remove="Assets\CharmsClock\Battery1.png" />
+    <None Remove="Assets\CharmsClock\Battery10.png" />
+    <None Remove="Assets\CharmsClock\Battery20.png" />
+    <None Remove="Assets\CharmsClock\Battery30.png" />
+    <None Remove="Assets\CharmsClock\Battery40.png" />
+    <None Remove="Assets\CharmsClock\Battery5.png" />
+    <None Remove="Assets\CharmsClock\Battery50.png" />
+    <None Remove="Assets\CharmsClock\Battery60.png" />
+    <None Remove="Assets\CharmsClock\Battery70.png" />
+    <None Remove="Assets\CharmsClock\Battery80.png" />
+    <None Remove="Assets\CharmsClock\Battery90.png" />
+    <None Remove="Assets\CharmsClock\BatteryFull.png" />
+    <None Remove="Assets\CharmsClock\Charging.png" />
+    <None Remove="Assets\CharmsClock\EthernetInternet.png" />
+    <None Remove="Assets\CharmsClock\EthernetNoInternet.png" />
+    <None Remove="Assets\CharmsClock\NoInternet.png" />
+    <None Remove="Assets\CharmsClock\WifiInternet.png" />
+    <None Remove="Assets\CharmsClock\WifiInternetMax.png" />
+    <None Remove="Assets\CharmsClock\WifiInternetMedium.png" />
+    <None Remove="Assets\CharmsClock\WifiInternetStrong.png" />
+    <None Remove="Assets\CharmsClock\WifiInternetWeak.png" />
+    <None Remove="Assets\CharmsClock\WifiInternetWeakest.png" />
+    <None Remove="Assets\CharmsClock\WifiNoInternet.png" />
+    <None Remove="Assets\CharmsClock\WifiNoInternetMax.png" />
+    <None Remove="Assets\CharmsClock\WifiNoInternetMedium.png" />
+    <None Remove="Assets\CharmsClock\WifiNoInternetStrong.png" />
+    <None Remove="Assets\CharmsClock\WifiNoInternetWeak.png" />
+    <None Remove="Assets\CharmsClock\WifiNoInternetWeakest.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="AppIcon.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\CharmsBarReloaded.Config\CharmsBarReloaded.Config.csproj" />
+    <ProjectReference Include="..\CharmsBarReloaded.Logger\CharmsBarReloaded.Logger.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Assets\CharmsBar\Devices.png" />
+    <Resource Include="Assets\CharmsBar\DevicesPreview.png" />
+    <Resource Include="Assets\CharmsBar\Exit.png" />
+    <Resource Include="Assets\CharmsBar\Search.png" />
+    <Resource Include="Assets\CharmsBar\SearchPreview.png" />
+    <Resource Include="Assets\CharmsBar\Settings.png" />
+    <Resource Include="Assets\CharmsBar\SettingsDark.png" />
+    <Resource Include="Assets\CharmsBar\SettingsPreview.png" />
+    <Resource Include="Assets\CharmsBar\Share.png" />
+    <Resource Include="Assets\CharmsBar\SharePreview.png" />
+    <Resource Include="Assets\CharmsBar\Start.png">
+    </Resource>
+    <Resource Include="Assets\CharmsBar\StartPreview.png" />
+    <Resource Include="Assets\CharmsClock\Battery0.png" />
+    <Resource Include="Assets\CharmsClock\Battery1.png" />
+    <Resource Include="Assets\CharmsClock\Battery10.png" />
+    <Resource Include="Assets\CharmsClock\Battery20.png" />
+    <Resource Include="Assets\CharmsClock\Battery30.png" />
+    <Resource Include="Assets\CharmsClock\Battery40.png" />
+    <Resource Include="Assets\CharmsClock\Battery5.png" />
+    <Resource Include="Assets\CharmsClock\Battery50.png" />
+    <Resource Include="Assets\CharmsClock\Battery60.png" />
+    <Resource Include="Assets\CharmsClock\Battery70.png" />
+    <Resource Include="Assets\CharmsClock\Battery80.png" />
+    <Resource Include="Assets\CharmsClock\Battery90.png" />
+    <Resource Include="Assets\CharmsClock\BatteryFull.png" />
+    <Resource Include="Assets\CharmsClock\Charging.png" />
+    <Resource Include="Assets\CharmsClock\EthernetInternet.png" />
+    <Resource Include="Assets\CharmsClock\EthernetNoInternet.png" />
+    <Resource Include="Assets\CharmsClock\NoInternet.png" />
+    <Resource Include="Assets\CharmsClock\WifiInternet.png" />
+    <Resource Include="Assets\CharmsClock\WifiInternetMax.png" />
+    <Resource Include="Assets\CharmsClock\WifiInternetMedium.png" />
+    <Resource Include="Assets\CharmsClock\WifiInternetStrong.png" />
+    <Resource Include="Assets\CharmsClock\WifiInternetWeak.png" />
+    <Resource Include="Assets\CharmsClock\WifiInternetWeakest.png" />
+    <Resource Include="Assets\CharmsClock\WifiNoInternet.png" />
+    <Resource Include="Assets\CharmsClock\WifiNoInternetMax.png" />
+    <Resource Include="Assets\CharmsClock\WifiNoInternetMedium.png" />
+    <Resource Include="Assets\CharmsClock\WifiNoInternetStrong.png" />
+    <Resource Include="Assets\CharmsClock\WifiNoInternetWeak.png" />
+    <Resource Include="Assets\CharmsClock\WifiNoInternetWeakest.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="CharmsBar\CharmsBar.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="CharmsSettings\" />
+  </ItemGroup>
+
+</Project>

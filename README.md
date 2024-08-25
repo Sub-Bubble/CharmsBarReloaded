@@ -1,6 +1,6 @@
 # CharmsBar: Reloaded
 This application returns Windows 8's Charms Bar to Windows 10/11!<br><br>
-**Please, note that this is still in alpha, so features may be abscent/incomplete/buggy. If you encounter an issue, please report it.**
+**Please note that the application is currently under a complete rewrite, so features may be abscent/incomplete/buggy. If you encounter a bug, please create a new issue.**
 
 ## Features
 - [X] Lightweightness
@@ -11,8 +11,9 @@ This application returns Windows 8's Charms Bar to Windows 10/11!<br><br>
 - [X] Running on startup
 - [X] CharmsClock
 - [X] DPI scaling
+- [X] Button mapping (Settings coming in later beta builds)
+- [ ] Translations support (Coming in later beta builds)
 - [ ] Theme support (Coming soon™)
-- [ ] Button mapping (Coming soon™)
 
 ## Screenshots
 <details>
