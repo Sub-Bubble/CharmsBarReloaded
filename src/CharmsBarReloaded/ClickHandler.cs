@@ -12,11 +12,9 @@ namespace CharmsBarReloaded
         {
             switch (action)
             {
+                //main charms bar actions
                 case "Search":
-                    keybd_event(0x5B, 0, 0, UIntPtr.Zero);
-                    keybd_event(0x53, 0, 0, UIntPtr.Zero);
-                    keybd_event(0x53, 0, 0x02, UIntPtr.Zero);
-                    keybd_event(0x5B, 0, 0x02, UIntPtr.Zero);
+                    Process.Start(new ProcessStartInfo { FileName = "explorer.exe", Arguments = $"shell:::{{2559a1f8-21d7-11d4-bdaf-00c04f60b9f0}}", CreateNoWindow = true });
                     break;
                 case "Share":
                     keybd_event(0x2C, 0, 0, UIntPtr.Zero);

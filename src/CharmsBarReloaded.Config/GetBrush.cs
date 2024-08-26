@@ -22,7 +22,7 @@ namespace CharmsBarReloaded.Config
                 case "Transparent":
                     return (Brush)converter.ConvertFrom("#01000000");
                 case "White":
-                    return (Brush)converter.ConvertFrom("#00000000");
+                    return (Brush)converter.ConvertFrom("#FFFFFFFF");
                 default:
                     return (Brush)converter.ConvertFrom("#FF000000");
             }

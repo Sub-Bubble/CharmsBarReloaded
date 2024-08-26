@@ -1,5 +1,7 @@
 ﻿using CharmsBarReloaded.Config;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Media.Imaging;
 
 namespace CharmsBarReloaded.CharmsBar
 {
@@ -15,6 +17,21 @@ namespace CharmsBarReloaded.CharmsBar
         public void HideWindow()
         {
             BeginAnimation(UIElement.OpacityProperty, fadeOut);
+            foreach (Grid grid in charmsStack.Children)
+            {
+                foreach (var item in grid.Children)
+                {
+                    if (item.GetType() == typeof(Image))
+                    {
+                        string source = ((Image)item).Source.ToString();
+                        if (!source.Contains("Preview")) ((Image)item).Source = new BitmapImage(new Uri(source.Insert(source.LastIndexOf(".png"), "Preview")));
+                    }
+                    if (item.GetType() == typeof(Label))
+                        ((Label)item).Visibility = Visibility.Collapsed;
+                    if (item.GetType() == typeof(Grid))
+                        ((Grid)item).Background = GetBrush.GetSpecialBrush("White");
+                }
+            }
         }
         public bool windowVisible;
         public bool isAnimating = false;

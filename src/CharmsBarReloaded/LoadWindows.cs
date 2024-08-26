@@ -1,7 +1,9 @@
 ﻿using CharmsBarReloaded.Config;
 using System.Runtime.InteropServices;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Interop;
+using System.Windows.Media.Imaging;
 
 namespace CharmsBarReloaded
 {
@@ -53,6 +55,7 @@ namespace CharmsBarReloaded
                     charmsClock.BeginAnimation(UIElement.OpacityProperty, charmsClock.fadeOut);
                 else
                     charmsClock.BeginAnimation(UIElement.OpacityProperty, charmsClock.noAnimationOut);
+                charmsBar.Top = 1;
             };
             charmsBar.Loaded += (sender, args) =>
             {
@@ -75,6 +78,23 @@ namespace CharmsBarReloaded
                     else
                         charmsClock.BeginAnimation(UIElement.OpacityProperty, charmsClock.noAnimationIn);
                 }
+                foreach (Grid grid in charmsBar.charmsStack.Children)
+                {
+                    foreach (var item in grid.Children)
+                    {
+                        if (item.GetType() == typeof(Image))
+                        {
+                            string source = ((Image)item).Source.ToString();
+                            ((Image)item).Source = new BitmapImage(new Uri(source.Replace("Preview", "")));
+                        }
+                        if (item.GetType() == typeof(Label))
+                            ((Label)item).Visibility = Visibility.Visible;
+                        if (item.GetType() == typeof(Grid))
+                            ((Grid)item).Background = SystemConfig.GetAccentColor;
+                    }
+                }
+
+
                 charmsBar.Height = SystemParameters.PrimaryScreenHeight;
                 charmsBar.Top = 0;
             };

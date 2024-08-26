@@ -48,9 +48,7 @@ namespace CharmsBarReloaded.CharmsBar
 
                 //image source
                 BitmapImage image = new BitmapImage(new Uri($"pack://application:,,,/Assets/CharmsBar/{action}.png"));
-                /*
-                 * TODO: MAKE BUTTON DYNAMIC
-                 if (action == "Start" /*&& {here should be theme parameter that decides if start button will use accent color})
+                 if (action == "Start" /*&& {here should be theme parameter that decides if start button will use accent color}*/)
                     buttons[i].Children.Add(new Grid
                     {
                         Height = 48, Width = 48,
@@ -58,7 +56,7 @@ namespace CharmsBarReloaded.CharmsBar
                         OpacityMask = new ImageBrush(image),
                         Background = SystemConfig.GetAccentColor
                     });
-                else*/
+                else
                 buttons[i].Children.Add(new Image
                 {
                     Height = 48,
