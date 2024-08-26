@@ -50,7 +50,7 @@ namespace CharmsBarReloaded.Config
             get
             {
                 int colorValue = (int)Registry.GetValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Accent", "AccentColorMenu", null);
-                var color = System.Windows.Media.Color.FromArgb(255, (byte)((colorValue >> 16) & 0xFF), (byte)((colorValue >> 8) & 0xFF), (byte)(colorValue & 0xFF));
+                var color = System.Windows.Media.Color.FromArgb(255, (byte)(colorValue & 0xFF), (byte)((colorValue >> 8) & 0xFF), (byte)((colorValue >> 16) & 0xFF));
                 return new SolidColorBrush(color);
             }
         }
