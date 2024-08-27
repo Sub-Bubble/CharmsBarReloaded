@@ -46,7 +46,7 @@ namespace CharmsBarReloaded.CharmsBar
                var slideInAnimation = new DoubleAnimation
                     {
                     From = 0,
-                    To = this.Width,
+                    To = charmsStack.ActualWidth,
                     Duration = TimeSpan.Zero,
                     BeginTime = TimeSpan.FromSeconds(i * 0.01),
                };
@@ -78,7 +78,7 @@ namespace CharmsBarReloaded.CharmsBar
                             animationDuration = TimeSpan.Zero;
                         var slideInAnimation = new DoubleAnimation
                         {
-                            From = 86,
+                            From = charmsStack.ActualWidth,
                             To = 0,
                             Duration = animationDuration,
                             BeginTime = TimeSpan.FromSeconds(i * 0.05),

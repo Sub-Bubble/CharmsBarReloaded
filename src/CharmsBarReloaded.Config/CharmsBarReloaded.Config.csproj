@@ -17,4 +17,13 @@
     <ProjectReference Include="..\CharmsBarReloaded.Logger\CharmsBarReloaded.Logger.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="lang\en-us.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="lang\ru-ru.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

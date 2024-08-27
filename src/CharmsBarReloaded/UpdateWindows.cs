@@ -65,7 +65,7 @@ namespace CharmsBarReloaded
                 if (Keyboard.IsKeyDown(Key.Escape) && charmsConfig.charmsBarConfig.EnableKeyboardShortcut)
                 {
                     charmsBar.HideWindow();
-                    if (charmsConfig.EnableAnimations)
+                    if (charmsConfig.EnableAnimations && charmsClock.Opacity != 0)
                         charmsClock.BeginAnimation(UIElement.OpacityProperty, charmsClock.fadeOut);
                     else
                         charmsClock.BeginAnimation(UIElement.OpacityProperty, charmsClock.noAnimationOut);

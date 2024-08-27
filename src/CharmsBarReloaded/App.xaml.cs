@@ -15,8 +15,11 @@ namespace CharmsBarReloaded
         private static CharmsClock.CharmsClock charmsClock;
         private static CharmsConfig charmsConfig;
 
+        private static TranslationManager translationManager;
+
         private void Application_Startup(object sender, StartupEventArgs e)
         {
+
             Log.ClearPreviousLog();
             if (!Debugger.IsAttached)
             {
@@ -37,6 +40,9 @@ namespace CharmsBarReloaded
             Log.Info("Welcome!");
             Log.Info("Loading Configuration");
             charmsConfig = new CharmsConfig().Load();
+
+            Log.Info("Loading Translations");
+            translationManager = new TranslationManager().Load(charmsConfig.CurrentLocale);
 
             Log.Info("Loading Charms Bar");
             LoadCharmsBar();

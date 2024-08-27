@@ -17,6 +17,7 @@ namespace CharmsBarReloaded.Config
         public bool EnableAnimations { get; set; } = true;
         public bool OverrideAccentColorEnabled { get; set; } = false;
         public string OverrideAccentColor { get; set; } = "000000";
+        public string CurrentLocale { get; set; } = "en-us";
 
         #region Methods
         private static readonly string configPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "CharmsBarReloaded");

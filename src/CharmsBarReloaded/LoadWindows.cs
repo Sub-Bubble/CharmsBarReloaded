@@ -59,12 +59,13 @@ namespace CharmsBarReloaded
             };
             charmsBar.Loaded += (sender, args) =>
             {
-                charmsBar.Height = SystemParameters.PrimaryScreenHeight - 1;
-                charmsBar.Left = SystemConfig.GetDesktopWorkingArea.Right - charmsBar.Width;
                 charmsBar.Top = SystemConfig.GetDesktopWorkingArea.Top + 1;
-
                 HideWindowFromAltTab(charmsBar);
-                charmsBar.Window_Reload(charmsConfig);
+                charmsBar.Window_Reload(charmsConfig, translationManager);
+                charmsBar.Left = SystemConfig.GetDesktopWorkingArea.Right - charmsBar.windowWidth;
+                charmsBar.Width = charmsBar.windowWidth;
+                charmsBar.charmsStack.Width = charmsBar.windowWidth;
+                charmsBar.Height = SystemParameters.PrimaryScreenHeight - 1;
                 charmsBar.HideWindow();
             };
             charmsBar.charmsStack.MouseEnter += (sender, args) =>

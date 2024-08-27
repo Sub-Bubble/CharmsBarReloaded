@@ -35,10 +35,11 @@ namespace CharmsBarReloaded.CharmsBar
         }
         public bool windowVisible;
         public bool isAnimating = false;
-        public void Window_Reload(CharmsConfig appConfig)
+        public int windowWidth;
+        public void Window_Reload(CharmsConfig appConfig, TranslationManager translation)
         {
             InitializeAnimations(appConfig.EnableAnimations, appConfig.charmsBarConfig.BackgroundColor);
-            SetupButtons(appConfig.charmsBarConfig.ButtonsAmount + 2, appConfig.charmsBarConfig.ButtonActions, appConfig.charmsBarConfig.HideWindowAfterClick, appConfig.charmsBarConfig.HoverColor);
+            SetupButtons(appConfig.charmsBarConfig, translation);
 
             Log.Info("Loaded Charms Bar successfully!");
             this.Height = SystemParameters.PrimaryScreenHeight - 1;

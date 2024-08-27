@@ -9,40 +9,41 @@ namespace CharmsBarReloaded.CharmsBar
 {
     public partial class CharmsBar
     {
-        private void SetupButtons(int buttonsAmount, string[] ButtonActions, bool HideWindowAfterClick, string HoverColor)
+        private void SetupButtons(CharmsConfig.CharmsBarConfig charmsBarConfig, TranslationManager translation)
         {
-            Grid[] buttons = new Grid[buttonsAmount];
+            Grid[] buttons = new Grid[charmsBarConfig.ButtonsAmount+2];
             #region filler
             buttons[0] = new Grid();
-            buttons[0].Children.Add(new TextBlock { Height = 100, Width = 86, Text = "" });
+            buttons[0].Children.Add(new TextBlock { Height = 100, Text = "", HorizontalAlignment = HorizontalAlignment.Stretch });
             #endregion filler
-            for (int i = 1; i < buttonsAmount; i++)
+            for (int i = 1; i < charmsBarConfig.ButtonsAmount+2; i++)
             {
-                TextBlock hitboxFiller = new TextBlock { Height = 100, Width = 86, Text = "" };
+                TextBlock hitboxFiller = new TextBlock { Height = 100, HorizontalAlignment = HorizontalAlignment.Stretch, Text = "" };
                 #region filler
-                if (i == buttonsAmount - 1)
+                if (i == charmsBarConfig.ButtonsAmount + 1)
                 {
                     buttons[i] = new Grid();
                     buttons[i].Children.Add(hitboxFiller);
                     break;
                 }
                 #endregion filler
-                if (!CharmsConfig.CharmsBarConfig.ValidActions.Contains(ButtonActions[i - 1]))
+                if (!CharmsConfig.CharmsBarConfig.ValidActions.Contains(charmsBarConfig.ButtonActions[i - 1]))
                 {
                     MessageBox.Show("Invalid Config!");
-                    Log.Error($"Invalid action: {ButtonActions[i - 1]}");
-                    throw new InvalidDataException($"Invalid action: {ButtonActions[i - 1]}");
+                    Log.Error($"Invalid action: {charmsBarConfig.ButtonActions[i - 1]}");
+                    throw new InvalidDataException($"Invalid action: {charmsBarConfig.ButtonActions[i - 1]}");
                 }
 
-                string action = ButtonActions[i - 1];
-                buttons[i] = new Grid { Height = 100, Width = 86, RenderTransform = new TranslateTransform() };
-                buttons[i].MouseDown += (o, e) => { App.ClickHandler(action); if (HideWindowAfterClick) HideWindow(); };
+                string action = charmsBarConfig.ButtonActions[i - 1];
+
+                buttons[i] = new Grid { Height = 100,/* Width = 86, */RenderTransform = new TranslateTransform() };
+                buttons[i].MouseDown += (o, e) => { App.ClickHandler(action); if (charmsBarConfig.HideWindowAfterClick) HideWindow(); };
                 buttons[i].Opacity = 0.01;
                 buttons[i].Style = new Style
                 {
                     TargetType = typeof(Grid),
                     Triggers = { new Trigger { Property = IsMouseOverProperty, Value = true,
-                        Setters = { new Setter { Property = BackgroundProperty, Value = GetBrush.GetBrushFromHex(HoverColor) }}}}
+                        Setters = { new Setter { Property = BackgroundProperty, Value = GetBrush.GetBrushFromHex(charmsBarConfig.HoverColor) }}}}
                 };
                 buttons[i].Children.Add(hitboxFiller);
 
@@ -66,9 +67,9 @@ namespace CharmsBarReloaded.CharmsBar
                 });
                 buttons[i].Children.Add(new Label
                 {
-                    Foreground = new SolidColorBrush(Colors.LightGray),
+                    Foreground = GetBrush.GetBrushFromHex(charmsBarConfig.TextColor),
                     Height = 26,
-                    Content = $"{action}",
+                    Content = $"{translation.GetTranslation($"CharmsBar.{action}")}",
                     Margin = new Thickness(0, 0, 0, 11),
                     VerticalAlignment = VerticalAlignment.Bottom,
                     HorizontalAlignment = HorizontalAlignment.Center
@@ -83,6 +84,7 @@ namespace CharmsBarReloaded.CharmsBar
             }
             charmsStack.InvalidateMeasure();
             charmsStack.UpdateLayout();
+            windowWidth = (int)charmsStack.ActualWidth;
         }
     }
 }

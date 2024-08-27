@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CharmsBarReloaded.CharmsBar"
         mc:Ignorable="d"
-        Title="Bar" Width="86" Top="0" Topmost="True" SnapsToDevicePixels="True"
+        Title="Bar" MinWidth="86" Top="0" Topmost="True" SnapsToDevicePixels="True"
         ResizeMode="NoResize" ScrollViewer.VerticalScrollBarVisibility="Disabled" SizeToContent="Width"
         WindowStyle="None" AllowsTransparency="True"
         Background="Transparent">
