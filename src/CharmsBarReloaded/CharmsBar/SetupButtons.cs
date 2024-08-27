@@ -36,7 +36,7 @@ namespace CharmsBarReloaded.CharmsBar
 
                 string action = charmsBarConfig.ButtonActions[i - 1];
 
-                buttons[i] = new Grid { Height = 100,/* Width = 86, */RenderTransform = new TranslateTransform() };
+                buttons[i] = new Grid { Height = 100, RenderTransform = new TranslateTransform() };
                 buttons[i].MouseDown += (o, e) => { App.ClickHandler(action); if (charmsBarConfig.HideWindowAfterClick) HideWindow(); };
                 buttons[i].Opacity = 0.01;
                 buttons[i].Style = new Style

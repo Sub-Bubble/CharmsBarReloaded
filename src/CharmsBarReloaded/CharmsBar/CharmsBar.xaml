@@ -10,10 +10,12 @@
         WindowStyle="None" AllowsTransparency="True"
         Background="Transparent">
     <Grid>
+        <ScrollViewer VerticalScrollBarVisibility="Hidden" HorizontalScrollBarVisibility="Disabled">
         <StackPanel x:Name="charmsStack" VerticalAlignment="Center">
             <Grid Height="86" VerticalAlignment="Center">
                 <TextBlock Height="86" Width="86"/>
             </Grid>
         </StackPanel>
+        </ScrollViewer>
     </Grid>
 </Window>
