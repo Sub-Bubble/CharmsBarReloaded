@@ -42,7 +42,6 @@ namespace CharmsBarReloaded.CharmsBar
             SetupButtons(appConfig.charmsBarConfig, translation);
 
             Log.Info("Loaded Charms Bar successfully!");
-            this.Height = SystemParameters.PrimaryScreenHeight - 1;
             this.Background = GetBrush.GetBrushFromHex(appConfig.charmsBarConfig.BackgroundColor);
             PrepareButtons(appConfig.EnableAnimations);
         }

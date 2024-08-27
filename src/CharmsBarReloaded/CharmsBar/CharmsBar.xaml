@@ -6,16 +6,14 @@
         xmlns:local="clr-namespace:CharmsBarReloaded.CharmsBar"
         mc:Ignorable="d"
         Title="Bar" MinWidth="86" Top="0" Topmost="True" SnapsToDevicePixels="True"
-        ResizeMode="NoResize" ScrollViewer.VerticalScrollBarVisibility="Disabled" SizeToContent="Width"
+        ResizeMode="NoResize" SizeToContent="Width"
         WindowStyle="None" AllowsTransparency="True"
         Background="Transparent">
-    <Grid>
-        <ScrollViewer VerticalScrollBarVisibility="Hidden" HorizontalScrollBarVisibility="Disabled">
-        <StackPanel x:Name="charmsStack" VerticalAlignment="Center">
+    <ScrollViewer VerticalScrollBarVisibility="Hidden" HorizontalScrollBarVisibility="Disabled">
+        <StackPanel x:Name="charmsStack" VerticalAlignment="Center" HorizontalAlignment="Stretch">
             <Grid Height="86" VerticalAlignment="Center">
                 <TextBlock Height="86" Width="86"/>
             </Grid>
         </StackPanel>
-        </ScrollViewer>
-    </Grid>
+    </ScrollViewer>
 </Window>
