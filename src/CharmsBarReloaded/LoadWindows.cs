@@ -95,10 +95,10 @@ namespace CharmsBarReloaded
                     }
                 }
 
-
-                charmsBar.Height = SystemParameters.PrimaryScreenHeight;
                 charmsBar.Top = 0;
             };
+
+            charmsBar.Height = SystemParameters.PrimaryScreenHeight;
             charmsBar.Show();
         }
     }

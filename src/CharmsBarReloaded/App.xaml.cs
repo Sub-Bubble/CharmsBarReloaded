@@ -46,6 +46,7 @@ namespace CharmsBarReloaded
 
             Log.Info("Loading Charms Bar");
             LoadCharmsBar();
+            charmsBar.Height = SystemParameters.PrimaryScreenHeight;
 
             Log.Info("Loading Charms Clock");
             LoadCharmsClock();

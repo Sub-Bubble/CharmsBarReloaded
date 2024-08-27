@@ -69,7 +69,7 @@ namespace CharmsBarReloaded.CharmsBar
                 {
                     Foreground = GetBrush.GetBrushFromHex(charmsBarConfig.TextColor),
                     Height = 26,
-                    Content = $"{translation.GetTranslation($"CharmsBar.{action}")}",
+                    Content = $"ASFHAJKSHFJKH{translation.GetTranslation($"CharmsBar.{action}")}",
                     Margin = new Thickness(0, 0, 0, 11),
                     VerticalAlignment = VerticalAlignment.Bottom,
                     HorizontalAlignment = HorizontalAlignment.Center
