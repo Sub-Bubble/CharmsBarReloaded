@@ -72,5 +72,9 @@ namespace CharmsBarReloaded
                 }
             });
         }
+        private void CharmsBarReloaded_WifiUpdate(object? sender, System.Timers.ElapsedEventArgs e)
+        {
+            charmsClock.Dispatcher.Invoke(charmsClock.UpdateInternetStatus);
+        }
     }
 }

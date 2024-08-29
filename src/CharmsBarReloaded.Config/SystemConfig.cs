@@ -99,7 +99,7 @@ namespace CharmsBarReloaded.Config
             {
                 try
                 {
-                    foreach(ManagementObject managementObject in brightnessMethods)
+                    foreach (ManagementObject managementObject in brightnessMethods)
                     {
                         managementObject.InvokeMethod("WmiSetBrightness", new Object[] { UInt32.MaxValue, (byte)value });
                         break;
@@ -120,14 +120,24 @@ namespace CharmsBarReloaded.Config
             }
         }
 
-        /// <summary>
-        /// TODO: MAKE INTERNET STATUS
-        /// </summary>
+        private static string cachedInternetStatus = "NoInternet";
+        private static bool isCachingInternetStatus = false;
+        private async static Task UpdateCachedInternetStatus()
+        {
+            if (isCachingInternetStatus) return;
+
+            isCachingInternetStatus = true;
+            cachedInternetStatus = await WifiConfig.GetStatus();
+
+            isCachingInternetStatus = false;
+        }
+
         public static string GetInternetStatus
         {
             get
             {
-                return "EthernetInternet";
+                UpdateCachedInternetStatus();
+                return cachedInternetStatus;
             }
         }
 

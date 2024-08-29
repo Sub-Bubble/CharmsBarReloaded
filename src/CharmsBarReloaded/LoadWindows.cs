@@ -40,6 +40,7 @@ namespace CharmsBarReloaded
                     charmsClock.Background = GetBrush.GetBrushFromHex(charmsConfig.charmsBarConfig.BackgroundColor);
                 HideWindowFromAltTab(charmsClock);
                 charmsClock.Update(charmsConfig.charmsClockConfig);
+                charmsClock.UpdateInternetStatus();
             };
             charmsClock.Show();
             charmsClock.BeginAnimation(UIElement.OpacityProperty, charmsClock.noAnimationOut);

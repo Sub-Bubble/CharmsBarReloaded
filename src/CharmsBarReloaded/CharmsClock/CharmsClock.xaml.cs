@@ -15,7 +15,6 @@ namespace CharmsBarReloaded.CharmsClock
         }
         public void Update(CharmsConfig.CharmsClockConfig config)
         {
-            InternetStatus.Source = new BitmapImage(new Uri($"pack://application:,,,/Assets/CharmsClock/{SystemConfig.GetInternetStatus}.png"));
             switch (SystemConfig.IsCharging)
             {
                 case "NoBattery":
@@ -54,6 +53,11 @@ namespace CharmsBarReloaded.CharmsClock
                 default:
                     BatteryLife.Source = new BitmapImage(new Uri(@$"../Assets/CharmsClockIcons/Battery{(SystemConfig.GetBatteryPercentage/10)}0.png", UriKind.Relative)); break;
             }
+        }
+
+        public void UpdateInternetStatus()
+        {
+            InternetStatus.Source = new BitmapImage(new Uri($"pack://application:,,,/Assets/CharmsClock/{SystemConfig.GetInternetStatus}.png"));
         }
     }
 }
