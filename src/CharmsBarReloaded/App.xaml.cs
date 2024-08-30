@@ -1,6 +1,7 @@
 ﻿using System.Diagnostics;
 using System.Windows;
-using System.Windows.Media.Animation;
+using CharmsBarReloaded.CharmsSettings;
+using CharmsBarReloaded.CharmsSettings.Pages;
 using CharmsBarReloaded.Config;
 using Timer = System.Timers.Timer;
 
@@ -14,9 +15,12 @@ namespace CharmsBarReloaded
         private static CharmsBar.CharmsBar charmsBar;
         private static CharmsClock.CharmsClock charmsClock;
         private static CharmsConfig charmsConfig;
-
-        private static TranslationManager translationManager;
-
+        private static SettingsWindow charmsSettings;
+        private static Home settingsHome;
+        private static General settingsGeneral;
+        private static Personalization settingsPersonalization;
+        private static About settingsAbout;
+        public static TranslationManager translationManager { get; private set; }
         private void Application_Startup(object sender, StartupEventArgs e)
         {
 
@@ -50,6 +54,9 @@ namespace CharmsBarReloaded
 
             Log.Info("Loading Charms Clock");
             LoadCharmsClock();
+
+            Log.Info("Loading Settings");
+            LoadSettings();
 
 
             Timer timer = new Timer();

@@ -1,0 +1,18 @@
+﻿<Page x:Class="CharmsBarReloaded.CharmsSettings.Pages.Personalization"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:CharmsBarReloaded.CharmsSettings.Pages"
+      mc:Ignorable="d" Width="360"
+      Title="Personalization">
+
+    <StackPanel>
+        <StackPanel Orientation="Horizontal" Margin="40, 40, 0, 0" VerticalAlignment="Top">
+            <Grid Height="40" Width="40" Margin="0,0,10,0" MouseDown="BackButton_MouseDown" MouseUp="BackButton_MouseUp"  MouseEnter="BackButton_MouseEnter" MouseLeave="BackButton_MouseLeave">
+                <Image Source="../../Assets/CharmsSettings/BackButton.png" Width="40" Height="40" x:Name="BackButton"/>
+            </Grid>
+            <TextBlock Text="Personalization" FontSize="30px" Foreground="White" FontWeight="Thin" Margin="0,0,0,5" x:Name="personalizationTitle"/>
+        </StackPanel>
+    </StackPanel>
+</Page>

@@ -12,6 +12,7 @@ namespace CharmsBarReloaded
         {
             CharmsBar_Update();
             charmsClock.Dispatcher.Invoke(() => { charmsClock.Update(charmsConfig.charmsClockConfig); });
+            Settings_Update();
         }
         private void CharmsBar_Update()
         {
@@ -70,6 +71,25 @@ namespace CharmsBarReloaded
                     else
                         charmsClock.BeginAnimation(UIElement.OpacityProperty, charmsClock.noAnimationOut);
                 }
+            });
+        }
+        private void Settings_Update()
+        {
+            //settingsHome.networkImage.Source = new Uri
+            //SystemConfig.UpdateDevice();
+            settingsHome.Dispatcher.Invoke(() =>
+            {
+                if (SystemConfig.GetDeviceVolume == 0 || SystemConfig.IsVolumeMuted)
+                    settingsHome.volumeImage.Source = new BitmapImage(new Uri(@"../../Assets/CharmsSettings/VolumeMute.png", UriKind.Relative));
+                else settingsHome.volumeImage.Source = new BitmapImage(new Uri(@"../../Assets/CharmsSettings/Volume.png", UriKind.Relative));
+
+                if (SystemConfig.DeviceBrighttess == -1)
+                    settingsHome.brightnessText.Text = translationManager.GetTranslation("CharmsSettings.Home.Unavailable");
+                else settingsHome.brightnessText.Text = SystemConfig.DeviceBrighttess.ToString();
+
+                settingsHome.keyboardLayout.Text = SystemConfig.GetKeyboardLayout;
+
+                settingsHome.volumeText.Text = SystemConfig.GetDeviceVolume.ToString();
             });
         }
     }

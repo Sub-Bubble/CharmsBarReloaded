@@ -110,13 +110,19 @@ namespace CharmsBarReloaded.Config
         }
 
         private static MMDeviceEnumerator deviceEnumerator = new MMDeviceEnumerator(Guid.Empty);
+        private static MMDevice device = deviceEnumerator.GetDefaultAudioEndpoint(DataFlow.Render, Role.Multimedia);
         public static int GetDeviceVolume
         {
             get
-            {
-                MMDevice device = deviceEnumerator.GetDefaultAudioEndpoint(DataFlow.Render, Role.Multimedia);
-
+            { 
                 return (int)(device.AudioEndpointVolume.MasterVolumeLevelScalar * 100);
+            }
+        }
+        public static bool IsVolumeMuted
+        {
+            get
+            {
+                return device.AudioEndpointVolume.Mute;
             }
         }
 

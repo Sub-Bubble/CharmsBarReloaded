@@ -1,9 +1,12 @@
 ﻿using CharmsBarReloaded.Config;
+using CharmsBarReloaded.CharmsSettings;
+using CharmsBarReloaded.CharmsSettings.Pages;
 using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Interop;
 using System.Windows.Media.Imaging;
+using System.Windows.Media.Animation;
 
 namespace CharmsBarReloaded
 {
@@ -19,32 +22,6 @@ namespace CharmsBarReloaded
             SetWindowLong(new WindowInteropHelper(Window).Handle, -20, (GetWindowLong(new WindowInteropHelper(Window).Handle, -20) | 0x00000080) & ~0x00040000);
         }
         #endregion hide window from alt tab
-        private void LoadCharmsClock()
-        {
-            charmsClock = new CharmsClock.CharmsClock();
-            charmsClock.Loaded += (sender, args) =>
-            {
-                charmsClock.Top = SystemConfig.GetDesktopWorkingArea.Bottom - 188;
-                charmsClock.Left = 50;
-                if (!charmsConfig.charmsClockConfig.SyncClockSettings)
-                {
-                    charmsClock.Background = GetBrush.GetBrushFromHex(charmsConfig.charmsClockConfig.BackgroundColor);
-                    var brush = GetBrush.GetBrushFromHex(charmsConfig.charmsClockConfig.TextColor);
-                    charmsClock.Hours.Foreground = brush;
-                    charmsClock.Minutes.Foreground = brush;
-                    charmsClock.Separator.Foreground = brush;
-                    charmsClock.Date.Foreground = brush;
-                }
-                else
-                    //omitting using charms bar text color is not a mistake
-                    charmsClock.Background = GetBrush.GetBrushFromHex(charmsConfig.charmsBarConfig.BackgroundColor);
-                HideWindowFromAltTab(charmsClock);
-                charmsClock.Update(charmsConfig.charmsClockConfig);
-            };
-            charmsClock.Show();
-            charmsClock.BeginAnimation(UIElement.OpacityProperty, charmsClock.noAnimationOut);
-            Log.Info("Loaded Charms Clock successfully!");
-        }
         private void LoadCharmsBar()
         {
             charmsBar = new CharmsBar.CharmsBar();
@@ -62,7 +39,8 @@ namespace CharmsBarReloaded
                 charmsBar.Top = SystemConfig.GetDesktopWorkingArea.Top + 1;
                 HideWindowFromAltTab(charmsBar);
                 charmsBar.Window_Reload(charmsConfig, translationManager);
-                charmsBar.Left = SystemConfig.GetDesktopWorkingArea.Right - charmsBar.Width;
+                charmsBar.Left = SystemConfig.GetDesktopWorkingArea.Right - charmsBar.Width - 3;
+                charmsBar.charmsStack.Width = charmsBar.windowWidth;
                 charmsBar.Width = charmsBar.windowWidth;
                 charmsBar.MinHeight = SystemParameters.PrimaryScreenHeight - 1;
                 charmsBar.HideWindow();
@@ -99,6 +77,73 @@ namespace CharmsBarReloaded
 
             charmsBar.Height = SystemParameters.PrimaryScreenHeight;
             charmsBar.Show();
+        }
+        private void LoadCharmsClock()
+        {
+            charmsClock = new CharmsClock.CharmsClock();
+            charmsClock.Loaded += (sender, args) =>
+            {
+                charmsClock.Top = SystemConfig.GetDesktopWorkingArea.Bottom - 188;
+                charmsClock.Left = 50;
+                if (!charmsConfig.charmsClockConfig.SyncClockSettings)
+                {
+                    charmsClock.Background = GetBrush.GetBrushFromHex(charmsConfig.charmsClockConfig.BackgroundColor);
+                    var brush = GetBrush.GetBrushFromHex(charmsConfig.charmsClockConfig.TextColor);
+                    charmsClock.Hours.Foreground = brush;
+                    charmsClock.Minutes.Foreground = brush;
+                    charmsClock.Separator.Foreground = brush;
+                    charmsClock.Date.Foreground = brush;
+                }
+                else
+                    //omitting using charms bar text color is not a mistake
+                    charmsClock.Background = GetBrush.GetBrushFromHex(charmsConfig.charmsBarConfig.BackgroundColor);
+                HideWindowFromAltTab(charmsClock);
+                charmsClock.Update(charmsConfig.charmsClockConfig);
+            };
+            charmsClock.Show();
+            charmsClock.BeginAnimation(UIElement.OpacityProperty, charmsClock.noAnimationOut);
+            Log.Info("Loaded Charms Clock successfully!");
+        }
+        private void LoadSettings()
+        {
+            charmsSettings = new SettingsWindow();
+            settingsHome = new Home();
+            settingsGeneral = new General();
+            settingsPersonalization = new Personalization();
+            settingsAbout = new About();
+
+            charmsSettings.Left = SystemConfig.GetDesktopWorkingArea.Width - 360;
+            charmsSettings.Height = SystemConfig.GetDesktopWorkingArea.Height;
+            charmsSettings.Top = 0;
+            charmsSettings.frame.Background = SystemConfig.GetAccentColor;
+            charmsSettings.frame.Content = settingsHome;
+            Storyboard settingsSlideIn = (Storyboard)charmsSettings.FindResource("SlideIn");
+            Storyboard settingsSlideOut = (Storyboard)charmsSettings.FindResource("SlideOut");
+            settingsSlideOut.Completed += (sender, args) => { charmsSettings.Hide(); };
+            charmsSettings.Loaded += (sender, args) =>
+            {
+                if (charmsConfig.EnableAnimations)
+                    charmsSettings.BeginStoryboard(settingsSlideIn);
+            };
+            charmsSettings.Deactivated += (sender, args) =>
+            {
+                if (charmsSettings.isBusy) { return; }
+                if (charmsConfig.EnableAnimations)
+                {
+                    charmsSettings.BeginStoryboard(settingsSlideOut);
+                }
+                else
+                {
+                    charmsSettings.Hide();
+                    charmsSettings.frame.Content = new Home();
+                }
+            };
+            charmsSettings.Activated += (sender, args) =>
+            {
+                Log.Info("activated");
+                charmsSettings.isBusy = false;
+            };
+            Log.Info("Charms Settings loaded!");
         }
     }
 }

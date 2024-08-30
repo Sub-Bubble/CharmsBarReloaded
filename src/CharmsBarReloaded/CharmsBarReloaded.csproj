@@ -8,7 +8,7 @@
     <UseWPF>true</UseWPF>
     <UseWindowsForms>False</UseWindowsForms>
     <SupportedOSPlatformVersion>10.0.17763.0</SupportedOSPlatformVersion>
-    <ApplicationIcon>AppIcon.ico</ApplicationIcon>
+    <ApplicationIcon>assets\AppIcon.ico</ApplicationIcon>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -49,10 +49,15 @@
     <None Remove="Assets\CharmsClock\WifiNoInternetStrong.png" />
     <None Remove="Assets\CharmsClock\WifiNoInternetWeak.png" />
     <None Remove="Assets\CharmsClock\WifiNoInternetWeakest.png" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Content Include="AppIcon.ico" />
+    <None Remove="assets\CharmsSettings\BackButton.png" />
+    <None Remove="assets\CharmsSettings\BackButtonClicked.png" />
+    <None Remove="assets\CharmsSettings\BackButtonMouseOver.png" />
+    <None Remove="assets\CharmsSettings\Brightness.png" />
+    <None Remove="assets\CharmsSettings\Notifications.png" />
+    <None Remove="assets\CharmsSettings\NoVolume.png" />
+    <None Remove="assets\CharmsSettings\Power.png" />
+    <None Remove="assets\CharmsSettings\Volume.png" />
+    <None Remove="assets\CharmsSettings\VolumeMute.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -103,6 +108,15 @@
     <Resource Include="Assets\CharmsClock\WifiNoInternetStrong.png" />
     <Resource Include="Assets\CharmsClock\WifiNoInternetWeak.png" />
     <Resource Include="Assets\CharmsClock\WifiNoInternetWeakest.png" />
+    <Resource Include="assets\CharmsSettings\BackButton.png"/>
+    <Resource Include="assets\CharmsSettings\BackButtonClicked.png"/>
+    <Resource Include="assets\CharmsSettings\BackButtonMouseOver.png"/>
+    <Resource Include="assets\CharmsSettings\Brightness.png"/>
+    <Resource Include="assets\CharmsSettings\Notifications.png"/>
+    <Resource Include="assets\CharmsSettings\NoVolume.png"/>
+    <Resource Include="assets\CharmsSettings\Power.png"/>
+    <Resource Include="assets\CharmsSettings\Volume.png"/>
+    <Resource Include="assets\CharmsSettings\VolumeMute.png"/>
   </ItemGroup>
 
   <ItemGroup>
@@ -112,7 +126,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="CharmsSettings\" />
+    <Folder Include="Assets\CharmsSettings\" />
   </ItemGroup>
 
 </Project>

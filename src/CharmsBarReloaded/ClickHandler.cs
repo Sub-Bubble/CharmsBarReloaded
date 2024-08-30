@@ -1,4 +1,6 @@
-﻿using System.Diagnostics;
+﻿using CharmsBarReloaded.CharmsSettings.Pages;
+using CharmsBarReloaded.Config;
+using System.Diagnostics;
 using System.Runtime.InteropServices;
 using MessageBox = System.Windows.MessageBox;
 
@@ -30,7 +32,11 @@ namespace CharmsBarReloaded
                     keybd_event(0x1B, 0, 0x02, UIntPtr.Zero);
                     break;
                 case "Settings":
-                    MessageBox.Show("Settings coming back in future beta builds");
+                    charmsSettings.isBusy = true;
+                    charmsSettings.Show();
+                    charmsSettings.Focus();
+                    /*if (!charmsSettings.IsFocused)
+                        MessageBox.Show("what");*/
                     break;
                 case "FocusSettings":
                     MessageBox.Show("Settings coming back in future beta builds");
@@ -38,16 +44,16 @@ namespace CharmsBarReloaded
 
                 //settings navigation
                 case "SettingsHome":
-                    MessageBox.Show("Settings coming back in future beta builds");
+                    charmsSettings.frame.Content = settingsHome;
                     break;
                 case "SettingsGeneral":
-                    MessageBox.Show("General settings are on a rewrite, will come back soon!");
+                    charmsSettings.frame.Content = settingsGeneral;
                     break;
                 case "SettingsPersonalization":
-                    MessageBox.Show("Personalization settings are on a rewrite, will come back soon!");
+                    charmsSettings.frame.Content = settingsPersonalization;
                     break;
                 case "SettingsAbout":
-                    MessageBox.Show("About page is on a rewrite, will come back soon!");
+                    charmsSettings.frame.Content = settingsAbout;
                     break;
 
                 //Windows Actions
@@ -61,6 +67,14 @@ namespace CharmsBarReloaded
                     Process.Start(new ProcessStartInfo { FileName = "explorer.exe", Arguments = $"ms-availablenetworks:", CreateNoWindow = true });
                     break;
                 case "VolumeSettings":
+                    var process = Process.GetProcessesByName("sndvol");
+                    if (process.Any())
+                    {
+                        foreach (var current in process)
+                            current.Kill();
+                        break;
+                    }
+                    Process.Start(new ProcessStartInfo { FileName = "sndvol.exe", Arguments = $"-f {SystemConfig.GetMouseLocation.Y * 65536 + SystemConfig.GetMouseLocation.X}", UseShellExecute = true });
                     break;
                 case "ChangeKeyboardLayout":
                     keybd_event(0x5B, 0, 0, UIntPtr.Zero);
