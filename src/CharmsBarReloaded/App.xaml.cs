@@ -64,6 +64,10 @@ namespace CharmsBarReloaded
             timer.Elapsed += CharmsBarReloaded_Update;
             timer.Start();
 
+            Timer wifiTimer = new();
+            wifiTimer.Interval = 2500;
+            wifiTimer.Elapsed += CharmsBarReloaded_WifiUpdate;
+            wifiTimer.Start();
         }
     }
 }
