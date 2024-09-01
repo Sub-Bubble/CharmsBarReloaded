@@ -2,11 +2,13 @@
 using CharmsBarReloaded.Config;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
+using System.Text;
+using System.Windows;
 using MessageBox = System.Windows.MessageBox;
 
 namespace CharmsBarReloaded
 {
-    public partial class App : System.Windows.Application
+    public partial class App : Application
     {
         [DllImport("user32.dll", SetLastError = true)]
         static extern void keybd_event(byte bVk, byte bScan, uint dwFlags, UIntPtr dwExtraInfo);
@@ -33,8 +35,14 @@ namespace CharmsBarReloaded
                     break;
                 case "Settings":
                     charmsSettings.isBusy = true;
-                    charmsSettings.Show();
-                    charmsSettings.Focus();
+
+                    Current.Dispatcher.BeginInvoke(new Action(() => {
+                        charmsSettings.Show();
+                        charmsSettings.Focus();
+                    }), System.Windows.Threading.DispatcherPriority.Input);
+
+                    //var a = Current.Windows.OfType<Window>().SingleOrDefault(w => w.IsActive);
+                    //var b = GetActiveWindowTitle();
                     /*if (!charmsSettings.IsFocused)
                         MessageBox.Show("what");*/
                     break;

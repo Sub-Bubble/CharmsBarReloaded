@@ -140,9 +140,12 @@ namespace CharmsBarReloaded
             };
             charmsSettings.Activated += (sender, args) =>
             {
-                Log.Info("activated");
                 charmsSettings.isBusy = false;
+
+                if (charmsConfig.EnableAnimations)
+                    charmsSettings.BeginStoryboard(settingsSlideIn);
             };
+
             Log.Info("Charms Settings loaded!");
         }
     }
