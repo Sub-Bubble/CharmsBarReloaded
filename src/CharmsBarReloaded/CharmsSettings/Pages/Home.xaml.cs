@@ -1,6 +1,9 @@
-﻿using System.Windows;
+﻿using CharmsBarReloaded.Config;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media.Animation;
+using System.Windows.Media.Imaging;
 
 namespace CharmsBarReloaded.CharmsSettings.Pages
 {
@@ -27,6 +30,10 @@ namespace CharmsBarReloaded.CharmsSettings.Pages
             notificationsText.Text = App.translationManager.GetTranslation("CharmsSettings.Home.Notifications");
             powerText.Text = App.translationManager.GetTranslation("CharmsSettings.Home.Power");
             keyboardText.Text = App.translationManager.GetTranslation("CharmsSettings.Home.Keyboard");
+
+            SleepText.Text = App.translationManager.GetTranslation("CharmsSettings.Home.Power.Sleep");
+            ShutdownText.Text = App.translationManager.GetTranslation("CharmsSettings.Home.Power.Shutdown");
+            RestartText.Text = App.translationManager.GetTranslation("CharmsSettings.Home.Power.Restart");
 
         }
 
@@ -59,6 +66,11 @@ namespace CharmsBarReloaded.CharmsSettings.Pages
         {
             App.ClickHandler("Network");
         }
+        public void UpdateInternetStatus()
+        {
+            networkImage.Source = new BitmapImage(new Uri($"pack://application:,,,/Assets/CharmsClock/{SystemConfig.GetInternetStatus}.png"));
+        }
+
         private void KeyboardLayout_MouseDown(object sender, MouseButtonEventArgs e)
         {
             App.ClickHandler("ChangeKeyboardLayout");
@@ -76,27 +88,34 @@ namespace CharmsBarReloaded.CharmsSettings.Pages
 
         private void Brightness_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            //MessageBox.Show("in the works");
+            brightnessPopup.IsOpen = !brightnessPopup.IsOpen;
+        }
+
+        private void brightnessSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            brightnessSlider.Value = Math.Round(brightnessSlider.Value, 0);
+            brightnessText.Text = brightnessSlider.Value.ToString();
+            SystemConfig.DeviceBrightness = (int)brightnessSlider.Value;
         }
 
         private void Power_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            //MessageBox.Show("in the works");
+            shutdownPopup.IsOpen = !shutdownPopup.IsOpen;
         }
 
         private void Sleep_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            MessageBox.Show("in the works");
+            App.ClickHandler("Sleep");
         }
 
         private void Shutdown_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            MessageBox.Show("in the works");
+            App.ClickHandler("Shutdown");
         }
 
         private void Restart_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            MessageBox.Show("in the works");
+            App.ClickHandler("Restart");
         }
     }
 }

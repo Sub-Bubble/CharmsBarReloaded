@@ -76,25 +76,36 @@ namespace CharmsBarReloaded
         private void CharmsBarReloaded_WifiUpdate(object? sender, System.Timers.ElapsedEventArgs e)
         {
             charmsClock.Dispatcher.Invoke(charmsClock.UpdateInternetStatus);
+            settingsHome.Dispatcher.Invoke(settingsHome.UpdateInternetStatus);
         }
+        int i = 0;
         private void Settings_Update()
         {
-            //settingsHome.networkImage.Source = new Uri
-            //SystemConfig.UpdateDevice();
-            settingsHome.Dispatcher.Invoke(() =>
+            if (i == 20)
             {
-                if (SystemConfig.GetDeviceVolume == 0 || SystemConfig.IsVolumeMuted)
-                    settingsHome.volumeImage.Source = new BitmapImage(new Uri(@"../../Assets/CharmsSettings/VolumeMute.png", UriKind.Relative));
-                else settingsHome.volumeImage.Source = new BitmapImage(new Uri(@"../../Assets/CharmsSettings/Volume.png", UriKind.Relative));
+                settingsHome.Dispatcher.Invoke(() =>
+                {
+                    if (SystemConfig.GetDeviceVolume == 0 || SystemConfig.IsVolumeMuted)
+                        settingsHome.volumeImage.Source = new BitmapImage(new Uri(@"../../Assets/CharmsSettings/VolumeMute.png", UriKind.Relative));
+                    else settingsHome.volumeImage.Source = new BitmapImage(new Uri(@"../../Assets/CharmsSettings/Volume.png", UriKind.Relative));
 
-                if (SystemConfig.DeviceBrighttess == -1)
-                    settingsHome.brightnessText.Text = translationManager.GetTranslation("CharmsSettings.Home.Unavailable");
-                else settingsHome.brightnessText.Text = SystemConfig.DeviceBrighttess.ToString();
+                    int brightness = SystemConfig.DeviceBrightness;
+                    if (brightness == -1)
+                    {
+                        settingsHome.brightnessText.Text = translationManager.GetTranslation("CharmsSettings.Home.Unavailable");
+                        settingsHome.brightnessSlider.IsEnabled = false;
+                        settingsHome.brightnessSliderText.Text = translationManager.GetTranslation("CharmsSettings.Home.Unavailable");
 
-                settingsHome.keyboardLayout.Text = SystemConfig.GetKeyboardLayout;
+                    }
+                    else settingsHome.brightnessText.Text = brightness.ToString();
 
-                settingsHome.volumeText.Text = SystemConfig.GetDeviceVolume.ToString();
-            });
+                    settingsHome.keyboardLayout.Text = SystemConfig.GetKeyboardLayout;
+
+                    settingsHome.volumeText.Text = SystemConfig.GetDeviceVolume.ToString();
+                });
+                i = 0;
+            }
+            i++;
         }
     }
 }

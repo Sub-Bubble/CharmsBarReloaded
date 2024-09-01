@@ -77,7 +77,7 @@ namespace CharmsBarReloaded.Config
 
         private static ManagementObjectCollection brightnessValues = new ManagementObjectSearcher(new ManagementScope("root\\WMI"), new SelectQuery("WmiMonitorBrightness")).Get();
         private static ManagementObjectCollection brightnessMethods = new ManagementObjectSearcher(new ManagementScope("root\\WMI"), new SelectQuery("WmiMonitorBrightnessMethods")).Get();
-        public static int DeviceBrighttess
+        public static int DeviceBrightness
         {
             get //will return 0-100 if there is a display, and -1 if there is none
             {
