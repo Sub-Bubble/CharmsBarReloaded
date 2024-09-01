@@ -39,7 +39,7 @@ namespace CharmsBarReloaded
                 charmsBar.Top = SystemConfig.GetDesktopWorkingArea.Top + 1;
                 HideWindowFromAltTab(charmsBar);
                 charmsBar.Window_Reload(charmsConfig, translationManager);
-                charmsBar.Left = SystemConfig.GetDesktopWorkingArea.Right - charmsBar.Width - 3;
+                charmsBar.Left = SystemConfig.GetDesktopWorkingArea.Right - charmsBar.Width;
                 charmsBar.charmsStack.Width = charmsBar.windowWidth;
                 charmsBar.Width = charmsBar.windowWidth;
                 charmsBar.MinHeight = SystemParameters.PrimaryScreenHeight - 1;
