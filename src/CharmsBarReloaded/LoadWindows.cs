@@ -7,6 +7,7 @@ using System.Windows.Controls;
 using System.Windows.Interop;
 using System.Windows.Media.Imaging;
 using System.Windows.Media.Animation;
+using Hardcodet.Wpf.TaskbarNotification;
 
 namespace CharmsBarReloaded
 {
@@ -108,7 +109,7 @@ namespace CharmsBarReloaded
         {
             charmsSettings = new SettingsWindow();
             settingsHome = new Home();
-            settingsGeneral = new General();
+            settingsGeneral = new General(charmsConfig);
             settingsPersonalization = new Personalization();
             settingsAbout = new About();
 
@@ -124,6 +125,7 @@ namespace CharmsBarReloaded
             {
                 if (charmsConfig.EnableAnimations)
                     charmsSettings.BeginStoryboard(settingsSlideIn);
+                HideWindowFromAltTab(charmsSettings);
             };
             charmsSettings.Deactivated += (sender, args) =>
             {
@@ -135,7 +137,8 @@ namespace CharmsBarReloaded
                 else
                 {
                     charmsSettings.Hide();
-                    charmsSettings.frame.Content = new Home();
+                    charmsSettings.frame.Content = settingsHome;
+                    charmsConfig.Save();
                 }
             };
             charmsSettings.Activated += (sender, args) =>
@@ -147,6 +150,11 @@ namespace CharmsBarReloaded
             };
 
             Log.Info("Charms Settings loaded!");
+        }
+        private void LoadTray()
+        {
+            tray = (TaskbarIcon)FindResource("TaskbarIcon");
+            Log.Info("Tray loaded!");
         }
     }
 }

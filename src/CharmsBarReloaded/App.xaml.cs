@@ -3,6 +3,8 @@ using System.Windows;
 using CharmsBarReloaded.CharmsSettings;
 using CharmsBarReloaded.CharmsSettings.Pages;
 using CharmsBarReloaded.Config;
+using Hardcodet.Wpf.TaskbarNotification;
+using Hardcodet.Wpf.TaskbarNotification.Interop;
 using Timer = System.Timers.Timer;
 
 namespace CharmsBarReloaded
@@ -14,12 +16,13 @@ namespace CharmsBarReloaded
     {
         private static CharmsBar.CharmsBar charmsBar;
         private static CharmsClock.CharmsClock charmsClock;
-        private static CharmsConfig charmsConfig;
+        public static CharmsConfig charmsConfig { get; private set; }
         private static SettingsWindow charmsSettings;
         private static Home settingsHome;
         private static General settingsGeneral;
         private static Personalization settingsPersonalization;
         private static About settingsAbout;
+        private static TaskbarIcon tray;
         public static TranslationManager translationManager { get; private set; }
         private void Application_Startup(object sender, StartupEventArgs e)
         {
@@ -57,6 +60,9 @@ namespace CharmsBarReloaded
 
             Log.Info("Loading Settings");
             LoadSettings();
+
+            Log.Info("Loading Tray");
+            LoadTray();
 
 
             Timer timer = new Timer();

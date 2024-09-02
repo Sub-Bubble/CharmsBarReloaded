@@ -11,13 +11,10 @@ namespace CharmsBarReloaded.Config
         public static string GetBuild { get { return assembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>().InformationalVersion.Trim(); } }
         public static int GetVersion { get { return assembly.GetName().Version.Major; } }
         #endregion App Version
-
+        public string CurrentLocale { get; set; } = "en-us";
+        public bool EnableAnimations { get; set; } = true;
         public CharmsBarConfig charmsBarConfig { get; set; } = new CharmsBarConfig();
         public CharmsClockConfig charmsClockConfig { get; set; } = new CharmsClockConfig();
-        public bool EnableAnimations { get; set; } = true;
-        public bool OverrideAccentColorEnabled { get; set; } = false;
-        public string OverrideAccentColor { get; set; } = "000000";
-        public string CurrentLocale { get; set; } = "en-us";
 
         #region Methods
         private static readonly string configPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "CharmsBarReloaded");

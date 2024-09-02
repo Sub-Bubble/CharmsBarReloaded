@@ -38,13 +38,8 @@ namespace CharmsBarReloaded
 
                     Current.Dispatcher.BeginInvoke(new Action(() => {
                         charmsSettings.Show();
-                        charmsSettings.Focus();
+                       charmsSettings.Focus();
                     }), System.Windows.Threading.DispatcherPriority.Input);
-
-                    //var a = Current.Windows.OfType<Window>().SingleOrDefault(w => w.IsActive);
-                    //var b = GetActiveWindowTitle();
-                    /*if (!charmsSettings.IsFocused)
-                        MessageBox.Show("what");*/
                     break;
                 case "FocusSettings":
                     MessageBox.Show("Settings coming back in future beta builds");

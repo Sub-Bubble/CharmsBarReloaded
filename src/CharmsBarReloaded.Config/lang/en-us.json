@@ -4,6 +4,10 @@
   "CharmsBar.Start": "Start",
   "CharmsBar.Devices": "Devices",
   "CharmsBar.Settings": "Settings",
+  "CharmsSettings.On": "On",
+  "CharmsSettings.Off": "Off",
+  "CharmsSettings.CharmsBar": "Charms Bar",
+  "CharmsSettings.CharmsClock": "Charms Clock",
   "CharmsSettings.Home.Title": "Settings",
   "CharmsSettings.Home.SubTitle": "Charms Bar: Reloaded Settings",
   "CharmsSettings.Home.General": "General",
@@ -20,7 +24,15 @@
   "CharmsSettings.Home.Power.Restart": "Restart",
   "CharmsSettings.Home.Keyboard": "Keyboard",
   "CharmsSettings.Home.Unavailable": "Unavailable",
+  "CharmsSettings.General.Language": "Language",
+  "CharmsSettings.General.EnableAnimations": "Enable Animations",
+  "CharmsSettings.General.RunOnStartup": "Run on startup",
+  "CharmsSettings.General.CharmsBarEnabled": "Enable Charms Bar",
+  "CharmsSettings.General.CharmsClockEnabled": "Enable Charms Clock",
+  "CharmsSettings.General.EnableKeyboardShortcuts": "Keyboard shortcuts",
+  "CharmsSettings.General.KeyboardShortcutsOverrideCharmsBarOff": "Keyboard shortcuts override disabled Charms Bar",
   "CharmsSettings.About.Version": "Version",
   "CharmsSettings.About.Build": "Build",
-  "CharmsSettings.About.CheckForUpdates": "Check for updates"
+  "CharmsSettings.About.CheckForUpdates": "Check for updates",
+  "Tray.Exit": "Exit"
 }

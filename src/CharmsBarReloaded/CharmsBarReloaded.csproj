@@ -20,6 +20,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="assets\AppIcon.ico" />
     <None Remove="Assets\CharmsClock\Battery0.png" />
     <None Remove="Assets\CharmsClock\Battery1.png" />
     <None Remove="Assets\CharmsClock\Battery10.png" />
@@ -58,14 +59,18 @@
     <None Remove="assets\CharmsSettings\Power.png" />
     <None Remove="assets\CharmsSettings\Volume.png" />
     <None Remove="assets\CharmsSettings\VolumeMute.png" />
+    <None Remove="assets\DarkIcon.png" />
+    <None Remove="assets\Tray\Exit.png" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\CharmsBarReloaded.Config\CharmsBarReloaded.Config.csproj" />
     <ProjectReference Include="..\CharmsBarReloaded.Logger\CharmsBarReloaded.Logger.csproj" />
+    <ProjectReference Include="..\CharmsBarReloaded.WpfExtensions\CharmsBarReloaded.WpfExtensions.csproj" />
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="assets\AppIcon.ico" />
     <Resource Include="Assets\CharmsBar\Devices.png" />
     <Resource Include="Assets\CharmsBar\DevicesPreview.png" />
     <Resource Include="Assets\CharmsBar\Exit.png" />
@@ -108,15 +113,17 @@
     <Resource Include="Assets\CharmsClock\WifiNoInternetStrong.png" />
     <Resource Include="Assets\CharmsClock\WifiNoInternetWeak.png" />
     <Resource Include="Assets\CharmsClock\WifiNoInternetWeakest.png" />
-    <Resource Include="assets\CharmsSettings\BackButton.png"/>
-    <Resource Include="assets\CharmsSettings\BackButtonClicked.png"/>
-    <Resource Include="assets\CharmsSettings\BackButtonMouseOver.png"/>
-    <Resource Include="assets\CharmsSettings\Brightness.png"/>
-    <Resource Include="assets\CharmsSettings\Notifications.png"/>
-    <Resource Include="assets\CharmsSettings\NoVolume.png"/>
-    <Resource Include="assets\CharmsSettings\Power.png"/>
-    <Resource Include="assets\CharmsSettings\Volume.png"/>
-    <Resource Include="assets\CharmsSettings\VolumeMute.png"/>
+    <Resource Include="assets\CharmsSettings\BackButton.png" />
+    <Resource Include="assets\CharmsSettings\BackButtonClicked.png" />
+    <Resource Include="assets\CharmsSettings\BackButtonMouseOver.png" />
+    <Resource Include="assets\CharmsSettings\Brightness.png" />
+    <Resource Include="assets\CharmsSettings\Notifications.png" />
+    <Resource Include="assets\CharmsSettings\NoVolume.png" />
+    <Resource Include="assets\CharmsSettings\Power.png" />
+    <Resource Include="assets\CharmsSettings\Volume.png" />
+    <Resource Include="assets\CharmsSettings\VolumeMute.png" />
+    <Resource Include="assets\DarkIcon.png" />
+    <Resource Include="assets\Tray\Exit.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -127,6 +134,11 @@
 
   <ItemGroup>
     <Folder Include="Assets\CharmsSettings\" />
+    <Folder Include="Assets\Tray\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Hardcodet.NotifyIcon.Wpf" Version="1.1.0" />
   </ItemGroup>
 
 </Project>

@@ -1,27 +1,27 @@
 # CharmsBar: Reloaded
 This application returns Windows 8's Charms Bar to Windows 10/11!<br><br>
-**Please note that the application is currently under a complete rewrite, so features may be abscent/incomplete/buggy. If you encounter a bug, please create a new issue.**
+**Please note that the application is currently under a complete rewrite, so features may be absent/incomplete/buggy. If you encounter a bug, please create a new issue.**
 
 ## Features
 | Status      | Feature      | Note |
 | ------------- | ------------- | ------------- |
-| ✅ | Lightweightness |
-| 🛠️ | Customizability with settings | On a rewrite |
-| 🛠️ | Tray Icon | On a rewrite |
+| ✅ | Lightweight |
+| 🛠️ | Customizability with settings | Language selector not yet available, Customization in the works |
+| ✅ | Tray Icon |
 | ✅ | Animations |
 | ⚠️ | Keyboard Shortcuts | Broken on Windows 11 due to it opening Edge/Copilot |
 | ✅ | Running on startup |
 | ✅ | Charms Clock |
 | ✅ | DPI scaling |
 | ✅ | Button mapping |
-| 🛠️ | Translations support | Not all strings are yet available for translation |
+| ✅ | Translations support |
 | 🕓 | Theme support |
 | 🕓 | Updater |
 | ❌ | Proper touchscreen support |
 - ✅ - Fully working
 - ⚠️ - Has problems
 - 🛠️ - In the works
-- ❌ - Abscent and is not planned
+- ❌ - Absent and is not planned
 - 🕓 - Coming soon™
 
 ## Screenshots
@@ -30,7 +30,7 @@ This application returns Windows 8's Charms Bar to Windows 10/11!<br><br>
 | <img src="/Media/Win10Preview.png"> | <img src="/Media/Win11Preview.jpg"> |
 
 ## Languages
-| Langugate | Percentage | Contributors |
+| Language | Percentage | Contributors |
 | ------------- | ------------- | ------------- |
 | Croatian | 100% | <a href="https://github.com/RealKrazy">RealKrazy</a> |
 | English (US) | 100% | <a href="https://github.com/Sub-Bubble">SubBubble</a> |

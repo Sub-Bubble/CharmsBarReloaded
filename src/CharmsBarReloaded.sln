@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CharmsBarReloaded.Config", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CharmsBarReloaded.Logger", "CharmsBarReloaded.Logger\CharmsBarReloaded.Logger.csproj", "{0BD86628-F85E-46E8-861E-822B167E6B69}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CharmsBarReloaded.WpfExtensions", "CharmsBarReloaded.WpfExtensions\CharmsBarReloaded.WpfExtensions.csproj", "{99F4115A-E7BF-4BDA-AA6A-6C0F70023F5B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{0BD86628-F85E-46E8-861E-822B167E6B69}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0BD86628-F85E-46E8-861E-822B167E6B69}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0BD86628-F85E-46E8-861E-822B167E6B69}.Release|Any CPU.Build.0 = Release|Any CPU
+		{99F4115A-E7BF-4BDA-AA6A-6C0F70023F5B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{99F4115A-E7BF-4BDA-AA6A-6C0F70023F5B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{99F4115A-E7BF-4BDA-AA6A-6C0F70023F5B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{99F4115A-E7BF-4BDA-AA6A-6C0F70023F5B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
