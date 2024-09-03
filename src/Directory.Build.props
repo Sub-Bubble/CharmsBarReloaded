@@ -1,7 +1,7 @@
 <Project>
   <PropertyGroup>
-    <AssemblyVersion>25.0</AssemblyVersion>
-    <FileVersion>25.0</FileVersion>
+    <AssemblyVersion>26.0</AssemblyVersion>
+    <FileVersion>26.0</FileVersion>
     <InformationalVersion>b1.0-pre3</InformationalVersion>
     <IncludeSourceRevisionInInformationalVersion>False</IncludeSourceRevisionInInformationalVersion>
   </PropertyGroup>

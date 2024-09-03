@@ -35,10 +35,10 @@ This application returns Windows 8's Charms Bar to Windows 10/11!<br><br>
 | Croatian | 13% | <a href="https://github.com/RealKrazy">RealKrazy</a> |
 | English (US) | 100% | <a href="https://github.com/Sub-Bubble">SubBubble</a> |
 | Japanese | 13% | <a href="https://github.com/RealKrazy">RealKrazy</a> |
-| Polish | 13% | <a href="https://github.com/Sub-Bubble">SubBubble</a> |
+| Polish | 100% | <a href="https://github.com/Sub-Bubble">SubBubble</a> |
 | Russian | 100% | <a href="https://github.com/Sub-Bubble">SubBubble</a> |
 | Slovak | 13% | <a href="https://github.com/RealKrazy">RealKrazy</a> |
-| Ukrainian | 13% | <a href="https://github.com/Sub-Bubble">SubBubble</a> |
+| Ukrainian | 100% | <a href="https://github.com/Sub-Bubble">SubBubble</a> |
 
 ## Downloads
 ### **To download the latest release**, click on <a href="https://github.com/Sub-Bubble/CharmsBarReloaded/releases/latest">this link</a>
