@@ -6,6 +6,9 @@ namespace CharmsBarReloaded.Tray
     {
         private void ContextMenu_Opened(object sender, RoutedEventArgs e)
         {
+            checkmark.Header = App.translationManager.GetTranslation("CharmsSettings.General.CharmsBarEnabled");
+            openSettings.Header = App.translationManager.GetTranslation("CharmsBar.Settings");
+            exitApp.Header = App.translationManager.GetTranslation("Tray.Exit");
             checkmark.IsChecked = App.charmsConfig.charmsBarConfig.IsEnabled;
         }
         private void ExitApp(object sender, EventArgs e)

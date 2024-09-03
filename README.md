@@ -6,7 +6,7 @@ This application returns Windows 8's Charms Bar to Windows 10/11!<br><br>
 | Status      | Feature      | Note |
 | ------------- | ------------- | ------------- |
 | ✅ | Lightweight |
-| 🛠️ | Customizability with settings | Language selector not yet available, Customization in the works |
+| 🛠️ | Customizability with settings | Customization in the works |
 | ✅ | Tray Icon |
 | ✅ | Animations |
 | ⚠️ | Keyboard Shortcuts | Broken on Windows 11 due to it opening Edge/Copilot |
@@ -32,13 +32,13 @@ This application returns Windows 8's Charms Bar to Windows 10/11!<br><br>
 ## Languages
 | Language | Percentage | Contributors |
 | ------------- | ------------- | ------------- |
-| Croatian | 100% | <a href="https://github.com/RealKrazy">RealKrazy</a> |
+| Croatian | 13% | <a href="https://github.com/RealKrazy">RealKrazy</a> |
 | English (US) | 100% | <a href="https://github.com/Sub-Bubble">SubBubble</a> |
-| Japanese | 100% | <a href="https://github.com/RealKrazy">RealKrazy</a> |
-| Polish | 100% | <a href="https://github.com/Sub-Bubble">SubBubble</a> |
+| Japanese | 13% | <a href="https://github.com/RealKrazy">RealKrazy</a> |
+| Polish | 13% | <a href="https://github.com/Sub-Bubble">SubBubble</a> |
 | Russian | 100% | <a href="https://github.com/Sub-Bubble">SubBubble</a> |
-| Slovak | 100% | <a href="https://github.com/RealKrazy">RealKrazy</a> |
-| Ukrainian | 100% | <a href="https://github.com/Sub-Bubble">SubBubble</a> |
+| Slovak | 13% | <a href="https://github.com/RealKrazy">RealKrazy</a> |
+| Ukrainian | 13% | <a href="https://github.com/Sub-Bubble">SubBubble</a> |
 
 ## Downloads
 ### **To download the latest release**, click on <a href="https://github.com/Sub-Bubble/CharmsBarReloaded/releases/latest">this link</a>

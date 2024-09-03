@@ -1,6 +1,8 @@
 ﻿using CharmsBarReloaded.Config;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,8 +14,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
-using System.Windows.Shapes;
-
+using WinRT;
 namespace CharmsBarReloaded.CharmsSettings.Pages
 {
     /// <summary>
@@ -23,47 +24,77 @@ namespace CharmsBarReloaded.CharmsSettings.Pages
     {
         string onText;
         string offText;
-        public General(CharmsConfig charmsConfig)
+        public General()
         {
             InitializeComponent();
 
-            onText = App.translationManager.GetTranslation("CharmsSettings.On");
-            offText = App.translationManager.GetTranslation("CharmsSettings.Off");
-
-            generalTitle.Text = App.translationManager.GetTranslation("CharmsSettings.Home.General");
-
-            LanguageText.Text = App.translationManager.GetTranslation("CharmsSettings.General.Language");
-
-            EnableAnimationText.Text = App.translationManager.GetTranslation("CharmsSettings.General.EnableAnimations");
-            EnableAnimationsToggle.IsChecked = charmsConfig.EnableAnimations;
-            if (charmsConfig.EnableAnimations) EnableAnimationsOnOff.Text = onText;
-            EnableAnimationsOnOff.Text = offText;
-
-            RunOnStartupText.Text = App.translationManager.GetTranslation("CharmsSettings.General.RunOnStartup");
+            ReloadStrings();
+            LoadLanguageSelector();
+            LanguageNeedRestart.Visibility = Visibility.Collapsed;
+            EnableAnimationsToggle.IsChecked = App.charmsConfig.EnableAnimations;
             RunOnStartupToggle.IsChecked = SystemConfig.StartupKeyExists;
-            if (SystemConfig.StartupKeyExists) RunOnStartupOnOff.Text = onText;
-            RunOnStartupOnOff.Text = offText;
-
-            BarEnabledText.Text = App.translationManager.GetTranslation("CharmsSettings.General.CharmsBarEnabled");
-            BarEnabledToggle.IsChecked = charmsConfig.EnableAnimations;
-            if (charmsConfig.EnableAnimations) BarEnabledOnOff.Text = onText;
-            BarEnabledOnOff.Text = offText;
-
-            ClockEnabledText.Text = App.translationManager.GetTranslation("CharmsSettings.General.CharmsClockEnabled");
-            ClockEnabledToggle.IsChecked = charmsConfig.EnableAnimations;
-            if (charmsConfig.EnableAnimations) ClockEnabledOnOff.Text = onText;
-            ClockEnabledOnOff.Text = offText;
-
-            KeyboardShortcutsText.Text = App.translationManager.GetTranslation("CharmsSettings.General.EnableKeyboardShortcuts");
-            KeyboardShortcutsToggle.IsChecked = charmsConfig.EnableAnimations;
-            if (charmsConfig.EnableAnimations) KeyboardShortcutsOnOff.Text = onText;
-            KeyboardShortcutsOnOff.Text = offText;
-
-            KeyboardShortcutOverrideText.Text = App.translationManager.GetTranslation("CharmsSettings.General.KeyboardShortcutsOverrideCharmsBarOff");
-            KeyboardShortcutOverrideToggle.IsChecked = charmsConfig.EnableAnimations;
-            if (charmsConfig.EnableAnimations) KeyboardShortcutOverrideOnOff.Text = onText;
-            KeyboardShortcutOverrideOnOff.Text = offText;
+            BarEnabledToggle.IsChecked = App.charmsConfig.charmsBarConfig.IsEnabled;
+            BarHideAfterClickToggle.IsChecked = App.charmsConfig.charmsBarConfig.HideWindowAfterClick;
+            ClockEnabledToggle.IsChecked = App.charmsConfig.EnableAnimations;
+            KeyboardShortcutsToggle.IsChecked = App.charmsConfig.EnableAnimations;
+            KeyboardShortcutOverrideToggle.IsChecked = App.charmsConfig.EnableAnimations;
         }
+        #region language selector loading
+        private void LoadLanguageSelector()
+        {
+            if (!Directory.Exists(@"lang"))
+            {
+                Log.Error("Language folder doesn't exist. That's bad. Expect errors");
+            }
+
+            string[] langFiles = Directory.GetFiles("lang");
+            string codes = string.Empty;
+            foreach (string langFile in langFiles)
+            {
+                string langCode = Path.GetFileNameWithoutExtension(langFile);
+                try
+                {
+                    CultureInfo cultureInfo = new CultureInfo(langCode);
+                    string displayName = cultureInfo.DisplayName;
+                    int percentage = (int)Math.Round((App.translationManager.GetKeysAmount(langCode) / (double)App.translationManager.TotalKeys) * 100);
+                    LanguageItem languageItem = new LanguageItem
+                    {
+                        DisplayName = $"{displayName} | {percentage}%",
+                        LanguageCode = langCode,
+                    };
+
+                    LanguageSelector.Items.Add(languageItem);
+
+                    if (langCode == App.charmsConfig.CurrentLocale)
+                        LanguageSelector.SelectedItem = languageItem;
+
+                }
+                catch (CultureNotFoundException)
+                {
+                    LanguageSelector.Items.Add(new LanguageItem
+                    {
+                        DisplayName = langCode,
+                        LanguageCode = langCode,
+                    });
+                }
+            }
+
+            if (LanguageSelector.SelectedIndex == -1)
+            {
+                LanguageSelector.SelectedItem = LanguageSelector.Items.Cast<LanguageItem>().FirstOrDefault(item => item.LanguageCode == "en-us");
+            }
+
+        }
+        private class LanguageItem
+        {
+            public string DisplayName { get; set; }
+            public string LanguageCode { get; set; }
+            public override string ToString()
+            {
+                return DisplayName;
+            }
+        }
+        #endregion language selector loading
         #region back button
         private void BackButton_MouseDown(object sender, MouseButtonEventArgs e)
         {
@@ -84,6 +115,53 @@ namespace CharmsBarReloaded.CharmsSettings.Pages
             BackButton.Source = new BitmapImage(new Uri(@"../../Assets/CharmsSettings/BackButton.png", UriKind.Relative));
         }
         #endregion back button
+        #region loading strings
+        public void ReloadStrings()
+        {
+
+            onText = App.translationManager.GetTranslation("CharmsSettings.On");
+            offText = App.translationManager.GetTranslation("CharmsSettings.Off");
+
+            generalTitle.Text = App.translationManager.GetTranslation("CharmsSettings.Home.General");
+
+            LanguageText.Text = App.translationManager.GetTranslation("CharmsSettings.General.Language");
+            LanguageNeedRestart.Text = App.translationManager.GetTranslation("CharmsSettings.General.LanguageNeedRestart");
+
+            EnableAnimationText.Text = App.translationManager.GetTranslation("CharmsSettings.General.EnableAnimations");
+            if (App.charmsConfig.EnableAnimations) EnableAnimationsOnOff.Text = onText;
+            else EnableAnimationsOnOff.Text = offText;
+
+            RunOnStartupText.Text = App.translationManager.GetTranslation("CharmsSettings.General.RunOnStartup");
+            if (SystemConfig.StartupKeyExists) RunOnStartupOnOff.Text = onText;
+            else RunOnStartupOnOff.Text = offText;
+
+            BarEnabledText.Text = App.translationManager.GetTranslation("CharmsSettings.General.CharmsBarEnabled");
+            if (App.charmsConfig.charmsBarConfig.IsEnabled) BarEnabledOnOff.Text = onText;
+            else BarEnabledOnOff.Text = offText;
+
+            BarHideAfterClickText.Text = App.translationManager.GetTranslation("CharmsSettings.General.HideBarAfterClick");
+            if (App.charmsConfig.charmsBarConfig.HideWindowAfterClick) BarHideAfterClickOnOff.Text = onText;
+            else BarHideAfterClickOnOff.Text = offText;
+
+            ClockEnabledText.Text = App.translationManager.GetTranslation("CharmsSettings.General.CharmsClockEnabled");
+            if (App.charmsConfig.EnableAnimations) ClockEnabledOnOff.Text = onText;
+            else ClockEnabledOnOff.Text = offText;
+
+            KeyboardShortcutsText.Text = App.translationManager.GetTranslation("CharmsSettings.General.EnableKeyboardShortcuts");
+            if (App.charmsConfig.EnableAnimations) KeyboardShortcutsOnOff.Text = onText;
+            else KeyboardShortcutsOnOff.Text = offText;
+
+            KeyboardShortcutOverrideText.Text = App.translationManager.GetTranslation("CharmsSettings.General.KeyboardShortcutsOverrideCharmsBarOff");
+            if (App.charmsConfig.EnableAnimations) KeyboardShortcutOverrideOnOff.Text = onText;
+            else KeyboardShortcutOverrideOnOff.Text = offText;
+        }
+        #endregion loading strings
+
+        private void LanguageSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            App.charmsConfig.CurrentLocale = LanguageSelector.SelectedItem.As<LanguageItem>().LanguageCode;
+            LanguageNeedRestart.Visibility = Visibility.Visible;
+        }
 
         private void EnableAnimationsToggle_Checked(object sender, RoutedEventArgs e)
         {
@@ -98,6 +176,10 @@ namespace CharmsBarReloaded.CharmsSettings.Pages
         private void BarEnabledToggle_Checked(object sender, RoutedEventArgs e)
         {
             App.charmsConfig.charmsBarConfig.IsEnabled = (bool)BarEnabledToggle.IsChecked;
+        }
+        private void BarHideAfterClickToggle_Click(object sender, RoutedEventArgs e)
+        {
+            App.charmsConfig.charmsBarConfig.HideWindowAfterClick = (bool)BarHideAfterClickToggle.IsChecked;
         }
 
         private void ClockEnabledToggle_Checked(object sender, RoutedEventArgs e)

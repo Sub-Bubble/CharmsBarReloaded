@@ -15,9 +15,13 @@ namespace CharmsBarReloaded.CharmsSettings.Pages
         public Home()
         {
             InitializeComponent();
+            ReloadStrings();
+        }
+        public void ReloadStrings()
+        {
             settingsTitle.Text = App.translationManager.GetTranslation("CharmsSettings.Home.Title");
             settingsSubTitle.Text = App.translationManager.GetTranslation("CharmsSettings.Home.SubTitle");
-            
+
             generalSettings.Text = App.translationManager.GetTranslation("CharmsSettings.Home.General");
             personalizationSettings.Text = App.translationManager.GetTranslation("CharmsSettings.Home.Personalization");
             aboutSettings.Text = App.translationManager.GetTranslation("CharmsSettings.Home.About");
@@ -36,7 +40,6 @@ namespace CharmsBarReloaded.CharmsSettings.Pages
             RestartText.Text = App.translationManager.GetTranslation("CharmsSettings.Home.Power.Restart");
 
         }
-
         private void General_MouseDown(object sender, MouseButtonEventArgs e)
         {
             App.ClickHandler("SettingsGeneral");

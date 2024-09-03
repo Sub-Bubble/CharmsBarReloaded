@@ -13,6 +13,7 @@ namespace CharmsBarReloaded.Config
     {
         private Dictionary<string, string> localizedStrings;
         private Dictionary<string, string> fallbackStrings;
+        public int TotalKeys { get; } = 38;
         public TranslationManager Load(string cultureCode)
         {
             string localizedPath = $"lang/{cultureCode}.json";
@@ -37,6 +38,16 @@ namespace CharmsBarReloaded.Config
             if (localizedStrings.TryGetValue(key, out string value)) return value;
             if (fallbackStrings != null && fallbackStrings.TryGetValue(key, out string fallbackValue)) return fallbackValue;
             return key;
+        }
+        public int GetKeysAmount(string cultureCode)
+        {
+            string localizedPath = $"lang/{cultureCode}.json";
+            if (!File.Exists(localizedPath))
+            {
+                return 0;
+            }
+            Dictionary<string, string> translations = JsonSerializer.Deserialize<Dictionary<string, string>>(File.ReadAllText(localizedPath));
+            return translations.Count;
         }
     }
 }

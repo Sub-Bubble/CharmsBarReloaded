@@ -24,12 +24,7 @@ namespace CharmsBarReloaded.CharmsSettings.Pages
         public About()
         {
             InitializeComponent();
-            var assembly = Assembly.GetExecutingAssembly();
-            versionString.Text = $"{App.translationManager.GetTranslation("CharmsSettings.About.Version")}: {assembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>().InformationalVersion}";
-            buildString.Text = $"{App.translationManager.GetTranslation("CharmsSettings.About.Build")}: {assembly.GetName().Version.Major}";
-
-            aboutText.Text = App.translationManager.GetTranslation("CharmsSettings.Home.About");
-            UpdateButton.Content = App.translationManager.GetTranslation("CharmsSettings.About.CheckForUpdates");
+            ReloadStrings();
         }
         #region back button
         private void BackButton_MouseDown(object sender, MouseButtonEventArgs e)
@@ -50,6 +45,15 @@ namespace CharmsBarReloaded.CharmsSettings.Pages
             BackButton.Source = new BitmapImage(new Uri(@"../../Assets/CharmsSettings/BackButton.png", UriKind.Relative));
         }
         #endregion back button
+        public void ReloadStrings()
+        {
+            var assembly = Assembly.GetExecutingAssembly();
+            versionString.Text = $"{App.translationManager.GetTranslation("CharmsSettings.About.Version")}: {assembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>().InformationalVersion}";
+            buildString.Text = $"{App.translationManager.GetTranslation("CharmsSettings.About.Build")}: {assembly.GetName().Version.Major}";
+
+            aboutText.Text = App.translationManager.GetTranslation("CharmsSettings.Home.About");
+            UpdateButton.Content = App.translationManager.GetTranslation("CharmsSettings.About.CheckForUpdates");
+        }
 
     }
 }

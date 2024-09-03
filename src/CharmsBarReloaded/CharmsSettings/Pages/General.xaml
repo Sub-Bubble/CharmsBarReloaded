@@ -15,29 +15,35 @@
             </Grid>
             <TextBlock Text="General" FontSize="30px" Foreground="White" FontWeight="Thin" Margin="0,0,0,5" x:Name="generalTitle"/>
         </StackPanel>
-        <TextBlock Text="Language" TextWrapping="WrapWithOverflow" FontSize="20" Foreground="White" FontFamily="Segoe UI Semilight" Margin="0,20,0,0" x:Name="LanguageText"/>
-        <ComboBox x:Name="LanguageSelector" Margin="0,0,40,0" IsEnabled="False"/>
-        <TextBlock Text="EnableAnimations" FontSize="20" TextWrapping="WrapWithOverflow" Foreground="White" FontFamily="Segoe UI Semilight" x:Name="EnableAnimationText"/>
+        <TextBlock Text="Language" TextWrapping="WrapWithOverflow" FontSize="20" Foreground="White" FontFamily="Segoe UI Semilight" Margin="0,20,10,0" x:Name="LanguageText"/>
+        <ComboBox x:Name="LanguageSelector" Margin="0,0,40,0" SelectionChanged="LanguageSelector_SelectionChanged"/>
+        <TextBlock Text="Restart CharmsBar: Reloaded to fully apply changed language!" TextWrapping="WrapWithOverflow" FontSize="13" Foreground="White" FontFamily="Segoe UI Semilight" Margin="0,0,10,10" x:Name="LanguageNeedRestart"/>
+        <TextBlock Text="EnableAnimations" FontSize="20" TextWrapping="WrapWithOverflow" Foreground="White" FontFamily="Segoe UI Semilight" x:Name="EnableAnimationText" Margin="0,0,10,0"/>
         <StackPanel Orientation="Horizontal">
             <TextBlock Foreground="White" FontFamily="Segoe UI Bold" Text="On/Off" MinWidth="40" Margin="10,0,10,0" x:Name="EnableAnimationsOnOff"/>
             <cc:Win8Switch x:Name="EnableAnimationsToggle" Click="EnableAnimationsToggle_Checked"/>
         </StackPanel>
-        <TextBlock Text="RunOnStartup" FontSize="20" TextWrapping="WrapWithOverflow" Foreground="White" FontFamily="Segoe UI Semilight" x:Name="RunOnStartupText"/>
+        <TextBlock Text="RunOnStartup" FontSize="20" TextWrapping="WrapWithOverflow" Foreground="White" FontFamily="Segoe UI Semilight" x:Name="RunOnStartupText" Margin="0,0,10,0"/>
         <StackPanel Orientation="Horizontal">
             <TextBlock Foreground="White" FontFamily="Segoe UI Bold" Text="On/Off" MinWidth="40" Margin="10,0,10,0" x:Name="RunOnStartupOnOff"/>
             <cc:Win8Switch x:Name="RunOnStartupToggle" Click="RunOnStartupToggle_Checked"/>
         </StackPanel>
-        <TextBlock Text="CharmsBar.IsEnabled" FontSize="20" TextWrapping="WrapWithOverflow" Foreground="White" FontFamily="Segoe UI Semilight" x:Name="BarEnabledText"/>
+        <TextBlock Text="CharmsBar.IsEnabled" FontSize="20" TextWrapping="WrapWithOverflow" Foreground="White" FontFamily="Segoe UI Semilight" x:Name="BarEnabledText" Margin="0,0,10,0"/>
         <StackPanel Orientation="Horizontal">
             <TextBlock Foreground="White" FontFamily="Segoe UI Bold" Text="On/Off" MinWidth="40" Margin="10,0,10,0" x:Name="BarEnabledOnOff"/>
             <cc:Win8Switch x:Name="BarEnabledToggle" Click="BarEnabledToggle_Checked"/>
         </StackPanel>
-        <TextBlock Text="CharmsClock.IsEnabled" FontSize="20" TextWrapping="WrapWithOverflow" Foreground="White" FontFamily="Segoe UI Semilight" x:Name="ClockEnabledText"/>
+        <TextBlock Text="CharmsBar.HideWindowAfterClick" FontSize="20" TextWrapping="WrapWithOverflow" Foreground="White" FontFamily="Segoe UI Semilight" x:Name="BarHideAfterClickText" Margin="0,0,10,0"/>
+        <StackPanel Orientation="Horizontal">
+            <TextBlock Foreground="White" FontFamily="Segoe UI Bold" Text="On/Off" MinWidth="40" Margin="10,0,10,0" x:Name="BarHideAfterClickOnOff"/>
+            <cc:Win8Switch x:Name="BarHideAfterClickToggle" Click="BarHideAfterClickToggle_Click"/>
+        </StackPanel>
+        <TextBlock Text="CharmsClock.IsEnabled" FontSize="20" TextWrapping="WrapWithOverflow" Foreground="White" FontFamily="Segoe UI Semilight" x:Name="ClockEnabledText" Margin="0,0,10,0"/>
         <StackPanel Orientation="Horizontal">
             <TextBlock Foreground="White" FontFamily="Segoe UI Bold" Text="On/Off" MinWidth="40" Margin="10,0,10,0" x:Name="ClockEnabledOnOff"/>
             <cc:Win8Switch x:Name="ClockEnabledToggle" Click="ClockEnabledToggle_Checked"/>
         </StackPanel>
-        <TextBlock Text="EnableKeyboardShortcuts" FontSize="20" TextWrapping="WrapWithOverflow" Foreground="White" FontFamily="Segoe UI Semilight" x:Name="KeyboardShortcutsText"/>
+        <TextBlock Text="EnableKeyboardShortcuts" FontSize="20" TextWrapping="WrapWithOverflow" Foreground="White" FontFamily="Segoe UI Semilight" x:Name="KeyboardShortcutsText" Margin="0,0,10,0"/>
         <StackPanel Orientation="Horizontal">
             <TextBlock Foreground="White" FontFamily="Segoe UI Bold" Text="On/Off" MinWidth="40" Margin="10,0,10,0" x:Name="KeyboardShortcutsOnOff"/>
             <cc:Win8Switch x:Name="KeyboardShortcutsToggle" Click="KeyboardShortcutsToggle_Checked"/>

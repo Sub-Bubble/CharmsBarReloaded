@@ -20,7 +20,7 @@ namespace CharmsBarReloaded
         }
         public static void Fatal(Exception e, string message)
         {
-            logger.Fatal($"{message}\n{e.Message}\n{e.Data}\n{e.Source}");
+            logger.Fatal(e, message);
         }
         public static void Debug(string message)
         {

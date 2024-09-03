@@ -109,7 +109,7 @@ namespace CharmsBarReloaded
         {
             charmsSettings = new SettingsWindow();
             settingsHome = new Home();
-            settingsGeneral = new General(charmsConfig);
+            settingsGeneral = new General();
             settingsPersonalization = new Personalization();
             settingsAbout = new About();
 
@@ -120,7 +120,11 @@ namespace CharmsBarReloaded
             charmsSettings.frame.Content = settingsHome;
             Storyboard settingsSlideIn = (Storyboard)charmsSettings.FindResource("SlideIn");
             Storyboard settingsSlideOut = (Storyboard)charmsSettings.FindResource("SlideOut");
-            settingsSlideOut.Completed += (sender, args) => { charmsSettings.Hide(); };
+            settingsSlideOut.Completed += (sender, args) =>
+            {
+                charmsSettings.frame.Content = settingsHome; 
+                charmsSettings.Hide();
+            };
             charmsSettings.Loaded += (sender, args) =>
             {
                 if (charmsConfig.EnableAnimations)
@@ -129,6 +133,17 @@ namespace CharmsBarReloaded
             };
             charmsSettings.Deactivated += (sender, args) =>
             {
+                if (charmsSettings.frame.Content != settingsHome)
+                {
+                    charmsConfig.Save();
+                    translationManager = new TranslationManager().Load(charmsConfig.CurrentLocale);
+                    charmsBar.Window_Reload(charmsConfig, translationManager);
+                    charmsBar.HideWindow();
+                    settingsHome.ReloadStrings();
+                    settingsGeneral.ReloadStrings();
+                    settingsPersonalization.ReloadStrings();
+                    settingsAbout.ReloadStrings();
+                }
                 if (charmsSettings.isBusy) { return; }
                 if (charmsConfig.EnableAnimations)
                 {
@@ -136,9 +151,8 @@ namespace CharmsBarReloaded
                 }
                 else
                 {
-                    charmsSettings.Hide();
                     charmsSettings.frame.Content = settingsHome;
-                    charmsConfig.Save();
+                    charmsSettings.Hide();
                 }
             };
             charmsSettings.Activated += (sender, args) =>

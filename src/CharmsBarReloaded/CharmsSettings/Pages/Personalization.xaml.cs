@@ -24,7 +24,7 @@ namespace CharmsBarReloaded.CharmsSettings.Pages
         {
             InitializeComponent();
 
-            personalizationTitle.Text = App.translationManager.GetTranslation("CharmsSettings.Home.Personalization");
+            ReloadStrings();
         }
         #region back button
         private void BackButton_MouseDown(object sender, MouseButtonEventArgs e)
@@ -45,5 +45,9 @@ namespace CharmsBarReloaded.CharmsSettings.Pages
             BackButton.Source = new BitmapImage(new Uri(@"../../Assets/CharmsSettings/BackButton.png", UriKind.Relative));
         }
         #endregion back button
+        public void ReloadStrings()
+        {
+            personalizationTitle.Text = App.translationManager.GetTranslation("CharmsSettings.Home.Personalization");
+        }
     }
 }
