@@ -20,21 +20,21 @@ namespace CharmsBarReloaded.CharmsBar
             Duration = TimeSpan.Zero
         };
         public Storyboard fadeIn = new Storyboard();
-        private void InitializeAnimations(bool animationsEnabled, string bgColor)
+        private void InitializeAnimations()
         {
             TimeSpan timeSpan = TimeSpan.Zero;
-            if (animationsEnabled) timeSpan = TimeSpan.FromMilliseconds(100);
+            if (App.charmsConfig.EnableAnimations) timeSpan = TimeSpan.FromMilliseconds(100);
             fadeIn.Children.Clear(); //just in case
             fadeIn.Children.Add(new ColorAnimation
             {
-                To = (Color)ColorConverter.ConvertFromString($"#FF{bgColor}"),
+                To = (Color)ColorConverter.ConvertFromString($"#FF{App.charmsConfig.charmsBarConfig.BackgroundColor}"),
                 Duration = timeSpan
             });
             Storyboard.SetTargetProperty(fadeIn, new PropertyPath("(Window.Background).(SolidColorBrush.Color)"));
             fadeIn.Completed += (sender, e) => { isAnimating = false; };
             fadeOut.Completed += FadeOut_Completed;
         }
-        public void PrepareButtons(bool animationsEnabled, bool doSlideIn = true)
+        public void PrepareButtons(bool doSlideIn = true)
         {
             isAnimating = true;
             var storyboard = new Storyboard();
@@ -53,12 +53,12 @@ namespace CharmsBarReloaded.CharmsBar
                 Storyboard.SetTarget(slideInAnimation, grid);
                 Storyboard.SetTargetProperty(slideInAnimation, new PropertyPath("(UIElement.RenderTransform).(TranslateTransform.X)"));
                 storyboard.Children.Add(slideInAnimation);
-                storyboard.Completed += delegate { grid.Opacity = 1.0; if (doSlideIn) SlideInButtons(animationsEnabled); };
+                storyboard.Completed += delegate { grid.Opacity = 1.0; if (doSlideIn) SlideInButtons(); };
             }
             BeginStoryboard(storyboard);
         }
 
-        public void SlideInButtons(bool animationsEnabled)
+        public void SlideInButtons()
         {
             var storyboard = new Storyboard();
             var animationOrder = CalculateAnimationOrder(charmsStack.Children.Count);
@@ -72,7 +72,7 @@ namespace CharmsBarReloaded.CharmsBar
                     if (grid != null)
                     {
                         TimeSpan animationDuration;
-                        if (animationsEnabled)
+                        if (App.charmsConfig.EnableAnimations)
                             animationDuration = TimeSpan.FromSeconds(0.5);
                         else
                             animationDuration = TimeSpan.Zero;

@@ -27,7 +27,7 @@ namespace CharmsBarReloaded
                     {
                         charmsBar.Background = GetBrush.GetSpecialBrush("Transparent");
                         charmsBar.charmsStack.Visibility = Visibility.Visible;
-                        charmsBar.SlideInButtons(charmsConfig.EnableAnimations);
+                        charmsBar.SlideInButtons();
                     }
                 }
                 if (Keyboard.IsKeyDown(Key.LWin) && Keyboard.IsKeyDown(Key.C) && charmsConfig.charmsBarConfig.EnableKeyboardShortcut && (charmsConfig.charmsBarConfig.IsEnabled || charmsConfig.charmsBarConfig.KeyboardShortcutOverridesOffSetting))
@@ -38,7 +38,7 @@ namespace CharmsBarReloaded
                         charmsBar.charmsStack.Visibility = Visibility.Visible;
                         charmsBar.windowVisible = true;
                         charmsBar.isAnimating = true;
-                        charmsBar.SlideInButtons(charmsConfig.EnableAnimations);
+                        charmsBar.SlideInButtons();
                         charmsBar.BeginStoryboard(charmsBar.fadeIn);
                         if (charmsConfig.EnableAnimations)
                             charmsClock.BeginAnimation(UIElement.OpacityProperty, charmsClock.fadeIn);

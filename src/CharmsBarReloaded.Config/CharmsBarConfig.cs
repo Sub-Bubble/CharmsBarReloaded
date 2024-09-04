@@ -11,8 +11,8 @@
             public string BackgroundColor { get; set; } = "000000";
             public bool EnableKeyboardShortcut { get; set; } = true;
             public bool KeyboardShortcutOverridesOffSetting { get; set; } = false;
-            public int ButtonsAmount { get; set; } = 5;
             public string[] ButtonActions { get; set; } = ["Search", "Share", "Start", "Devices", "Settings"];
+            public bool[] UsesDynamicColor { get; set; } = [false, false, true, false, false];
             public static HashSet<string> ValidActions { get { return new HashSet<string> { "Search", "Share", "Start", "Devices", "Settings" }; } }
         }
     }

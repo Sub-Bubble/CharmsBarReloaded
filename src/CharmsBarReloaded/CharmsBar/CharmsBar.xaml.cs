@@ -38,8 +38,8 @@ namespace CharmsBarReloaded.CharmsBar
         public int windowWidth;
         public void Window_Reload(CharmsConfig appConfig, TranslationManager translation)
         {
-            InitializeAnimations(appConfig.EnableAnimations, appConfig.charmsBarConfig.BackgroundColor);
-            SetupButtons(appConfig.charmsBarConfig, translation);
+            InitializeAnimations();
+            SetupButtons();
 
             Log.Info("Loaded Charms Bar successfully!");
             this.Background = GetBrush.GetBrushFromHex(appConfig.charmsBarConfig.BackgroundColor);
@@ -47,7 +47,7 @@ namespace CharmsBarReloaded.CharmsBar
         }
         private void FadeOut_Completed(object? sender, EventArgs e)
         {
-            PrepareButtons(true, false);
+            PrepareButtons(false);
             isAnimating = false;
             windowVisible = false;
             this.Background = GetBrush.GetSpecialBrush("Hide");
