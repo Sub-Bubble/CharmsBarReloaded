@@ -48,6 +48,14 @@ namespace CharmsBarReloaded
                 //settings navigation
                 case "SettingsHome":
                     charmsSettings.frame.Content = settingsHome;
+                    charmsConfig.Save();
+                    translationManager = new TranslationManager().Load(charmsConfig.CurrentLocale);
+                    charmsBar.Window_Reload(charmsConfig, translationManager);
+                    charmsBar.HideWindow();
+                    settingsHome.ReloadStrings();
+                    settingsGeneral.ReloadStrings();
+                    settingsPersonalization.ReloadStrings();
+                    settingsAbout.ReloadStrings();
                     break;
                 case "SettingsGeneral":
                     charmsSettings.frame.Content = settingsGeneral;

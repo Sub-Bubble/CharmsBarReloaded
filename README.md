@@ -6,7 +6,7 @@ This application returns Windows 8's Charms Bar to Windows 10/11!<br><br>
 | Status      | Feature      | Note |
 | ------------- | ------------- | ------------- |
 | ✅ | Lightweight |
-| 🛠️ | Customizability with settings | Customization in the works |
+| 🛠️ | Customizability with settings | Button mapping settings in the works |
 | ✅ | Tray Icon |
 | ✅ | Animations |
 | ⚠️ | Keyboard Shortcuts | Broken on Windows 11 due to it opening Edge/Copilot |
