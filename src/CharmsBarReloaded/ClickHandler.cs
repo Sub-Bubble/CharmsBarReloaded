@@ -53,18 +53,15 @@ namespace CharmsBarReloaded
                     charmsBar.Window_Reload(charmsConfig, translationManager);
                     charmsBar.HideWindow();
                     settingsHome.ReloadStrings();
-                    settingsGeneral.ReloadStrings();
-                    settingsPersonalization.ReloadStrings();
-                    settingsAbout.ReloadStrings();
                     break;
                 case "SettingsGeneral":
-                    charmsSettings.frame.Content = settingsGeneral;
+                    charmsSettings.frame.Content = new General();
                     break;
                 case "SettingsPersonalization":
-                    charmsSettings.frame.Content = settingsPersonalization;
+                    charmsSettings.frame.Content = new Personalization();
                     break;
                 case "SettingsAbout":
-                    charmsSettings.frame.Content = settingsAbout;
+                    charmsSettings.frame.Content = new About();
                     break;
 
                 //Windows Actions

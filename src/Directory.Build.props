@@ -1,8 +1,9 @@
 <Project>
   <PropertyGroup>
-    <AssemblyVersion>26.0</AssemblyVersion>
-    <FileVersion>26.0</FileVersion>
-    <InformationalVersion>b1.0-pre3</InformationalVersion>
+    <TargetFramework>net8.0-windows10.0.20348.0</TargetFramework>
+    <AssemblyVersion>27.0</AssemblyVersion>
+    <FileVersion>27.0</FileVersion>
+    <InformationalVersion>b1.0-pre4</InformationalVersion>
     <IncludeSourceRevisionInInformationalVersion>False</IncludeSourceRevisionInInformationalVersion>
   </PropertyGroup>
 </Project>

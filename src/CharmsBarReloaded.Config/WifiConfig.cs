@@ -28,7 +28,7 @@ public class WifiConfig
         {
             if (adapter.OperationalStatus != OperationalStatus.Up) continue;
             if (!adapter.GetIPProperties().UnicastAddresses.Any(ip => ip.Address.AddressFamily == AddressFamily.InterNetwork || ip.Address.AddressFamily == AddressFamily.InterNetworkV6)) continue;
-            if (adapter.Description.Contains("VPN") || adapter.Description.Contains("Virtual") || adapter.Description.Contains("VM") || adapter.Description.Contains("Software")) continue;
+            if (adapter.Description.Contains("VPN") || adapter.Description.Contains("Virtual") || adapter.Description.Contains("VM") || adapter.Description.Contains("Software") || adapter.Description.Contains("TAP-Windows") ) continue;
 
             return adapter;
         }

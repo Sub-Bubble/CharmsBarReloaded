@@ -109,9 +109,6 @@ namespace CharmsBarReloaded
         {
             charmsSettings = new SettingsWindow();
             settingsHome = new Home();
-            settingsGeneral = new General();
-            settingsPersonalization = new Personalization();
-            settingsAbout = new About();
 
             charmsSettings.Left = SystemConfig.GetDesktopWorkingArea.Width - 360;
             charmsSettings.Height = SystemConfig.GetDesktopWorkingArea.Height;
@@ -140,9 +137,6 @@ namespace CharmsBarReloaded
                     charmsBar.Window_Reload(charmsConfig, translationManager);
                     charmsBar.HideWindow();
                     settingsHome.ReloadStrings();
-                    settingsGeneral.ReloadStrings();
-                    settingsPersonalization.ReloadStrings();
-                    settingsAbout.ReloadStrings();
                 }
                 if (charmsSettings.isBusy) { return; }
                 if (charmsConfig.EnableAnimations)
