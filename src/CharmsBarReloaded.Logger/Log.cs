@@ -28,7 +28,7 @@ namespace CharmsBarReloaded
         }
         public static void ClearPreviousLog()
         {
-            string logFilePath =$"{Path.Combine(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "CharmsBarReloaded"), "latest.log")}";
+            string logFilePath = $"{Path.Combine(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "CharmsBarReloaded"), "latest.log")}";
 
             // Clear the log file
             if (File.Exists(logFilePath))

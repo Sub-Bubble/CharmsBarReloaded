@@ -46,14 +46,21 @@ namespace CharmsBarReloaded.CharmsClock
             {
                 case 0:
                     BatteryLife.Source = new BitmapImage(new Uri(@"../Assets/CharmsClock/Battery0.png", UriKind.Relative)); break;
-                case 1: case 2: case 3: case 4:
+                case 1:
+                case 2:
+                case 3:
+                case 4:
                     BatteryLife.Source = new BitmapImage(new Uri(@"../Assets/CharmsClock/Battery1.png", UriKind.Relative)); break;
-                case 5: case 6: case 7: case 8: case 9:
+                case 5:
+                case 6:
+                case 7:
+                case 8:
+                case 9:
                     BatteryLife.Source = new BitmapImage(new Uri(@"../Assets/CharmsClock/Battery5.png", UriKind.Relative)); break;
                 case 100:
                     BatteryLife.Source = new BitmapImage(new Uri(@"../Assets/CharmsClock/BatteryFull.png", UriKind.Relative)); break;
                 default:
-                    BatteryLife.Source = new BitmapImage(new Uri(@$"../Assets/CharmsClock/Battery{(SystemConfig.GetBatteryPercentage/10)}0.png", UriKind.Relative)); break;
+                    BatteryLife.Source = new BitmapImage(new Uri(@$"../Assets/CharmsClock/Battery{(SystemConfig.GetBatteryPercentage / 10)}0.png", UriKind.Relative)); break;
             }
         }
 

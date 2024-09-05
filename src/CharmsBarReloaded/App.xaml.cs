@@ -1,10 +1,9 @@
-﻿using System.Diagnostics;
-using System.Windows;
-using CharmsBarReloaded.CharmsSettings;
+﻿using CharmsBarReloaded.CharmsSettings;
 using CharmsBarReloaded.CharmsSettings.Pages;
 using CharmsBarReloaded.Config;
 using Hardcodet.Wpf.TaskbarNotification;
-using Hardcodet.Wpf.TaskbarNotification.Interop;
+using System.Diagnostics;
+using System.Windows;
 using Timer = System.Timers.Timer;
 
 namespace CharmsBarReloaded

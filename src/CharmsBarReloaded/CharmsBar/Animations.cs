@@ -1,7 +1,7 @@
-﻿using System.Windows.Controls;
-using System.Windows.Media.Animation;
-using System.Windows;
+﻿using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 
 namespace CharmsBarReloaded.CharmsBar
 {
@@ -42,14 +42,14 @@ namespace CharmsBarReloaded.CharmsBar
 
             for (int i = 0; i < numberOfGrids; i++)
             {
-               var grid = charmsStack.Children[i] as Grid;
-               var slideInAnimation = new DoubleAnimation
-                    {
+                var grid = charmsStack.Children[i] as Grid;
+                var slideInAnimation = new DoubleAnimation
+                {
                     From = 0,
                     To = charmsStack.ActualWidth,
                     Duration = TimeSpan.Zero,
                     BeginTime = TimeSpan.FromSeconds(i * 0.01),
-               };
+                };
                 Storyboard.SetTarget(slideInAnimation, grid);
                 Storyboard.SetTargetProperty(slideInAnimation, new PropertyPath("(UIElement.RenderTransform).(TranslateTransform.X)"));
                 storyboard.Children.Add(slideInAnimation);

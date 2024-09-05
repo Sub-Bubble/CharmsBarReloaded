@@ -1,10 +1,10 @@
-﻿using Microsoft.Win32;
-using System.Windows.Media;
-using System.Windows;
+﻿using CoreAudio;
+using Microsoft.Win32;
 using System.Management;
-using CoreAudio;
-using Point = System.Windows.Point;
 using System.Runtime.InteropServices;
+using System.Windows;
+using System.Windows.Media;
+using Point = System.Windows.Point;
 using PowerLineStatus = System.Windows.Forms.PowerLineStatus;
 
 namespace CharmsBarReloaded.Config
@@ -114,7 +114,7 @@ namespace CharmsBarReloaded.Config
         public static int GetDeviceVolume
         {
             get
-            { 
+            {
                 return (int)(device.AudioEndpointVolume.MasterVolumeLevelScalar * 100);
             }
         }

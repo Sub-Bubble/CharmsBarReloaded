@@ -1,13 +1,13 @@
-﻿using CharmsBarReloaded.Config;
-using CharmsBarReloaded.CharmsSettings;
+﻿using CharmsBarReloaded.CharmsSettings;
 using CharmsBarReloaded.CharmsSettings.Pages;
+using CharmsBarReloaded.Config;
+using Hardcodet.Wpf.TaskbarNotification;
 using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Interop;
-using System.Windows.Media.Imaging;
 using System.Windows.Media.Animation;
-using Hardcodet.Wpf.TaskbarNotification;
+using System.Windows.Media.Imaging;
 
 namespace CharmsBarReloaded
 {
@@ -119,7 +119,7 @@ namespace CharmsBarReloaded
             Storyboard settingsSlideOut = (Storyboard)charmsSettings.FindResource("SlideOut");
             settingsSlideOut.Completed += (sender, args) =>
             {
-                charmsSettings.frame.Content = settingsHome; 
+                charmsSettings.frame.Content = settingsHome;
                 charmsSettings.Hide();
             };
             charmsSettings.Loaded += (sender, args) =>

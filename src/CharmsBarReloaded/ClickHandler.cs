@@ -2,7 +2,6 @@
 using CharmsBarReloaded.Config;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
-using System.Text;
 using System.Windows;
 using MessageBox = System.Windows.MessageBox;
 
@@ -36,9 +35,10 @@ namespace CharmsBarReloaded
                 case "Settings":
                     charmsSettings.isBusy = true;
 
-                    Current.Dispatcher.BeginInvoke(new Action(() => {
+                    Current.Dispatcher.BeginInvoke(new Action(() =>
+                    {
                         charmsSettings.Show();
-                       charmsSettings.Focus();
+                        charmsSettings.Focus();
                     }), System.Windows.Threading.DispatcherPriority.Input);
                     break;
                 case "FocusSettings":

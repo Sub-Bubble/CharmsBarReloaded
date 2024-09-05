@@ -35,7 +35,7 @@ namespace CharmsBarReloaded.Config
             {
                 if (!Directory.Exists(configPath)) Directory.CreateDirectory(configPath);
                 using (FileStream fs = File.Create(configFile)) { }
-                File.WriteAllText(configFile, JsonSerializer.Serialize(this, new JsonSerializerOptions { WriteIndented = true}));
+                File.WriteAllText(configFile, JsonSerializer.Serialize(this, new JsonSerializerOptions { WriteIndented = true }));
                 return this;
             }
 

@@ -1,20 +1,9 @@
 ﻿using CharmsBarReloaded.Config;
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace CharmsBarReloaded.CharmsSettings.Pages
 {
@@ -130,7 +119,8 @@ namespace CharmsBarReloaded.CharmsSettings.Pages
                 };
                 dynamicColorCheck.Content = new TextBlock { TextWrapping = TextWrapping.Wrap, Text = App.translationManager.GetTranslation("CharmsSettings.Personalization.UseDynamicColor") };
 
-                dynamicColorCheck.Click += (sender, args) => {
+                dynamicColorCheck.Click += (sender, args) =>
+                {
                     App.charmsConfig.charmsBarConfig.UsesDynamicColor[j] = (bool)dynamicColorCheck.IsChecked;
                 };
 
@@ -166,7 +156,7 @@ namespace CharmsBarReloaded.CharmsSettings.Pages
             bool[] dynamicColors = App.charmsConfig.charmsBarConfig.UsesDynamicColor;
             Array.Resize(ref dynamicColors, dynamicColors.Length - 1);
             App.charmsConfig.charmsBarConfig.UsesDynamicColor = dynamicColors;
-            
+
             UpdateButtonsStack();
         }
 

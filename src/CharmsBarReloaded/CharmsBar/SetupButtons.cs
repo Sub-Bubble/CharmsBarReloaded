@@ -1,9 +1,9 @@
 ﻿using CharmsBarReloaded.Config;
+using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.IO;
 
 namespace CharmsBarReloaded.CharmsBar
 {
@@ -11,7 +11,7 @@ namespace CharmsBarReloaded.CharmsBar
     {
         private void SetupButtons()
         {
-            Grid[] buttons = new Grid[App.charmsConfig.charmsBarConfig.ButtonActions.Length+2];
+            Grid[] buttons = new Grid[App.charmsConfig.charmsBarConfig.ButtonActions.Length + 2];
             #region filler
             buttons[0] = new Grid();
             buttons[0].Children.Add(new TextBlock { Height = 100, Text = "", HorizontalAlignment = HorizontalAlignment.Stretch });
@@ -49,22 +49,24 @@ namespace CharmsBarReloaded.CharmsBar
 
                 //image source
                 BitmapImage image = new BitmapImage(new Uri($"pack://application:,,,/Assets/CharmsBar/{action}.png"));
-                 if (App.charmsConfig.charmsBarConfig.UsesDynamicColor[i-1])
+                if (App.charmsConfig.charmsBarConfig.UsesDynamicColor[i - 1])
                     buttons[i].Children.Add(new Grid
                     {
-                        Height = 48, Width = 48,
-                        Margin = new Thickness(0, 18.01, 0, 0), VerticalAlignment = VerticalAlignment.Top,
+                        Height = 48,
+                        Width = 48,
+                        Margin = new Thickness(0, 18.01, 0, 0),
+                        VerticalAlignment = VerticalAlignment.Top,
                         OpacityMask = new ImageBrush(image),
                         Background = SystemConfig.GetAccentColor
                     });
                 else
-                buttons[i].Children.Add(new Image
-                {
-                    Height = 48,
-                    Margin = new Thickness(0, 18, 0, 0),
-                    VerticalAlignment = VerticalAlignment.Top,
-                    Source = image
-                });
+                    buttons[i].Children.Add(new Image
+                    {
+                        Height = 48,
+                        Margin = new Thickness(0, 18, 0, 0),
+                        VerticalAlignment = VerticalAlignment.Top,
+                        Source = image
+                    });
                 buttons[i].Children.Add(new Label
                 {
                     Foreground = GetBrush.GetBrushFromHex(App.charmsConfig.charmsBarConfig.TextColor),
