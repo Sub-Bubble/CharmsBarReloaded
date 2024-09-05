@@ -16,12 +16,9 @@ namespace CharmsBarReloaded
     {
         private static CharmsBar.CharmsBar charmsBar;
         private static CharmsClock.CharmsClock charmsClock;
-        public static CharmsConfig charmsConfig { get; private set; }
+        public static CharmsConfig charmsConfig { get; set; }
         private static SettingsWindow charmsSettings;
-        private static Home settingsHome;/*
-        private static General settingsGeneral;
-        private static Personalization settingsPersonalization;
-        private static About settingsAbout;*/
+        private static Home settingsHome;
         private static TaskbarIcon tray;
         public static TranslationManager translationManager { get; private set; }
         private void Application_Startup(object sender, StartupEventArgs e)

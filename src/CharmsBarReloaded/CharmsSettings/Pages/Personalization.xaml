@@ -37,7 +37,16 @@
             <colorpicker:PortableColorPicker Width="50" Height="25" Style="{StaticResource DefaultColorPickerStyle}" Cursor="Hand" Margin="0,0,10,0" x:Name="BarTextColorPicker" ShowAlpha="False"/>
             <TextBlock Text="Text color" FontSize="17" Foreground="White" FontFamily="Segoe UI" VerticalAlignment="Center" x:Name="BarTextColorText"/>
         </StackPanel>
-        
+
+        <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+            <TextBlock Text="ButtonMapping" TextWrapping="WrapWithOverflow" FontSize="20" Foreground="White" FontFamily="Segoe UI Semilight" x:Name="ButtonMappingText" Margin="0,0,10,0"/>
+            <Button Content="+" Height="30" Width="30" FontSize="16.5" FontFamily="Segoe UI Bold" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Center" Margin="0,0,10,0" x:Name="ButtonMappingPlus" Click="ButtonMappingPlus_Click"/>
+            <Button Content="-" Height="30" Width="30" FontSize="16.5" FontFamily="Segoe UI Bold" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Center" x:Name="ButtonMappingMinus" Click="ButtonMappingMinus_Click"/>
+        </StackPanel>
+        <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled" Margin="0,10,10,0">
+            <StackPanel Orientation="Horizontal" x:Name="ButtonsStack"/>
+        </ScrollViewer>
+
         <!-- Charms Clock Personalization settings -->
         <TextBlock Text="Charms Clock" Foreground="Gray" FontFamily="Segoe UI Semilight" Margin="0,30,0,0" x:Name="CharmsClock"/>
         <TextBlock Text="ShowChargingOnDesktop" TextWrapping="WrapWithOverflow" FontSize="20" Foreground="White" FontFamily="Segoe UI Semilight" x:Name="ShowChargingOnDesktopText" Margin="0,10,10,0"/>

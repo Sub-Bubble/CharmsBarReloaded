@@ -5,19 +5,19 @@ This application returns Windows 8's Charms Bar to Windows 10/11!<br><br>
 ## Features
 | Status      | Feature      | Note |
 | ------------- | ------------- | ------------- |
-| ✅ | Lightweight |
-| 🛠️ | Customizability with settings | Button mapping settings in the works |
-| ✅ | Tray Icon |
 | ✅ | Animations |
-| ⚠️ | Keyboard Shortcuts | Broken on Windows 11 due to it opening Edge/Copilot |
-| ✅ | Running on startup |
-| ✅ | Charms Clock |
-| ✅ | DPI scaling |
 | ✅ | Button mapping |
-| ✅ | Translations support |
-| 🕓 | Theme support |
-| 🕓 | Updater |
+| ✅ | Charms Clock |
+| ✅ | Customizability with settings |
+| ✅ | DPI scaling |
+| ⚠️ | Keyboard Shortcuts | Broken on Windows 11 due to it opening Edge/Copilot |
+| ✅ | Lightweight |
 | ❌ | Proper touchscreen support |
+| ✅ | Running on startup |
+| 🕓 | Theme support | Currently no ETA |
+| ✅ | Translations support |
+| ✅ | Tray Icon |
+| 🕓 | Updater | Coming in b2.0 |
 - ✅ - Fully working
 - ⚠️ - Has problems
 - 🛠️ - In the works
@@ -27,7 +27,8 @@ This application returns Windows 8's Charms Bar to Windows 10/11!<br><br>
 ## Screenshots
 | Windows 10 | Windows 11 |
 | ------------- | ------------- |
-| <img src="/Media/Win10Preview.png"> | <img src="/Media/Win11Preview.jpg"> |
+| <img src="/media/Win10Desktop.png"> <p align="center">Desktop</p>  | <img src="/media/Win11Desktop.png"> <p align="center">Desktop</p> |
+| <img src="/media/Win10Laptop.png"> <p align="center">Laptop</p> | <img src="/media/Win11Laptop.png"> <p align="center">Laptop</p> |
 
 ## Languages
 | Language | Percentage | Contributors |

@@ -1,5 +1,8 @@
-﻿using System;
+﻿using CharmsBarReloaded.Config;
+using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -36,6 +39,8 @@ namespace CharmsBarReloaded.CharmsSettings.Pages
 
             ClockBackgroundPicker.SelectedColor = (Color)ColorConverter.ConvertFromString($"#FF{App.charmsConfig.charmsClockConfig.BackgroundColor}");
             ClockTextColorPicker.SelectedColor = (Color)ColorConverter.ConvertFromString($"#FF{App.charmsConfig.charmsClockConfig.TextColor}");
+
+            UpdateButtonsStack();
         }
         #region back button
         private void BackButton_MouseDown(object sender, MouseButtonEventArgs e)
@@ -79,6 +84,9 @@ namespace CharmsBarReloaded.CharmsSettings.Pages
             BarBackgroundText.Text = App.translationManager.GetTranslation("CharmsSettings.Personalization.BarBackground");
             BarHoverText.Text = App.translationManager.GetTranslation("CharmsSettings.Personalization.BarHover");
             BarTextColorText.Text = App.translationManager.GetTranslation("CharmsSettings.Personalization.BarText");
+            ButtonMappingText.Text = App.translationManager.GetTranslation("CharmsSettings.Personalization.ButtonMapping");
+            ButtonMappingPlus.Content = App.translationManager.GetTranslation("CharmsSettings.Plus");
+            ButtonMappingMinus.Content = App.translationManager.GetTranslation("CharmsSettings.Minus");
 
             CharmsClock.Text = App.translationManager.GetTranslation("CharmsSettings.CharmsClock");
             ShowChargingOnDesktopText.Text = App.translationManager.GetTranslation("CharmsSettings.Personalization.ShowChargingOnDesktop");
@@ -91,6 +99,76 @@ namespace CharmsBarReloaded.CharmsSettings.Pages
             ClockTextColorText.Text = App.translationManager.GetTranslation("CharmsSettings.Personalization.ClockText");
         }
         #endregion loading strings
+
+        private void UpdateButtonsStack()
+        {
+            ButtonsStack.Children.Clear();
+
+            for (int i = 0; i < App.charmsConfig.charmsBarConfig.ButtonActions.Length; i++)
+            {
+                int j = i;
+
+                StackPanel stack = new StackPanel
+                {
+                    Width = 100,
+                    Margin = new Thickness(0, 0, 10, 0)
+                };
+
+                ComboBox comboBox = new ComboBox
+                {
+                    ItemsSource = CharmsConfig.CharmsBarConfig.ValidActions,
+                    SelectedItem = App.charmsConfig.charmsBarConfig.ButtonActions[j],
+                    Width = 100
+                };
+                comboBox.SelectionChanged += (sender, args) =>
+                {
+                    App.charmsConfig.charmsBarConfig.ButtonActions[j] = comboBox.SelectedItem.ToString();
+                };
+                CheckBox dynamicColorCheck = new CheckBox
+                {
+                    IsChecked = App.charmsConfig.charmsBarConfig.UsesDynamicColor[j],
+                };
+                dynamicColorCheck.Content = new TextBlock { TextWrapping = TextWrapping.Wrap, Text = App.translationManager.GetTranslation("CharmsSettings.Personalization.UseDynamicColor") };
+
+                dynamicColorCheck.Click += (sender, args) => {
+                    App.charmsConfig.charmsBarConfig.UsesDynamicColor[j] = (bool)dynamicColorCheck.IsChecked;
+                };
+
+                stack.Children.Add(comboBox);
+                stack.Children.Add(dynamicColorCheck);
+
+                ButtonsStack.Children.Add(stack);
+            }
+        }
+        private void ButtonMappingPlus_Click(object sender, RoutedEventArgs e)
+        {
+            string[] actions = App.charmsConfig.charmsBarConfig.ButtonActions;
+            Array.Resize(ref actions, actions.Length + 1);
+            App.charmsConfig.charmsBarConfig.ButtonActions = actions;
+
+            bool[] dynamicColors = App.charmsConfig.charmsBarConfig.UsesDynamicColor;
+            Array.Resize(ref dynamicColors, dynamicColors.Length + 1);
+            App.charmsConfig.charmsBarConfig.UsesDynamicColor = dynamicColors;
+
+            App.charmsConfig.charmsBarConfig.ButtonActions[App.charmsConfig.charmsBarConfig.ButtonActions.Length - 1] = "Search";
+            App.charmsConfig.charmsBarConfig.UsesDynamicColor[App.charmsConfig.charmsBarConfig.UsesDynamicColor.Length - 1] = false;
+
+            UpdateButtonsStack();
+            App.charmsConfig.Save();
+        }
+
+        private void ButtonMappingMinus_Click(object sender, RoutedEventArgs e)
+        {
+            string[] actions = App.charmsConfig.charmsBarConfig.ButtonActions;
+            Array.Resize(ref actions, actions.Length - 1);
+            App.charmsConfig.charmsBarConfig.ButtonActions = actions;
+
+            bool[] dynamicColors = App.charmsConfig.charmsBarConfig.UsesDynamicColor;
+            Array.Resize(ref dynamicColors, dynamicColors.Length - 1);
+            App.charmsConfig.charmsBarConfig.UsesDynamicColor = dynamicColors;
+            
+            UpdateButtonsStack();
+        }
 
         private void ShowChargingOnDesktopToggle_Click(object sender, RoutedEventArgs e)
         {
