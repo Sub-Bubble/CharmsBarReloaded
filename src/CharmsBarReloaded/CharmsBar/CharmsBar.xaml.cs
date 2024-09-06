@@ -36,14 +36,14 @@ namespace CharmsBarReloaded.CharmsBar
         public bool windowVisible;
         public bool isAnimating = false;
         public int windowWidth;
-        public void Window_Reload(CharmsConfig appConfig, TranslationManager translation)
+        public void Window_Reload()
         {
             InitializeAnimations();
             SetupButtons();
 
             Log.Info("Loaded Charms Bar successfully!");
-            this.Background = GetBrush.GetBrushFromHex(appConfig.charmsBarConfig.BackgroundColor);
-            PrepareButtons(appConfig.EnableAnimations);
+            this.Background = GetBrush.GetBrushFromHex(App.charmsConfig.charmsBarConfig.BackgroundColor);
+            PrepareButtons(App.charmsConfig.EnableAnimations);
         }
         private void FadeOut_Completed(object? sender, EventArgs e)
         {

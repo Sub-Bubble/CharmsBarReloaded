@@ -18,12 +18,12 @@ namespace CharmsBarReloaded
         static extern int GetWindowLong(IntPtr hWnd, int nIndex);
         [DllImport("user32.dll")]
         static extern int SetWindowLong(IntPtr hWnd, int nIndex, int dwNewLong);
-        private void HideWindowFromAltTab(Window Window)
+        private static void HideWindowFromAltTab(Window Window)
         {
             SetWindowLong(new WindowInteropHelper(Window).Handle, -20, (GetWindowLong(new WindowInteropHelper(Window).Handle, -20) | 0x00000080) & ~0x00040000);
         }
         #endregion hide window from alt tab
-        private void LoadCharmsBar()
+        private static void LoadCharmsBar()
         {
             charmsBar = new CharmsBar.CharmsBar();
             charmsBar.MouseLeave += (sender, args) =>
@@ -39,7 +39,7 @@ namespace CharmsBarReloaded
             {
                 charmsBar.Top = SystemConfig.GetDesktopWorkingArea.Top + 1;
                 HideWindowFromAltTab(charmsBar);
-                charmsBar.Window_Reload(charmsConfig, translationManager);
+                charmsBar.Window_Reload();
                 charmsBar.Left = SystemConfig.GetDesktopWorkingArea.Right - charmsBar.Width;
                 charmsBar.charmsStack.Width = charmsBar.windowWidth;
                 charmsBar.Width = charmsBar.windowWidth;
@@ -130,15 +130,15 @@ namespace CharmsBarReloaded
             };
             charmsSettings.Deactivated += (sender, args) =>
             {
+                if (charmsSettings.isBusy) { return; }
                 if (charmsSettings.frame.Content != settingsHome)
                 {
                     charmsConfig.Save();
                     translationManager = new TranslationManager().Load(charmsConfig.CurrentLocale);
-                    charmsBar.Window_Reload(charmsConfig, translationManager);
-                    charmsBar.HideWindow();
+                    charmsBar = new();
+                    LoadCharmsBar();
                     settingsHome.ReloadStrings();
                 }
-                if (charmsSettings.isBusy) { return; }
                 if (charmsConfig.EnableAnimations)
                 {
                     charmsSettings.BeginStoryboard(settingsSlideOut);
@@ -151,10 +151,9 @@ namespace CharmsBarReloaded
             };
             charmsSettings.Activated += (sender, args) =>
             {
-                charmsSettings.isBusy = false;
-
-                if (charmsConfig.EnableAnimations)
+                if (charmsConfig.EnableAnimations && !charmsSettings.isBusy)
                     charmsSettings.BeginStoryboard(settingsSlideIn);
+                charmsSettings.isBusy = false;
             };
 
             Log.Info("Charms Settings loaded!");

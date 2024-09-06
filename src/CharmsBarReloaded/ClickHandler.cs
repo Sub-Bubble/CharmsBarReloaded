@@ -33,8 +33,6 @@ namespace CharmsBarReloaded
                     keybd_event(0x1B, 0, 0x02, UIntPtr.Zero);
                     break;
                 case "Settings":
-                    charmsSettings.isBusy = true;
-
                     Current.Dispatcher.BeginInvoke(new Action(() =>
                     {
                         charmsSettings.Show();
@@ -49,10 +47,16 @@ namespace CharmsBarReloaded
                 case "SettingsHome":
                     charmsSettings.frame.Content = settingsHome;
                     charmsConfig.Save();
+                    charmsSettings.isBusy = true;
                     translationManager = new TranslationManager().Load(charmsConfig.CurrentLocale);
-                    charmsBar.Window_Reload(charmsConfig, translationManager);
-                    charmsBar.HideWindow();
+                    charmsBar = new();
+                    LoadCharmsBar();
                     settingsHome.ReloadStrings();
+                    Current.Dispatcher.BeginInvoke(new Action(() =>
+                    {
+                        charmsSettings.Show();
+                        charmsSettings.Focus();
+                    }), System.Windows.Threading.DispatcherPriority.Input);
                     break;
                 case "SettingsGeneral":
                     charmsSettings.frame.Content = new General();
@@ -75,6 +79,7 @@ namespace CharmsBarReloaded
                     Process.Start(new ProcessStartInfo { FileName = "explorer.exe", Arguments = $"ms-availablenetworks:", CreateNoWindow = true });
                     break;
                 case "VolumeSettings":
+                    charmsSettings.isBusy = true;
                     var process = Process.GetProcessesByName("sndvol");
                     if (process.Any())
                     {
