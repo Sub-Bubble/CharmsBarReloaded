@@ -11,14 +11,6 @@
     <ApplicationIcon>assets\AppIcon.ico</ApplicationIcon>
   </PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <GenerateAssemblyInfo>True</GenerateAssemblyInfo>
-  </PropertyGroup>
-
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <GenerateAssemblyInfo>True</GenerateAssemblyInfo>
-  </PropertyGroup>
-
   <ItemGroup>
     <None Remove="assets\AppIcon.ico" />
     <None Remove="Assets\CharmsClock\Battery0.png" />
