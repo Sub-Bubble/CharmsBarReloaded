@@ -100,9 +100,9 @@ namespace CharmsBarReloaded
                     charmsClock.Background = GetBrush.GetBrushFromHex(charmsConfig.charmsBarConfig.BackgroundColor);
                 HideWindowFromAltTab(charmsClock);
                 charmsClock.Update(charmsConfig.charmsClockConfig);
+                charmsClock.BeginAnimation(UIElement.OpacityProperty, charmsClock.noAnimationOut);
             };
             charmsClock.Show();
-            charmsClock.BeginAnimation(UIElement.OpacityProperty, charmsClock.noAnimationOut);
             Log.Info("Loaded Charms Clock successfully!");
         }
         private void LoadSettings()
