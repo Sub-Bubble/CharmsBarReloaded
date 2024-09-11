@@ -1,6 +1,6 @@
 # CharmsBar: Reloaded
 This application returns Windows 8's Charms Bar to Windows 10/11!<br><br>
-**Please note that the application is currently under a complete rewrite, so features may be absent/incomplete/buggy. If you encounter a bug, please create a new issue.**
+**Now in beta!**
 
 ## Features
 | Status      | Feature      | Note |
