@@ -1,0 +1,57 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:CharmsBarReloaded.WpfExtensions">
+    <ControlTemplate x:Key="Win8SwitchTemplate" TargetType="local:Win8Switch">
+        <Grid Width="50" Height="19" HorizontalAlignment="Left">
+            <!-- Outer Border -->
+            <Border Width="50" Height="19" BorderThickness="2" CornerRadius="0" BorderBrush="#a6a6a6">
+                <!-- Inner Rectangle with Space -->
+                <Border x:Name="InnerBackground" Margin="1" CornerRadius="0" Background="#a6a6a6"/>
+            </Border>
+
+            <!-- Thumb -->
+            <Border x:Name="SwitchThumb" Width="12" Height="19" Background="White" CornerRadius="0" HorizontalAlignment="Left">
+                <Border.RenderTransform>
+                    <TranslateTransform x:Name="ThumbTransform" X="0" />
+                </Border.RenderTransform>
+            </Border>
+        </Grid>
+
+        <!-- Animations for Thumb Movement -->
+        <ControlTemplate.Triggers>
+            <!-- Trigger to change background when IsChecked is True -->
+            <Trigger Property="IsChecked" Value="True">
+                <Setter TargetName="InnerBackground" Property="Background" Value="{Binding Source={x:Static SystemParameters.WindowGlassBrush}}" />
+                <Trigger.EnterActions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation Storyboard.TargetName="ThumbTransform"
+                                             Storyboard.TargetProperty="X"
+                                             To="38" Duration="0:0:0.05" />
+                        </Storyboard>
+                    </BeginStoryboard>
+                </Trigger.EnterActions>
+                <Trigger.ExitActions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation Storyboard.TargetName="ThumbTransform"
+                                             Storyboard.TargetProperty="X"
+                                             To="0" Duration="0:0:0.05" />
+                        </Storyboard>
+                    </BeginStoryboard>
+                </Trigger.ExitActions>
+            </Trigger>
+
+            <!-- Trigger to handle disabled state -->
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter TargetName="SwitchThumb" Property="Background" Value="#a6a6a6" />
+                <Setter TargetName="InnerBackground" Property="Background" Value="#a6a6a6" />
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+    <Style TargetType="{x:Type local:Win8Switch}">
+        <Setter Property="Template" Value="{StaticResource Win8SwitchTemplate}" />
+    </Style>
+
+</ResourceDictionary>

@@ -1,0 +1,26 @@
+﻿<Window x:Class="CharmsBarReloaded.CharmsClock.CharmsClock"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CharmsBarReloaded.CharmsClock"
+        mc:Ignorable="d"
+        Title="Clock" Height="140" Width="487"
+        Topmost="True" WindowStyle="None" AllowsTransparency="True"
+        SnapsToDevicePixels="True" UseLayoutRounding="True">
+    <Grid Background="Black" HorizontalAlignment="Left">
+        <TextBlock Height="140" Width="487"/>
+        <Image x:Name="InternetStatus" Source="../Assets/CharmsClock/NoInternet.png" Height="20" Width="22" Margin="40,38,425,82"/>
+        <Image x:Name="BatteryLife" Source="../Assets/CharmsClock/BatteryFull.png" Height="20" Width="22" Margin="40,82,425,38"/>
+        <Image x:Name="IsCharging" Source="../Assets/CharmsClock/Charging.png" Height="20" Width="22" Margin="40,82,425,38"/>
+
+        <StackPanel Margin="80,0,0,10" Orientation="Horizontal">
+            <Label x:Name="Hours" Content="0" FontFamily="Segoe UI Light" Foreground="White" FontSize="80" VerticalAlignment="Center" HorizontalContentAlignment="Right"/>
+            <Label x:Name="Separator" Content=":" FontFamily="Segoe UI Light" Foreground="White" FontSize="80" VerticalAlignment="Center" Margin="-5,0,-5,12" />
+            <Label x:Name="Minutes" Content="00" FontFamily="Segoe UI Light" Foreground="White" FontSize="80" VerticalAlignment="Center" Margin="0,0,10,0"/>
+
+            <Label x:Name="Date" Content="[null]&#x0a;[null]" FontFamily="Segoe UI Semilight" Foreground="White" VerticalAlignment="Center" FontSize="30"/>
+        </StackPanel>
+
+    </Grid>
+</Window>
