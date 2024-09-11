@@ -3,7 +3,7 @@
 		<TargetFramework>net8.0-windows10.0.20348.0</TargetFramework>
 		<AssemblyVersion>28.0</AssemblyVersion>
 		<FileVersion>28.0</FileVersion>
-		<InformationalVersion>b1.0-rc1</InformationalVersion>
+		<InformationalVersion>b1.0</InformationalVersion>
 		<IncludeSourceRevisionInInformationalVersion>False</IncludeSourceRevisionInInformationalVersion>
 	</PropertyGroup>
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
