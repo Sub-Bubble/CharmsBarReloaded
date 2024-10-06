@@ -33,8 +33,10 @@ This application returns Windows 8's Charms Bar to Windows 10/11!
 ## Languages
 | Language | Percentage | Contributors |
 | ------------- | ------------- | ------------- |
+| Chinese (Simplified) | 100% | <a href="https://github.com/smallmushroomovo">smallmushroomovo</a> |
 | Croatian | 100% | <a href="https://github.com/RealKrazy">RealKrazy</a> |
 | English (US) | 100% | <a href="https://github.com/Sub-Bubble">SubBubble</a> |
+| French | 100% | <a href="https://github.com/sasufler">sasufler</a> |
 | Japanese | 100% | <a href="https://github.com/RealKrazy">RealKrazy</a> |
 | Polish | 100% | <a href="https://github.com/Sub-Bubble">SubBubble</a> |
 | Russian | 100% | <a href="https://github.com/Sub-Bubble">SubBubble</a> |
@@ -50,7 +52,9 @@ If you want to download an older version, check <a href="https://github.com/Sub-
 #### Special thanks
 - Microsoft for Charms Bar, Windows 8 and most, if not all, assets.
 #### Contributors
-- <a href="https://github.com/RealKrazy">RealKrazy</a> for testing this application, translations and contributing code.
+- <a href="https://github.com/RealKrazy">RealKrazy</a> for testing this application, translations and contributing code!
+- <a href="https://github.com/smallmushroomovo">smallmushroomovo</a> for translating CharmsBar: Reloaded to chinese!
+- <a href="https://github.com/sasufler">sasufler</a> for making this application speak french!
 #### Other
 - <a href="https://github.com/Icepenguins101/charms-bar-port">charms-bar-port</a> for my idea to make this project
 
