@@ -31,7 +31,7 @@
   "CharmsSettings.General.EnableAnimations": "启用动画",
   "CharmsSettings.General.RunOnStartup": "开机启动",
   "CharmsSettings.General.CharmsBarEnabled": "启用侧边栏",
-  "CharmsSettings.General.HideBarAfterClick": "点击按钮后隐藏侧边栏",
+  "CharmsSettings.General.HideBarAfterClick": "点击后隐藏侧边栏",
   "CharmsSettings.General.CharmsClockEnabled": "启用侧边栏时钟",
   "CharmsSettings.General.EnableKeyboardShortcuts": "键盘快捷键",
   "CharmsSettings.General.KeyboardShortcutsOverrideCharmsBarOff": "键盘快捷键可打开被禁用的侧边栏",
