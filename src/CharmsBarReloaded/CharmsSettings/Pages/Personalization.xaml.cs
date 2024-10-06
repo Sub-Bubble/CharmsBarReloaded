@@ -117,7 +117,7 @@ namespace CharmsBarReloaded.CharmsSettings.Pages
                 {
                     IsChecked = App.charmsConfig.charmsBarConfig.UsesDynamicColor[j],
                 };
-                dynamicColorCheck.Content = new TextBlock { TextWrapping = TextWrapping.Wrap, Text = App.translationManager.GetTranslation("CharmsSettings.Personalization.UseDynamicColor") };
+                dynamicColorCheck.Content = new TextBlock { TextWrapping = TextWrapping.Wrap, Text = App.translationManager.GetTranslation("CharmsSettings.Personalization.UseDynamicColor"), Foreground = GetBrush.GetSpecialBrush("White") };
 
                 dynamicColorCheck.Click += (sender, args) =>
                 {
