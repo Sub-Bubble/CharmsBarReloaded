@@ -2,6 +2,8 @@
 **Now in beta!**<br>
 This application returns Windows 8's Charms Bar to Windows 10/11!
 
+## Maintenance status: ⚠️Semi-maintained (Providing fixes, slow development of new features)
+
 ## Features
 | Status      | Feature      | Note |
 | ------------- | ------------- | ------------- |
@@ -14,6 +16,7 @@ This application returns Windows 8's Charms Bar to Windows 10/11!
 | ✅ | Lightweight |
 | ❌ | Proper touchscreen support |
 | ✅ | Running on startup |
+| 🕓 | Start Charms | Coming in Release 2.0 |
 | 🕓 | Theme support | Currently no ETA |
 | ✅ | Translations support |
 | ✅ | Tray Icon |
