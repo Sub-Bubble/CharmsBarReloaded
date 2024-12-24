@@ -42,30 +42,36 @@ namespace CharmsBarReloaded
                 case "FocusSettings":
                     MessageBox.Show("Settings coming back in future beta builds");
                     break;
-
+                
+                //app actions
+                case "Reload":
+                    Log.Info("Initiating full reload...");
+                    Log.Info("Reloading translations...");
+                    translationManager = new TranslationManager().Load(charmsConfig.CurrentLocale);
+                    settingsHome.ReloadStrings();
+                    Log.Info("Reloading Charms Bar...");
+                    charmsBar.Window_Reload();
+                    if (charmsConfig.EnableAnimations)
+                        charmsSettings.BeginStoryboard(charmsSettings.settingsSlideOut);
+                    else
+                    {
+                        charmsSettings.frame.Content = settingsHome;
+                        charmsSettings.Hide();
+                    }
+                    break;
+                
                 //settings navigation
                 case "SettingsHome":
                     charmsSettings.frame.Content = settingsHome;
-                    charmsConfig.Save();
-                    charmsSettings.isBusy = true;
-                    translationManager = new TranslationManager().Load(charmsConfig.CurrentLocale);
-                    charmsBar = new();
-                    LoadCharmsBar();
-                    settingsHome.ReloadStrings();
-                    Current.Dispatcher.BeginInvoke(new Action(() =>
-                    {
-                        charmsSettings.Show();
-                        charmsSettings.Focus();
-                    }), System.Windows.Threading.DispatcherPriority.Input);
                     break;
                 case "SettingsGeneral":
-                    charmsSettings.frame.Content = new General();
+                    charmsSettings.frame.Content = settingsGeneral;
                     break;
                 case "SettingsPersonalization":
-                    charmsSettings.frame.Content = new Personalization();
+                    charmsSettings.frame.Content = settingsPersonalization;
                     break;
                 case "SettingsAbout":
-                    charmsSettings.frame.Content = new About();
+                    charmsSettings.frame.Content = settingsAbout;
                     break;
 
                 //Windows Actions

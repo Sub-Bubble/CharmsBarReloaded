@@ -1,5 +1,7 @@
 ﻿using CharmsBarReloaded.Config;
 using System.Windows;
+using System.Windows.Interop;
+using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
 namespace CharmsBarReloaded.CharmsClock
@@ -12,13 +14,37 @@ namespace CharmsBarReloaded.CharmsClock
         public CharmsClock()
         {
             InitializeComponent();
+            RenderOptions.ProcessRenderMode = RenderMode.SoftwareOnly;
+            this.Loaded += CharmsClock_Loaded;
         }
-        public void Update(CharmsConfig.CharmsClockConfig config)
+        private void CharmsClock_Loaded(object sender, RoutedEventArgs e)
+        {
+            this.Top = SystemConfig.GetDesktopWorkingArea.Bottom - 188;
+            this.Left = 50;
+            if (!App.charmsConfig.charmsClockConfig.SyncClockSettings)
+            {
+                this.Background = GetBrush.GetBrushFromHex(App.charmsConfig.charmsClockConfig.BackgroundColor);
+                var brush = GetBrush.GetBrushFromHex(App.charmsConfig.charmsClockConfig.TextColor);
+                this.Hours.Foreground = brush;
+                this.Minutes.Foreground = brush;
+                this.Separator.Foreground = brush;
+                this.Date.Foreground = brush;
+            }
+            else
+                //omitting using charms bar text color is not a mistake
+                this.Background = GetBrush.GetBrushFromHex(App.charmsConfig.charmsBarConfig.BackgroundColor);
+            Update();
+            BeginAnimation(UIElement.OpacityProperty, noAnimationOut);
+            
+            this.Loaded -= CharmsClock_Loaded;
+        }
+
+        public void Update()
         {
             switch (SystemConfig.IsCharging)
             {
                 case "NoBattery":
-                    if (config.ShowChargingOnDesktop)
+                    if (App.charmsConfig.charmsClockConfig.ShowChargingOnDesktop)
                         IsCharging.Visibility = Visibility.Visible;
                     else
                         IsCharging.Visibility = Visibility.Collapsed;

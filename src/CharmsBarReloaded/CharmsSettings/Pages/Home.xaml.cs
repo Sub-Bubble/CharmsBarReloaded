@@ -39,6 +39,25 @@ namespace CharmsBarReloaded.CharmsSettings.Pages
             RestartText.Text = App.translationManager.GetTranslation("CharmsSettings.Home.Power.Restart");
 
         }
+
+        public void Home_Reload()
+        {
+            if (SystemConfig.GetDeviceVolume == 0 || SystemConfig.IsVolumeMuted)
+                volumeImage.Source = new BitmapImage(new Uri(@"../../Assets/CharmsSettings/VolumeMute.png", UriKind.Relative));
+            else volumeImage.Source = new BitmapImage(new Uri(@"../../Assets/CharmsSettings/Volume.png", UriKind.Relative));
+
+            int brightness = SystemConfig.DeviceBrightness;
+            if (brightness == -1)
+            {
+                brightnessText.Text = App.translationManager.GetTranslation("CharmsSettings.Home.Unavailable");
+                brightnessSlider.IsEnabled = false;
+                brightnessSliderText.Text = App.translationManager.GetTranslation("CharmsSettings.Home.Unavailable");
+
+            }
+            else brightnessText.Text = brightness.ToString();
+            keyboardLayout.Text = SystemConfig.GetKeyboardLayout;
+            volumeText.Text = SystemConfig.GetDeviceVolume.ToString();
+        }
         private void General_MouseDown(object sender, MouseButtonEventArgs e)
         {
             App.ClickHandler("SettingsGeneral");
