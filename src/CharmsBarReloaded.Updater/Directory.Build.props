@@ -1,9 +1,9 @@
 <Project>
 	<PropertyGroup>
 		<TargetFramework>net8.0-windows10.0.20348.0</TargetFramework>
-		<AssemblyVersion>31.0</AssemblyVersion>
-		<FileVersion>31.0</FileVersion>
-		<InformationalVersion>b2.0-pre2</InformationalVersion>
+		<AssemblyVersion>1.0</AssemblyVersion>
+		<FileVersion>1.0</FileVersion>
+		<InformationalVersion>v1.0</InformationalVersion>
 		<IncludeSourceRevisionInInformationalVersion>False</IncludeSourceRevisionInInformationalVersion>
 	</PropertyGroup>
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

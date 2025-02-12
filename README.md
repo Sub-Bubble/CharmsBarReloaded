@@ -12,15 +12,15 @@ This application returns Windows 8's Charms Bar to Windows 10/11!
 | ✅ | Charms Clock |
 | ✅ | Customizability with settings |
 | ✅ | DPI scaling |
-| ⚠️ | Keyboard Shortcuts | Broken on Windows 11 due to it opening Edge/Copilot |
+| ⚠️ | Keyboard Shortcuts | Broken. Expect fix in v1.0 (Release 1.0) |
 | ✅ | Lightweight |
 | ❌ | Proper touchscreen support |
 | ✅ | Running on startup |
-| 🕓 | Start Charms | Coming in Release 2.0 |
+| 🕓 | Start Charms | Coming in v2.0 (Release 2.0) |
 | 🕓 | Theme support | Currently no ETA |
 | ✅ | Translations support |
 | ✅ | Tray Icon |
-| 🕓 | Updater | Coming in b2.0 |
+| 🛠️ | Updater | Coming in b2.0 |
 - ✅ - Fully working
 - ⚠️ - Has problems
 - 🛠️ - In the works
@@ -59,6 +59,7 @@ If you want to download an older version, check <a href="https://github.com/Sub-
 - <a href="https://github.com/smallmushroomovo">smallmushroomovo</a> for translating CharmsBar: Reloaded to chinese!
 - <a href="https://github.com/sasufler">sasufler</a> for making this application speak french!
 #### Other
+- <a href="https://github.com/free-icons/free-icons">free-icons</a> for the updater icon
 - <a href="https://github.com/Icepenguins101/charms-bar-port">charms-bar-port</a> for my idea to make this project
 
 ## Support
