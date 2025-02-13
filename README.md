@@ -2,7 +2,7 @@
 **Now in beta!**<br>
 This application returns Windows 8's Charms Bar to Windows 10/11!
 
-## Maintenance status: ⚠️Semi-maintained (Providing fixes, slow development of new features)
+## Maintenance status: ✅Maintained
 
 ## Features
 | Status      | Feature      | Note |
@@ -53,14 +53,14 @@ If you want to download an older version, check <a href="https://github.com/Sub-
 
 ## Credits
 #### Special thanks
-- Microsoft for Charms Bar, Windows 8 and most, if not all, assets.
+- Microsoft for Charms Bar, Windows 8 and most, if not all, assets
 #### Contributors
-- <a href="https://github.com/RealKrazy">RealKrazy</a> for testing this application, translations and contributing code!
-- <a href="https://github.com/smallmushroomovo">smallmushroomovo</a> for translating CharmsBar: Reloaded to chinese!
-- <a href="https://github.com/sasufler">sasufler</a> for making this application speak french!
+- <a href="https://github.com/RealKrazy">RealKrazy</a> for testing this application, translations and contributing code
+- <a href="https://github.com/smallmushroomovo">smallmushroomovo</a> for translating CharmsBar: Reloaded to chinese
+- <a href="https://github.com/sasufler">sasufler</a> for making this application speak french
 #### Other
 - <a href="https://github.com/free-icons/free-icons">free-icons</a> for the updater icon
+- <a href="https://github.com/hardcodet/wpf-notifyicon">wpf-notifyicon</a> for the taskbar icon
 - <a href="https://github.com/Icepenguins101/charms-bar-port">charms-bar-port</a> for my idea to make this project
-
 ## Support
 This project currently doesn't accept donations.<br>If you want to support it though, you can contribute code or translate it!
