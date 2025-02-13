@@ -2,7 +2,6 @@
 	<PropertyGroup>
 		<TargetFramework>net8.0-windows10.0.20348.0</TargetFramework>
 		<AssemblyVersion>1.0</AssemblyVersion>
-		<FileVersion>1.0</FileVersion>
 		<InformationalVersion>v1.0</InformationalVersion>
 		<IncludeSourceRevisionInInformationalVersion>False</IncludeSourceRevisionInInformationalVersion>
 	</PropertyGroup>

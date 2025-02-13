@@ -1,7 +1,11 @@
+using System.Text.Json;
+
 namespace CharmsBarReloaded.Updater
 {
     internal static class Program
     {
+        public const string AppName = "CharmsBarReloaded";
+        public readonly static string DefaultConfigPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "CharmsBarReloaded", "updaterConfig.json");
         /// <summary>
         ///  The main entry point for the application.
         /// </summary>
@@ -11,16 +15,30 @@ namespace CharmsBarReloaded.Updater
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
-            if (args.Length > 1)
+            if (args.Length > 0)
             {
-                if (args.Contains<string>("-checkforupdates"))
+                bool useCustomServer = true;
+                string customServerUrl = @"http://localhost";
+                if (File.Exists(DefaultConfigPath))
                 {
-                    if (args.Contains<string>("-includebetas"))
-                    Console.WriteLine("Coming soon in pre3!");
-                    throw new NotImplementedException("Coming soon in pre3!");
+                    try
+                    {
+                        var settings = JsonSerializer.Deserialize<UpdaterSettings>(File.ReadAllText(DefaultConfigPath));
+                        customServerUrl = settings.customUpdateServer;
+                        useCustomServer = settings.useCustomUpdateServer;
+                    } catch { }
+                }
+                
+                if (args.Contains("-checkforupdates"))
+                {
+                    if (args.Contains("beta"))
+                        RemoteServer.CheckForUpdates(true, useCustomServer, customServerUrl).GetAwaiter().GetResult();
+                    else if (args.Contains("stable") || args.Length == 1)
+                        RemoteServer.CheckForUpdates(true, useCustomServer, customServerUrl).GetAwaiter().GetResult();
                 }
             }
-            Application.Run(new UpdaterForm());
+            else
+                Application.Run(new UpdaterForm());
         }
     }
 }

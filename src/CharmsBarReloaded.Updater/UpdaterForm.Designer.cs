@@ -38,6 +38,7 @@
             installedVersionLabel = new Label();
             latestVersionLabel = new Label();
             AdvancedSettings = new GroupBox();
+            portableInstallCheckBox = new CheckBox();
             loadSettings = new Button();
             applyUpdateServerPathBtn = new Button();
             detectInstallPath = new Button();
@@ -56,7 +57,7 @@
             updaterMenu = new MenuStrip();
             windowToolStripMenuItem = new ToolStripMenuItem();
             checkForUpdatesToolStripMenuItem = new ToolStripMenuItem();
-            chechForUpdatesToolStripMenuItem = new ToolStripMenuItem();
+            checkForUpdatesincludeBetasToolStripMenuItem = new ToolStripMenuItem();
             installCustomUpdatePackageToolStripMenuItem = new ToolStripMenuItem();
             aboutToolStripMenuItem = new ToolStripMenuItem();
             aboutToolStripMenuItem1 = new ToolStripMenuItem();
@@ -123,6 +124,7 @@
             versionSelector.Name = "versionSelector";
             versionSelector.Size = new Size(121, 23);
             versionSelector.TabIndex = 5;
+            versionSelector.SelectedIndexChanged += versionSelector_SelectedIndexChanged;
             // 
             // installedVersionLabel
             // 
@@ -145,6 +147,7 @@
             // 
             // AdvancedSettings
             // 
+            AdvancedSettings.Controls.Add(portableInstallCheckBox);
             AdvancedSettings.Controls.Add(loadSettings);
             AdvancedSettings.Controls.Add(applyUpdateServerPathBtn);
             AdvancedSettings.Controls.Add(detectInstallPath);
@@ -168,6 +171,16 @@
             AdvancedSettings.TabStop = false;
             AdvancedSettings.Text = "Advanced";
             // 
+            // portableInstallCheckBox
+            // 
+            portableInstallCheckBox.AutoSize = true;
+            portableInstallCheckBox.Location = new Point(251, 98);
+            portableInstallCheckBox.Name = "portableInstallCheckBox";
+            portableInstallCheckBox.Size = new Size(104, 19);
+            portableInstallCheckBox.TabIndex = 15;
+            portableInstallCheckBox.Text = "Portable install";
+            portableInstallCheckBox.UseVisualStyleBackColor = true;
+            // 
             // loadSettings
             // 
             loadSettings.Location = new Point(322, 172);
@@ -190,7 +203,6 @@
             // 
             // detectInstallPath
             // 
-            detectInstallPath.Enabled = false;
             detectInstallPath.Location = new Point(332, 66);
             detectInstallPath.Name = "detectInstallPath";
             detectInstallPath.Size = new Size(75, 23);
@@ -332,30 +344,30 @@
             // 
             // windowToolStripMenuItem
             // 
-            windowToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { checkForUpdatesToolStripMenuItem, chechForUpdatesToolStripMenuItem, installCustomUpdatePackageToolStripMenuItem });
+            windowToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { checkForUpdatesToolStripMenuItem, checkForUpdatesincludeBetasToolStripMenuItem, installCustomUpdatePackageToolStripMenuItem });
             windowToolStripMenuItem.Name = "windowToolStripMenuItem";
             windowToolStripMenuItem.Size = new Size(63, 20);
             windowToolStripMenuItem.Text = "Window";
             // 
             // checkForUpdatesToolStripMenuItem
             // 
-            checkForUpdatesToolStripMenuItem.Enabled = false;
             checkForUpdatesToolStripMenuItem.Name = "checkForUpdatesToolStripMenuItem";
-            checkForUpdatesToolStripMenuItem.Size = new Size(252, 22);
+            checkForUpdatesToolStripMenuItem.Size = new Size(251, 22);
             checkForUpdatesToolStripMenuItem.Text = "Check for updates";
+            checkForUpdatesToolStripMenuItem.Click += checkForUpdatesToolStripMenuItem_Click;
             // 
-            // chechForUpdatesToolStripMenuItem
+            // checkForUpdatesincludeBetasToolStripMenuItem
             // 
-            chechForUpdatesToolStripMenuItem.Enabled = false;
-            chechForUpdatesToolStripMenuItem.Name = "chechForUpdatesToolStripMenuItem";
-            chechForUpdatesToolStripMenuItem.Size = new Size(252, 22);
-            chechForUpdatesToolStripMenuItem.Text = "Chech for updates (include betas)";
+            checkForUpdatesincludeBetasToolStripMenuItem.Name = "checkForUpdatesincludeBetasToolStripMenuItem";
+            checkForUpdatesincludeBetasToolStripMenuItem.Size = new Size(251, 22);
+            checkForUpdatesincludeBetasToolStripMenuItem.Text = "Check for updates (include betas)";
+            checkForUpdatesincludeBetasToolStripMenuItem.Click += checkForUpdatesincludeBetasToolStripMenuItem_Click;
             // 
             // installCustomUpdatePackageToolStripMenuItem
             // 
             installCustomUpdatePackageToolStripMenuItem.Enabled = false;
             installCustomUpdatePackageToolStripMenuItem.Name = "installCustomUpdatePackageToolStripMenuItem";
-            installCustomUpdatePackageToolStripMenuItem.Size = new Size(252, 22);
+            installCustomUpdatePackageToolStripMenuItem.Size = new Size(251, 22);
             installCustomUpdatePackageToolStripMenuItem.Text = "Install custom update package";
             // 
             // aboutToolStripMenuItem
@@ -436,6 +448,7 @@
         private Button setDefaultPathButton;
         private Button applyUpdateServerPathBtn;
         private Button loadSettings;
-        private ToolStripMenuItem chechForUpdatesToolStripMenuItem;
+        private CheckBox portableInstallCheckBox;
+        private ToolStripMenuItem checkForUpdatesincludeBetasToolStripMenuItem;
     }
 }

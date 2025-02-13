@@ -1,47 +1,37 @@
-﻿using System;
-using System.Buffers.Text;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Net.Http.Headers;
-using System.Text;
-using System.Text.Json;
-using System.Text.Json.Serialization;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using System.Text.Json;
+
 
 namespace CharmsBarReloaded.Updater
 {
     public partial class UpdaterForm : Form
     {
-        public struct UpdateItem
-        {
-            public string versionName { get; set; }
-            public int build { get; set; }
-            public string downloadLink { get; set; }
-            public bool isBeta { get; set; }
-            public bool isLegacy { get; set; }
-        }
-        private struct UpdaterSettings
-        {
-            public bool includeBeta { get; set; }
-            public bool includeLegacy { get; set; }
-            public bool useCustomUpdateServer { get; set; }
-            public string customUpdateServer { get; set; }
-            public string customInstallPath { get; set; }
-        }
         List<UpdateItem> updates;
         private bool showAdvancedSettings = false;
-        string defaultConfigPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "CharmsBarReloaded", "updaterConfig.json");
         public UpdaterForm()
         {
             InitializeComponent();
+            if (InstallDetector.IsInstalled())
+            {
+                this.Text = "Updater";
+                installedVersionLabel.Text = $"Installed: {InstallDetector.VersionString}";
+                installPathTextBox.Text = InstallDetector.InstallPath;
+                portableInstallCheckBox.Checked = InstallDetector.IsPortable;
+                checkForUpdatesToolStripMenuItem.Enabled = true;
+                checkForUpdatesincludeBetasToolStripMenuItem.Enabled = true;
+            }
+            else
+            {
+                this.Text = "Installer";
+                installedVersionLabel.Text = $"Not installed!";
+                portableInstallCheckBox.Checked = false;
+                checkForUpdatesToolStripMenuItem.Enabled = false;
+                checkForUpdatesincludeBetasToolStripMenuItem.Enabled = false;
+            }
+
             AdvancedSettings.Hide();
 
-            if (File.Exists(defaultConfigPath))
-                LoadConfig(defaultConfigPath);
+            if (File.Exists(Program.DefaultConfigPath))
+                LoadConfig(Program.DefaultConfigPath);
             else
             {
                 officialServerRadio.Checked = false;
@@ -60,6 +50,7 @@ namespace CharmsBarReloaded.Updater
             var settings = JsonSerializer.Deserialize<UpdaterSettings>(File.ReadAllText(configPath));
             includeBetasCheckbox.Checked = settings.includeBeta;
             includeLegacyCheckbox.Checked = settings.includeLegacy;
+            portableInstallCheckBox.Checked = settings.doPortableInstall;
             if (settings.useCustomUpdateServer)
             {
                 customServerRadio.Checked = true;
@@ -93,102 +84,87 @@ namespace CharmsBarReloaded.Updater
                 return;
             }
 
-            using (var client = new HttpClient())
+            try
             {
-                try
-                {
-                    client.BaseAddress = new Uri(customServerTextBox.Text);
-                    client.DefaultRequestHeaders.Add("CharmsBarReloaded-Updater", "v1.0");
-                    client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                UpdateStatus("Connecting to a remote server", "info", false);
 
-                    string updatesList = await FindRemoteJson(client, customServerTextBox.Text);
+                var updatesList = await RemoteServer.FetchUpdates(isCustomUrl, customServerTextBox.Text);
 
-                    if (string.IsNullOrWhiteSpace(updatesList))
-                    {
-                        UpdateStatus("Failed to fetch updates!", "error", false);
-                        return;
-                    }
-
-                    updates = JsonSerializer.Deserialize<List<UpdateItem>>(updatesList, new JsonSerializerOptions
-                    {
-                        PropertyNameCaseInsensitive = true
-                    });
-
-                    versionSelector.Items.Clear();
-                    RepopulateUpdatesList();
-                    UpdateStatus("Ready", "info");
-                }
-                catch (UriFormatException)
-                {
-                    UpdateStatus("Failed to connect to a server", "error", false);
-                }
-                catch (HttpRequestException ex) when (ex.StatusCode == null)
-                {
-                    UpdateStatus("Failed to connect to a server", "error", false);
-                }
-                catch
+                if (string.IsNullOrWhiteSpace(updatesList))
                 {
                     UpdateStatus("Failed to fetch updates!", "error", false);
+                    return;
                 }
-            }
-        }
-        private async Task<string> FindRemoteJson(HttpClient client, string url)
-        {
-            if (url.EndsWith(".json", StringComparison.OrdinalIgnoreCase))
-                return await GetRemoteJson(client, url);
-            else
-            {
-                try
+
+                updates = JsonSerializer.Deserialize<List<UpdateItem>>(updatesList, new JsonSerializerOptions
                 {
-                    string json = await GetRemoteJson(client, url);
-                    if (!string.IsNullOrWhiteSpace(json))
-                        return json;
-                } catch { }
-                return await GetRemoteJson(client, $"{url}/updates.json");
+                    PropertyNameCaseInsensitive = true
+                });
+                updates.Sort((a, b) => b.build.CompareTo(a.build));
+                versionSelector.Items.Clear();
+                RepopulateUpdatesList();
+                UpdateStatus("Ready", "info");
             }
-        }
-        private async Task<string> GetRemoteJson(HttpClient client, string url)
-        {
-            HttpResponseMessage response = await client.GetAsync(url);
-            response.EnsureSuccessStatusCode();
-            return await response.Content.ReadAsStringAsync();
+            catch (UriFormatException)
+            {
+                UpdateStatus("Failed to connect to a server", "error", false);
+            }
+            catch (HttpRequestException ex) when (ex.StatusCode == null)
+            {
+                UpdateStatus("Failed to connect to a server", "error", false);
+            }
+            catch
+            {
+                UpdateStatus("Failed to fetch updates!", "error", false);
+            }
         }
         #endregion fetch remote server
 
         #region UI modification
+        List<UpdateItem> filteredUpdates = new List<UpdateItem>();
         private void RepopulateUpdatesList()
         {
             versionSelector.Items.Clear();
+            filteredUpdates.Clear();
+
             if (updates == null || updates.Count == 0)
             {
                 UpdateStatus("Error parsing update list", "error", false);
                 return;
             }
+
             versionSelector.Enabled = true;
             latestVersionLabel.ForeColor = Color.Black;
             statusLabel.ForeColor = Color.Black;
-            for (int i = 0; i < updates.Count; i++)
+
+            foreach (var update in updates)
             {
-                if (updates[i].isBeta && updates[i].isLegacy && includeBetasCheckbox.Checked && includeLegacyCheckbox.Checked)
-                    versionSelector.Items.Add(updates[i].versionName);
-                if (updates[i].isBeta && !updates[i].isLegacy && includeBetasCheckbox.Checked)
-                    versionSelector.Items.Add(updates[i].versionName);
-                else if (updates[i].isLegacy && !updates[i].isBeta && includeLegacyCheckbox.Checked)
-                    versionSelector.Items.Add(updates[i].versionName);
-                else if (!updates[i].isLegacy && !updates[i].isBeta)
-                    versionSelector.Items.Add(updates[i].versionName);
+                if ((update.isBeta && includeBetasCheckbox.Checked && !update.isLegacy) ||
+                    (!update.isBeta && update.isLegacy && includeLegacyCheckbox.Checked) ||
+                    (update.isBeta && includeBetasCheckbox.Checked && update.isLegacy && includeLegacyCheckbox.Checked) ||
+                    (!update.isBeta && !update.isLegacy))
+                {
+                    versionSelector.Items.Add(update.versionName);
+                    filteredUpdates.Add(update);
+                }
             }
             versionSelector.SelectedIndex = 0;
-            latestVersionLabel.Text = $"Latest: {versionSelector.Items[0]}";
-            statusLabel.Text = "Ready";
+            latestVersionLabel.Text = $"Latest: {filteredUpdates[0].versionName}";
+
+            if (filteredUpdates[0].build > InstallDetector.BuildNumber && InstallDetector.IsInstalled())
+                UpdateStatus("Update available!", "info", true, true);
+            else
+                UpdateStatus("Ready", "info");
         }
-        void UpdateStatus(string statusMessage, string type = "info", bool updatesAvailable = true)
+
+        void UpdateStatus(string statusMessage, string type = "info", bool updatesAvailable = true, bool hasNewUpdate = false)
         {
             switch (type)
             {
                 case "info":
                     if (!updatesAvailable) latestVersionLabel.Text = $"Latest version: Fetching";
-                    latestVersionLabel.ForeColor = Color.Black;
+                    if (hasNewUpdate) latestVersionLabel.ForeColor = Color.Green;
+                    else latestVersionLabel.ForeColor = Color.Black;
                     statusLabel.ForeColor = Color.Black;
                     break;
                 case "warning":
@@ -342,6 +318,9 @@ namespace CharmsBarReloaded.Updater
 
         private void detectInstallPath_Click(object sender, EventArgs e)
         {
+            if (!InstallDetector.IsInstalled())
+                MessageBox.Show("Install not detected or app is not installed!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            else installPathTextBox.Text = InstallDetector.InstallPath;
         }
 
         private void setDefaultPathButton_Click(object sender, EventArgs e)
@@ -387,5 +366,28 @@ namespace CharmsBarReloaded.Updater
         }
         #endregion advanced
         #endregion UI interaction
+
+        private void versionSelector_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (InstallDetector.IsInstalled() && filteredUpdates.Count > 0)
+            {
+                if (filteredUpdates[versionSelector.SelectedIndex].build > InstallDetector.BuildNumber)
+                    installButton.Text = "Update";
+                if (filteredUpdates[versionSelector.SelectedIndex].build == InstallDetector.BuildNumber)
+                    installButton.Text = "Reinstall";
+                if (filteredUpdates[versionSelector.SelectedIndex].build < InstallDetector.BuildNumber)
+                    installButton.Text = "Install";
+            }
+        }
+
+        private void checkForUpdatesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            RemoteServer.CheckForUpdates(false, customServerRadio.Checked, customServerTextBox.Text);
+        }
+
+        private void checkForUpdatesincludeBetasToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            RemoteServer.CheckForUpdates(true, customServerRadio.Checked, customServerTextBox.Text);
+        }
     }
 }
