@@ -2,14 +2,14 @@
     
 	<PropertyGroup>
       <OutputType>WinExe</OutputType>
-      <TargetFramework>net9.0-windows10.0.20348.0</TargetFramework>
-      <Nullable>enable</Nullable>
+	  <TargetFramework>net9.0-windows</TargetFramework>
+	  <Nullable>enable</Nullable>
       <UseWindowsForms>true</UseWindowsForms>
       <ImplicitUsings>enable</ImplicitUsings>
 	  <ApplicationIcon>assets\updaterIcon.ico</ApplicationIcon>
 	  <AssemblyName>Updater</AssemblyName>
     </PropertyGroup>
-    
+	
 	<ItemGroup>
 	  <None Remove="assets\updaterIcon.ico" />
 	</ItemGroup>
