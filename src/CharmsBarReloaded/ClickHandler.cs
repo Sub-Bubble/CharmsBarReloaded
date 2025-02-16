@@ -1,6 +1,7 @@
 ﻿using CharmsBarReloaded.CharmsSettings.Pages;
 using CharmsBarReloaded.Config;
 using System.Diagnostics;
+using System.IO;
 using System.Runtime.InteropServices;
 using System.Windows;
 using MessageBox = System.Windows.MessageBox;
@@ -112,6 +113,51 @@ namespace CharmsBarReloaded
                     break;
                 case "Restart":
                     Process.Start(new ProcessStartInfo { FileName = "shutdown.exe", Arguments = $"-r -t 0", CreateNoWindow = true });
+                    break;
+
+                //updater actions
+                case "OpenUpdater":
+                    try
+                    {
+                        if (charmsConfig.BetaProgramOptIn)
+                            Process.Start(new ProcessStartInfo
+                            {
+                                FileName = "Updater.exe",
+                                WorkingDirectory = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, ""),
+                                ArgumentList = { "-includebetas" }
+                            });
+                        else
+                            Process.Start(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Updater.exe"));
+                    }
+                    catch
+                    {
+                        MessageBox.Show(translationManager.GetTranslation("CharmsBarReloaded.Error.UpdaterMissing"));
+                        Log.Error("No updater detected. CharmsBar:Reloaded install can be broken");
+                    }
+                    break;
+                case "CheckForUpdates":
+                    try
+                    {
+                        if (charmsConfig.BetaProgramOptIn)
+                            Process.Start(new ProcessStartInfo
+                            {
+                                FileName = "Updater.exe",
+                                WorkingDirectory = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, ""),
+                                ArgumentList = { "-checkforupdates", "beta" }
+                            });
+                        else
+                            Process.Start(new ProcessStartInfo
+                            {
+                                FileName = "Updater.exe",
+                                WorkingDirectory = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, ""),
+                                ArgumentList = { "-checkforupdates", "stable" }
+                            });
+                    }
+                    catch
+                    {
+                        MessageBox.Show(translationManager.GetTranslation("CharmsBarReloaded.Error.UpdaterMissing"));
+                        Log.Error("No updater detected. CharmsBar:Reloaded install can be broken");
+                    }
                     break;
             }
         }

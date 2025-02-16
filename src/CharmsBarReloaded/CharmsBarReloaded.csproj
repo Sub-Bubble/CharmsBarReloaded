@@ -52,11 +52,13 @@
     <None Remove="assets\CharmsSettings\VolumeMute.png" />
     <None Remove="assets\DarkIcon.png" />
     <None Remove="assets\Tray\Exit.png" />
+    <None Remove="Assets\UpdaterIcon.png" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\CharmsBarReloaded.Config\CharmsBarReloaded.Config.csproj" />
     <ProjectReference Include="..\CharmsBarReloaded.Logger\CharmsBarReloaded.Logger.csproj" />
+    <ProjectReference Include="..\CharmsBarReloaded.Updater\CharmsBarReloaded.Updater.csproj" />
     <ProjectReference Include="..\CharmsBarReloaded.WpfExtensions\CharmsBarReloaded.WpfExtensions.csproj" />
   </ItemGroup>
 
@@ -115,6 +117,7 @@
     <Resource Include="assets\CharmsSettings\VolumeMute.png" />
     <Resource Include="assets\DarkIcon.png" />
     <Resource Include="assets\Tray\Exit.png" />
+    <Resource Include="Assets\UpdaterIcon.png" />
   </ItemGroup>
 
   <ItemGroup>

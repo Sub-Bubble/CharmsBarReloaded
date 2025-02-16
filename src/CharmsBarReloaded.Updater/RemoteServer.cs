@@ -20,7 +20,11 @@ namespace CharmsBarReloaded.Updater
             {
                 updatesList = await FetchUpdates(useCustomUrl, CustomUrl);
             }
-            catch (Exception ex) { MessageBox.Show("exception"); }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Failed to connect to update server!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
 
             if (string.IsNullOrWhiteSpace(updatesList))
             {
@@ -40,14 +44,14 @@ namespace CharmsBarReloaded.Updater
                 if (includeBetas && (update.build > InstallDetector.BuildNumber))
                 {
                     MessageBox.Show($"A new update is available!\n[{InstallDetector.VersionString}] -> [{update.versionName}]\nDo you want to update?"
-                        , "[BETA] Update available!", MessageBoxButtons.YesNo);
+                        , $"{ (update.isBeta ? "[BETA] " : "") }Update available!", MessageBoxButtons.YesNo);
                     canUpdate = true;
                     break;
                 }
                 else if (!includeBetas && !update.isBeta && (update.build > InstallDetector.BuildNumber))
                 {
                     MessageBox.Show($"A new update is available!\n[{InstallDetector.VersionString}] -> [{update.versionName}]\nDo you want to update?"
-                        , "[STABLE] Update available!", MessageBoxButtons.YesNo);
+                        , "Update available!", MessageBoxButtons.YesNo);
                     canUpdate = true;
                     break;
                 }

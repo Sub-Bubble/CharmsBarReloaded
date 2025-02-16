@@ -7,7 +7,7 @@
       xmlns:cc="clr-namespace:CharmsBarReloaded.WpfExtensions;assembly=CharmsBarReloaded.WpfExtensions"
       mc:Ignorable="d" Width="360" SnapsToDevicePixels="True"
       Title="General">
-
+    
     <StackPanel HorizontalAlignment="Left" Margin="40,0,0,0">
         <StackPanel Orientation="Horizontal" Margin="0, 40, 0, 0" VerticalAlignment="Top">
             <Grid Height="40" Width="40" Margin="0,0,10,0" MouseDown="BackButton_MouseDown" MouseUp="BackButton_MouseUp"  MouseEnter="BackButton_MouseEnter" MouseLeave="BackButton_MouseLeave">
@@ -53,5 +53,13 @@
             <TextBlock Foreground="White" FontFamily="Segoe UI Bold" Text="On/Off" MinWidth="40" Margin="10,0,10,0" x:Name="KeyboardShortcutOverrideOnOff"/>
             <cc:Win8Switch x:Name="KeyboardShortcutOverrideToggle" Click="KeyboardShortcutOverrideToggle_Checked"/>
         </StackPanel>
+
+        <TextBlock Text="BetaProgramOptIn" TextWrapping="WrapWithOverflow" FontSize="20" Foreground="White" FontFamily="Segoe UI Semilight" x:Name="BetaProgramOptInText" Margin="0,20,10,0"/>
+        <StackPanel Orientation="Horizontal">
+            <TextBlock Foreground="White" FontFamily="Segoe UI Bold" Text="On/Off" MinWidth="40" Margin="10,0,10,0" x:Name="BetaProgramOptInOnOff"/>
+            <cc:Win8Switch x:Name="BetaProgramOptInToggle" Click="BetaProgramOptInToggle_Checked"/>
+        </StackPanel>
+        <TextBlock Text="OpenUpdater" TextWrapping="WrapWithOverflow" FontSize="20" Foreground="White" FontFamily="Segoe UI Semilight" x:Name="OpenUpdaterText" Margin="0,0,10,0"/>
+        <Button Content="Updater" Margin="2" Padding="7,3,7,3" VerticalAlignment="Center" FontSize="15" HorizontalAlignment="Left" x:Name="OpenUpdaterBtn" Click="OpenUpdaterBtn_Click" FontWeight="Bold"/>
     </StackPanel>
 </Page>

@@ -34,8 +34,10 @@ namespace CharmsBarReloaded.Updater
                     if (args.Contains("beta"))
                         RemoteServer.CheckForUpdates(true, useCustomServer, customServerUrl).GetAwaiter().GetResult();
                     else if (args.Contains("stable") || args.Length == 1)
-                        RemoteServer.CheckForUpdates(true, useCustomServer, customServerUrl).GetAwaiter().GetResult();
+                        RemoteServer.CheckForUpdates(false, useCustomServer, customServerUrl).GetAwaiter().GetResult();
                 }
+                if (args.Contains("-includebetas"))
+                    Application.Run(new UpdaterForm(true));
             }
             else
                 Application.Run(new UpdaterForm());

@@ -29,6 +29,7 @@ namespace CharmsBarReloaded.CharmsSettings.Pages
             ClockEnabledToggle.IsChecked = App.charmsConfig.EnableAnimations;
             KeyboardShortcutsToggle.IsChecked = App.charmsConfig.EnableAnimations;
             KeyboardShortcutOverrideToggle.IsChecked = App.charmsConfig.EnableAnimations;
+            BetaProgramOptInToggle.IsChecked = App.charmsConfig.BetaProgramOptIn;
         }
         #region language selector loading
         private void LoadLanguageSelector()
@@ -145,6 +146,13 @@ namespace CharmsBarReloaded.CharmsSettings.Pages
             KeyboardShortcutOverrideText.Text = App.translationManager.GetTranslation("CharmsSettings.General.KeyboardShortcutsOverrideCharmsBarOff");
             if (App.charmsConfig.EnableAnimations) KeyboardShortcutOverrideOnOff.Text = onText;
             else KeyboardShortcutOverrideOnOff.Text = offText;
+
+            BetaProgramOptInText.Text = App.translationManager.GetTranslation("CharmsSettings.General.BetaProgramOptIn");
+            if (App.charmsConfig.EnableAnimations) BetaProgramOptInOnOff.Text = onText;
+            else BetaProgramOptInOnOff.Text = offText;
+
+            OpenUpdaterText.Text = App.translationManager.GetTranslation("CharmsSettings.General.OpenUpdater");
+            OpenUpdaterBtn.Content = App.translationManager.GetTranslation("CharmsSettings.General.Updater");
         }
         #endregion loading strings
 
@@ -186,6 +194,16 @@ namespace CharmsBarReloaded.CharmsSettings.Pages
         private void KeyboardShortcutOverrideToggle_Checked(object sender, RoutedEventArgs e)
         {
             App.charmsConfig.charmsBarConfig.KeyboardShortcutOverridesOffSetting = (bool)KeyboardShortcutOverrideToggle.IsChecked;
+        }
+        
+        private void BetaProgramOptInToggle_Checked(Object sender, RoutedEventArgs e)
+        {
+            App.charmsConfig.BetaProgramOptIn = (bool)BetaProgramOptInToggle.IsChecked;
+        }
+
+        private void OpenUpdaterBtn_Click(object sender, RoutedEventArgs e)
+        {
+            App.ClickHandler("OpenUpdater");
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System.Reflection;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
@@ -39,10 +40,14 @@ namespace CharmsBarReloaded.CharmsSettings.Pages
             var assembly = Assembly.GetExecutingAssembly();
             versionString.Text = $"{App.translationManager.GetTranslation("CharmsSettings.About.Version")}: {assembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>().InformationalVersion}";
             buildString.Text = $"{App.translationManager.GetTranslation("CharmsSettings.About.Build")}: {assembly.GetName().Version.Major}";
-
+            branchString.Text = $"{App.translationManager.GetTranslation("CharmsSettings.About.Branch")}: {(App.charmsConfig.isBetaBranch ? App.translationManager.GetTranslation("CharmsSettings.About.Branch.Beta") : App.translationManager.GetTranslation("CharmsSettings.About.Branch.Stable"))}";
             aboutText.Text = App.translationManager.GetTranslation("CharmsSettings.Home.About");
             UpdateButton.Content = App.translationManager.GetTranslation("CharmsSettings.About.CheckForUpdates");
         }
 
+        private void UpdateButton_Click(object sender, RoutedEventArgs e)
+        {
+            App.ClickHandler("CheckForUpdates");
+        }
     }
 }

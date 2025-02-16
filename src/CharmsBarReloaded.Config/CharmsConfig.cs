@@ -10,9 +10,11 @@ namespace CharmsBarReloaded.Config
         private static Assembly assembly = Assembly.GetExecutingAssembly();
         public static string GetBuild { get { return assembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>().InformationalVersion.Trim(); } }
         public static int GetVersion { get { return assembly.GetName().Version.Major; } }
+        public readonly bool isBetaBranch = true;
         #endregion App Version
         public string CurrentLocale { get; set; } = "en-us";
         public bool EnableAnimations { get; set; } = true;
+        public bool BetaProgramOptIn {  get; set; } = false;
         public CharmsBarConfig charmsBarConfig { get; set; } = new CharmsBarConfig();
         public CharmsClockConfig charmsClockConfig { get; set; } = new CharmsClockConfig();
 

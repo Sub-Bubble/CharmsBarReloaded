@@ -7,7 +7,7 @@ namespace CharmsBarReloaded.Updater
     {
         List<UpdateItem> updates;
         private bool showAdvancedSettings = false;
-        public UpdaterForm()
+        public UpdaterForm(bool includeBetas = false)
         {
             InitializeComponent();
             if (InstallDetector.IsInstalled())
@@ -30,10 +30,14 @@ namespace CharmsBarReloaded.Updater
 
             AdvancedSettings.Hide();
 
+            // custom made config is always prioritized over a checkbox
             if (File.Exists(Program.DefaultConfigPath))
                 LoadConfig(Program.DefaultConfigPath);
             else
             {
+                if (includeBetas)
+                    includeBetasCheckbox.Checked = true;
+
                 officialServerRadio.Checked = false;
 
                 customServerRadio.Checked = true;

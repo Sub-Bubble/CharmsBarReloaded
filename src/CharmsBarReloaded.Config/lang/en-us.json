@@ -4,6 +4,7 @@
   "CharmsBar.Start": "Start",
   "CharmsBar.Devices": "Devices",
   "CharmsBar.Settings": "Settings",
+  "CharmsBarReloaded.Error.UpdaterMissing": "CharmsBar:Reloaded failed to open updater, indicating app instalation may be broken or tampered with.\nIt is highly reccomended to reinstall CharmsBar: Reloaded",
   "CharmsSettings.On": "On",
   "CharmsSettings.Off": "Off",
   "CharmsSettings.CharmsBar": "Charms Bar",
@@ -35,6 +36,9 @@
   "CharmsSettings.General.CharmsClockEnabled": "Enable Charms Clock",
   "CharmsSettings.General.EnableKeyboardShortcuts": "Keyboard shortcuts",
   "CharmsSettings.General.KeyboardShortcutsOverrideCharmsBarOff": "Keyboard shortcuts override disabled Charms Bar",
+  "CharmsSettings.General.BetaProgramOptIn": "Opt in to beta prgram",
+  "CharmsSettings.General.OpenUpdater": "Open updater",
+  "CharmsSettings.General.Updater": "Updater",
   "CharmsSettings.Personalization.BarBackground": "Background color",
   "CharmsSettings.Personalization.BarHover": "Hover color",
   "CharmsSettings.Personalization.BarText": "Text color",
@@ -46,6 +50,10 @@
   "CharmsSettings.Personalization.ClockText": "Text color",
   "CharmsSettings.About.Version": "Version",
   "CharmsSettings.About.Build": "Build",
+  "CharmsSettings.About.Branch": "Branch",
+  "CharmsSettings.About.Branch.Stable": "Stable",
+  "CharmsSettings.About.Branch.Beta": "Beta",
   "CharmsSettings.About.CheckForUpdates": "Check for updates",
   "Tray.Exit": "Exit"
 }
+
