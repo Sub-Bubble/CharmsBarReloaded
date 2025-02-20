@@ -1,13 +1,16 @@
-﻿using System.Text.Json;
+﻿using System.ComponentModel;
+using System.Diagnostics;
+using System.Text.Json;
 
 
 namespace CharmsBarReloaded.Updater
 {
+    [DesignerCategory("Form")]
     public partial class UpdaterForm : Form
     {
         List<UpdateItem> updates;
         private bool showAdvancedSettings = false;
-        public UpdaterForm(bool includeBetas = false)
+        public UpdaterForm(bool includeBetas = false, bool includeLegacy = false)
         {
             InitializeComponent();
             if (InstallDetector.IsInstalled())
@@ -18,6 +21,9 @@ namespace CharmsBarReloaded.Updater
                 portableInstallCheckBox.Checked = InstallDetector.IsPortable;
                 checkForUpdatesToolStripMenuItem.Enabled = true;
                 checkForUpdatesincludeBetasToolStripMenuItem.Enabled = true;
+                uninstallBtn.Enabled = true;
+                if (InstallDetector.AdminInstall)
+                    ShieldIcon.AddToButton(uninstallBtn);
             }
             else
             {
@@ -26,6 +32,7 @@ namespace CharmsBarReloaded.Updater
                 portableInstallCheckBox.Checked = false;
                 checkForUpdatesToolStripMenuItem.Enabled = false;
                 checkForUpdatesincludeBetasToolStripMenuItem.Enabled = false;
+                uninstallBtn.Enabled = false;
             }
 
             AdvancedSettings.Hide();
@@ -37,6 +44,8 @@ namespace CharmsBarReloaded.Updater
             {
                 if (includeBetas)
                     includeBetasCheckbox.Checked = true;
+                if (includeLegacy)
+                    includeLegacyCheckbox.Checked = true;
 
                 officialServerRadio.Checked = false;
 
@@ -44,6 +53,8 @@ namespace CharmsBarReloaded.Updater
                 customServerTextBox.Enabled = true;
                 customServerTextBox.Text = "http://localhost"; // temporary solution
                 applyUpdateServerPathBtn.Enabled = true;
+                if (!Program.IsElevated)
+                    ShieldIcon.AddToButton(installButton);
 
                 FetchRemoteUpdates(true);
             }
@@ -74,55 +85,6 @@ namespace CharmsBarReloaded.Updater
 
             FetchRemoteUpdates(settings.useCustomUpdateServer);
         }
-
-        #region fetch remote server
-        private async void FetchRemoteUpdates(bool isCustomUrl)
-        {
-            UpdateStatus("Connecting to a remote server", "info", false);
-            string remoteUrl = @""; //will be released later
-            if (isCustomUrl)
-                remoteUrl = customServerTextBox.Text;
-            if (!isCustomUrl)
-            {
-                MessageBox.Show("Update list server is not up yet! Stay tuned for later updates.");
-                return;
-            }
-
-            try
-            {
-                UpdateStatus("Connecting to a remote server", "info", false);
-
-                var updatesList = await RemoteServer.FetchUpdates(isCustomUrl, customServerTextBox.Text);
-
-                if (string.IsNullOrWhiteSpace(updatesList))
-                {
-                    UpdateStatus("Failed to fetch updates!", "error", false);
-                    return;
-                }
-
-                updates = JsonSerializer.Deserialize<List<UpdateItem>>(updatesList, new JsonSerializerOptions
-                {
-                    PropertyNameCaseInsensitive = true
-                });
-                updates.Sort((a, b) => b.build.CompareTo(a.build));
-                versionSelector.Items.Clear();
-                RepopulateUpdatesList();
-                UpdateStatus("Ready", "info");
-            }
-            catch (UriFormatException)
-            {
-                UpdateStatus("Failed to connect to a server", "error", false);
-            }
-            catch (HttpRequestException ex) when (ex.StatusCode == null)
-            {
-                UpdateStatus("Failed to connect to a server", "error", false);
-            }
-            catch
-            {
-                UpdateStatus("Failed to fetch updates!", "error", false);
-            }
-        }
-        #endregion fetch remote server
 
         #region UI modification
         List<UpdateItem> filteredUpdates = new List<UpdateItem>();
@@ -159,6 +121,7 @@ namespace CharmsBarReloaded.Updater
                 UpdateStatus("Update available!", "info", true, true);
             else
                 UpdateStatus("Ready", "info");
+            installButton.Enabled = true;
         }
 
         void UpdateStatus(string statusMessage, string type = "info", bool updatesAvailable = true, bool hasNewUpdate = false)
@@ -182,6 +145,9 @@ namespace CharmsBarReloaded.Updater
                         latestVersionLabel.Text = $"Latest version: Unavailable";
                     }
                     statusLabel.ForeColor = Color.Red;
+                    break;
+                case "success":
+                    statusLabel.ForeColor = Color.Green;
                     break;
             }
             if (!updatesAvailable)
@@ -241,10 +207,56 @@ namespace CharmsBarReloaded.Updater
         #region main ui
         private void installButton_Click(object sender, EventArgs e)
         {
+            if (installPathTextBox.Text.Contains("\\Users\\") || portableInstallCheckBox.Checked || Program.IsElevated)
+            {
+                cancelButton.Enabled = true;
+                installButton.Enabled = false;
+                DownloadAsync(installPathTextBox.Text, filteredUpdates[versionSelector.SelectedIndex].downloadLink, portableInstallCheckBox.Checked);
+            }
+            else
+            {
+                var args = new List<string>
+                    {
+                        "-install",
+                        $"-version {filteredUpdates[versionSelector.SelectedIndex].versionName}",
+                        $"-build {filteredUpdates[versionSelector.SelectedIndex].build}",
+                        $"-installpath \"{installPathTextBox.Text}\""
+                    };
+
+                if (customServerRadio.Checked)
+                    args.Add($"-customserver \"{customServerTextBox.Text}\"");
+
+                if (portableInstallCheckBox.Checked)
+                    args.Add("-portable");
+
+                if (includeBetasCheckbox.Checked)
+                    args.Add("-includebetas");
+
+                if (includeLegacyCheckbox.Checked)
+                    args.Add("-includelegacy");
+                try
+                {
+                    Process.Start(new ProcessStartInfo
+                    {
+                        FileName = $"{AppDomain.CurrentDomain.BaseDirectory}{AppDomain.CurrentDomain.FriendlyName}.exe",
+                        Arguments = $"-install -version {filteredUpdates[versionSelector.SelectedIndex].versionName} -build {filteredUpdates[versionSelector.SelectedIndex].build} -installpath {"\"" + installPathTextBox.Text + "\""} {(customServerRadio.Checked ? $"-customserver {"\"" + customServerTextBox.Text + "\""}" : "")} {(portableInstallCheckBox.Checked ? "-portable" : "")} {(includeBetasCheckbox.Checked ? "-includebetas" : "")} {(includeLegacyCheckbox.Checked ? "-includelegacy" : "")} ",
+                        Verb = "runas",
+                        UseShellExecute = true
+                    });
+                    Environment.Exit(0);
+                }
+                catch
+                {
+                    MessageBox.Show("failed to get administrator privileges!\nplease, install a portable instalation to a users folder or accept UAC prompt");
+                }
+            }
         }
 
         private void cancelButton_Click(object sender, EventArgs e)
         {
+            RemoteServer.StopDownload();
+            installButton.Enabled = true;
+            cancelButton.Enabled = false;
         }
 
         private void advancedSettingsButton_Click(object sender, EventArgs e)
@@ -315,7 +327,7 @@ namespace CharmsBarReloaded.Updater
 
                 if (result == DialogResult.OK && !string.IsNullOrWhiteSpace(fbd.SelectedPath))
                 {
-                    installPathTextBox.Text = fbd.SelectedPath;
+                    installPathTextBox.Text = fbd.SelectedPath + $"\\{Program.AppName}";
                 }
             }
         }
@@ -392,6 +404,50 @@ namespace CharmsBarReloaded.Updater
         private void checkForUpdatesincludeBetasToolStripMenuItem_Click(object sender, EventArgs e)
         {
             RemoteServer.CheckForUpdates(true, customServerRadio.Checked, customServerTextBox.Text);
+        }
+
+        private void installPathTextBox_TextChanged(object sender, EventArgs e)
+        {
+            if (installPathTextBox.Text.Contains("\\Users\\") || portableInstallCheckBox.Checked || Program.IsElevated)
+                ShieldIcon.RemoveFromButton(installButton);
+            else
+                ShieldIcon.AddToButton(installButton);
+        }
+
+        private void portableInstallCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            if (installPathTextBox.Text.Contains("\\Users\\") || portableInstallCheckBox.Checked || Program.IsElevated)
+                ShieldIcon.RemoveFromButton(installButton);
+            else
+                ShieldIcon.AddToButton(installButton);
+        }
+
+        private void installCustomUpdatePackageToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            openFileDialog.Title = "Pick an update file";
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+                Install(installPathTextBox.Text, openFileDialog.FileName, portableInstallCheckBox.Checked);
+        }
+        private void ApplicationInstallSuccess(bool isPortable)
+        {
+            UpdateStatus("Installed!", "success");
+            progressBar.Value = 100;
+            installButton.Enabled = true;
+            if (isPortable)
+                return;
+
+            InstallDetector.IsInstalled(true);
+            this.Text = "Updater";
+            installedVersionLabel.Text = $"Installed: {InstallDetector.VersionString}";
+            installPathTextBox.Text = InstallDetector.InstallPath;
+            portableInstallCheckBox.Checked = InstallDetector.IsPortable;
+            checkForUpdatesToolStripMenuItem.Enabled = true;
+            checkForUpdatesincludeBetasToolStripMenuItem.Enabled = true;
+        }
+
+        private void uninstallBtn_Click(object sender, EventArgs e)
+        {
+            Uninstall();
         }
     }
 }

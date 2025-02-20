@@ -18,17 +18,21 @@ namespace CharmsBarReloaded.Updater
         public static bool IsPortable { get; private set; } = false;
         public static string VersionString { get; private set; } = string.Empty;
         public static int BuildNumber { get; private set; } = -1;
+        public static bool AdminInstall { get; private set; } = false;
 
-        public static bool IsInstalled()
+        public static bool IsInstalled(bool recheck = false)
         {
-            if (appInstalled != null)
+            if (appInstalled != null && !recheck)
                 return appInstalled.Value;
 
             foreach (var key in systemRegKeys)
             {
                 appInstalled = CheckRegistryKey(Registry.LocalMachine, key);
                 if (appInstalled.Value == true)
+                {
+                    AdminInstall = true;
                     return true;
+                }
 
             }
 
@@ -61,12 +65,13 @@ namespace CharmsBarReloaded.Updater
                 if (registryKey == null)
                     return false;
                 foreach (var subKeys in registryKey.GetSubKeyNames())
-                    using (var subKey = registryKey.OpenSubKey(subKeys))
-                        if (Program.AppName.Equals((string)subKey.GetValue("DisplayName"), StringComparison.OrdinalIgnoreCase))
+                    if (Program.AppName.Equals((string)subKeys, StringComparison.OrdinalIgnoreCase))
+                        using (var subKey = registryKey.OpenSubKey(subKeys))
                         {
                             InstallRegPath = subKey.ToString();
                             InstallPath = (string)subKey.GetValue("InstallLocation");
                             VersionString = (string)subKey.GetValue("DisplayVersion");
+                            BuildNumber = (int)subKey.GetValue("MajorVersion");
                             IsPortable = false;
                             return true;
                         }

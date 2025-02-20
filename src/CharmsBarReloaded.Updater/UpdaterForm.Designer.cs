@@ -61,6 +61,7 @@
             installCustomUpdatePackageToolStripMenuItem = new ToolStripMenuItem();
             aboutToolStripMenuItem = new ToolStripMenuItem();
             aboutToolStripMenuItem1 = new ToolStripMenuItem();
+            uninstallBtn = new Button();
             AdvancedSettings.SuspendLayout();
             updaterMenu.SuspendLayout();
             SuspendLayout();
@@ -180,6 +181,7 @@
             portableInstallCheckBox.TabIndex = 15;
             portableInstallCheckBox.Text = "Portable install";
             portableInstallCheckBox.UseVisualStyleBackColor = true;
+            portableInstallCheckBox.CheckedChanged += portableInstallCheckBox_CheckedChanged;
             // 
             // loadSettings
             // 
@@ -238,6 +240,7 @@
             installPathTextBox.Size = new Size(224, 23);
             installPathTextBox.TabIndex = 9;
             installPathTextBox.Text = "C:\\Program Files\\CharmsBarReloaded";
+            installPathTextBox.TextChanged += installPathTextBox_TextChanged;
             // 
             // installPathText
             // 
@@ -365,10 +368,10 @@
             // 
             // installCustomUpdatePackageToolStripMenuItem
             // 
-            installCustomUpdatePackageToolStripMenuItem.Enabled = false;
             installCustomUpdatePackageToolStripMenuItem.Name = "installCustomUpdatePackageToolStripMenuItem";
             installCustomUpdatePackageToolStripMenuItem.Size = new Size(251, 22);
             installCustomUpdatePackageToolStripMenuItem.Text = "Install custom update package";
+            installCustomUpdatePackageToolStripMenuItem.Click += installCustomUpdatePackageToolStripMenuItem_Click;
             // 
             // aboutToolStripMenuItem
             // 
@@ -384,6 +387,17 @@
             aboutToolStripMenuItem1.Text = "About";
             aboutToolStripMenuItem1.Click += aboutToolStripMenuItem1_Click;
             // 
+            // uninstallBtn
+            // 
+            uninstallBtn.Enabled = false;
+            uninstallBtn.Location = new Point(256, 77);
+            uninstallBtn.Name = "uninstallBtn";
+            uninstallBtn.Size = new Size(75, 23);
+            uninstallBtn.TabIndex = 10;
+            uninstallBtn.Text = "Uninstall";
+            uninstallBtn.UseVisualStyleBackColor = true;
+            uninstallBtn.Click += uninstallBtn_Click;
+            // 
             // UpdaterForm
             // 
             AutoScaleDimensions = new SizeF(96F, 96F);
@@ -391,6 +405,7 @@
             AutoSize = true;
             AutoSizeMode = AutoSizeMode.GrowAndShrink;
             ClientSize = new Size(508, 327);
+            Controls.Add(uninstallBtn);
             Controls.Add(AdvancedSettings);
             Controls.Add(latestVersionLabel);
             Controls.Add(installedVersionLabel);
@@ -450,5 +465,6 @@
         private Button loadSettings;
         private CheckBox portableInstallCheckBox;
         private ToolStripMenuItem checkForUpdatesincludeBetasToolStripMenuItem;
+        private Button uninstallBtn;
     }
 }
