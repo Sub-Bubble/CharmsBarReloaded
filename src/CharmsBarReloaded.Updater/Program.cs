@@ -1,3 +1,4 @@
+using System.Security.Principal;
 using System.Text.Json;
 
 namespace CharmsBarReloaded.Updater
@@ -5,7 +6,12 @@ namespace CharmsBarReloaded.Updater
     internal static class Program
     {
         public const string AppName = "CharmsBarReloaded";
+        public const string AppDisplayName = "CharmsBar: Reloaded";
+        public const string AboutURL = "https://github.com/Sub-Bubble/CharmsBarReloaded";
+        public const string IssueLink = "https://github.com/Sub-Bubble/CharmsBarReloaded/issues";
+        public const string Publisher = "Sub-Bubble";
         public readonly static string DefaultConfigPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "CharmsBarReloaded", "updaterConfig.json");
+        public static bool IsElevated => new WindowsPrincipal(WindowsIdentity.GetCurrent()).IsInRole(WindowsBuiltInRole.Administrator);
         /// <summary>
         ///  The main entry point for the application.
         /// </summary>
@@ -38,6 +44,17 @@ namespace CharmsBarReloaded.Updater
                 }
                 if (args.Contains("-includebetas"))
                     Application.Run(new UpdaterForm(true));
+                if (args[0] == "-install")
+                {
+                    string version = args[Array.IndexOf(args, "-version")+1];
+                    int build = int.Parse(args[Array.IndexOf(args, "-build") + 1]);
+
+                    string CustomServer = args.Contains("-customserver") ? args[Array.IndexOf(args, "-customserver") + 1] : string.Empty;
+                    bool isPortable = args.Contains("-portable");
+                    bool includeBetas = args.Contains("-includebetas");
+                    bool includeLegacy = args.Contains("-includelegacy"); ;
+                    //Application.Run(new UpdaterForm(includeBetas, includeLegacy, version, build, isPortable, CustomServer));
+                }
             }
             else
                 Application.Run(new UpdaterForm());

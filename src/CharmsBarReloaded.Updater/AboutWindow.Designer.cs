@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AboutWindow));
-            label1 = new Label();
+            updaterNameLabel = new Label();
             contributorsLinkLabel = new LinkLabel();
             okBtn = new Button();
             versionString = new Label();
@@ -39,15 +39,15 @@
             mitLicenseLinkLabel = new LinkLabel();
             SuspendLayout();
             // 
-            // label1
+            // updaterNameLabel
             // 
-            label1.AutoSize = true;
-            label1.Font = new Font("Segoe UI", 15F);
-            label1.Location = new Point(12, 9);
-            label1.Name = "label1";
-            label1.Size = new Size(273, 28);
-            label1.TabIndex = 1;
-            label1.Text = "CharmsBar: Reloaded Updater";
+            updaterNameLabel.AutoSize = true;
+            updaterNameLabel.Font = new Font("Segoe UI", 15F);
+            updaterNameLabel.Location = new Point(12, 9);
+            updaterNameLabel.Name = "updaterNameLabel";
+            updaterNameLabel.Size = new Size(175, 28);
+            updaterNameLabel.TabIndex = 1;
+            updaterNameLabel.Text = "AppName updater";
             // 
             // contributorsLinkLabel
             // 
@@ -133,7 +133,7 @@
             Controls.Add(buildString);
             Controls.Add(versionString);
             Controls.Add(okBtn);
-            Controls.Add(label1);
+            Controls.Add(updaterNameLabel);
             FormBorderStyle = FormBorderStyle.FixedSingle;
             Icon = (Icon)resources.GetObject("$this.Icon");
             MaximizeBox = false;
@@ -148,7 +148,7 @@
 
         #endregion
 
-        private Label label1;
+        private Label updaterNameLabel;
         private LinkLabel contributorsLinkLabel;
         private Button okBtn;
         private Label versionString;

@@ -28,6 +28,7 @@ namespace CharmsBarReloaded.Updater
 
         private void AboutWindow_Load(object sender, EventArgs e)
         {
+            updaterNameLabel.Text = $"{Program.AppDisplayName} updater";
             versionString.Text = $"Version: {assembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>().InformationalVersion}";
             buildString.Text = $"Build: {assembly.GetName().Version.Major}";
         }
