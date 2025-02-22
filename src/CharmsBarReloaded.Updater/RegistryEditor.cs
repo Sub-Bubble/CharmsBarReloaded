@@ -24,7 +24,14 @@ namespace CharmsBarReloaded.Updater
         }
         public static void RemoveRegistryKey(RegistryKey rootKey, string registryPath)
         {
-
+            using (RegistryKey registryKey = rootKey.OpenSubKey(registryPath, true))
+            {
+                if (registryKey == null)
+                    return;
+                foreach (var subKeys in registryKey.GetSubKeyNames())
+                    if (Program.AppName.Equals((string)subKeys, StringComparison.OrdinalIgnoreCase))
+                        registryKey.DeleteSubKey(subKeys);
+            }
         }
     }
 }

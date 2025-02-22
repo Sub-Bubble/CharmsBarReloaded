@@ -1,3 +1,4 @@
+using System;
 using System.Security.Principal;
 using System.Text.Json;
 
@@ -23,8 +24,16 @@ namespace CharmsBarReloaded.Updater
             ApplicationConfiguration.Initialize();
             if (args.Length > 0)
             {
+                string action = string.Empty;
+                bool includeBetas = false;
+                bool includeLegacy = false;
+                bool isPortable = false;
+                string version = string.Empty;
+                int build = -1;
+
                 bool useCustomServer = true;
                 string customServerUrl = @"http://localhost";
+                
                 if (File.Exists(DefaultConfigPath))
                 {
                     try
@@ -41,20 +50,29 @@ namespace CharmsBarReloaded.Updater
                         RemoteServer.CheckForUpdates(true, useCustomServer, customServerUrl).GetAwaiter().GetResult();
                     else if (args.Contains("stable") || args.Length == 1)
                         RemoteServer.CheckForUpdates(false, useCustomServer, customServerUrl).GetAwaiter().GetResult();
+                    Application.Exit();
                 }
-                if (args.Contains("-includebetas"))
-                    Application.Run(new UpdaterForm(true));
-                if (args[0] == "-install")
+                if (args[0] == "-uninstall")
                 {
-                    string version = args[Array.IndexOf(args, "-version")+1];
-                    int build = int.Parse(args[Array.IndexOf(args, "-build") + 1]);
-
-                    string CustomServer = args.Contains("-customserver") ? args[Array.IndexOf(args, "-customserver") + 1] : string.Empty;
-                    bool isPortable = args.Contains("-portable");
-                    bool includeBetas = args.Contains("-includebetas");
-                    bool includeLegacy = args.Contains("-includelegacy"); ;
-                    //Application.Run(new UpdaterForm(includeBetas, includeLegacy, version, build, isPortable, CustomServer));
+                    Installer.Uninstall();
+                    Environment.Exit(0);
                 }
+
+                if (args.Contains("-includebetas"))
+                    includeBetas = true;
+                if (args.Contains("-includelegacy"))
+                    includeLegacy = true;
+                if (args.Contains("-portable"))
+                    isPortable = true;
+                if (args.Contains("-build"))
+                    build = int.Parse(args[Array.IndexOf(args, "-build") + 1]);
+                if (args.Contains("-version"))
+                    version = args[Array.IndexOf(args, "-version") + 1];
+                if (args.Contains("-customserver"))
+                    customServerUrl = args[Array.IndexOf(args, "-customserver") + 1];
+                if (args.Contains("-install"))
+                    action = "install";
+                Application.Run(new UpdaterForm(action, includeBetas, includeLegacy));
             }
             else
                 Application.Run(new UpdaterForm());

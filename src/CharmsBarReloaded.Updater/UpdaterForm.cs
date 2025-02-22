@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Text.Json;
 
@@ -10,7 +11,7 @@ namespace CharmsBarReloaded.Updater
     {
         List<UpdateItem> updates;
         private bool showAdvancedSettings = false;
-        public UpdaterForm(bool includeBetas = false, bool includeLegacy = false)
+        public UpdaterForm(string action = "", bool includeBetas = false, bool includeLegacy = false)
         {
             InitializeComponent();
             if (InstallDetector.IsInstalled())
@@ -22,7 +23,7 @@ namespace CharmsBarReloaded.Updater
                 checkForUpdatesToolStripMenuItem.Enabled = true;
                 checkForUpdatesincludeBetasToolStripMenuItem.Enabled = true;
                 uninstallBtn.Enabled = true;
-                if (InstallDetector.AdminInstall)
+                if (InstallDetector.AdminInstall && !Program.IsElevated)
                     ShieldIcon.AddToButton(uninstallBtn);
             }
             else
@@ -34,11 +35,9 @@ namespace CharmsBarReloaded.Updater
                 checkForUpdatesincludeBetasToolStripMenuItem.Enabled = false;
                 uninstallBtn.Enabled = false;
             }
-
             AdvancedSettings.Hide();
-
             // custom made config is always prioritized over a checkbox
-            if (File.Exists(Program.DefaultConfigPath))
+            if (File.Exists(Program.DefaultConfigPath) && action != "uninstall")
                 LoadConfig(Program.DefaultConfigPath);
             else
             {
@@ -51,12 +50,13 @@ namespace CharmsBarReloaded.Updater
 
                 customServerRadio.Checked = true;
                 customServerTextBox.Enabled = true;
-                customServerTextBox.Text = "http://localhost"; // temporary solution
+                customServerTextBox.Text = "http://localhost/updates.json"; // temporary solution
                 applyUpdateServerPathBtn.Enabled = true;
                 if (!Program.IsElevated)
                     ShieldIcon.AddToButton(installButton);
 
-                FetchRemoteUpdates(true);
+                if (action != "uninstall")
+                    FetchRemoteUpdates(true);
             }
         }
 
@@ -447,7 +447,26 @@ namespace CharmsBarReloaded.Updater
 
         private void uninstallBtn_Click(object sender, EventArgs e)
         {
-            Uninstall();
+            if ((InstallDetector.AdminInstall && Program.IsElevated) || !InstallDetector.AdminInstall)
+                Installer.Uninstall();
+            else
+            {
+                try
+                {
+                    Process.Start(new ProcessStartInfo
+                    {
+                        FileName = $"{AppDomain.CurrentDomain.BaseDirectory}{AppDomain.CurrentDomain.FriendlyName}.exe",
+                        Arguments = $"-uninstall",
+                        Verb = "runas",
+                        UseShellExecute = true
+                    });
+                    Environment.Exit(0);
+                }
+                catch
+                {
+                    MessageBox.Show("failed to get administrator privileges!\nplease, accept UAC prompt");
+                }
+            }
         }
     }
 }
