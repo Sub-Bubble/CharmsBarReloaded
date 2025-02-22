@@ -59,16 +59,17 @@ namespace CharmsBarReloaded.Updater
             if (!canUpdate)
                 MessageBox.Show($"You are running the latest version of {Program.AppName}", "No updates available", MessageBoxButtons.OK);
         }
-        private static HttpClient client = new HttpClient();
         public static async Task<string> FetchUpdates(bool isCustomUrl, string customUrl = "")
         {
-            if (isCustomUrl)
-                remoteUrl = customUrl;
+                if (isCustomUrl)
+                    remoteUrl = customUrl;
             if (!isCustomUrl)
             {
                 MessageBox.Show("Update list server is not up yet! Stay tuned for later updates.");
                 return null;
             }
+
+            using var client = new HttpClient();
             client.CancelPendingRequests();
             client.BaseAddress = new Uri(remoteUrl);
             client.DefaultRequestHeaders.Add($"{Program.AppName}-Updater", "v1.0");
@@ -101,39 +102,33 @@ namespace CharmsBarReloaded.Updater
 
         public static async Task DownloadPackage(string downloadLink, string resultPath, IProgress<int> progress, CancellationToken cancellationToken)
         {
-            using (HttpResponseMessage httpResponse = await client.GetAsync(downloadLink, HttpCompletionOption.ResponseHeadersRead, cancellationToken))
+            using var client = new HttpClient();
+            using HttpResponseMessage httpResponse = await client.GetAsync(downloadLink, HttpCompletionOption.ResponseHeadersRead, cancellationToken);
+
+            httpResponse.EnsureSuccessStatusCode();
+            long? totalBytes = httpResponse.Content.Headers.ContentLength;
+
+            using Stream contentStream = await httpResponse.Content.ReadAsStreamAsync();
+            using var fileStream = new FileStream(resultPath, FileMode.Create, FileAccess.Write, FileShare.None, 8192, true);
+
+            byte[] buffer = new byte[8192];
+            long totalRead = 0;
+            int bytesRead;
+
+            while ((bytesRead = await contentStream.ReadAsync(buffer, 0, buffer.Length, cancellationToken)) > 0)
             {
-                httpResponse.EnsureSuccessStatusCode();
-                long? totalBytes = httpResponse.Content.Headers.ContentLength;
+                cancellationToken.ThrowIfCancellationRequested();
+                await fileStream.WriteAsync(buffer, 0, bytesRead, cancellationToken);
+                totalRead += bytesRead;
 
-                using (Stream contentStream = await httpResponse.Content.ReadAsStreamAsync())
+                if (totalBytes.HasValue)
                 {
-                    using (var fileStream = new FileStream(resultPath, FileMode.Create, FileAccess.Write, FileShare.None, 8192, true))
-                    {
-                        byte[] buffer = new byte[8192];
-                        long totalRead = 0;
-                        int bytesRead;
-
-                        while ((bytesRead = await contentStream.ReadAsync(buffer, 0, buffer.Length, cancellationToken)) > 0)
-                        {
-                            cancellationToken.ThrowIfCancellationRequested();
-                            await fileStream.WriteAsync(buffer, 0, bytesRead, cancellationToken);
-                            totalRead += bytesRead;
-
-                            if (totalBytes.HasValue)
-                            {
-                                int percentage = (int)((totalRead * 100) / totalBytes.Value);
-                                progress.Report(percentage);
-                            }
-                            else
-                            {
-                                progress.Report(-1);
-                            }
-                        }
-                    }
+                    int percentage = (int)((totalRead * 100) / totalBytes.Value);
+                    progress.Report(percentage);
                 }
+                else
+                    progress.Report(-1);
             }
-            progress.Report(100);
         }
         public static CancellationTokenSource cancelToken = new CancellationTokenSource();
         public static void StopDownload()
