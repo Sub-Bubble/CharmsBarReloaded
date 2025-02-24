@@ -120,6 +120,7 @@
             // 
             versionSelector.DropDownStyle = ComboBoxStyle.DropDownList;
             versionSelector.DropDownWidth = 121;
+            versionSelector.Enabled = false;
             versionSelector.FormattingEnabled = true;
             versionSelector.Location = new Point(103, 78);
             versionSelector.Name = "versionSelector";
@@ -134,7 +135,7 @@
             installedVersionLabel.Name = "installedVersionLabel";
             installedVersionLabel.Size = new Size(227, 15);
             installedVersionLabel.TabIndex = 6;
-            installedVersionLabel.Text = "Installed: Unknown";
+            installedVersionLabel.Text = "Not installed!";
             installedVersionLabel.TextAlign = ContentAlignment.TopRight;
             // 
             // latestVersionLabel
@@ -284,7 +285,6 @@
             customServerRadio.Name = "customServerRadio";
             customServerRadio.Size = new Size(67, 19);
             customServerRadio.TabIndex = 4;
-            customServerRadio.TabStop = true;
             customServerRadio.Text = "Custom";
             customServerRadio.UseVisualStyleBackColor = true;
             customServerRadio.CheckedChanged += customServerRadio_CheckedChanged;
@@ -292,7 +292,7 @@
             // officialServerRadio
             // 
             officialServerRadio.AutoSize = true;
-            officialServerRadio.Enabled = false;
+            officialServerRadio.Checked = true;
             officialServerRadio.Location = new Point(15, 97);
             officialServerRadio.Name = "officialServerRadio";
             officialServerRadio.Size = new Size(63, 19);
@@ -354,6 +354,7 @@
             // 
             // checkForUpdatesToolStripMenuItem
             // 
+            checkForUpdatesToolStripMenuItem.Enabled = false;
             checkForUpdatesToolStripMenuItem.Name = "checkForUpdatesToolStripMenuItem";
             checkForUpdatesToolStripMenuItem.Size = new Size(251, 22);
             checkForUpdatesToolStripMenuItem.Text = "Check for updates";
@@ -361,6 +362,7 @@
             // 
             // checkForUpdatesincludeBetasToolStripMenuItem
             // 
+            checkForUpdatesincludeBetasToolStripMenuItem.Enabled = false;
             checkForUpdatesincludeBetasToolStripMenuItem.Name = "checkForUpdatesincludeBetasToolStripMenuItem";
             checkForUpdatesincludeBetasToolStripMenuItem.Size = new Size(251, 22);
             checkForUpdatesincludeBetasToolStripMenuItem.Text = "Check for updates (include betas)";
@@ -422,7 +424,7 @@
             MaximizeBox = false;
             Name = "UpdaterForm";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "Updater";
+            Text = "Installer";
             AdvancedSettings.ResumeLayout(false);
             AdvancedSettings.PerformLayout();
             updaterMenu.ResumeLayout(false);

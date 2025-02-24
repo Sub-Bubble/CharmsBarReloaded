@@ -11,7 +11,11 @@ namespace CharmsBarReloaded.Updater
     {
         List<UpdateItem> updates;
         private bool showAdvancedSettings = false;
-        public UpdaterForm(string action = "", bool includeBetas = false, bool includeLegacy = false)
+
+        private string autoAction = string.Empty;
+        private int? buildAutoSelect = null;
+        public UpdaterForm(string action = "", bool includeBetas = false, bool includeLegacy = false,
+            bool isPortable = false, int? build = null, string installPath = "", string customServerUrl = "")
         {
             InitializeComponent();
             if (InstallDetector.IsInstalled())
@@ -26,38 +30,38 @@ namespace CharmsBarReloaded.Updater
                 if (InstallDetector.AdminInstall && !Program.IsElevated)
                     ShieldIcon.AddToButton(uninstallBtn);
             }
-            else
-            {
-                this.Text = "Installer";
-                installedVersionLabel.Text = $"Not installed!";
-                portableInstallCheckBox.Checked = false;
-                checkForUpdatesToolStripMenuItem.Enabled = false;
-                checkForUpdatesincludeBetasToolStripMenuItem.Enabled = false;
-                uninstallBtn.Enabled = false;
-            }
-            AdvancedSettings.Hide();
-            // custom made config is always prioritized over a checkbox
-            if (File.Exists(Program.DefaultConfigPath) && action != "uninstall")
-                LoadConfig(Program.DefaultConfigPath);
-            else
-            {
-                if (includeBetas)
-                    includeBetasCheckbox.Checked = true;
-                if (includeLegacy)
-                    includeLegacyCheckbox.Checked = true;
-
-                officialServerRadio.Checked = false;
-
-                customServerRadio.Checked = true;
-                customServerTextBox.Enabled = true;
-                customServerTextBox.Text = "http://localhost/updates.json"; // temporary solution
-                applyUpdateServerPathBtn.Enabled = true;
-                if (!Program.IsElevated)
+            else if (!Program.IsElevated)
                     ShieldIcon.AddToButton(installButton);
 
-                if (action != "uninstall")
-                    FetchRemoteUpdates(true);
+            AdvancedSettings.Hide();
+
+            if (includeBetas)
+                includeBetasCheckbox.Checked = true;
+            if (includeLegacy)
+                includeLegacyCheckbox.Checked = true;
+            if (isPortable)
+                portableInstallCheckBox.Checked = true;
+            if (build.HasValue)
+                buildAutoSelect = build.Value;
+            if (!string.IsNullOrWhiteSpace(action))
+                autoAction = action;
+
+            if (!string.IsNullOrWhiteSpace(customServerUrl))
+            {
+                officialServerRadio.Checked = false;
+                customServerRadio.Checked = true;
+                customServerTextBox.Enabled = true;
+                customServerTextBox.Text = customServerUrl;
+                applyUpdateServerPathBtn.Enabled = true;
             }
+            if (!string.IsNullOrWhiteSpace(installPath))
+                installPathTextBox.Text = installPath;
+
+            // custom made config is always prioritized over a checkbox
+            if (File.Exists(Program.DefaultConfigPath))
+                LoadConfig(Program.DefaultConfigPath);
+            else
+                FetchRemoteUpdates(customServerRadio.Checked);
         }
 
         void LoadConfig(string configPath)
@@ -122,6 +126,14 @@ namespace CharmsBarReloaded.Updater
             else
                 UpdateStatus("Ready", "info");
             installButton.Enabled = true;
+
+            if (buildAutoSelect.HasValue)
+                foreach (var version in filteredUpdates)
+                    if (version.build == buildAutoSelect.Value)
+                        versionSelector.SelectedIndex = filteredUpdates.IndexOf(version);
+            
+            if (!string.IsNullOrWhiteSpace(autoAction))
+                installButton_Click(null, null);
         }
 
         void UpdateStatus(string statusMessage, string type = "info", bool updatesAvailable = true, bool hasNewUpdate = false)
@@ -218,7 +230,6 @@ namespace CharmsBarReloaded.Updater
                 var args = new List<string>
                     {
                         "-install",
-                        $"-version {filteredUpdates[versionSelector.SelectedIndex].versionName}",
                         $"-build {filteredUpdates[versionSelector.SelectedIndex].build}",
                         $"-installpath \"{installPathTextBox.Text}\""
                     };
@@ -239,7 +250,7 @@ namespace CharmsBarReloaded.Updater
                     Process.Start(new ProcessStartInfo
                     {
                         FileName = $"{AppDomain.CurrentDomain.BaseDirectory}{AppDomain.CurrentDomain.FriendlyName}.exe",
-                        Arguments = $"-install -version {filteredUpdates[versionSelector.SelectedIndex].versionName} -build {filteredUpdates[versionSelector.SelectedIndex].build} -installpath {"\"" + installPathTextBox.Text + "\""} {(customServerRadio.Checked ? $"-customserver {"\"" + customServerTextBox.Text + "\""}" : "")} {(portableInstallCheckBox.Checked ? "-portable" : "")} {(includeBetasCheckbox.Checked ? "-includebetas" : "")} {(includeLegacyCheckbox.Checked ? "-includelegacy" : "")} ",
+                        Arguments = $"-install -build {filteredUpdates[versionSelector.SelectedIndex].build} -installpath {"\"" + installPathTextBox.Text + "\""} {(customServerRadio.Checked ? $"-customserver {"\"" + customServerTextBox.Text + "\""}" : "")} {(portableInstallCheckBox.Checked ? "-portable" : "")} {(includeBetasCheckbox.Checked ? "-includebetas" : "")} {(includeLegacyCheckbox.Checked ? "-includelegacy" : "")} ",
                         Verb = "runas",
                         UseShellExecute = true
                     });
@@ -437,6 +448,7 @@ namespace CharmsBarReloaded.Updater
                 return;
 
             InstallDetector.IsInstalled(true);
+            uninstallBtn.Enabled = true;
             this.Text = "Updater";
             installedVersionLabel.Text = $"Installed: {InstallDetector.VersionString}";
             installPathTextBox.Text = InstallDetector.InstallPath;

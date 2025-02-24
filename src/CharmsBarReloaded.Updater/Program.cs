@@ -22,41 +22,44 @@ namespace CharmsBarReloaded.Updater
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
-            if (args.Length > 0)
+
+            if (args.Length == 0)
+                Application.Run(new UpdaterForm());
+            else
             {
                 string action = string.Empty;
                 bool includeBetas = false;
                 bool includeLegacy = false;
                 bool isPortable = false;
-                string version = string.Empty;
-                int build = -1;
+                string installPath = string.Empty;
+                int? build = null;
+                string customServerUrl = @"http://localhost/updates.json";
 
-                bool useCustomServer = true;
-                string customServerUrl = @"http://localhost";
-                
-                if (File.Exists(DefaultConfigPath))
+                if (args[0] == ("-checkforupdates"))
                 {
-                    try
+                    bool useCustomServer = true;
+                    if (File.Exists(DefaultConfigPath))
                     {
-                        var settings = JsonSerializer.Deserialize<UpdaterSettings>(File.ReadAllText(DefaultConfigPath));
-                        customServerUrl = settings.customUpdateServer;
-                        useCustomServer = settings.useCustomUpdateServer;
-                    } catch { }
-                }
-                
-                if (args.Contains("-checkforupdates"))
-                {
+                        try
+                        {
+                            var settings = JsonSerializer.Deserialize<UpdaterSettings>(File.ReadAllText(DefaultConfigPath));
+                            customServerUrl = settings.customUpdateServer;
+                            useCustomServer = settings.useCustomUpdateServer;
+                        }
+                        catch { }
+                    }
                     if (args.Contains("beta"))
                         RemoteServer.CheckForUpdates(true, useCustomServer, customServerUrl).GetAwaiter().GetResult();
                     else if (args.Contains("stable") || args.Length == 1)
                         RemoteServer.CheckForUpdates(false, useCustomServer, customServerUrl).GetAwaiter().GetResult();
                     Application.Exit();
                 }
+
                 if (args[0] == "-uninstall")
-                {
                     Installer.Uninstall();
-                    Environment.Exit(0);
-                }
+
+                if (args[0] == ("-install"))
+                    action = "install";
 
                 if (args.Contains("-includebetas"))
                     includeBetas = true;
@@ -66,16 +69,12 @@ namespace CharmsBarReloaded.Updater
                     isPortable = true;
                 if (args.Contains("-build"))
                     build = int.Parse(args[Array.IndexOf(args, "-build") + 1]);
-                if (args.Contains("-version"))
-                    version = args[Array.IndexOf(args, "-version") + 1];
+                if (args.Contains("-installpath"))
+                    installPath = args[Array.IndexOf(args, "-installpath") + 1];
                 if (args.Contains("-customserver"))
                     customServerUrl = args[Array.IndexOf(args, "-customserver") + 1];
-                if (args.Contains("-install"))
-                    action = "install";
-                Application.Run(new UpdaterForm(action, includeBetas, includeLegacy));
+                Application.Run(new UpdaterForm(action, includeBetas, includeLegacy, isPortable, build, installPath, customServerUrl));
             }
-            else
-                Application.Run(new UpdaterForm());
         }
     }
 }

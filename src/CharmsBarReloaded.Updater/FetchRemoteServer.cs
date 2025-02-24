@@ -9,20 +9,15 @@ namespace CharmsBarReloaded.Updater
             installButton.Enabled = false;
             cancelButton.Enabled = false;
             UpdateStatus("Connecting to a remote server", "info", false);
-            string remoteUrl = @""; //will be released later
+            string remoteUrl = @"http://localhost/updates.json"; //will be released later
             if (isCustomUrl)
                 remoteUrl = customServerTextBox.Text;
-            if (!isCustomUrl)
-            {
-                MessageBox.Show("Update list server is not up yet! Stay tuned for later updates.");
-                return;
-            }
 
             try
             {
                 UpdateStatus("Connecting to a remote server", "info", false);
 
-                var updatesList = await RemoteServer.FetchUpdates(isCustomUrl, customServerTextBox.Text);
+                var updatesList = await RemoteServer.FetchUpdates(remoteUrl);
 
                 if (string.IsNullOrWhiteSpace(updatesList))
                 {

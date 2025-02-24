@@ -41,11 +41,11 @@ namespace CharmsBarReloaded.Updater
                     WorkingDirectory = Path.GetTempPath()
                 };
                 Process.Start(psi);
-                Application.Exit();
+                Environment.Exit(0);
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"The installed had crashed!\nError message: {ex.Message}\n\nStack trace: {ex.StackTrace}", "Whoops!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"The uninstaller had crashed!\nError message: {ex.Message}\n\nStack trace: {ex.StackTrace}", "Whoops!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }

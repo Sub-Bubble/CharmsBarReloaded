@@ -18,7 +18,7 @@ namespace CharmsBarReloaded.Updater
             string updatesList = string.Empty;
             try
             {
-                updatesList = await FetchUpdates(useCustomUrl, CustomUrl);
+                updatesList = await FetchUpdates(CustomUrl);
             }
             catch (Exception ex)
             {
@@ -59,16 +59,8 @@ namespace CharmsBarReloaded.Updater
             if (!canUpdate)
                 MessageBox.Show($"You are running the latest version of {Program.AppName}", "No updates available", MessageBoxButtons.OK);
         }
-        public static async Task<string> FetchUpdates(bool isCustomUrl, string customUrl = "")
+        public static async Task<string> FetchUpdates(string remoteUrl)
         {
-                if (isCustomUrl)
-                    remoteUrl = customUrl;
-            if (!isCustomUrl)
-            {
-                MessageBox.Show("Update list server is not up yet! Stay tuned for later updates.");
-                return null;
-            }
-
             using var client = new HttpClient();
             client.CancelPendingRequests();
             client.BaseAddress = new Uri(remoteUrl);
