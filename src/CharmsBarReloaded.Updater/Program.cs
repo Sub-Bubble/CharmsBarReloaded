@@ -1,4 +1,4 @@
-using System;
+using System.Diagnostics;
 using System.Security.Principal;
 using System.Text.Json;
 
@@ -13,6 +13,13 @@ namespace CharmsBarReloaded.Updater
         public const string Publisher = "Sub-Bubble";
         public readonly static string DefaultConfigPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "CharmsBarReloaded", "updaterConfig.json");
         public static bool IsElevated => new WindowsPrincipal(WindowsIdentity.GetCurrent()).IsInRole(WindowsBuiltInRole.Administrator);
+        public readonly static string TempFolder = Path.Combine(Path.GetTempPath(), AppName);
+        public static readonly string[] systemRegKeys =
+        {
+                @"SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall",
+                @"SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall",
+            };
+        public const string userRegKey = @"Software\Microsoft\Windows\CurrentVersion\Uninstall";
         /// <summary>
         ///  The main entry point for the application.
         /// </summary>
@@ -28,9 +35,6 @@ namespace CharmsBarReloaded.Updater
             else
             {
                 string action = string.Empty;
-                bool includeBetas = false;
-                bool includeLegacy = false;
-                bool isPortable = false;
                 string installPath = string.Empty;
                 int? build = null;
                 string customServerUrl = @"http://localhost/updates.json";
@@ -52,7 +56,7 @@ namespace CharmsBarReloaded.Updater
                         RemoteServer.CheckForUpdates(true, useCustomServer, customServerUrl).GetAwaiter().GetResult();
                     else if (args.Contains("stable") || args.Length == 1)
                         RemoteServer.CheckForUpdates(false, useCustomServer, customServerUrl).GetAwaiter().GetResult();
-                    Application.Exit();
+                    Environment.Exit(0);
                 }
 
                 if (args[0] == "-uninstall")
@@ -60,20 +64,32 @@ namespace CharmsBarReloaded.Updater
 
                 if (args[0] == ("-install"))
                     action = "install";
-
-                if (args.Contains("-includebetas"))
-                    includeBetas = true;
-                if (args.Contains("-includelegacy"))
-                    includeLegacy = true;
-                if (args.Contains("-portable"))
-                    isPortable = true;
                 if (args.Contains("-build"))
                     build = int.Parse(args[Array.IndexOf(args, "-build") + 1]);
                 if (args.Contains("-installpath"))
                     installPath = args[Array.IndexOf(args, "-installpath") + 1];
                 if (args.Contains("-customserver"))
                     customServerUrl = args[Array.IndexOf(args, "-customserver") + 1];
-                Application.Run(new UpdaterForm(action, includeBetas, includeLegacy, isPortable, build, installPath, customServerUrl));
+                Application.Run(new UpdaterForm(action, args.Contains("-includebetas"), args.Contains("-includelegacy"), args.Contains("-portable"),
+                    build, installPath, customServerUrl));
+            }
+        }
+        public static void Elevate(string[] args)
+        {
+            try
+            {
+                Process.Start(new ProcessStartInfo
+                {
+                    FileName = $"{AppDomain.CurrentDomain.BaseDirectory}{AppDomain.CurrentDomain.FriendlyName}.exe",
+                    Arguments = string.Join(" ", args),
+                    Verb = "runas",
+                    UseShellExecute = true
+                });
+                Environment.Exit(0);
+            }
+            catch
+            {
+                MessageBox.Show("Failed to get administrator privileges!\nPlease, accept UAC prompt", "Admin request rejected!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }

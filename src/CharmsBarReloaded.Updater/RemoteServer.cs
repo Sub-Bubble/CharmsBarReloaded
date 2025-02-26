@@ -6,7 +6,6 @@ namespace CharmsBarReloaded.Updater
 {
     public class RemoteServer
     {
-        private static string remoteUrl = @""; //will be released later
         public static async Task CheckForUpdates(bool includeBetas, bool useCustomUrl, string CustomUrl)
         {
             if (!InstallDetector.IsInstalled())
@@ -62,7 +61,6 @@ namespace CharmsBarReloaded.Updater
         public static async Task<string> FetchUpdates(string remoteUrl)
         {
             using var client = new HttpClient();
-            client.CancelPendingRequests();
             client.BaseAddress = new Uri(remoteUrl);
             client.DefaultRequestHeaders.Add($"{Program.AppName}-Updater", "v1.0");
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
@@ -92,6 +90,7 @@ namespace CharmsBarReloaded.Updater
             return await response.Content.ReadAsStringAsync();
         }
 
+        public static CancellationTokenSource cancelToken = new CancellationTokenSource();
         public static async Task DownloadPackage(string downloadLink, string resultPath, IProgress<int> progress, CancellationToken cancellationToken)
         {
             using var client = new HttpClient();
@@ -121,11 +120,6 @@ namespace CharmsBarReloaded.Updater
                 else
                     progress.Report(-1);
             }
-        }
-        public static CancellationTokenSource cancelToken = new CancellationTokenSource();
-        public static void StopDownload()
-        {
-            cancelToken.Cancel();
         }
     }
 }

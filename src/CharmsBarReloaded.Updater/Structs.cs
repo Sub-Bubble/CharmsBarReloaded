@@ -1,5 +1,17 @@
 ﻿namespace CharmsBarReloaded.Updater
 {
+    public enum Status
+    {
+        Success,
+        Error,
+        Info,
+        Warning
+    }
+    public struct StatusMessage
+    {
+        public Status Status;
+        public string Message;
+    }
     public class UpdateItem
     {
         public string versionName { get; set; }
