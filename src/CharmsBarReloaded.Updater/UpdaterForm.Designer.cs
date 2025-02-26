@@ -196,6 +196,7 @@
             // 
             // applyUpdateServerPathBtn
             // 
+            applyUpdateServerPathBtn.Enabled = false;
             applyUpdateServerPathBtn.Location = new Point(183, 142);
             applyUpdateServerPathBtn.Name = "applyUpdateServerPathBtn";
             applyUpdateServerPathBtn.Size = new Size(47, 23);
@@ -273,6 +274,7 @@
             // 
             // customServerTextBox
             // 
+            customServerTextBox.Enabled = false;
             customServerTextBox.Location = new Point(15, 142);
             customServerTextBox.Name = "customServerTextBox";
             customServerTextBox.Size = new Size(162, 23);
