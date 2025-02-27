@@ -4,6 +4,7 @@
   "CharmsBar.Start": "Пуск",
   "CharmsBar.Devices": "Устройства",
   "CharmsBar.Settings": "Настройки",
+  "CharmsBarReloaded.Error.UpdaterMissing": "CharmsBar:Reloaded не удалось открыть обновитель, что указывает на вероятное повреждение приложения.\nРекомендуется переустановка CharmsBar: Reloaded",
   "CharmsSettings.On": "Вкл",
   "CharmsSettings.Off": "Выкл",
   "CharmsSettings.CharmsBar": "Charms Bar",
@@ -35,6 +36,9 @@
   "CharmsSettings.General.CharmsClockEnabled": "Включить Charms Clock",
   "CharmsSettings.General.EnableKeyboardShortcuts": "Сочетания клавиш",
   "CharmsSettings.General.KeyboardShortcutsOverrideCharmsBarOff": "Сочетания клавиш работают даже при отключенном Charms Bar",
+  "CharmsSettings.General.BetaProgramOptIn": "Записаться в программу бета-теста",
+  "CharmsSettings.General.OpenUpdater": "Открыть обновитель",
+  "CharmsSettings.General.Updater": "Обновитель",
   "CharmsSettings.Personalization.BarBackground": "Цвет фона",
   "CharmsSettings.Personalization.BarHover": "Цвет при наведении курсором",
   "CharmsSettings.Personalization.BarText": "Цвет текста",
@@ -46,6 +50,9 @@
   "CharmsSettings.Personalization.ClockText": "Цвет текста",
   "CharmsSettings.About.Version": "Версия",
   "CharmsSettings.About.Build": "Билд",
+  "CharmsSettings.About.Branch": "Ветка обновлений:",
+  "CharmsSettings.About.Branch.Stable": "Стабильная",
+  "CharmsSettings.About.Branch.Beta": "Бета",
   "CharmsSettings.About.CheckForUpdates": "Проверить на наличие обновлений",
   "Tray.Exit": "Выход"
 }

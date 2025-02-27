@@ -36,14 +36,14 @@ This application returns Windows 8's Charms Bar to Windows 10/11!
 ## Languages
 | Language | Percentage | Contributors |
 | ------------- | ------------- | ------------- |
-| Chinese (Simplified) | 100% | <a href="https://github.com/smallmushroomovo">smallmushroomovo</a> |
-| Croatian | 100% | <a href="https://github.com/RealKrazy">RealKrazy</a> |
+| Chinese (Simplified) | 88% | <a href="https://github.com/smallmushroomovo">smallmushroomovo</a> |
+| Croatian | 88% | <a href="https://github.com/RealKrazy">RealKrazy</a> |
 | English (US) | 100% | <a href="https://github.com/Sub-Bubble">SubBubble</a> |
 | French | 100% | <a href="https://github.com/sasufler">sasufler</a> |
-| Japanese | 100% | <a href="https://github.com/RealKrazy">RealKrazy</a> |
+| Japanese | 88% | <a href="https://github.com/RealKrazy">RealKrazy</a> |
 | Polish | 100% | <a href="https://github.com/Sub-Bubble">SubBubble</a> |
 | Russian | 100% | <a href="https://github.com/Sub-Bubble">SubBubble</a> |
-| Slovak | 100% | <a href="https://github.com/RealKrazy">RealKrazy</a> |
+| Slovak | 88% | <a href="https://github.com/RealKrazy">RealKrazy</a> |
 | Ukrainian | 100% | <a href="https://github.com/Sub-Bubble">SubBubble</a> |
 
 ## Downloads

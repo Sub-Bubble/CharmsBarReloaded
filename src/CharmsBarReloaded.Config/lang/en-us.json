@@ -4,7 +4,7 @@
   "CharmsBar.Start": "Start",
   "CharmsBar.Devices": "Devices",
   "CharmsBar.Settings": "Settings",
-  "CharmsBarReloaded.Error.UpdaterMissing": "CharmsBar:Reloaded failed to open updater, indicating app instalation may be broken or tampered with.\nIt is highly reccomended to reinstall CharmsBar: Reloaded",
+  "CharmsBarReloaded.Error.UpdaterMissing": "CharmsBar:Reloaded failed to open updater, indicating app instalation may be broken.\nIt is highly reccomended to reinstall CharmsBar: Reloaded",
   "CharmsSettings.On": "On",
   "CharmsSettings.Off": "Off",
   "CharmsSettings.CharmsBar": "Charms Bar",
