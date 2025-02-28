@@ -36,6 +36,7 @@
   "CharmsSettings.General.CharmsClockEnabled": "Włącz Charms Clock",
   "CharmsSettings.General.EnableKeyboardShortcuts": "Skróty klawiaturowe",
   "CharmsSettings.General.KeyboardShortcutsOverrideCharmsBarOff": "Skróty klawiaturowe zastępują wyłączony pasek Charms Bar",
+  "CharmsSettings.General.AutomaticCheckForUpdates": "Automatyczne sprawdzanie aktualizacji",
   "CharmsSettings.General.BetaProgramOptIn": "Dołączyć do programu beta",
   "CharmsSettings.General.OpenUpdater": "Otwórz aktualizator",
   "CharmsSettings.General.Updater": "Aktualizator",

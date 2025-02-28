@@ -7,7 +7,7 @@ namespace CharmsBarReloaded.Config
     {
         private Dictionary<string, string> localizedStrings;
         private Dictionary<string, string> fallbackStrings;
-        public int TotalKeys { get; } = 56;
+        public int TotalKeys { get; } = 57;
         public TranslationManager Load(string cultureCode)
         {
             string localizedPath = $"lang/{cultureCode}.json";

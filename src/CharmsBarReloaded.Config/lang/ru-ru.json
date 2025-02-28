@@ -36,6 +36,7 @@
   "CharmsSettings.General.CharmsClockEnabled": "Включить Charms Clock",
   "CharmsSettings.General.EnableKeyboardShortcuts": "Сочетания клавиш",
   "CharmsSettings.General.KeyboardShortcutsOverrideCharmsBarOff": "Сочетания клавиш работают даже при отключенном Charms Bar",
+  "CharmsSettings.General.AutomaticCheckForUpdates": "Автоматическая проверка обновлений",
   "CharmsSettings.General.BetaProgramOptIn": "Записаться в программу бета-теста",
   "CharmsSettings.General.OpenUpdater": "Открыть обновитель",
   "CharmsSettings.General.Updater": "Обновитель",

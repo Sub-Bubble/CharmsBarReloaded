@@ -36,6 +36,7 @@
   "CharmsSettings.General.CharmsClockEnabled": "Enable Charms Clock",
   "CharmsSettings.General.EnableKeyboardShortcuts": "Keyboard shortcuts",
   "CharmsSettings.General.KeyboardShortcutsOverrideCharmsBarOff": "Keyboard shortcuts override disabled Charms Bar",
+  "CharmsSettings.General.AutomaticCheckForUpdates": "Check for updates automatically",
   "CharmsSettings.General.BetaProgramOptIn": "Opt in to beta prgram",
   "CharmsSettings.General.OpenUpdater": "Open updater",
   "CharmsSettings.General.Updater": "Updater",
