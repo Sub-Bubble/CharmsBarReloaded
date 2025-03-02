@@ -1,0 +1,233 @@
+[
+  {
+    "versionName": "b2.0",
+    "build": 34,
+    "downloadLink": "https://github.com/Sub-Bubble/CharmsBarReloaded/releases/download/b2.0/CharmsBarReloader.zip",
+    "isBeta": false,
+    "isLegacy": false
+  },
+  {
+    "versionName": "b2.0-pre4",
+    "build": 33,
+    "downloadLink": "https://github.com/Sub-Bubble/CharmsBarReloaded/releases/download/b2.0-pre4/CharmsBarReloaded.zip",
+    "isBeta": true,
+    "isLegacy": false
+  },
+  {
+    "versionName": "b2.0-pre3",
+    "build": 32,
+    "downloadLink": "https://github.com/Sub-Bubble/CharmsBarReloaded/releases/download/b2.0-pre3/CharmsBarReloaded.zip",
+    "isBeta": true,
+    "isLegacy": false
+  },
+  {
+    "versionName": "b2.0-pre2",
+    "build": 31,
+    "downloadLink": "https://github.com/Sub-Bubble/CharmsBarReloaded/releases/download/b2.0-pre2/CharmsBarReloader.zip",
+    "isBeta": true,
+    "isLegacy": false
+  },
+  {
+    "versionName": "b2.0-pre1",
+    "build": 30,
+    "downloadLink": "https://github.com/Sub-Bubble/CharmsBarReloaded/releases/download/b2.0-pre1/CharmsBarReloaded.zip",
+    "isBeta": true,
+    "isLegacy": false
+  },
+  {
+    "versionName": "b1.1",
+    "build": 29,
+    "downloadLink": "https://github.com/Sub-Bubble/CharmsBarReloaded/releases/download/b1.1/CharmsBarReloaded.zip",
+    "isBeta": false,
+    "isLegacy": false
+  },
+  {
+    "versionName": "b1.0",
+    "build": 28,
+    "downloadLink": "https://github.com/Sub-Bubble/CharmsBarReloaded/releases/download/b1.0/CharmsBarReloaded.zip",
+    "isBeta": false,
+    "isLegacy": false
+  },
+  {
+    "versionName": "b1.0-rc1",
+    "build": 27,
+    "downloadLink": "https://github.com/Sub-Bubble/CharmsBarReloaded/releases/download/b1.0-rc1/CharmsBarReloaded.zip",
+    "isBeta": true,
+    "isLegacy": false
+  },
+  {
+    "versionName": "b1.0-pre4",
+    "build": 26,
+    "downloadLink": "https://github.com/Sub-Bubble/CharmsBarReloaded/releases/download/b1.0-pre4/CharmsBarReloaded.zip",
+    "isBeta": true,
+    "isLegacy": false
+  },
+  {
+    "versionName": "b1.0-pre3",
+    "build": 25,
+    "downloadLink": "https://github.com/Sub-Bubble/CharmsBarReloaded/releases/download/b1.0-pre3/CharmsBarReloaded.zip",
+    "isBeta": true,
+    "isLegacy": false
+  },
+  {
+    "versionName": "b1.0-pre2",
+    "build": 24,
+    "downloadLink": "https://github.com/Sub-Bubble/CharmsBarReloaded/releases/download/b1.0-pre2/CharmsBarReloaded.zip",
+    "isBeta": true,
+    "isLegacy": false
+  },
+  {
+    "versionName": "b1.0-pre1",
+    "build": 23,
+    "downloadLink": "https://github.com/Sub-Bubble/CharmsBarReloaded/releases/download/b1.0-pre1/CharmsBarReloaded.zip",
+    "isBeta": true,
+    "isLegacy": false
+  },
+  {
+    "versionName": "a5.1",
+    "build": 22,
+    "downloadLink": "https://github.com/Sub-Bubble/CharmsBarReloaded/releases/download/a5.1/CharmsBarReloaded.zip",
+    "isBeta": false,
+    "isLegacy": true
+  },
+  {
+    "versionName": "a5.0",
+    "build": 21,
+    "downloadLink": "https://github.com/Sub-Bubble/CharmsBarReloaded/releases/download/a5.0/CharmsBarReloaded.zip",
+    "isBeta": false,
+    "isLegacy": true
+  },
+  {
+    "versionName": "a4.2.2",
+    "build": 20,
+    "downloadLink": "https://github.com/Sub-Bubble/CharmsBarReloaded/releases/download/a4.2.2/CharmsBarReloaded.zip",
+    "isBeta": false,
+    "isLegacy": true
+  },
+  {
+    "versionName": "a4.2.1",
+    "build": 19,
+    "downloadLink": "https://github.com/Sub-Bubble/CharmsBarReloaded/releases/download/a4.2.1/CharmsBarReloaded.zip",
+    "isBeta": false,
+    "isLegacy": true
+  },
+  {
+    "versionName": "a4.2",
+    "build": 18,
+    "downloadLink": "https://github.com/Sub-Bubble/CharmsBarReloaded/releases/download/a4.2/CharmsBarReloaded.zip",
+    "isBeta": false,
+    "isLegacy": true
+  },
+  {
+    "versionName": "a4.1.1",
+    "build": 17,
+    "downloadLink": "https://github.com/Sub-Bubble/CharmsBarReloaded/releases/download/a4.1.1/CharmsBarReloaded.zip",
+    "isBeta": false,
+    "isLegacy": true
+  },
+  {
+    "versionName": "a4.1",
+    "build": 16,
+    "downloadLink": "https://github.com/Sub-Bubble/CharmsBarReloaded/releases/download/a4.1/CharmsBarReloaded.zip",
+    "isBeta": false,
+    "isLegacy": true
+  },
+  {
+    "versionName": "a4.0.1",
+    "build": 15,
+    "downloadLink": "https://github.com/Sub-Bubble/CharmsBarReloaded/releases/download/a4.0.1/CharmsBarReloaded.zip",
+    "isBeta": false,
+    "isLegacy": true
+  },
+  {
+    "versionName": "a4.0",
+    "build": 14,
+    "downloadLink": "https://github.com/Sub-Bubble/CharmsBarReloaded/releases/download/a4.0/CharmsBarReloaded.zip",
+    "isBeta": false,
+    "isLegacy": true
+  },
+  {
+    "versionName": "a3.3",
+    "build": 13,
+    "downloadLink": "https://github.com/Sub-Bubble/CharmsBarReloaded/releases/download/a3.3/CharmsBarReloaded.zip",
+    "isBeta": false,
+    "isLegacy": true
+  },
+  {
+    "versionName": "a3.2",
+    "build": 12,
+    "downloadLink": "https://github.com/Sub-Bubble/CharmsBarReloaded/releases/download/a3.2/CharmsBarReloaded.zip",
+    "isBeta": false,
+    "isLegacy": true
+  },
+  {
+    "versionName": "a3.1.1",
+    "build": 11,
+    "downloadLink": "https://github.com/Sub-Bubble/CharmsBarReloaded/releases/download/a3.1.1/CharmsBarReloaded.zip",
+    "isBeta": false,
+    "isLegacy": true
+  },
+  {
+    "versionName": "a3.1",
+    "build": 10,
+    "downloadLink": "https://github.com/Sub-Bubble/CharmsBarReloaded/releases/download/a3.1/CharmsBarReloaded.zip",
+    "isBeta": false,
+    "isLegacy": true
+  },
+  {
+    "versionName": "a3.0.1",
+    "build": 9,
+    "downloadLink": "https://github.com/Sub-Bubble/CharmsBarReloaded/releases/download/a3.0.1/CharmsBarReloaded.zip",
+    "isBeta": false,
+    "isLegacy": true
+  },
+  {
+    "versionName": "a3.0",
+    "build": 8,
+    "downloadLink": "https://github.com/Sub-Bubble/CharmsBarReloaded/releases/download/a3.0/CharmsBarReloaded.zip",
+    "isBeta": false,
+    "isLegacy": true
+  },
+  {
+    "versionName": "a2.0.2",
+    "build": 6,
+    "downloadLink": "https://github.com/Sub-Bubble/CharmsBarReloaded/releases/download/a2.0.2/CharmsBarReloaded.zip",
+    "isBeta": false,
+    "isLegacy": true
+  },
+  {
+    "versionName": "a2.0.1",
+    "build": 5,
+    "downloadLink": "https://github.com/Sub-Bubble/CharmsBarReloaded/releases/download/a2.0.1/CharmsBarReloaded.zip",
+    "isBeta": false,
+    "isLegacy": true
+  },
+  {
+    "versionName": "a2.0",
+    "build": 4,
+    "downloadLink": "https://github.com/Sub-Bubble/CharmsBarReloaded/releases/download/a2.0/CharmsBarReloaded.zip",
+    "isBeta": false,
+    "isLegacy": true
+  },
+  {
+    "versionName": "a1.1",
+    "build": 3,
+    "downloadLink": "https://github.com/Sub-Bubble/CharmsBarReloaded/releases/download/a1.1/CharmsBarReloaded.zip",
+    "isBeta": false,
+    "isLegacy": true
+  },
+  {
+    "versionName": "a1.0.1",
+    "build": 2,
+    "downloadLink": "https://github.com/Sub-Bubble/CharmsBarReloaded/releases/download/a1.0.1/CharmsBarReloaded.zip",
+    "isBeta": false,
+    "isLegacy": true
+  },
+  {
+    "versionName": "a1.0",
+    "build": 1,
+    "downloadLink": "https://github.com/Sub-Bubble/CharmsBarReloaded/releases/download/a1.0/CharmsBarReloaded.zip",
+    "isBeta": false,
+    "isLegacy": true
+  }
+]
