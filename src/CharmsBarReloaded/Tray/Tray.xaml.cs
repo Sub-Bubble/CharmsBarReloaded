@@ -20,6 +20,13 @@ namespace CharmsBarReloaded.Tray
         {
             App.ClickHandler("Settings");
         }
+        
+        private void CheckForUpdates(object sender, RoutedEventArgs e)
+        {
+            if (App.charmsConfig.BetaProgramOptIn)
+                App.ClickHandler("CheckForUpdatesBeta");
+            else App.ClickHandler("CheckForUpdates");
+        }
         private void ToggleCharmsBar(object sender, RoutedEventArgs e)
         {
             checkmark.IsChecked = !App.charmsConfig.charmsBarConfig.IsEnabled;

@@ -4,6 +4,7 @@
   "CharmsBar.Start": "Start",
   "CharmsBar.Devices": "Urządzenia",
   "CharmsBar.Settings": "Ustawienia",
+  "CharmsBarReloaded.Error.UpdaterMissing": "Nie powiodła się otwarcie aktualizatora, co wskazuje, że instalacja aplikacji może być uszkodzona.\nZalecana jest ponowna instalacja CharmsBar: Reloaded",
   "CharmsSettings.On": "Włączone",
   "CharmsSettings.Off": "Wyłączone",
   "CharmsSettings.CharmsBar": "Charms Bar",
@@ -35,6 +36,10 @@
   "CharmsSettings.General.CharmsClockEnabled": "Włącz Charms Clock",
   "CharmsSettings.General.EnableKeyboardShortcuts": "Skróty klawiaturowe",
   "CharmsSettings.General.KeyboardShortcutsOverrideCharmsBarOff": "Skróty klawiaturowe zastępują wyłączony pasek Charms Bar",
+  "CharmsSettings.General.AutomaticCheckForUpdates": "Automatyczne sprawdzanie aktualizacji",
+  "CharmsSettings.General.BetaProgramOptIn": "Dołączyć do programu beta",
+  "CharmsSettings.General.OpenUpdater": "Otwórz aktualizator",
+  "CharmsSettings.General.Updater": "Aktualizator",
   "CharmsSettings.Personalization.BarBackground": "Kolor tła",
   "CharmsSettings.Personalization.BarHover": "Kolor po najechaniu kursorem",
   "CharmsSettings.Personalization.BarText": "Kolor tekstu",
@@ -46,6 +51,9 @@
   "CharmsSettings.Personalization.ClockText": "Kolor tekstu",
   "CharmsSettings.About.Version": "Wersja",
   "CharmsSettings.About.Build": "Build",
+  "CharmsSettings.About.Branch": "Tyo wersji",
+  "CharmsSettings.About.Branch.Stable": "Stabilny",
+  "CharmsSettings.About.Branch.Beta": "Beta",
   "CharmsSettings.About.CheckForUpdates": "Sprawdź dostępność aktualizacji",
   "Tray.Exit": "Wyjście"
 }

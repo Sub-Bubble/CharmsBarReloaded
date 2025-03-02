@@ -1,6 +1,7 @@
 ﻿using CharmsBarReloaded.CharmsSettings.Pages;
 using CharmsBarReloaded.Config;
 using System.Diagnostics;
+using System.IO;
 using System.Runtime.InteropServices;
 using System.Windows;
 using MessageBox = System.Windows.MessageBox;
@@ -42,30 +43,36 @@ namespace CharmsBarReloaded
                 case "FocusSettings":
                     MessageBox.Show("Settings coming back in future beta builds");
                     break;
-
+                
+                //app actions
+                case "Reload":
+                    Log.Info("Initiating full reload...");
+                    Log.Info("Reloading translations...");
+                    translationManager = new TranslationManager().Load(charmsConfig.CurrentLocale);
+                    settingsHome.ReloadStrings();
+                    Log.Info("Reloading Charms Bar...");
+                    charmsBar.Window_Reload();
+                    if (charmsConfig.EnableAnimations)
+                        charmsSettings.BeginStoryboard(charmsSettings.settingsSlideOut);
+                    else
+                    {
+                        charmsSettings.frame.Content = settingsHome;
+                        charmsSettings.Hide();
+                    }
+                    break;
+                
                 //settings navigation
                 case "SettingsHome":
                     charmsSettings.frame.Content = settingsHome;
-                    charmsConfig.Save();
-                    charmsSettings.isBusy = true;
-                    translationManager = new TranslationManager().Load(charmsConfig.CurrentLocale);
-                    charmsBar = new();
-                    LoadCharmsBar();
-                    settingsHome.ReloadStrings();
-                    Current.Dispatcher.BeginInvoke(new Action(() =>
-                    {
-                        charmsSettings.Show();
-                        charmsSettings.Focus();
-                    }), System.Windows.Threading.DispatcherPriority.Input);
                     break;
                 case "SettingsGeneral":
-                    charmsSettings.frame.Content = new General();
+                    charmsSettings.frame.Content = settingsGeneral;
                     break;
                 case "SettingsPersonalization":
-                    charmsSettings.frame.Content = new Personalization();
+                    charmsSettings.frame.Content = settingsPersonalization;
                     break;
                 case "SettingsAbout":
-                    charmsSettings.frame.Content = new About();
+                    charmsSettings.frame.Content = settingsAbout;
                     break;
 
                 //Windows Actions
@@ -106,6 +113,51 @@ namespace CharmsBarReloaded
                     break;
                 case "Restart":
                     Process.Start(new ProcessStartInfo { FileName = "shutdown.exe", Arguments = $"-r -t 0", CreateNoWindow = true });
+                    break;
+
+                //updater actions
+                case "OpenUpdater":
+                    try
+                    {
+                        if (charmsConfig.BetaProgramOptIn)
+                            Process.Start(new ProcessStartInfo
+                            {
+                                FileName = "Updater.exe",
+                                WorkingDirectory = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, ""),
+                                ArgumentList = { "-includebetas" }
+                            });
+                        else
+                            Process.Start(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Updater.exe"));
+                    }
+                    catch
+                    {
+                        MessageBox.Show(translationManager.GetTranslation("CharmsBarReloaded.Error.UpdaterMissing"));
+                        Log.Error("No updater detected. CharmsBar:Reloaded install can be broken");
+                    }
+                    break;
+                case "CheckForUpdates":
+                    try
+                    {
+                        if (charmsConfig.BetaProgramOptIn)
+                            Process.Start(new ProcessStartInfo
+                            {
+                                FileName = "Updater.exe",
+                                WorkingDirectory = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, ""),
+                                ArgumentList = { "-checkforupdates", "beta" }
+                            });
+                        else
+                            Process.Start(new ProcessStartInfo
+                            {
+                                FileName = "Updater.exe",
+                                WorkingDirectory = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, ""),
+                                ArgumentList = { "-checkforupdates", "stable" }
+                            });
+                    }
+                    catch
+                    {
+                        MessageBox.Show(translationManager.GetTranslation("CharmsBarReloaded.Error.UpdaterMissing"));
+                        Log.Error("No updater detected. CharmsBar:Reloaded install can be broken");
+                    }
                     break;
             }
         }

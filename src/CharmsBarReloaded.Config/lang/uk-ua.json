@@ -4,6 +4,7 @@
   "CharmsBar.Start": "Пуск",
   "CharmsBar.Devices": "Пристрої",
   "CharmsBar.Settings": "Налаштування",
+  "CharmsBarReloaded.Error.UpdaterMissing": "CharmsBar:Reloaded  не зміг відкрити оновлювач, що вказує, що інсталяция була пошкоджена.\nРекомендується перевстановити CharmsBar: Reloaded",
   "CharmsSettings.On": "Вмик",
   "CharmsSettings.Off": "Вимк",
   "CharmsSettings.CharmsBar": "Charms Bar",
@@ -35,6 +36,10 @@
   "CharmsSettings.General.CharmsClockEnabled": "Увімкнути Charms Clock",
   "CharmsSettings.General.EnableKeyboardShortcuts": "Сполучення клавіш",
   "CharmsSettings.General.KeyboardShortcutsOverrideCharmsBarOff": "Сполучення клавіш працюють навіть при вимкненому Charms Bar",
+  "CharmsSettings.General.AutomaticCheckForUpdates": "Автоматична перевірка оновлень",
+  "CharmsSettings.General.BetaProgramOptIn": "Записатися в програму бета-тесту",
+  "CharmsSettings.General.OpenUpdater": "Відкрити оновлювач",
+  "CharmsSettings.General.Updater": "Оновлювач",
   "CharmsSettings.Personalization.BarBackground": "Колір фону",
   "CharmsSettings.Personalization.BarHover": "Колір при наведенні курсором",
   "CharmsSettings.Personalization.BarText": "Колір тексту",
@@ -46,6 +51,9 @@
   "CharmsSettings.Personalization.ClockText": "Колір тексту",
   "CharmsSettings.About.Version": "Версія",
   "CharmsSettings.About.Build": "Білд",
+  "CharmsSettings.About.Branch": "Гілка оновлень",
+  "CharmsSettings.About.Branch.Stable": "Стабільна",
+  "CharmsSettings.About.Branch.Beta": "Бета",
   "CharmsSettings.About.CheckForUpdates": "Перевірити на наявність оновлень",
   "Tray.Exit": "Вихід"
 }

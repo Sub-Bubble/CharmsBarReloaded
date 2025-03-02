@@ -87,6 +87,9 @@ namespace CharmsBarReloaded.CharmsBar
             charmsStack.InvalidateMeasure();
             charmsStack.UpdateLayout();
             windowWidth = (int)charmsStack.ActualWidth;
+            buttons = null;
+            GC.WaitForPendingFinalizers();
+            GC.Collect();
         }
     }
 }
