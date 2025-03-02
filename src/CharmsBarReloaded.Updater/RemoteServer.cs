@@ -17,7 +17,7 @@ namespace CharmsBarReloaded.Updater
             string updatesList = string.Empty;
             try
             {
-                updatesList = await FetchUpdates(CustomUrl);
+                updatesList = await FetchUpdates(string.IsNullOrWhiteSpace(CustomUrl) ? Program.UpdateServerUrl : CustomUrl);
             }
             catch (Exception ex)
             {
@@ -42,15 +42,17 @@ namespace CharmsBarReloaded.Updater
             {
                 if (includeBetas && (update.build > InstallDetector.BuildNumber))
                 {
-                    MessageBox.Show($"A new update is available!\n[{InstallDetector.VersionString}] -> [{update.versionName}]\nDo you want to update?"
-                        , $"{(update.isBeta ? "[BETA] " : "")}Update available!", MessageBoxButtons.YesNo);
+                    if (MessageBox.Show($"A new update is available!\n[{InstallDetector.VersionString}] -> [{update.versionName}]\nDo you want to update?"
+                        , $"{(update.isBeta ? "[BETA] " : "")}Update available!", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                        Application.Run(new UpdaterForm());
                     canUpdate = true;
                     break;
                 }
                 else if (!includeBetas && !update.isBeta && (update.build > InstallDetector.BuildNumber))
                 {
-                    MessageBox.Show($"A new update is available!\n[{InstallDetector.VersionString}] -> [{update.versionName}]\nDo you want to update?"
-                        , "Update available!", MessageBoxButtons.YesNo);
+                    if (MessageBox.Show($"A new update is available!\n[{InstallDetector.VersionString}] -> [{update.versionName}]\nDo you want to update?"
+                        , "Update available!", MessageBoxButtons.YesNo) == DialogResult.Yes);
+                        Application.Run(new UpdaterForm());
                     canUpdate = true;
                     break;
                 }

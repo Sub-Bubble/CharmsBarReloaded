@@ -473,7 +473,7 @@ namespace CharmsBarReloaded.Updater
             installButton.Enabled = false;
             cancelButton.Enabled = false;
             UpdateStatus("Connecting to a remote server", Status.Info, false);
-            string remoteUrl = @"http://localhost/updates.json"; //will be released later
+            string remoteUrl = Program.UpdateServerUrl;
             if (isCustomUrl)
                 remoteUrl = customServerTextBox.Text;
 

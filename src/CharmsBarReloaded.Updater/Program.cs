@@ -18,7 +18,8 @@ namespace CharmsBarReloaded.Updater
         {
                 @"SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall",
                 @"SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall",
-            };
+        };
+        public const string UpdateServerUrl = @"https://raw.githubusercontent.com/Sub-Bubble/CharmsBarReloaded/updates/updates.json";
         public const string userRegKey = @"Software\Microsoft\Windows\CurrentVersion\Uninstall";
         /// <summary>
         ///  The main entry point for the application.
@@ -37,7 +38,7 @@ namespace CharmsBarReloaded.Updater
                 string action = string.Empty;
                 string installPath = string.Empty;
                 int? build = null;
-                string customServerUrl = @"http://localhost/updates.json";
+                string customServerUrl = UpdateServerUrl;
 
                 if (args[0] == ("-checkforupdates"))
                 {
