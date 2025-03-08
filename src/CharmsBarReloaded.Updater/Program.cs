@@ -54,9 +54,9 @@ namespace CharmsBarReloaded.Updater
                         catch { }
                     }
                     if (args.Contains("beta"))
-                        RemoteServer.CheckForUpdates(true, useCustomServer, customServerUrl).GetAwaiter().GetResult();
+                        RemoteServer.CheckForUpdates(true, useCustomServer, customServerUrl, args.Contains("quiet")).GetAwaiter().GetResult();
                     else if (args.Contains("stable") || args.Length == 1)
-                        RemoteServer.CheckForUpdates(false, useCustomServer, customServerUrl).GetAwaiter().GetResult();
+                        RemoteServer.CheckForUpdates(false, useCustomServer, customServerUrl, args.Contains("quiet")).GetAwaiter().GetResult();
                     Environment.Exit(0);
                 }
 

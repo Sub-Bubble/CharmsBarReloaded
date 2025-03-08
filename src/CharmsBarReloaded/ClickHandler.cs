@@ -159,6 +159,30 @@ namespace CharmsBarReloaded
                         Log.Error("No updater detected. CharmsBar:Reloaded install can be broken");
                     }
                     break;
+                case "CheckForUpdatesSilent":
+                    try
+                    {
+                        if (charmsConfig.BetaProgramOptIn)
+                            Process.Start(new ProcessStartInfo
+                            {
+                                FileName = "Updater.exe",
+                                WorkingDirectory = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, ""),
+                                ArgumentList = { "-checkforupdates", "beta", "quiet" }
+                            });
+                        else
+                            Process.Start(new ProcessStartInfo
+                            {
+                                FileName = "Updater.exe",
+                                WorkingDirectory = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, ""),
+                                ArgumentList = { "-checkforupdates", "stable", "quiet" }
+                            });
+                    }
+                    catch
+                    {
+                        MessageBox.Show(translationManager.GetTranslation("CharmsBarReloaded.Error.UpdaterMissing"));
+                        Log.Error("No updater detected. CharmsBar:Reloaded install can be broken");
+                    }
+                    break;
             }
         }
     }

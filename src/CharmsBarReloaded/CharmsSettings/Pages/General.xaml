@@ -54,7 +54,12 @@
             <cc:Win8Switch x:Name="KeyboardShortcutOverrideToggle" Click="KeyboardShortcutOverrideToggle_Checked"/>
         </StackPanel>
 
-        <TextBlock Text="BetaProgramOptIn" TextWrapping="WrapWithOverflow" FontSize="20" Foreground="White" FontFamily="Segoe UI Semilight" x:Name="BetaProgramOptInText" Margin="0,20,10,0"/>
+        <TextBlock Text="AutoCheckForUpdates" TextWrapping="WrapWithOverflow" FontSize="20" Foreground="White" FontFamily="Segoe UI Semilight" x:Name="AutoCheckForUpdatesText" Margin="0,20,10,0"/>
+        <StackPanel Orientation="Horizontal">
+            <TextBlock Foreground="White" FontFamily="Segoe UI Bold" Text="On/Off" MinWidth="40" Margin="10,0,10,0" x:Name="AutoCheckForUpdatesOnOff"/>
+            <cc:Win8Switch x:Name="AutoCheckForUpdatesToggle" Click="AutoCheckForUpdatesToggle_Checked"/>
+        </StackPanel>
+        <TextBlock Text="BetaProgramOptIn" TextWrapping="WrapWithOverflow" FontSize="20" Foreground="White" FontFamily="Segoe UI Semilight" x:Name="BetaProgramOptInText" Margin="0,0,10,0"/>
         <StackPanel Orientation="Horizontal">
             <TextBlock Foreground="White" FontFamily="Segoe UI Bold" Text="On/Off" MinWidth="40" Margin="10,0,10,0" x:Name="BetaProgramOptInOnOff"/>
             <cc:Win8Switch x:Name="BetaProgramOptInToggle" Click="BetaProgramOptInToggle_Checked"/>

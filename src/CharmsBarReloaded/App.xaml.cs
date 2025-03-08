@@ -106,6 +106,9 @@ namespace CharmsBarReloaded
             wifiTimer.Interval = 2500;
             wifiTimer.Elapsed += CharmsBarReloaded_WifiUpdate;
             wifiTimer.Start();
+
+            if (charmsConfig.AutoCheckForUpdates)
+                ClickHandler("CheckForUpdatesSilent");
         }
     }
 }

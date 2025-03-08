@@ -6,7 +6,7 @@ namespace CharmsBarReloaded.Updater
 {
     public class RemoteServer
     {
-        public static async Task CheckForUpdates(bool includeBetas, bool useCustomUrl, string CustomUrl)
+        public static async Task CheckForUpdates(bool includeBetas, bool useCustomUrl, string CustomUrl, bool isQuiet = false)
         {
             if (!InstallDetector.IsInstalled())
             {
@@ -57,7 +57,7 @@ namespace CharmsBarReloaded.Updater
                     break;
                 }
             }
-            if (!canUpdate)
+            if (!canUpdate && !isQuiet)
                 MessageBox.Show($"You are running the latest version of {Program.AppName}", "No updates available", MessageBoxButtons.OK);
         }
         public static async Task<string> FetchUpdates(string remoteUrl)
