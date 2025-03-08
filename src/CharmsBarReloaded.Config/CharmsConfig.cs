@@ -12,6 +12,8 @@ namespace CharmsBarReloaded.Config
         public static int GetVersion { get { return assembly.GetName().Version.Major; } }
         public readonly bool isBetaBranch = false;
         #endregion App Version
+
+        public bool AutoCheckForUpdates { get; set; } = true;
         public string CurrentLocale { get; set; } = "en-us";
         public bool EnableAnimations { get; set; } = true;
         public bool BetaProgramOptIn {  get; set; } = false;

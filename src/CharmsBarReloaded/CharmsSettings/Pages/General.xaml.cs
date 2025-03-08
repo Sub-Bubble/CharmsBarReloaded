@@ -29,6 +29,7 @@ namespace CharmsBarReloaded.CharmsSettings.Pages
             ClockEnabledToggle.IsChecked = App.charmsConfig.EnableAnimations;
             KeyboardShortcutsToggle.IsChecked = App.charmsConfig.EnableAnimations;
             KeyboardShortcutOverrideToggle.IsChecked = App.charmsConfig.EnableAnimations;
+            AutoCheckForUpdatesToggle.IsChecked = App.charmsConfig.AutoCheckForUpdates;
             BetaProgramOptInToggle.IsChecked = App.charmsConfig.BetaProgramOptIn;
         }
         #region language selector loading
@@ -147,6 +148,10 @@ namespace CharmsBarReloaded.CharmsSettings.Pages
             if (App.charmsConfig.EnableAnimations) KeyboardShortcutOverrideOnOff.Text = onText;
             else KeyboardShortcutOverrideOnOff.Text = offText;
 
+            AutoCheckForUpdatesText.Text = App.translationManager.GetTranslation("CharmsSettings.General.AutomaticCheckForUpdates");
+            if (App.charmsConfig.EnableAnimations) AutoCheckForUpdatesOnOff.Text = onText;
+            else AutoCheckForUpdatesOnOff.Text = offText;
+
             BetaProgramOptInText.Text = App.translationManager.GetTranslation("CharmsSettings.General.BetaProgramOptIn");
             if (App.charmsConfig.EnableAnimations) BetaProgramOptInOnOff.Text = onText;
             else BetaProgramOptInOnOff.Text = offText;
@@ -195,7 +200,12 @@ namespace CharmsBarReloaded.CharmsSettings.Pages
         {
             App.charmsConfig.charmsBarConfig.KeyboardShortcutOverridesOffSetting = (bool)KeyboardShortcutOverrideToggle.IsChecked;
         }
-        
+
+        private void AutoCheckForUpdatesToggle_Checked(Object sender, RoutedEventArgs e)
+        {
+            App.charmsConfig.AutoCheckForUpdates = (bool)AutoCheckForUpdatesToggle.IsChecked;
+        }
+
         private void BetaProgramOptInToggle_Checked(Object sender, RoutedEventArgs e)
         {
             App.charmsConfig.BetaProgramOptIn = (bool)BetaProgramOptInToggle.IsChecked;
