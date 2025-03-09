@@ -36,7 +36,7 @@
             buildString = new Label();
             label4 = new Label();
             label5 = new Label();
-            mitLicenseLinkLabel = new LinkLabel();
+            lgplv3LicenseLinkLabel = new LinkLabel();
             SuspendLayout();
             // 
             // updaterNameLabel
@@ -109,17 +109,17 @@
             label5.TabIndex = 6;
             label5.Text = "Licensed under the";
             // 
-            // mitLicenseLinkLabel
+            // lgplv3LicenseLinkLabel
             // 
-            mitLicenseLinkLabel.AutoSize = true;
-            mitLicenseLinkLabel.BackColor = Color.Transparent;
-            mitLicenseLinkLabel.Location = new Point(121, 111);
-            mitLicenseLinkLabel.Name = "mitLicenseLinkLabel";
-            mitLicenseLinkLabel.Size = new Size(67, 15);
-            mitLicenseLinkLabel.TabIndex = 7;
-            mitLicenseLinkLabel.TabStop = true;
-            mitLicenseLinkLabel.Text = "MIT license";
-            mitLicenseLinkLabel.LinkClicked += mitLicenseLinkLabel_LinkClicked;
+            lgplv3LicenseLinkLabel.AutoSize = true;
+            lgplv3LicenseLinkLabel.BackColor = Color.Transparent;
+            lgplv3LicenseLinkLabel.Location = new Point(121, 111);
+            lgplv3LicenseLinkLabel.Name = "lgplv3LicenseLinkLabel";
+            lgplv3LicenseLinkLabel.Size = new Size(84, 15);
+            lgplv3LicenseLinkLabel.TabIndex = 7;
+            lgplv3LicenseLinkLabel.TabStop = true;
+            lgplv3LicenseLinkLabel.Text = "LGPLv3 license";
+            lgplv3LicenseLinkLabel.LinkClicked += mitLicenseLinkLabel_LinkClicked;
             // 
             // AboutWindow
             // 
@@ -127,7 +127,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(396, 170);
             Controls.Add(contributorsLinkLabel);
-            Controls.Add(mitLicenseLinkLabel);
+            Controls.Add(lgplv3LicenseLinkLabel);
             Controls.Add(label5);
             Controls.Add(label4);
             Controls.Add(buildString);
@@ -155,6 +155,6 @@
         private Label buildString;
         private Label label4;
         private Label label5;
-        private LinkLabel mitLicenseLinkLabel;
+        private LinkLabel lgplv3LicenseLinkLabel;
     }
 }

@@ -23,7 +23,7 @@ namespace CharmsBarReloaded.Updater
 
         private void mitLicenseLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            Process.Start(new ProcessStartInfo("https://github.com/Sub-Bubble/CharmsBarReloaded/blob/master/LICENSE.txt") { UseShellExecute = true });
+            Process.Start(new ProcessStartInfo("https://github.com/Sub-Bubble/CharmsBarReloaded/blob/master/src/CharmsBarReloaded.Updater/LICENSE.txt") { UseShellExecute = true });
         }
 
         private void AboutWindow_Load(object sender, EventArgs e)

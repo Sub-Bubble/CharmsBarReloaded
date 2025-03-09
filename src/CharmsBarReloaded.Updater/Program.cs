@@ -76,21 +76,46 @@ namespace CharmsBarReloaded.Updater
             }
         }
         public static void Elevate(string[] args)
+        {/*
+            try
+            {*/
+                string tempExePath = Path.Combine(TempFolder, "CharmsBarReloaded.Updater.exe");
+                if (!Directory.Exists(TempFolder))
+                    Directory.CreateDirectory(TempFolder);
+                File.Copy(Process.GetCurrentProcess().MainModule.FileName, tempExePath, true);
+                Process.Start(new ProcessStartInfo
+                {
+                    FileName = tempExePath,
+                    Arguments = string.Join(" ", args),
+                    Verb = "runas",
+                    UseShellExecute = true
+                });
+                Environment.Exit(0);/*
+            }
+            catch
+            {
+                MessageBox.Show("Failed to get administrator privileges!\nPlease, accept UAC prompt", "Admin request rejected!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }*/
+        }
+        public static void UpdateRestart(string[] args)
         {
+            string tempExePath = Path.Combine(TempFolder, "CharmsBarReloaded.Updater.exe");
+            if (!Directory.Exists(TempFolder))
+                Directory.CreateDirectory(TempFolder);
+            File.Copy(Process.GetCurrentProcess().MainModule.FileName, tempExePath, true);
             try
             {
                 Process.Start(new ProcessStartInfo
                 {
-                    FileName = $"{AppDomain.CurrentDomain.BaseDirectory}{AppDomain.CurrentDomain.FriendlyName}.exe",
+                    FileName = tempExePath,
                     Arguments = string.Join(" ", args),
-                    Verb = "runas",
                     UseShellExecute = true
                 });
                 Environment.Exit(0);
             }
             catch
             {
-                MessageBox.Show("Failed to get administrator privileges!\nPlease, accept UAC prompt", "Admin request rejected!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Could not restart updater from temp folder!");
             }
         }
     }
