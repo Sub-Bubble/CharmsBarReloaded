@@ -120,7 +120,15 @@ namespace CharmsBarReloaded.Updater
         private static void Cleanup(IProgress<StatusMessage> message)
         {
             message.Report(new StatusMessage { Message = $"Cleaning up", Status = Status.Info });
-            Directory.Delete(Program.TempFolder, true);
+            foreach (string file in Directory.GetFiles(Program.TempFolder, "*", SearchOption.AllDirectories))
+            {
+                try
+                {
+                    File.SetAttributes(file, FileAttributes.Normal);
+                    File.Delete(file);
+                }
+                catch { }
+            }
         }
         public static void Uninstall()
         {

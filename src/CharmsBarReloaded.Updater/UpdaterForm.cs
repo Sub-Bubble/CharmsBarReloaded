@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+using System.Diagnostics;
 using System.Text.Json;
 
 
@@ -18,6 +19,8 @@ namespace CharmsBarReloaded.Updater
         public UpdaterForm(string action = "", bool includeBetas = false, bool includeLegacy = false,
             bool isPortable = false, int? build = null, string installPath = "", string customServerUrl = "")
         {
+            if (Process.GetCurrentProcess().MainModule.FileName.Contains(Program.TempFolder))
+                this.FormClosing += CleanUpSelfDestruct;
             InitializeComponent();
             if (InstallDetector.IsInstalled())
             {
@@ -63,6 +66,20 @@ namespace CharmsBarReloaded.Updater
                 LoadConfig(Program.DefaultConfigPath);
             else
                 FetchRemoteUpdates(customServerRadio.Checked);
+        }
+
+        private void CleanUpSelfDestruct(object? sender, FormClosingEventArgs e)
+        {
+            ProcessStartInfo psi = new ProcessStartInfo()
+            {
+                FileName = "cmd.exe",
+                Arguments = "/C ping 1.1.1.1 -n 1 -w 3000 > Nul & RD /s /q " + Path.GetDirectoryName(Application.ExecutablePath),
+                CreateNoWindow = true,
+                UseShellExecute = false,
+                WorkingDirectory = Path.GetTempPath()
+            };
+            Process.Start(psi);
+            Environment.Exit(0);
         }
 
         void LoadConfig(string configPath)
@@ -250,8 +267,25 @@ namespace CharmsBarReloaded.Updater
 
         private async void installButton_Click(object sender, EventArgs e)
         {
+            string[] args =
+                    {
+                        "-install",
+                        $"-build {filteredUpdates[versionSelector.SelectedIndex].build}",
+                        $"-installpath \"{installPathTextBox.Text}\""
+                    };
+
+            if (customServerRadio.Checked)
+                args.Append($"-customserver \"{customServerTextBox.Text}\"");
+            if (portableInstallCheckBox.Checked)
+                args.Append("-portable");
+            if (includeBetasCheckbox.Checked)
+                args.Append("-includebetas");
+            if (includeLegacyCheckbox.Checked)
+                args.Append("-includelegacy");
             if (installPathTextBox.Text.Contains("\\Users\\") || portableInstallCheckBox.Checked || Program.IsElevated)
             {
+                if (!Process.GetCurrentProcess().MainModule.FileName.Contains(Program.TempFolder) && !Program.IsElevated)
+                        Program.UpdateRestart(args);
                 cancelButton.Enabled = true;
                 installButton.Enabled = false;
                 try
@@ -281,22 +315,6 @@ namespace CharmsBarReloaded.Updater
             }
             else
             {
-                string[] args =
-                    {
-                        "-install",
-                        $"-build {filteredUpdates[versionSelector.SelectedIndex].build}",
-                        $"-installpath \"{installPathTextBox.Text}\""
-                    };
-
-                if (customServerRadio.Checked)
-                    args.Append($"-customserver \"{customServerTextBox.Text}\"");
-                if (portableInstallCheckBox.Checked)
-                    args.Append("-portable");
-                if (includeBetasCheckbox.Checked)
-                    args.Append("-includebetas");
-                if (includeLegacyCheckbox.Checked)
-                    args.Append("-includelegacy");
-
                 Program.Elevate(args);
             }
         }
@@ -526,6 +544,20 @@ namespace CharmsBarReloaded.Updater
             portableInstallCheckBox.Checked = InstallDetector.IsPortable;
             checkForUpdatesToolStripMenuItem.Enabled = true;
             checkForUpdatesincludeBetasToolStripMenuItem.Enabled = true;
+        }
+
+        private void CleanUp(object sender, FormClosedEventArgs e)
+        {
+            ProcessStartInfo psi = new ProcessStartInfo()
+            {
+                FileName = "cmd.exe",
+                Arguments = "/C ping 1.1.1.1 -n 1 -w 3000 > Nul & RD /s /q " + Path.GetDirectoryName(Application.ExecutablePath),
+                CreateNoWindow = true,
+                UseShellExecute = false,
+                WorkingDirectory = Path.GetTempPath()
+            };
+            Process.Start(psi);
+            Environment.Exit(0);
         }
     }
 }
