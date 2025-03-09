@@ -20,7 +20,7 @@ This application returns Windows 8's Charms Bar to Windows 10/11!
 | 🕓 | Theme support | Currently no ETA |
 | ✅ | Translations support |
 | ✅ | Tray Icon |
-| ⚠️ | Updater/Installer | Updates are broken. Expect fix in b2.1.1 |
+| ✅ | Updater/Installer |
 - ✅ - Fully working
 - ⚠️ - Has problems
 - 🛠️ - In the works
