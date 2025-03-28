@@ -36,7 +36,7 @@ This application returns Windows 8's Charms Bar to Windows 10/11!
 ## Languages
 | Language | Percentage | Contributors |
 | ------------- | ------------- | ------------- |
-| Chinese (Simplified) | 86% | <a href="https://github.com/smallmushroomovo">smallmushroomovo</a> |
+| Chinese (Simplified) | 100% | <a href="https://github.com/smallmushroomovo">smallmushroomovo</a> |
 | Croatian | 86% | <a href="https://github.com/RealKrazy">RealKrazy</a> |
 | English (US) | 100% | <a href="https://github.com/Sub-Bubble">SubBubble</a> |
 | French | 86% | <a href="https://github.com/sasufler">sasufler</a> |

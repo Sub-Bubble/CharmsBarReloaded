@@ -4,6 +4,7 @@
   "CharmsBar.Start": "开始",
   "CharmsBar.Devices": "设备",
   "CharmsBar.Settings": "设置",
+  "CharmsBarReloaded.Error.UpdaterMissing": "CharmsBar:Reloaded 无法打开更新程序, 表明应用程序可能已损坏。\n强烈建议重新安装 CharmsBar: Reloaded",
   "CharmsSettings.On": "开",
   "CharmsSettings.Off": "关",
   "CharmsSettings.CharmsBar": "侧边栏",
@@ -35,6 +36,10 @@
   "CharmsSettings.General.CharmsClockEnabled": "启用侧边栏时钟",
   "CharmsSettings.General.EnableKeyboardShortcuts": "键盘快捷键",
   "CharmsSettings.General.KeyboardShortcutsOverrideCharmsBarOff": "键盘快捷键可打开被禁用的侧边栏",
+  "CharmsSettings.General.AutomaticCheckForUpdates": "自动检查更新",
+  "CharmsSettings.General.BetaProgramOptIn": "加入测试计划",
+  "CharmsSettings.General.OpenUpdater": "打开更新程序",
+  "CharmsSettings.General.Updater": "更新程序",
   "CharmsSettings.Personalization.BarBackground": "背景颜色",
   "CharmsSettings.Personalization.BarHover": "鼠标悬停颜色",
   "CharmsSettings.Personalization.BarText": "文本颜色",
@@ -46,6 +51,9 @@
   "CharmsSettings.Personalization.ClockText": "文本颜色",
   "CharmsSettings.About.Version": "版本",
   "CharmsSettings.About.Build": "Build",
+  "CharmsSettings.About.Branch": "分支",
+  "CharmsSettings.About.Branch.Stable": "稳定",
+  "CharmsSettings.About.Branch.Beta": "测试",
   "CharmsSettings.About.CheckForUpdates": "检查更新",
   "Tray.Exit": "退出"
 }
