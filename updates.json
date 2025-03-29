@@ -1,5 +1,12 @@
 [
   {
+    "versionName": "b3.0-pre1",
+    "build": 38,
+    "downloadLink": "https://github.com/Sub-Bubble/CharmsBarReloaded/releases/download/b3.0-pre1/CharmsBarReloaded.zip",
+    "isBeta": true,
+    "isLegacy": false
+  },
+  {
     "versionName": "b2.1.2",
     "build": 37,
     "downloadLink": "https://github.com/Sub-Bubble/CharmsBarReloaded/releases/download/b2.1.2/CharmsBarReloaded.zip",
