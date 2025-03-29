@@ -67,7 +67,6 @@ namespace CharmsBarReloaded.CharmsBar
             this.Left = SystemConfig.GetDesktopWorkingArea.Right - this.Width;
             this.charmsStack.Width = this.windowWidth;
             this.Width = this.windowWidth;
-            this.MinHeight = SystemParameters.PrimaryScreenHeight - 1;
             this.Height = SystemParameters.PrimaryScreenHeight;
         }
         private void CharmsBar_MouseLeave(ref CharmsClock.CharmsClock charmsClock)
@@ -77,7 +76,6 @@ namespace CharmsBarReloaded.CharmsBar
                 charmsClock.BeginAnimation(UIElement.OpacityProperty, charmsClock.fadeOut);
             else
                 charmsClock.BeginAnimation(UIElement.OpacityProperty, charmsClock.noAnimationOut);
-            this.Top = 1;
         }
         private void CharmsBar_MouseEnter(ref CharmsClock.CharmsClock charmsClock)
         {
@@ -105,15 +103,13 @@ namespace CharmsBarReloaded.CharmsBar
                         ((Grid)item).Background = SystemConfig.GetAccentColor;
                 }
             }
-
-            this.Top = 0;
         }
 
         public void CharmsBar_Update(ref CharmsClock.CharmsClock charmsClock)
         {
             Point cursorPos = SystemConfig.GetMouseLocation;
-
-            if (cursorPos.X + 1 == System.Windows.Forms.Screen.PrimaryScreen.Bounds.Width && cursorPos.Y == SystemConfig.GetDesktopWorkingArea.Top && App.charmsConfig.charmsBarConfig.IsEnabled && !windowVisible)
+            var bounds = System.Windows.Forms.Screen.FromPoint(System.Windows.Forms.Control.MousePosition).Bounds;
+            if (cursorPos.X + 1 == bounds.Width + bounds.Left && cursorPos.Y == bounds.Top && App.charmsConfig.charmsBarConfig.IsEnabled && !windowVisible)
             {
                 this.windowVisible = true;
                 if (!isAnimating)
@@ -153,8 +149,6 @@ namespace CharmsBarReloaded.CharmsBar
                         }
                     }
                 }
-                this.Height = SystemParameters.PrimaryScreenHeight;
-                this.Top = 0;
             }
             if (Keyboard.IsKeyDown(Key.Escape) && App.charmsConfig.charmsBarConfig.EnableKeyboardShortcut)
             {
@@ -163,6 +157,34 @@ namespace CharmsBarReloaded.CharmsBar
                     charmsClock.BeginAnimation(UIElement.OpacityProperty, charmsClock.fadeOut);
                 else
                     charmsClock.BeginAnimation(UIElement.OpacityProperty, charmsClock.noAnimationOut);
+            }
+            ActiveMonitorChangedCheck(ref charmsClock);
+        }
+        private void ActiveMonitorChangedCheck(ref CharmsClock.CharmsClock charmsClock)
+        {
+            System.Windows.Forms.Screen currentScreen = null;
+            var screen = System.Windows.Forms.Screen.FromPoint(System.Windows.Forms.Control.MousePosition);
+
+            if ( (currentScreen == null || !currentScreen.Equals(screen) ) && !windowVisible)
+            {
+                var workingArea = screen.WorkingArea;
+
+                var source = PresentationSource.FromVisual(this);
+                double dpiX = 1.0, dpiY = 1.0; 
+                
+                dpiX = source.CompositionTarget.TransformFromDevice.M11; 
+                dpiY = source.CompositionTarget.TransformFromDevice.M22;
+                
+                //moving charmsbar
+                this.Left = workingArea.Right * dpiX - this.Width;
+                this.Top = workingArea.Top * dpiY + 1;
+                this.Height = workingArea.Height * dpiY;
+                
+                //moving charmsclock
+                charmsClock.Left = workingArea.Left * dpiX + 50;
+                charmsClock.Top = workingArea.Bottom * dpiY - 188;
+                
+                currentScreen = screen;
             }
         }
     }

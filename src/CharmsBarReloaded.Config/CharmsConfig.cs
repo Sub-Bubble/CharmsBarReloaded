@@ -10,7 +10,7 @@ namespace CharmsBarReloaded.Config
         private static Assembly assembly = Assembly.GetExecutingAssembly();
         public static string GetBuild { get { return assembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>().InformationalVersion.Trim(); } }
         public static int GetVersion { get { return assembly.GetName().Version.Major; } }
-        public readonly bool isBetaBranch = false;
+        public readonly bool isBetaBranch = true;
         #endregion App Version
 
         public bool AutoCheckForUpdates { get; set; } = true;

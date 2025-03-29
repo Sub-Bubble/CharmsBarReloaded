@@ -14,9 +14,10 @@ This application returns Windows 8's Charms Bar to Windows 10/11!
 | ✅ | DPI scaling |
 | ⚠️ | Keyboard Shortcuts | Broken. Expect fix in v1.0 (Release 1.0) |
 | ✅ | Lightweight |
+| ✅ | Multiple monitor support | Coming in b3.0 |
 | ❌ | Proper touchscreen support |
 | ✅ | Running on startup |
-| 🕓 | Start Charms | Coming in v2.0 (Release 2.0) |
+| 🛠️ | Start Charms | Coming in b3.0 |
 | 🕓 | Theme support | Currently no ETA |
 | ✅ | Translations support |
 | ✅ | Tray Icon |
