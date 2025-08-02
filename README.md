@@ -45,6 +45,7 @@ This application returns Windows 8's Charms Bar to Windows 10/11!
 | Polish | 100% | <a href="https://github.com/Sub-Bubble">SubBubble</a> |
 | Russian | 100% | <a href="https://github.com/Sub-Bubble">SubBubble</a> |
 | Slovak | 86% | <a href="https://github.com/RealKrazy">RealKrazy</a> |
+| Spanish | 100% | <a href="https://github.com/zekatto">zekatto</a> |
 | Ukrainian | 100% | <a href="https://github.com/Sub-Bubble">SubBubble</a> |
 
 ## Downloads
@@ -59,6 +60,7 @@ If you want to download an older version, check <a href="https://github.com/Sub-
 - <a href="https://github.com/RealKrazy">RealKrazy</a> for testing this application, translations and contributing code
 - <a href="https://github.com/smallmushroomovo">smallmushroomovo</a> for translating CharmsBar: Reloaded to chinese
 - <a href="https://github.com/sasufler">sasufler</a> for making this application speak french
+- <a href="https://github.com/zekatto">zekatto</a> for translating CharmsBar: Reloaded to spanish
 #### Other
 - <a href="https://github.com/free-icons/free-icons">free-icons</a> for the updater icon
 - <a href="https://github.com/hardcodet/wpf-notifyicon">wpf-notifyicon</a> for the taskbar icon
