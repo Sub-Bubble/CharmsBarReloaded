@@ -11,7 +11,7 @@ This application returns Windows 8's Charms Bar to Windows 10/11!
 | ✅ | Charms Clock |
 | ✅ | Customizability with settings |
 | ✅ | DPI scaling |
-| ⚠️ | Keyboard Shortcuts | Broken. Expect fix in v1.0 (Release 1.0) |
+| ⚠️ | Keyboard Shortcuts | Can be broken in modern windows versions |
 | ✅ | Lightweight |
 | ✅ | Multiple monitor support | Coming in b3.0 |
 | ❌ | Proper touchscreen support |
