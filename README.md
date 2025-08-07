@@ -1,8 +1,7 @@
 # CharmsBar: Reloaded
-**Now in beta!**<br>
 This application returns Windows 8's Charms Bar to Windows 10/11!
 
-## Maintenance status: ✅Maintained
+## Maintenance status: 📦Archived
 
 ## Features
 | Status      | Feature      | Note |
@@ -17,8 +16,8 @@ This application returns Windows 8's Charms Bar to Windows 10/11!
 | ✅ | Multiple monitor support | Coming in b3.0 |
 | ❌ | Proper touchscreen support |
 | ✅ | Running on startup |
-| 🛠️ | Start Charms | Coming in b3.0 |
-| 🕓 | Theme support | Currently no ETA |
+| 📦 | Start Charms | Impossible due to windows not allowing overriding taskbar |
+| 📦 | Advanced theme support | |
 | ✅ | Translations support |
 | ✅ | Tray Icon |
 | ✅ | Updater/Installer |
@@ -27,6 +26,7 @@ This application returns Windows 8's Charms Bar to Windows 10/11!
 - 🛠️ - In the works
 - ❌ - Absent and is not planned
 - 🕓 - Coming soon™
+- 📦 - Cancelled features (Initially planned but cancelled due to various reasons)
 
 ## Screenshots
 | Windows 10 | Windows 11 |
