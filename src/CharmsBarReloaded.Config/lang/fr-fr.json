@@ -10,6 +10,7 @@
   "CharmsSettings.CharmsClock": "Horloge de Charms Bar",
   "CharmsSettings.Plus": "+",
   "CharmsSettings.Minus": "-",
+  "CharmsBarReloaded.Error.UpdaterMissing": "CharmsBar:Reloaded n'a pas réussi à ouvrir le programme de mise à jour, ce qui indique que l'installation de l'application peut être corrompue.\nIl est fortement recommandé de réinstaller CharmsBar:Reloaded",
   "CharmsSettings.Home.Title": "Paramètres",
   "CharmsSettings.Home.SubTitle": "Charms Bar: Reloaded Paramètres",
   "CharmsSettings.Home.General": "Général",
@@ -47,5 +48,12 @@
   "CharmsSettings.About.Version": "Version",
   "CharmsSettings.About.Build": "Build",
   "CharmsSettings.About.CheckForUpdates": "Rechercher des mises à jour",
-  "Tray.Exit": "Quitter"
+  "Tray.Exit": "Quitter",
+  "CharmsSettings.General.BetaProgramOptIn": "S'inscrire au programme bêta",
+  "CharmsSettings.General.OpenUpdater": "Ouvrir le programme de mise à jour",
+  "CharmsSettings.General.Updater": "Programme de mise à jour",
+  "CharmsSettings.General.AutomaticCheckForUpdates": "Vérifier automatiquement les mises à jour",
+  "CharmsSettings.About.Branch": "Branche",
+  "CharmsSettings.About.Branch.Stable": "Stable",
+  "CharmsSettings.About.Branch.Beta": "Bêta"
 }
