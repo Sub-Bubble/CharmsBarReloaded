@@ -64,7 +64,7 @@ namespace CharmsBarReloaded.CharmsBar
         {
             this.Top = SystemConfig.GetDesktopWorkingArea.Top + 1;
             this.Window_Reload();
-            this.Left = SystemConfig.GetDesktopWorkingArea.Right - this.Width;
+            this.Left = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Width - this.Width;
             this.charmsStack.Width = this.windowWidth;
             this.Width = this.windowWidth;
             this.Height = SystemParameters.PrimaryScreenHeight;
@@ -167,7 +167,8 @@ namespace CharmsBarReloaded.CharmsBar
 
             if ( (currentScreen == null || !currentScreen.Equals(screen) ) && !windowVisible)
             {
-                var workingArea = screen.WorkingArea;
+
+                var workingArea = screen.Bounds;
 
                 var source = PresentationSource.FromVisual(this);
                 double dpiX = 1.0, dpiY = 1.0; 
