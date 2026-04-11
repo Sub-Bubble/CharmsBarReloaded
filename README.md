@@ -38,15 +38,16 @@ This application returns Windows 8's Charms Bar to Windows 10/11!
 | Language | Percentage | Contributors |
 | ------------- | ------------- | ------------- |
 | Chinese (Simplified) | 100% | <a href="https://github.com/smallmushroomovo">smallmushroomovo</a> |
-| Croatian | 86% | <a href="https://github.com/RealKrazy">RealKrazy</a> |
+| Croatian | 100% | <a href="https://github.com/RealKrazy">RealKrazy</a> |
 | English (US) | 100% | <a href="https://github.com/Sub-Bubble">SubBubble</a> |
-| French | 86% | <a href="https://github.com/sasufler">sasufler</a> |
-| Japanese | 86% | <a href="https://github.com/RealKrazy">RealKrazy</a> |
+| French | 100% | <a href="https://github.com/sasufler">sasufler</a> |
+| Japanese | 100% | <a href="https://github.com/RealKrazy">RealKrazy</a> |
 | Polish | 100% | <a href="https://github.com/Sub-Bubble">SubBubble</a> |
 | Russian | 100% | <a href="https://github.com/Sub-Bubble">SubBubble</a> |
-| Slovak | 86% | <a href="https://github.com/RealKrazy">RealKrazy</a> |
+| Slovak | 100% | <a href="https://github.com/RealKrazy">RealKrazy</a> |
 | Spanish | 100% | <a href="https://github.com/zekatto">zekatto</a> |
 | Ukrainian | 100% | <a href="https://github.com/Sub-Bubble">SubBubble</a> |
+| Vietnamese | 100% | <a href="https://github.com/lebao3105">lebao3105</a> |
 
 ## Downloads
 ### **To download the latest release**, click on <a href="https://github.com/Sub-Bubble/CharmsBarReloaded/releases/latest">this link</a>
@@ -61,6 +62,7 @@ If you want to download an older version, check <a href="https://github.com/Sub-
 - <a href="https://github.com/smallmushroomovo">smallmushroomovo</a> for translating CharmsBar: Reloaded to chinese
 - <a href="https://github.com/sasufler">sasufler</a> for making this application speak french
 - <a href="https://github.com/zekatto">zekatto</a> for translating CharmsBar: Reloaded to spanish
+- <a href="https://github.com/lebao3105">lebao3105</a> for translating CharmsBar: Reloaded to vietnamese
 - <a href="https://github.com/personalchrisrlillo-ops">personalchrisrlillo-ops</a> for contributing to CharmsBar: Reloaded
 #### Other
 - <a href="https://github.com/free-icons/free-icons">free-icons</a> for the updater icon
