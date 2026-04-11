@@ -4,6 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:CharmsBarReloaded.CharmsSettings.Pages"
+      xmlns:config="clr-namespace:CharmsBarReloaded.Config;assembly=CharmsBarReloaded.Config"
       mc:Ignorable="d" Width="360"
       Title="About">
     <StackPanel Margin="40, 40, 0 ,0">
@@ -11,12 +12,12 @@
             <Grid Height="40" Width="40" Margin="0,0,10,0" MouseDown="BackButton_MouseDown" MouseUp="BackButton_MouseUp" MouseEnter="BackButton_MouseEnter" MouseLeave="BackButton_MouseLeave">
                 <Image Source="../../Assets/CharmsSettings/BackButton.png" Width="40" Height="40" x:Name="BackButton"/>
             </Grid>
-            <TextBlock Text="About" FontSize="30px" Foreground="White" FontWeight="Thin" Margin="0,0,0,5" x:Name="aboutText"/>
+            <TextBlock Text="About" FontSize="30px" Foreground="{x:Static config:SystemConfig.SystemForegroundBrush}" FontWeight="Thin" Margin="0,0,0,5" x:Name="aboutText"/>
         </StackPanel>
-        <TextBlock Text="CharmsBar: Reloaded" FontSize="17px" FontWeight="Thin" Foreground="White" Margin="0, 20, 0, 0"/>
-        <TextBlock x:Name="versionString" Text="Version: " FontSize="15px" Foreground="White" Margin="0, 5, 0, 0"/>
-        <TextBlock x:Name="buildString" Text="Build: " FontSize="15px" Foreground="White"/>
-        <TextBlock x:Name="branchString" Text="Branch: " FontSize="15px" Foreground="White"/>
+        <TextBlock Text="CharmsBar: Reloaded" FontSize="17px" FontWeight="Thin" Foreground="{x:Static config:SystemConfig.SystemForegroundBrush}" Margin="0, 20, 0, 0"/>
+        <TextBlock x:Name="versionString" Text="Version: " FontSize="15px" Foreground="{x:Static config:SystemConfig.SystemForegroundBrush}" Margin="0, 5, 0, 0"/>
+        <TextBlock x:Name="buildString" Text="Build: " FontSize="15px" Foreground="{x:Static config:SystemConfig.SystemForegroundBrush}"/>
+        <TextBlock x:Name="branchString" Text="Branch: " FontSize="15px" Foreground="{x:Static config:SystemConfig.SystemForegroundBrush}"/>
         <Button Content="Check for updates" Margin="2" Padding="10,0,10,0" VerticalAlignment="Center" FontSize="15" HorizontalAlignment="Left" x:Name="UpdateButton" Click="UpdateButton_Click"/>
     </StackPanel>
 </Page>

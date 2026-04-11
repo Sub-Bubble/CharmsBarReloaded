@@ -36,6 +36,7 @@ namespace CharmsBarReloaded
                 case "Settings":
                     Current.Dispatcher.BeginInvoke(new Action(() =>
                     {
+                        charmsSettings.frame.Background = SystemConfig.GetAccentColor;
                         charmsSettings.Show();
                         charmsSettings.Focus();
                     }), System.Windows.Threading.DispatcherPriority.Input);

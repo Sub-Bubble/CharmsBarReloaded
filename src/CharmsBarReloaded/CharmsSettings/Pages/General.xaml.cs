@@ -26,9 +26,9 @@ namespace CharmsBarReloaded.CharmsSettings.Pages
             RunOnStartupToggle.IsChecked = SystemConfig.StartupKeyExists;
             BarEnabledToggle.IsChecked = App.charmsConfig.charmsBarConfig.IsEnabled;
             BarHideAfterClickToggle.IsChecked = App.charmsConfig.charmsBarConfig.HideWindowAfterClick;
-            ClockEnabledToggle.IsChecked = App.charmsConfig.EnableAnimations;
-            KeyboardShortcutsToggle.IsChecked = App.charmsConfig.EnableAnimations;
-            KeyboardShortcutOverrideToggle.IsChecked = App.charmsConfig.EnableAnimations;
+            ClockEnabledToggle.IsChecked = App.charmsConfig.charmsClockConfig.IsEnabled;
+            KeyboardShortcutsToggle.IsChecked = App.charmsConfig.charmsBarConfig.EnableKeyboardShortcut;
+            KeyboardShortcutOverrideToggle.IsChecked = App.charmsConfig.charmsBarConfig.KeyboardShortcutOverridesOffSetting;
             AutoCheckForUpdatesToggle.IsChecked = App.charmsConfig.AutoCheckForUpdates;
             BetaProgramOptInToggle.IsChecked = App.charmsConfig.BetaProgramOptIn;
         }
@@ -137,29 +137,34 @@ namespace CharmsBarReloaded.CharmsSettings.Pages
             else BarHideAfterClickOnOff.Text = offText;
 
             ClockEnabledText.Text = App.translationManager.GetTranslation("CharmsSettings.General.CharmsClockEnabled");
-            if (App.charmsConfig.EnableAnimations) ClockEnabledOnOff.Text = onText;
+            if (App.charmsConfig.charmsClockConfig.IsEnabled) ClockEnabledOnOff.Text = onText;
             else ClockEnabledOnOff.Text = offText;
 
             KeyboardShortcutsText.Text = App.translationManager.GetTranslation("CharmsSettings.General.EnableKeyboardShortcuts");
-            if (App.charmsConfig.EnableAnimations) KeyboardShortcutsOnOff.Text = onText;
+            if (App.charmsConfig.charmsBarConfig.EnableKeyboardShortcut) KeyboardShortcutsOnOff.Text = onText;
             else KeyboardShortcutsOnOff.Text = offText;
 
             KeyboardShortcutOverrideText.Text = App.translationManager.GetTranslation("CharmsSettings.General.KeyboardShortcutsOverrideCharmsBarOff");
-            if (App.charmsConfig.EnableAnimations) KeyboardShortcutOverrideOnOff.Text = onText;
+            if (App.charmsConfig.charmsBarConfig.KeyboardShortcutOverridesOffSetting) KeyboardShortcutOverrideOnOff.Text = onText;
             else KeyboardShortcutOverrideOnOff.Text = offText;
 
             AutoCheckForUpdatesText.Text = App.translationManager.GetTranslation("CharmsSettings.General.AutomaticCheckForUpdates");
-            if (App.charmsConfig.EnableAnimations) AutoCheckForUpdatesOnOff.Text = onText;
+            if (App.charmsConfig.AutoCheckForUpdates) AutoCheckForUpdatesOnOff.Text = onText;
             else AutoCheckForUpdatesOnOff.Text = offText;
 
             BetaProgramOptInText.Text = App.translationManager.GetTranslation("CharmsSettings.General.BetaProgramOptIn");
-            if (App.charmsConfig.EnableAnimations) BetaProgramOptInOnOff.Text = onText;
+            if (App.charmsConfig.BetaProgramOptIn) BetaProgramOptInOnOff.Text = onText;
             else BetaProgramOptInOnOff.Text = offText;
 
             OpenUpdaterText.Text = App.translationManager.GetTranslation("CharmsSettings.General.OpenUpdater");
             OpenUpdaterBtn.Content = App.translationManager.GetTranslation("CharmsSettings.General.Updater");
         }
         #endregion loading strings
+
+        private void SetOnOffText(TextBlock target, bool isEnabled)
+        {
+            target.Text = isEnabled ? onText : offText;
+        }
 
         private void LanguageSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -170,45 +175,54 @@ namespace CharmsBarReloaded.CharmsSettings.Pages
         private void EnableAnimationsToggle_Checked(object sender, RoutedEventArgs e)
         {
             App.charmsConfig.EnableAnimations = (bool)EnableAnimationsToggle.IsChecked;
+            SetOnOffText(EnableAnimationsOnOff, App.charmsConfig.EnableAnimations);
         }
 
         private void RunOnStartupToggle_Checked(object sender, RoutedEventArgs e)
         {
             SystemConfig.SetupStartupKey(RunOnStartupToggle.IsChecked);
+            SetOnOffText(RunOnStartupOnOff, SystemConfig.StartupKeyExists);
         }
 
         private void BarEnabledToggle_Checked(object sender, RoutedEventArgs e)
         {
             App.charmsConfig.charmsBarConfig.IsEnabled = (bool)BarEnabledToggle.IsChecked;
+            SetOnOffText(BarEnabledOnOff, App.charmsConfig.charmsBarConfig.IsEnabled);
         }
         private void BarHideAfterClickToggle_Click(object sender, RoutedEventArgs e)
         {
             App.charmsConfig.charmsBarConfig.HideWindowAfterClick = (bool)BarHideAfterClickToggle.IsChecked;
+            SetOnOffText(BarHideAfterClickOnOff, App.charmsConfig.charmsBarConfig.HideWindowAfterClick);
         }
 
         private void ClockEnabledToggle_Checked(object sender, RoutedEventArgs e)
         {
             App.charmsConfig.charmsClockConfig.IsEnabled = (bool)ClockEnabledToggle.IsChecked;
+            SetOnOffText(ClockEnabledOnOff, App.charmsConfig.charmsClockConfig.IsEnabled);
         }
 
         private void KeyboardShortcutsToggle_Checked(object sender, RoutedEventArgs e)
         {
             App.charmsConfig.charmsBarConfig.EnableKeyboardShortcut = (bool)KeyboardShortcutsToggle.IsChecked;
+            SetOnOffText(KeyboardShortcutsOnOff, App.charmsConfig.charmsBarConfig.EnableKeyboardShortcut);
         }
 
         private void KeyboardShortcutOverrideToggle_Checked(object sender, RoutedEventArgs e)
         {
             App.charmsConfig.charmsBarConfig.KeyboardShortcutOverridesOffSetting = (bool)KeyboardShortcutOverrideToggle.IsChecked;
+            SetOnOffText(KeyboardShortcutOverrideOnOff, App.charmsConfig.charmsBarConfig.KeyboardShortcutOverridesOffSetting);
         }
 
         private void AutoCheckForUpdatesToggle_Checked(Object sender, RoutedEventArgs e)
         {
             App.charmsConfig.AutoCheckForUpdates = (bool)AutoCheckForUpdatesToggle.IsChecked;
+            SetOnOffText(AutoCheckForUpdatesOnOff, App.charmsConfig.AutoCheckForUpdates);
         }
 
         private void BetaProgramOptInToggle_Checked(Object sender, RoutedEventArgs e)
         {
             App.charmsConfig.BetaProgramOptIn = (bool)BetaProgramOptInToggle.IsChecked;
+            SetOnOffText(BetaProgramOptInOnOff, App.charmsConfig.BetaProgramOptIn);
         }
 
         private void OpenUpdaterBtn_Click(object sender, RoutedEventArgs e)
