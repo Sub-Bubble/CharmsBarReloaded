@@ -3,7 +3,11 @@ using Microsoft.Win32;
 using System.Management;
 using System.Runtime.InteropServices;
 using System.Windows;
-using System.Windows.Media;
+using MediaBrush = System.Windows.Media.Brush;
+using MediaColor = System.Windows.Media.Color;
+using MediaSolidColorBrush = System.Windows.Media.SolidColorBrush;
+using WpfSystemColors = System.Windows.SystemColors;
+using Windows.UI.ViewManagement;
 using Point = System.Windows.Point;
 using PowerLineStatus = System.Windows.Forms.PowerLineStatus;
 
@@ -45,13 +49,47 @@ namespace CharmsBarReloaded.Config
                 return value is int i && i > 0;
             }
         }
-        public static System.Windows.Media.Brush GetAccentColor
+        public static MediaBrush GetAccentColor
         {
             get
             {
                 int colorValue = (int)Registry.GetValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Accent", "AccentColorMenu", null);
-                var color = System.Windows.Media.Color.FromArgb(255, (byte)(colorValue & 0xFF), (byte)((colorValue >> 8) & 0xFF), (byte)((colorValue >> 16) & 0xFF));
-                return new SolidColorBrush(color);
+                var color = MediaColor.FromArgb(255, (byte)(colorValue & 0xFF), (byte)((colorValue >> 8) & 0xFF), (byte)((colorValue >> 16) & 0xFF));
+                return new MediaSolidColorBrush(color);
+            }
+        }
+
+        public static MediaBrush SystemForegroundBrush
+        {
+            get
+            {
+                try
+                {
+                    var uiSettings = new UISettings();
+                    var color = uiSettings.GetColorValue(UIColorType.Foreground);
+                    return new MediaSolidColorBrush(MediaColor.FromArgb(color.A, color.R, color.G, color.B));
+                }
+                catch
+                {
+                    return WpfSystemColors.WindowTextBrush;
+                }
+            }
+        }
+
+        public static MediaBrush SystemSecondaryForegroundBrush
+        {
+            get
+            {
+                try
+                {
+                    var uiSettings = new UISettings();
+                    var color = uiSettings.GetColorValue(UIColorType.Foreground);
+                    return new MediaSolidColorBrush(MediaColor.FromArgb(0xCC, color.R, color.G, color.B));
+                }
+                catch
+                {
+                    return WpfSystemColors.GrayTextBrush;
+                }
             }
         }
         public static bool StartupKeyExists
